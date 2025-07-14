@@ -253,7 +253,7 @@ export default function Home() {
       </section>
 
       {/* Featured Services Section */}
-      <section
+[      <section
         id="featured-services"
         ref={setSectionRef('featured-services')}
         className="py-20 bg-gray-50"
@@ -297,7 +297,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+]
       {/* Stats Section */}
       {/* <section className="py-20 bg-[#25237b]">
         <div className="container mx-auto px-4">
