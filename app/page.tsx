@@ -14,6 +14,12 @@ export default function Home() {
   const [visibleSections, setVisibleSections] = useState<{ [key: string]: boolean }>({});
   const [mounted, setMounted] = useState(false);
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const [hasScrolledToServices, setHasScrolledToServices] = useState(false);
+  const [hasEnteredServices, setHasEnteredServices] = useState(false);
+  const headingRef = useRef<HTMLDivElement | null>(null);
+  const [headingVisible, setHeadingVisible] = useState(false);
+
+
 
   const heroSlides = [
     {
@@ -125,6 +131,24 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (!mounted || !headingRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeadingVisible(true);
+          // observer.disconnect(); // stop observing after first trigger
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(headingRef.current);
+
+    return () => observer.disconnect();
+  }, [mounted]);
+
+  useEffect(() => {
     if (!mounted) return;
 
     const heroInterval = setInterval(() => {
@@ -144,19 +168,31 @@ export default function Home() {
   useEffect(() => {
     if (!mounted) return;
 
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const id = entry.target.id;
+
           if (entry.isIntersecting) {
-            setVisibleSections(prev => ({
+            setVisibleSections((prev) => ({
               ...prev,
-              [entry.target.id]: true
+              [id]: true,
             }));
+
+            if (id === 'featured-services' && !hasEnteredServices) {
+              setTimeout(() => {
+                setHasEnteredServices(true);
+              }, 1200); // ⏳ Delay of 1 second after section enters
+            }
+
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.6 } // Ensures 60% visible before triggering
     );
+
+
 
     Object.values(sectionRefs.current).forEach(ref => {
       if (ref) observer.observe(ref);
@@ -168,6 +204,8 @@ export default function Home() {
   const setSectionRef = (id: string) => (el: HTMLElement | null) => {
     sectionRefs.current[id] = el;
   };
+
+
 
   const stats = [
     { number: "500+", label: "Projects Completed" },
@@ -213,7 +251,7 @@ export default function Home() {
                   backgroundImage: `url(${slide.image})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
-                  
+
                 }}
                 className="absolute inset-0"
               ></div>
@@ -253,51 +291,118 @@ export default function Home() {
       </section>
 
       {/* Featured Services Section */}
-[      <section
+
+
+      <section
         id="featured-services"
         ref={setSectionRef('featured-services')}
-        className="py-20 bg-gray-50"
+        className="py-20 bg-gray-50 transition-all duration-700"
       >
         <div className="container mx-auto px-4">
-          <div className={`text-center mb-16 transform transition-all duration-1000 ${visibleSections['featured-services'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover our most popular technology solutions that drive business success
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {featuredServices.map((service, index) => (
+          {hasEnteredServices ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start transition-all duration-[1500ms] ease-in-out opacity-100 ">
+              {/* Left: Heading */}
+              {/* Sticky Heading */}
               <div
-                key={index}
-                className={`bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all backface-visible duration-150 transform hover:-translate-y-3 hover:scale-105 cursor-pointer group ${visibleSections['featured-services']
-                  ? 'translate-y-0 opacity-100'
-                  : 'translate-y-10 opacity-0'
+                ref={headingRef}
+                className={`lg:sticky top-32 self-start z-10 transition-all duration-1000 ease-out transform ${headingVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
                   }`}
-                style={{ transitionDelay: `${index * 200}ms` }}
               >
-                <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 group-hover:bg-[#25237b]700 transition-colors duration-300">
-                  <i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303] transition-colors duration-300`}></i>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <span
-                      key={featureIndex}
-                      className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors duration-300"
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </div>
+                <h2 className="text-5xl font-extrabold text-gray-900 mb-6">
+                  Featured Services
+                </h2>
+                <p className="text-xl text-gray-600 leading-relaxed">
+                  Discover our most popular technology solutions that drive business success
+                </p>
               </div>
-            ))}
-          </div>
+
+
+
+              {/* Right: Vertical Cards */}
+              <div className="flex flex-col gap-8">
+                {featuredServices.map((service, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-3 hover:scale-105 transition-all duration-500 group"
+                  >
+                    <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 group-hover:bg-[#25237b] transition-colors duration-300">
+                      <i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303]`}></i>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 mb-1">{service.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {service.features.map((feature, featureIndex) => (
+                        <span
+                          key={featureIndex}
+                          className="{`bg-white p-8 rounded-xl shadow-lg transform transition-all duration-700 ease-out
+                          hover:shadow-2xl hover:-translate-y-2 hover:scale-105
+                          opacity-0 translate-y-5 ${hasEnteredServices ? 'opacity-100 translate-y-0' : ''}
+                        `}
+                        style={{ transitionDelay: `${index * 200}ms` }}"
+                        >
+                          {feature}
+                        </span>
+
+                      ))}
+                    </div>
+                    <div className="mt-0">
+                      <Link
+                        href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
+                        className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+                      >
+                        Learn More
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            // Default Grid View
+            <div className="transition-opacity duration-1000 ease-out opacity-100">
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Services</h2>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                  Discover our most popular technology solutions that drive business success
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {featuredServices.map((service, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-3 hover:scale-105 transition-all duration-500 group"
+                  >
+                    <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 group-hover:bg-[#25237b] transition-colors duration-300">
+                      <i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303]`}></i>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-blue-600">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 mb-6">{service.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {service.features.map((feature, featureIndex) => (
+                        <span
+                          key={featureIndex}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
-]
+
+
+
+
       {/* Stats Section */}
       {/* <section className="py-20 bg-[#25237b]">
         <div className="container mx-auto px-4">
@@ -312,7 +417,7 @@ export default function Home() {
         </div>
       </section> */}
 
-      
+
 
       {/* Certifications & Memberships Slider */}
       <section
@@ -321,7 +426,7 @@ export default function Home() {
         className="py-20"
       >
         <div className="container mx-auto px-4">
-          <div className={`text-center mb-16 transform transition-all duration-1000 ${visibleSections['certifications'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          <div className={`text-center mb-16 transform transition-all duration-1000 ${hasScrolledToServices ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Certifications & Memberships</h2>
             <p className="text-xl text-gray-600">
@@ -389,7 +494,7 @@ export default function Home() {
             {featuredBlogs.map((blog, index) => (
               <article
                 key={index}
-                className={`bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 cursor-pointer group overflow-hidden ${visibleSections['featured-blogs']
+                className={`bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 cursor-pointer group ${hasScrolledToServices
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-10 opacity-0'
                   }`}

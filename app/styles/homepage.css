@@ -1,0 +1,12 @@
+/* Static View */
+#featured-services .text-center,
+#featured-services .grid {
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+/* Animated View */
+#featured-services .text-center.translate-y-0,
+#featured-services .grid.translate-y-0 {
+  transform: translateY(0);
+  opacity: 1;
+}
