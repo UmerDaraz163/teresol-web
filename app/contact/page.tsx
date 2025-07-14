@@ -30,24 +30,17 @@ export default function Contact() {
 
   const offices = [
     {
-      city: "Karachi",
-      address: "Plot 123, Block A, Gulshan-e-Iqbal, Karachi, Pakistan",
-      phone: "+92 21 1234 5678",
-      email: "karachi@teresol.com",
+      city: "Islamabad",
+      address: "15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA, Phase-II Islamabad , Pakistan",
+      phone: "+11 111 111111",
+      email: "info@teresol.com",
       isMain: true
     },
     {
-      city: "Lahore",
-      address: "Office 456, MM Alam Road, Gulberg III, Lahore, Pakistan",
-      phone: "+92 42 1234 5678",
-      email: "lahore@teresol.com",
-      isMain: false
-    },
-    {
-      city: "Islamabad",
-      address: "Suite 789, Blue Area, F-7 Markaz, Islamabad, Pakistan",
-      phone: "+92 51 1234 5678",
-      email: "islamabad@teresol.com",
+      city: "Karachi",
+      address: "Shaheed-e-Millat Expressway, KPT Interchange, Qayyumabad, Karachi",
+      phone: "+11 111 111111",
+      email: "info@teresol.com",
       isMain: false
     }
   ];

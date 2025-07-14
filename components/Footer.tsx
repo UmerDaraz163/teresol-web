@@ -63,13 +63,13 @@ export default function Footer() {
                 <div className="w-5 h-5 flex items-center justify-center mt-1">
                   <i className="ri-map-pin-line text-blue-400"></i>
                 </div>
-                <span className="text-gray-300">123 Tech Street, Innovation District, Karachi, Pakistan</span>
+                <span className="text-gray-300">15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA, Phase-II Islamabad , Pakistan</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-5 h-5 flex items-center justify-center">
                   <i className="ri-phone-line text-blue-400"></i>
                 </div>
-                <span className="text-gray-300">+92 21 1234 5678</span>
+                <span className="text-gray-300">+92 11 1111 1111</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-5 h-5 flex items-center justify-center">

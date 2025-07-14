@@ -299,7 +299,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-[#25237b]">
+      {/* <section className="py-20 bg-[#25237b]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -310,7 +310,9 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+
+      
 
       {/* Certifications & Memberships Slider */}
       <section
@@ -375,13 +377,13 @@ export default function Home() {
         className="py-20 bg-gray-50"
       >
         <div className="container mx-auto px-4">
-          <div className={`text-center mb-16 transform transition-all duration-1000 ${visibleSections['featured-blogs'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          {/* <div className={`text-center mb-16 transform transition-all duration-1000 ${visibleSections['featured-blogs'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Latest Insights</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Stay updated with the latest technology trends and industry insights
             </p>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredBlogs.map((blog, index) => (
@@ -424,16 +426,16 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="text-center mt-12">
+          {/* <div className="text-center mt-12">
             <Link href="/blog" className="bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap cursor-pointer inline-block">
               View All Articles
             </Link>
-          </div>
+          </div> */}
         </div>
       </section>
 
       {/* About Preview Section */}
-      <section
+      {/* <section
         id="about-preview"
         ref={setSectionRef('about-preview')}
         className="py-20"
@@ -463,10 +465,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-900">
+      {/* <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -476,7 +478,7 @@ export default function Home() {
             Start Your Project Today
           </Link>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>
