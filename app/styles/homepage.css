@@ -10,3 +10,15 @@
   transform: translateY(0);
   opacity: 1;
 }
+
+.wavy-text {
+  display: inline-block;
+  animation: wave-animation 2s infinite ease-in-out;
+}
+
+@keyframes wave-animation {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  50% { transform: rotate(-1deg); }
+  75% { transform: rotate(1deg); }
+}

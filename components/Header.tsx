@@ -52,7 +52,7 @@ export default function Header() {
             {menuItems.map((item, index) => (
               <Link
                 key={item.name}
-                href={item.href}
+                href={'/'}
                 className="text-gray-700 hover:text-blue-600 font-medium transition-all duration-300 whitespace-nowrap cursor-pointer relative group animate-fade-in-down"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
@@ -84,7 +84,7 @@ export default function Header() {
               {menuItems.map((item, index) => (
                 <Link
                   key={item.name}
-                  href={item.href}
+                  href={'/'}
                   className={`text-gray-700 hover:text-blue-600 font-medium py-2 transition-all duration-300 cursor-pointer hover:bg-blue-50 hover:pl-4 rounded-lg transform ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
                     }`}
                   style={{

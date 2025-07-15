@@ -6,6 +6,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
 import Button from '@/components/Button.';
+import './styles/homepage.css';
+
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -100,24 +102,24 @@ export default function Home() {
 
   const featuredBlogs = [
     {
-      title: "The Future of Embedded Systems in IoT",
-      excerpt: "Exploring how embedded systems are revolutionizing the Internet of Things landscape with smarter, more efficient solutions.",
+      title: "Lorem Ipsum Dolor Sit Amet",
+      excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non urna eu justo vehicula commodo.",
       date: "December 15, 2024",
       category: "Technology",
       image: "https://readdy.ai/api/search-image?query=IoT%20embedded%20systems%20and%20connected%20devices%20in%20modern%20smart%20environment%2C%20circuit%20boards%20and%20sensors%2C%20blue%20accent%20lighting%2C%20futuristic%20technology%20background&width=400&height=250&seq=blog1&orientation=landscape",
       readTime: "5 min read"
     },
     {
-      title: "Custom Software Development Trends 2024",
-      excerpt: "Key trends shaping the software development industry and how businesses can leverage them for competitive advantage.",
+      title: "Consectetur Adipiscing Elit",
+      excerpt: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
       date: "December 10, 2024",
       category: "Development",
       image: "https://readdy.ai/api/search-image?query=Software%20development%20coding%20on%20computer%20screens%2C%20modern%20programming%20environment%20with%20code%20editor%2C%20professional%20workspace%20with%20blue%20lighting&width=400&height=250&seq=blog2&orientation=landscape",
       readTime: "7 min read"
     },
     {
-      title: "Hardware Integration Best Practices",
-      excerpt: "Essential guidelines for successful hardware-software integration projects and avoiding common pitfalls.",
+      title: "Ut Enim Ad Minim Veniam",
+      excerpt: "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       date: "December 5, 2024",
       category: "Hardware",
       image: "https://readdy.ai/api/search-image?query=Hardware%20integration%20laboratory%20with%20electronic%20components%20and%20testing%20equipment%2C%20professional%20engineering%20workspace%2C%20blue%20accent%20lighting&width=400&height=250&seq=blog3&orientation=landscape",
@@ -145,7 +147,7 @@ export default function Home() {
 
     observer.observe(headingRef.current);
 
-    return () => observer.disconnect();
+    // return () => observer.disconnect();
   }, [mounted]);
 
   useEffect(() => {
@@ -153,7 +155,7 @@ export default function Home() {
 
     const heroInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 10000);
+    }, 5000);
 
     const certInterval = setInterval(() => {
       setCurrentCertSlide((prev) => (prev + 1) % Math.ceil(certifications.length / 4));
@@ -183,13 +185,13 @@ export default function Home() {
             if (id === 'featured-services' && !hasEnteredServices) {
               setTimeout(() => {
                 setHasEnteredServices(true);
-              }, 1200); // ⏳ Delay of 1 second after section enters
+              }, 1500); // ⏳ Delay of 1 second after section enters
             }
 
           }
         });
       },
-      { threshold: 0.6 } // Ensures 60% visible before triggering
+      { threshold: 0.4 } // Ensures 60% visible before triggering
     );
 
 
@@ -198,13 +200,33 @@ export default function Home() {
       if (ref) observer.observe(ref);
     });
 
-    return () => observer.disconnect();
+    // return () => observer.disconnect();
   }, [mounted]);
 
   const setSectionRef = (id: string) => (el: HTMLElement | null) => {
     sectionRefs.current[id] = el;
   };
 
+  // revert featuredServices to original
+
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
+  const prevScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > prevScrollY.current) {
+        setScrollDirection('down');
+      } else if (currentScrollY < prevScrollY.current) {
+        setScrollDirection('up');
+      }
+      prevScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
 
   const stats = [
@@ -217,7 +239,7 @@ export default function Home() {
   if (!mounted) {
     return (
       <div className="min-h-screen bg-white">
-        <div className="animate-pulse">
+        <div className="animate-bounce">
           <div className="h-16 bg-gray-200"></div>
           <div className="h-screen bg-gray-100"></div>
         </div>
@@ -279,12 +301,23 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentSlide ? 'bg-white' : 'bg-white/50'}`}
+            />
+          ))}
+        </div> */}
+        {/* Dots */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-4 h-4 rounded-full border border-white transition-all duration-300 cursor-pointer
+        ${index === currentSlide ? 'bg-white shadow-md scale-110' : 'bg-white/30 hover:scale-125'}`}
             />
           ))}
         </div>
@@ -299,104 +332,70 @@ export default function Home() {
         className="py-20 bg-gray-50 transition-all duration-700"
       >
         <div className="container mx-auto px-4">
-          {hasEnteredServices ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start transition-all duration-[1500ms] ease-in-out opacity-100 ">
-              {/* Left: Heading */}
-              {/* Sticky Heading */}
-              <div
-                ref={headingRef}
-                className={`lg:sticky top-32 self-start z-10 transition-all duration-1000 ease-out transform ${headingVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-                  }`}
+          <div
+            className={`transition-all duration-[1800ms] ease-in-out 
+        ${hasEnteredServices && scrollDirection === 'down'
+                ? 'grid grid-cols-1 lg:grid-cols-2 gap-12 items-start'
+                : 'text-center scale-[0.98] opacity-80'}`}
+          >
+            {/* Heading */}
+            <div
+              ref={headingRef}
+              className={`transition-all duration-[1800ms] delay-1500 ease-out transform
+          ${hasEnteredServices && scrollDirection === 'down'
+                  ? 'lg:sticky top-32 text-left opacity-100 translate-x-0'
+                  : 'text-center opacity-100 translate-y-0 hover:animate-pulse'}`}
+            >
+              <h2
+                className={`transition-all duration-700 font-extrabold text-gray-900 mb-6
+            ${hasEnteredServices ? 'text-5xl' : 'text-6xl'} wavy-text`}
               >
-                <h2 className="text-5xl font-extrabold text-gray-900 mb-6">
-                  Featured Services
-                </h2>
-                <p className="text-xl text-gray-600 leading-relaxed">
-                  Discover our most popular technology solutions that drive business success
-                </p>
-              </div>
+                Featured Services
+              </h2>
+              <p
+                className={`transition-all duration-700 text-gray-600 leading-relaxed
+            ${hasEnteredServices ? 'text-xl' : 'text-2xl max-w-2xl mx-auto'}`}
+              >
+                Discover our most popular technology solutions that drive business success
+              </p>
+            </div>
 
-
-
-              {/* Right: Vertical Cards */}
-              <div className="flex flex-col gap-8">
+            {/* Cards */}
+            {hasEnteredServices && scrollDirection === 'down' && (
+              <div className="flex flex-col gap-8 transition-opacity duration-700 ease-in opacity-100">
                 {featuredServices.map((service, index) => (
                   <div
                     key={index}
                     className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-3 hover:scale-105 transition-all duration-500 group"
                   >
-                    <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 group-hover:bg-[#25237b] transition-colors duration-300">
+                    <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 transition-colors duration-300">
                       <i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303]`}></i>
                     </div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600 mb-1">{service.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {service.features.map((feature, featureIndex) => (
+                    <p className="text-gray-600 mb-2">{service.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {service.features.map((feature, i) => (
                         <span
-                          key={featureIndex}
-                          className="{`bg-white p-8 rounded-xl shadow-lg transform transition-all duration-700 ease-out
-                          hover:shadow-2xl hover:-translate-y-2 hover:scale-105
-                          opacity-0 translate-y-5 ${hasEnteredServices ? 'opacity-100 translate-y-0' : ''}
-                        `}
-                        style={{ transitionDelay: `${index * 200}ms` }}"
-                        >
-                          {feature}
-                        </span>
-
-                      ))}
-                    </div>
-                    <div className="mt-0">
-                      <Link
-                        href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
-                        className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
-                      >
-                        Learn More
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : (
-            // Default Grid View
-            <div className="transition-opacity duration-1000 ease-out opacity-100">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Services</h2>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                  Discover our most popular technology solutions that drive business success
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {featuredServices.map((service, index) => (
-                  <div
-                    key={index}
-                    className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-3 hover:scale-105 transition-all duration-500 group"
-                  >
-                    <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 group-hover:bg-[#25237b] transition-colors duration-300">
-                      <i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303]`}></i>
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-blue-600">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 mb-6">{service.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {service.features.map((feature, featureIndex) => (
-                        <span
-                          key={featureIndex}
-                          className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800"
+                          key={i}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800 transition duration-300"
                         >
                           {feature}
                         </span>
                       ))}
                     </div>
+                    <Link
+                      href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+                    >
+                      Learn More
+                    </Link>
                   </div>
                 ))}
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </section>
 
@@ -404,7 +403,7 @@ export default function Home() {
 
 
       {/* Stats Section */}
-      {/* <section className="py-20 bg-[#25237b]">
+      <section className="py-20 bg-[#25237b]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -415,58 +414,81 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section> */}
-
+      </section>
 
 
       {/* Certifications & Memberships Slider */}
+
+      {/* Dynamic section */}
       <section
         id="certifications"
         ref={setSectionRef('certifications')}
-        className="py-20"
+        className="py-20 bg-gradient-to-b from-white to-blue-50 transition-all duration-1000"
       >
         <div className="container mx-auto px-4">
-          <div className={`text-center mb-16 transform transition-all duration-1000 ${hasScrolledToServices ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-            }`}>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Certifications & Memberships</h2>
-            <p className="text-xl text-gray-600">
+          {/* Heading */}
+          <div
+            className={`text-center mb-16 transform transition-all duration-[1500ms] ease-in-out ${visibleSections['certifications']
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-10 opacity-0'
+              }`}
+          >
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+              Certifications & Memberships
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Recognized excellence and professional standards
             </p>
           </div>
 
+          {/* Slider */}
           <div className="relative overflow-hidden">
             <div
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex transition-transform duration-700 ease-in-out"
               style={{ transform: `translateX(-${currentCertSlide * 100}%)` }}
             >
               {Array.from({ length: Math.ceil(certifications.length / 4) }).map((_, pageIndex) => (
                 <div key={pageIndex} className="w-full flex-shrink-0">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    {certifications.slice(pageIndex * 4, (pageIndex + 1) * 4).map((cert, index) => (
-                      <div
-                        key={index}
-                        className="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 cursor-pointer group"
-                      >
-                        <img
-                          src={cert.image}
-                          alt={cert.title}
-                          className="w-20 h-20 mx-auto mb-4 object-contain group-hover:scale-110 transition-transform duration-300"
-                        />
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">{cert.title}</h3>
-                        <p className="text-gray-600 text-sm">{cert.description}</p>
-                      </div>
-                    ))}
+                    {certifications
+                      .slice(pageIndex * 4, (pageIndex + 1) * 4)
+                      .map((cert, index) => (
+                        <div
+                          key={index}
+                          className={`bg-white p-6 rounded-2xl shadow-lg text-center transition-all duration-500 transform cursor-pointer group
+                      ${visibleSections['certifications']
+                              ? 'opacity-100 translate-y-0'
+                              : 'opacity-0 translate-y-10'}
+                    `}
+                          style={{
+                            transitionDelay: `${index * 200}ms`,
+                          }}
+                        >
+                          <div className="mb-4">
+                            <img
+                              src={cert.image}
+                              alt={cert.title}
+                              className="w-20 h-20 mx-auto object-contain group-hover:scale-110 transition-transform duration-300"
+                            />
+                          </div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">
+                            {cert.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm">{cert.description}</p>
+                        </div>
+                      ))}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex justify-center mt-8 space-x-2">
+            {/* Pagination */}
+            <div className="flex justify-center mt-10 space-x-2">
               {Array.from({ length: Math.ceil(certifications.length / 4) }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentCertSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentCertSlide ? 'bg-[#25237b]' : 'bg-gray-300'
+                  className={`w-4 h-4 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentCertSlide ? 'bg-[#25237b]' : 'bg-gray-300'
                     }`}
                 />
               ))}
@@ -476,25 +498,28 @@ export default function Home() {
       </section>
 
       {/* Featured Blogs Section */}
+
+
+      {/* Dynamic section */}
       <section
         id="featured-blogs"
         ref={setSectionRef('featured-blogs')}
         className="py-20 bg-gray-50"
       >
         <div className="container mx-auto px-4">
-          {/* <div className={`text-center mb-16 transform transition-all duration-1000 ${visibleSections['featured-blogs'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          <div className={`text-center mb-16 transform transition-all duration-1000 ${visibleSections['featured-blogs'] ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Latest Insights</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Stay updated with the latest technology trends and industry insights
             </p>
-          </div> */}
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredBlogs.map((blog, index) => (
               <article
                 key={index}
-                className={`bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 cursor-pointer group ${hasScrolledToServices
+                className={`bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 cursor-pointer group ${visibleSections['featured-blogs']
                   ? 'translate-y-0 opacity-100'
                   : 'translate-y-10 opacity-0'
                   }`}
@@ -531,16 +556,16 @@ export default function Home() {
             ))}
           </div>
 
-          {/* <div className="text-center mt-12">
+          <div className="text-center mt-12">
             <Link href="/blog" className="bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap cursor-pointer inline-block">
               View All Articles
             </Link>
-          </div> */}
+          </div>
         </div>
       </section>
 
       {/* About Preview Section */}
-      {/* <section
+      <section
         id="about-preview"
         ref={setSectionRef('about-preview')}
         className="py-20"
@@ -570,10 +595,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* CTA Section */}
-      {/* <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -583,7 +608,7 @@ export default function Home() {
             Start Your Project Today
           </Link>
         </div>
-      </section> */}
+      </section>
 
       <Footer />
     </div>
