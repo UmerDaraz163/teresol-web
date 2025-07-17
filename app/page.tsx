@@ -9,6 +9,7 @@ import Button from '@/components/Button.';
 import './styles/homepage.css';
 
 
+
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -21,6 +22,11 @@ export default function Home() {
   const headingRef = useRef<HTMLDivElement | null>(null);
   const [headingVisible, setHeadingVisible] = useState(false);
 
+
+
+  //lenis
+
+  //lenis
 
 
   const heroSlides = [
@@ -49,54 +55,62 @@ export default function Home() {
   const featuredServices = [
     {
       icon: "ri-code-line",
-      title: "Custom Software Development",
-      description: "Tailored software solutions built with cutting-edge technologies to meet your unique business requirements and drive digital transformation.",
-      features: ["Web Applications", "Mobile Apps", "API Development", "Cloud Solutions"]
+      title: "Enterprise Software Solutions",
+      description: "Well-reputed Research and Innovation (R&I) company with a proven track record in developing customized, cost efficient and scalable enterprise software solutions. We offer a comprehensive suite of services. We are a team of over 400 professionals includ- ing 20 PhDs from esteemed global institutes. We are ISO 9001, 20000, 27001 certified, guaranteeing industry-leading quality.",
+      features: ["Command, Control, Communications, Computers and Intelligence (C4I) System", "Banking", "Fintech", "Embedded Solutions"]
     },
     {
-      icon: "ri-computer-line",
-      title: "Hardware Design & Engineering",
-      description: "Complete hardware solutions from concept to manufacturing, including PCB design, prototyping, and system integration services.",
-      features: ["PCB Design", "Prototyping", "Testing", "Manufacturing"]
+      icon: "ri-brain-line",
+      title: "AI Devevelopment Services",
+      description: "The future of businesses reside in the transformative capabilities of Artificial Intelligence (AI). We help you integrate AI in your current infrastructure by delivering state-of-art AI software development services. Our competent developers provide you with custom solutions perfectly tailored to your requirements.",
+      features: ["Business Analytics Suite", "AI Detection and Tracking System", "Wind Power Estimation", "Brain Image Processing", "Eye Blob Remover",]
+    },
+
+    {
+      icon: "ri-dashboard-line",
+      title: "Automotive Electronics",
+      description: "TeReSol has successfully developed and delivered advanced automotive electronics and access control systems, offering end-to-end lifecycle support. Trusted by leading corporate clients across Pakistan, our solutions ensure reliability, efficiency, and innovation",
+      features: ["Fleet Management Solution", "Vehicle Infotainment System"]
     },
     {
       icon: "ri-cpu-line",
-      title: "Embedded Systems Development",
-      description: "Intelligent embedded solutions for IoT, automation, and control systems with real-time performance and reliability.",
-      features: ["IoT Devices", "Automation", "RTOS", "Firmware"]
+      title: "Embedded Design Services",
+      description: "Our embedded design includes complex multi layers (18-24) high speed signal processing PCBs, Single Board Computers (SBC) for time sched-uled applications, their board support packages/APIs for external integration and complete customized end to end product (qualified for tough temperature environment) with multiple designed cards.",
+      features: ["Single Board Computers (SBCs)", "Military Avionics", "Display Computer", "Control Computer", "Mission Data Recorders", , "Ground-based Defense Solutions", "AI based Autotracking System", "Ruggedized Field Equipment"]
     }
   ];
 
   const certifications = [
-    {
-      title: "ISO 9001:2015",
-      description: "Quality Management Systems",
-      image: "https://readdy.ai/api/search-image?query=ISO%209001%20quality%20management%20certification%20badge%20with%20professional%20blue%20and%20white%20design%2C%20corporate%20certification%20symbol%2C%20clean%20minimal%20background&width=200&height=200&seq=cert1&orientation=squarish"
-    },
-    {
-      title: "ISO 27001",
-      description: "Information Security Management",
-      image: "https://readdy.ai/api/search-image?query=ISO%2027001%20information%20security%20certification%20badge%20with%20professional%20blue%20and%20white%20design%2C%20cybersecurity%20certification%20symbol%2C%20clean%20minimal%20background&width=200&height=200&seq=cert2&orientation=squarish"
-    },
-    {
-      title: "CMMI Level 3",
-      description: "Capability Maturity Model Integration",
-      image: "https://readdy.ai/api/search-image?query=CMMI%20Level%203%20software%20development%20maturity%20certification%20badge%20with%20professional%20blue%20and%20white%20design%2C%20quality%20assurance%20symbol%2C%20clean%20minimal%20background&width=200&height=200&seq=cert3&orientation=squarish"
-    },
-    {
-      title: "IEEE Member",
-      description: "Institute of Electrical Engineers",
-      image: "https://readdy.ai/api/search-image?query=IEEE%20professional%20membership%20badge%20with%20blue%20and%20white%20design%2C%20electrical%20engineering%20certification%20symbol%2C%20clean%20minimal%20background&width=200&height=200&seq=cert4&orientation=squarish"
-    },
     {
       title: "P@SHA Member",
       description: "Pakistan Software Houses Association",
       image: "https://readdy.ai/api/search-image?query=Professional%20software%20association%20membership%20badge%20with%20blue%20and%20white%20design%2C%20technology%20industry%20certification%20symbol%2C%20clean%20minimal%20background&width=200&height=200&seq=cert5&orientation=squarish"
     },
     {
-      title: "PEA Member",
-      description: "Pakistan Electronics Association",
-      image: "https://readdy.ai/api/search-image?query=Electronics%20industry%20association%20membership%20badge%20with%20blue%20and%20white%20design%2C%20hardware%20certification%20symbol%2C%20clean%20minimal%20background&width=200&height=200&seq=cert6&orientation=squarish"
+      title: "PSEB",
+      description: "Quality Management Systems",
+      image: "/PSEB.png"
+    },
+    {
+      title: "PTA",
+      description: "Regulatory Body For Telecom",
+      image: "/PTA.png"
+    },
+    {
+      title: "PAeC",
+      description: "Defense Contractor And An Aerospace Manufacturer",
+      image: "/paec.png"
+    },
+    {
+      title: "ISO 9001",
+      description: "Standard For Quality Management Systems",
+      image: "/iso9001.png"
+    }
+    ,
+    {
+      title: "ISO 20000",
+      description: "International IT Service Management Standard",
+      image: "/iso20000.png"
     }
   ];
 
@@ -132,6 +146,7 @@ export default function Home() {
     setIsVisible(true);
   }, []);
 
+
   useEffect(() => {
     if (!mounted || !headingRef.current) return;
 
@@ -149,7 +164,6 @@ export default function Home() {
 
     // return () => observer.disconnect();
   }, [mounted]);
-
   useEffect(() => {
     if (!mounted) return;
 
@@ -203,9 +217,11 @@ export default function Home() {
     // return () => observer.disconnect();
   }, [mounted]);
 
+
   const setSectionRef = (id: string) => (el: HTMLElement | null) => {
     sectionRefs.current[id] = el;
   };
+
 
   // revert featuredServices to original
 
@@ -228,13 +244,6 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
-  const stats = [
-    { number: "500+", label: "Projects Completed" },
-    { number: "50+", label: "Happy Clients" },
-    { number: "15+", label: "Years Experience" },
-    { number: "24/7", label: "Support Available" }
-  ];
 
   if (!mounted) {
     return (
@@ -325,85 +334,169 @@ export default function Home() {
 
       {/* Featured Services Section */}
 
-
       <section
         id="featured-services"
         ref={setSectionRef('featured-services')}
-        className="py-20 bg-gray-50 transition-all duration-700"
+        className="relative min-h-screen py-20 bg-gray-50"
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-12">
+
+          {/* Sticky Heading Column */}
           <div
-            className={`transition-all duration-[1800ms] ease-in-out 
-        ${hasEnteredServices && scrollDirection === 'down'
-                ? 'grid grid-cols-1 lg:grid-cols-2 gap-12 items-start'
-                : 'text-center scale-[0.98] opacity-80'}`}
+            ref={headingRef}
+            className={`lg:col-span-2 relative transition-all duration-1000 ${hasEnteredServices ? 'sticky top-32 self-start' : 'flex items-center justify-center min-h-screen'
+              } text-center`}
           >
-            {/* Heading */}
-            <div
-              ref={headingRef}
-              className={`transition-all duration-[1800ms] delay-1500 ease-out transform
-          ${hasEnteredServices && scrollDirection === 'down'
-                  ? 'lg:sticky top-32 text-left opacity-100 translate-x-0'
-                  : 'text-center opacity-100 translate-y-0 hover:animate-pulse'}`}
-            >
+            <div className="transition-all duration-700">
               <h2
-                className={`transition-all duration-700 font-extrabold text-gray-900 mb-6
-            ${hasEnteredServices ? 'text-5xl' : 'text-6xl'} wavy-text`}
+                className={`font-extrabold text-gray-900 mb-6 transition-all duration-700 
+            ${hasEnteredServices ? 'text-5xl' : 'text-6xl text-center'} wavy-text`}
               >
                 Featured Services
               </h2>
               <p
-                className={`transition-all duration-700 text-gray-600 leading-relaxed
-            ${hasEnteredServices ? 'text-xl' : 'text-2xl max-w-2xl mx-auto'}`}
+                className={`text-gray-600 leading-relaxed transition-all duration-700 
+            ${hasEnteredServices ? 'text-xl' : 'text-2xl text-center max-w-2xl mx-auto'}`}
               >
                 Discover our most popular technology solutions that drive business success
               </p>
             </div>
+          </div>
 
-            {/* Cards */}
-            {hasEnteredServices && scrollDirection === 'down' && (
-              <div className="flex flex-col gap-8 transition-opacity duration-700 ease-in opacity-100">
-                {featuredServices.map((service, index) => (
-                  <div
-                    key={index}
-                    className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-3 hover:scale-105 transition-all duration-500 group"
-                  >
-                    <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 transition-colors duration-300">
-                      <i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303]`}></i>
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 mb-2">{service.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {service.features.map((feature, i) => (
-                        <span
-                          key={i}
-                          className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800 transition duration-300"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                    <Link
-                      href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
-                    >
-                      Learn More
-                    </Link>
+          {/* Cards Column */}
+          <div className="lg:col-span-3 flex flex-col gap-8 transition-opacity duration-700 ease-in">
+            {hasEnteredServices &&
+              scrollDirection === 'down' &&
+              featuredServices.map((service, index) => (
+                <div
+                  key={index}
+                  className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-3 hover:scale-105 transition-all duration-500 group"
+                >
+                  <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6">
+                    <i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303]`}></i>
                   </div>
-                ))}
+                  <h3 className="text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 mb-2">{service.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {service.features.map((feature, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800"
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                  <Link
+                    href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+                  >
+                    Learn More
+                  </Link>
+                </div>
+              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Maps Section (Stats Section)  */}
+
+
+      <section id="map" className="py-24 bg-white relative">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+
+            {/* Map Area - 3/5 Columns */}
+            <div className="lg:col-span-3">
+              <div className="relative w-full h-96 lg:h-[32rem] rounded-3xl overflow-hidden shadow-2xl">
+                <img
+                  src="/World-Map.png"
+                  alt="World Map"
+                  className="w-full h-full object-contain transition-transform duration-700 ease-in-out hover:scale-105"
+                />
+
+                {/* Map Markers with Tooltips */}
+
+                {/* Zambia */}
+                <div className="absolute top-[54%] left-[50%] group">
+                  <div className="w-3 h-3 bg-red-600 rounded-full animate-ping"></div>
+                  <div className="w-3 h-3 bg-red-600 rounded-full absolute top-0 left-0"></div>
+                  <div className="absolute left-1/2 -translate-x-1/2 -top-8 text-xs sm:text-sm bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap">
+                    Zambia
+                  </div>
+                </div>
+
+                {/* Pakistan */}
+                <div className="absolute top-[40%] left-[60%] group">
+                  <div className="w-3 h-3 bg-blue-600 rounded-full animate-ping"></div>
+                  <div className="w-3 h-3 bg-blue-600 rounded-full absolute top-0 left-0"></div>
+                  <div className="absolute left-1/2 -translate-x-1/2 -top-8 text-xs sm:text-sm bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap">
+                    Pakistan
+                  </div>
+                </div>
+
+                {/* USA */}
+                <div className="absolute top-[55%] left-[30%] group">
+                  <div className="w-3 h-3 bg-green-600 rounded-full animate-ping"></div>
+                  <div className="w-3 h-3 bg-green-600 rounded-full absolute top-0 left-0"></div>
+                  <div className="absolute left-1/2 -translate-x-1/2 -top-8 text-xs sm:text-sm bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap">
+                    USA
+                  </div>
+                </div>
+
               </div>
-            )}
+            </div>
+
+            {/* Stats Area - 2/5 Columns */}
+            <div className="lg:col-span-2 space-y-8">
+              <h2 className="text-4xl font-extrabold text-gray-800 mb-6">
+                Our Global Presence
+              </h2>
+
+              {/* Stat Card - Countries */}
+              <div className="flex items-center space-x-4 p-5 border-l-4 border-gradient-to-br from-blue-600 to-indigo-900 bg-gray-50 rounded-xl shadow transition-all duration-300 transform hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                <div className="text-5xl text-blue-700 font-bold">5+</div>
+                <div>
+                  <p className="text-lg text-gray-700 font-semibold">Countries Reached</p>
+                  <p className="text-sm text-gray-500">Expanding worldwide every year</p>
+                </div>
+              </div>
+
+              {/* Stat Card - Clients */}
+              <div className="flex items-center space-x-4 p-5 border-l-4 border-gradient-to-br from-green-500 to-emerald-700 bg-gray-50 rounded-xl shadow transition-all duration-300 transform hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                <div className="text-5xl text-green-600 font-bold">500+</div>
+                <div>
+                  <p className="text-lg text-gray-700 font-semibold">Clients Served</p>
+                  <p className="text-sm text-gray-500">Across various industries</p>
+                </div>
+              </div>
+
+              {/* Stat Card - Support */}
+              <div className="flex items-center space-x-4 p-5 border-l-4 border-gradient-to-br from-red-600 to-pink-700 bg-gray-50 rounded-xl shadow transition-all duration-300 transform hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                <div className="text-5xl text-red-600 font-bold">24/7</div>
+                <div>
+                  <p className="text-lg text-gray-700 font-semibold">Global Support</p>
+                  <p className="text-sm text-gray-500">Round-the-clock availability</p>
+                </div>
+              </div>
+              {/* Stat Card - Experience */}
+              <div className="flex items-center space-x-4 p-5 border-l-4 border-gradient-to-br from-red-600 to-pink-700 bg-gray-50 rounded-xl shadow transition-all duration-300 transform hover:scale-[1.03] hover:-translate-y-1 hover:shadow-2xl">
+                <div className="text-5xl text-orange-600 font-bold">15+</div>
+                <div>
+                  <p className="text-lg text-gray-700 font-semibold">Years Experience</p>
+                  <p className="text-sm text-gray-500">A Legacy of Excellence. A Vision for the Future</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
 
-
-
       {/* Stats Section */}
-      <section className="py-20 bg-[#25237b]">
+      {/* <section className="py-20 bg-[#25237b]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -414,7 +507,132 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section> */}
+
+      {/* Clients Section */}
+
+      <section id="clients" className="py-20 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#25237b] to-[#8b0303]">
+            Our Valuable Clients
+          </h2>
+          <p className="text-lg mb-12 max-w-2xl mx-auto text-transparent bg-clip-text bg-gradient-to-r from-[#25237b] to-[#8b0303]">
+            Trusted by industry leaders and national institutions
+          </p>
+
+          <div className="relative group">
+            <div className="flex space-x-12 w-max animate-marquee group-hover:[animation-play-state:paused] overflow-x-auto sm:overflow-hidden">
+              {[
+                {
+                  name: "Bank Al Habib",
+                  logo: "/clients/bank-al-habib.png"
+                },
+                {
+                  name: "Pakistan Air Force",
+                  logo: "/clients/paf-logo.png"
+                },
+                {
+                  name: "Heavy Industries Taxila",
+                  logo: "/clients/hit-logo.png"
+                },
+                {
+                  name: "National Bank of Pakistan",
+                  logo: "/clients/nbp-logo.png"
+                },
+                {
+                  name: "The First MicroFinanceBank",
+                  logo: "/clients/tfmfb.png"
+                },
+                {
+                  name: "Honda",
+                  logo: "/clients/honda.png"
+                },
+                {
+                  name: "Fauji Fertilizer Bin Qasim Ltd",
+                  logo: "/clients/ffbl.png"
+                },
+                {
+                  name: "Sybrid",
+                  logo: "/clients/sybrid.png"
+                },
+                {
+                  name: "Oil & Gas Development Company",
+                  logo: "/clients/OGDCL.png"
+                },
+                {
+                  name: "Albayrak",
+                  logo: "/clients/Albayrak.png"
+                }
+
+              ].concat([
+                {
+                  name: "Bank Al Habib",
+                  logo: "/clients/bank-al-habib.png"
+                },
+                {
+                  name: "Pakistan Air Force",
+                  logo: "/clients/paf-logo.png"
+                },
+                {
+                  name: "Heavy Industries Taxila",
+                  logo: "/clients/hit-logo.png"
+                },
+                {
+                  name: "National Bank of Pakistan",
+                  logo: "/clients/nbp-logo.png"
+                },
+                {
+                  name: "The First MicroFinanceBank",
+                  logo: "/clients/tfmfb.png"
+                },
+                {
+                  name: "Honda",
+                  logo: "/clients/honda.png"
+                },
+                {
+                  name: "Fauji Fertilizer Bin Qasim Ltd",
+                  logo: "/clients/ffbl.png"
+                },
+                {
+                  name: "Sybrid",
+                  logo: "/clients/sybrid.png"
+                },
+                {
+                  name: "Oil & Gas Development Company",
+                  logo: "/clients/OGDCL.png"
+                },
+                {
+                  name: "Albayrak",
+                  logo: "/clients/Albayrak.png"
+                }
+              ]).map((client, index) => (
+                <div
+                  key={index}
+                  className="relative group flex-shrink-0 w-48 h-28 bg-gradient-to-br from-gray-100 to-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="max-h-16 max-w-full object-contain transition duration-300"
+                  />
+                  {(
+                    <div className="absolute bottom-2 opacity-0 group-hover:opacity-100 text-sm font-medium text-[#8b0303] transition-opacity duration-300">
+                      {client?.name}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* Slider Dots */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {[0, 1, 2, 3].map((dot) => (
+                <span key={dot} className="w-3 h-3 rounded-full bg-[#25237b] opacity-50 hover:opacity-100 transition"></span>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
+
 
 
       {/* Certifications & Memberships Slider */}
@@ -497,6 +715,8 @@ export default function Home() {
         </div>
       </section>
 
+
+
       {/* Featured Blogs Section */}
 
 
@@ -564,6 +784,9 @@ export default function Home() {
         </div>
       </section>
 
+
+
+
       {/* About Preview Section */}
       <section
         id="about-preview"
@@ -576,10 +799,13 @@ export default function Home() {
               }`}>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">About Teresol</h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                With over 15 years of experience in the technology industry, Teresol Pvt Ltd has established itself as a leading provider of innovative software, hardware, and embedded solutions.
-              </p>
+                TeReSol's Enterprise Fintech Solutions empower businesses to thrive in the digital age. We offer a comprehensive suite
+                of services. We are a team of over 400 professionals including 20 PhDs from esteemed global institutes. We are ISO 9001,
+                20000, 27001 certified, guaranteeing industry-leading quality. </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Our team of expert engineers and developers work closely with clients to deliver cutting-edge solutions that drive business growth and operational efficiency.
+                We help you transform your outdated systems, deliver
+                seamless omni-channel banking experiences, manage your IT infrastructure, and provide expert advice for the perfect
+                fintech solution for your unique needs.
               </p>
               <Link href="/about">
                 <Button btnName={"Learn More About Us"} />
