@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
 import Button from '@/components/Button.';
+import TypeWriter from '@/components/TypeWriter';
 import './styles/homepage.css';
 
 
@@ -21,7 +22,7 @@ export default function Home() {
   const [hasEnteredServices, setHasEnteredServices] = useState(false);
   const headingRef = useRef<HTMLDivElement | null>(null);
   const [headingVisible, setHeadingVisible] = useState(false);
-
+  const [hoverKey, setHoverKey] = useState(0);
 
 
   //lenis
@@ -110,7 +111,7 @@ export default function Home() {
     {
       title: "ISO 20000",
       description: "International IT Service Management Standard",
-      image: "/iso20000.png"
+      image: "/iso2000-01.png"
     }
   ];
 
@@ -154,9 +155,11 @@ export default function Home() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setHeadingVisible(true);
-          // observer.disconnect(); // stop observing after first trigger
+          observer.disconnect(); // stop observing after first trigger
         }
+
       },
+
       { threshold: 0.5 }
     );
 
@@ -201,7 +204,6 @@ export default function Home() {
                 setHasEnteredServices(true);
               }, 1500); // ⏳ Delay of 1 second after section enters
             }
-
           }
         });
       },
@@ -229,16 +231,25 @@ export default function Home() {
   const prevScrollY = useRef(0);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       if (currentScrollY > prevScrollY.current) {
         setScrollDirection('down');
       } else if (currentScrollY < prevScrollY.current) {
         setScrollDirection('up');
+        setHasEnteredServices(false);
       }
       prevScrollY.current = currentScrollY;
-    };
+      ticking = false;
 
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    }
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => window.removeEventListener('scroll', handleScroll);
@@ -255,6 +266,9 @@ export default function Home() {
       </div>
     );
   }
+
+
+
 
   return (
     <div className="min-h-screen">
@@ -339,7 +353,12 @@ export default function Home() {
         ref={setSectionRef('featured-services')}
         className="relative min-h-screen py-20 bg-gray-50"
       >
-        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-12">
+
+        <div
+          className={`grid grid-cols-1 gap-12 items-start transition-all duration-[1500ms] ease-in-out opacity-100 ${hasEnteredServices ? 'lg:grid-cols-5' : 'lg:grid-cols-2'
+            }`}
+        >
+
 
           {/* Sticky Heading Column */}
           <div
@@ -350,7 +369,7 @@ export default function Home() {
             <div className="transition-all duration-700">
               <h2
                 className={`font-extrabold text-gray-900 mb-6 transition-all duration-700 
-            ${hasEnteredServices ? 'text-5xl' : 'text-6xl text-center'} wavy-text`}
+            ${false ? 'text-5xl' : 'text-6xl text-center'} wavy-text`}
               >
                 Featured Services
               </h2>
@@ -423,27 +442,51 @@ export default function Home() {
                 <div className="absolute top-[54%] left-[50%] group">
                   <div className="w-3 h-3 bg-red-600 rounded-full animate-ping"></div>
                   <div className="w-3 h-3 bg-red-600 rounded-full absolute top-0 left-0"></div>
-                  <div className="absolute left-1/2 -translate-x-1/2 -top-8 text-xs sm:text-sm bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap">
-                    Zambia
+                  <div className="relative group">
+                    <div onMouseEnter={() => setHoverKey(prev => prev + 1)}  className=" -top-20 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition duration-300 border-r-2 border-white animate-typewriter w-fit max-w-xs text-xs sm:text-sm whitespace-normal break-words shadow-lg z-10">
+                      <strong>Zambia:</strong>{" "}
+                      <TypeWriter key={hoverKey}
+                        text="Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+                        speed={30}
+                      />
+                    </div>
                   </div>
+
+
                 </div>
 
                 {/* Pakistan */}
                 <div className="absolute top-[40%] left-[60%] group">
                   <div className="w-3 h-3 bg-blue-600 rounded-full animate-ping"></div>
                   <div className="w-3 h-3 bg-blue-600 rounded-full absolute top-0 left-0"></div>
-                  <div className="absolute left-1/2 -translate-x-1/2 -top-8 text-xs sm:text-sm bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap">
-                    Pakistan
+                  <div className="relative group">
+                  
+                    <div onMouseEnter={() => setHoverKey(prev => prev + 1)} className=" -top-20 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition duration-300 border-r-2 border-white animate-typewriter w-fit max-w-xs text-xs sm:text-sm whitespace-normal break-words shadow-lg z-10">
+                      <strong>Pakistan:</strong>{" "}
+                      <TypeWriter key={hoverKey}
+                        text="Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+                        speed={30}
+                      />
+                    </div>
+                  
                   </div>
+
                 </div>
 
                 {/* USA */}
                 <div className="absolute top-[55%] left-[30%] group">
                   <div className="w-3 h-3 bg-green-600 rounded-full animate-ping"></div>
                   <div className="w-3 h-3 bg-green-600 rounded-full absolute top-0 left-0"></div>
-                  <div className="absolute left-1/2 -translate-x-1/2 -top-8 text-xs sm:text-sm bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition duration-300 whitespace-nowrap">
-                    USA
+                  <div className="relative group">
+                    <div onMouseEnter={() => setHoverKey(prev => prev + 1)}  className=" -top-20 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition duration-300 border-r-2 border-white animate-typewriter w-fit max-w-xs text-xs sm:text-sm whitespace-normal break-words shadow-lg z-10">
+                      <strong>USA:</strong>{" "}
+                      <TypeWriter key={hoverKey}
+                        text="Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+                        speed={30}
+                      />
+                    </div>
                   </div>
+
                 </div>
 
               </div>
@@ -533,7 +576,7 @@ export default function Home() {
                 },
                 {
                   name: "Heavy Industries Taxila",
-                  logo: "/clients/hit-logo.png"
+                  logo: "/clients/HIT-01.png"
                 },
                 {
                   name: "National Bank of Pakistan",
