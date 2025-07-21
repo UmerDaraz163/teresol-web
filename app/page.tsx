@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -7,7 +6,11 @@ import Footer from '../components/Footer';
 import Link from 'next/link';
 import Button from '@/components/Button.';
 import TypeWriter from '@/components/TypeWriter';
+import Tilt from 'react-parallax-tilt';
 import './styles/homepage.css';
+import { motion, AnimatePresence } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 
 
@@ -24,7 +27,16 @@ export default function Home() {
   const [headingVisible, setHeadingVisible] = useState(false);
   const [hoverKey, setHoverKey] = useState(0);
 
-
+  const headingTextRef = useRef<HTMLHeadingElement>(null);
+  const subheadingRef = useRef<HTMLParagraphElement>(null);
+  const wavyUnderlineRef = useRef<HTMLSpanElement>(null);
+  const headingContainerRef = useRef<HTMLDivElement | null>(null);
+  const featuredServicesRef = useRef<HTMLDivElement | null>(null);
+  const mapSectionRef = useRef<HTMLElement>(null);
+  const clientsSectionRef = useRef<HTMLElement>(null);
+  const certificationsSectionRef = useRef<HTMLElement>(null);
+  const blogsSectionRef = useRef<HTMLElement>(null);
+  const aboutSectionRef = useRef<HTMLElement>(null);
   //lenis
 
   //lenis
@@ -85,7 +97,7 @@ export default function Home() {
     {
       title: "P@SHA Member",
       description: "Pakistan Software Houses Association",
-      image: "https://readdy.ai/api/search-image?query=Professional%20software%20association%20membership%20badge%20with%20blue%20and%20white%20design%2C%20technology%20industry%20certification%20symbol%2C%20clean%20minimal%20background&width=200&height=200&seq=cert5&orientation=squarish"
+      image: "/PASHA.png"
     },
     {
       title: "PSEB",
@@ -147,6 +159,134 @@ export default function Home() {
     setIsVisible(true);
   }, []);
 
+  // on refresh go to top
+  useEffect(() => {
+    // Disable the browser's automatic scroll restoration.
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    // Scroll to the top of the page on mount.
+    window.scrollTo(0, 0);
+  }, []);
+
+
+  // GSAP Start
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+  }, []);
+
+  // Main animation setup
+  useEffect(() => {
+    if (!mounted) return;
+
+    const ctx = gsap.context(() => {
+
+      // Hero section animations
+      gsap.from(".hero-content", {
+        duration: 1.5,
+        y: 50,
+        opacity: 0,
+        ease: "power3.out",
+        delay: 0.5
+      });
+
+      // Featured Services animations
+      if (hasEnteredServices && headingContainerRef.current && featuredServicesRef.current) {
+        // This block runs when the layout is "active" (sticky heading)
+
+        // Heading container movement
+        gsap.to(headingContainerRef.current, {
+          x: -50, // Move heading left on scroll
+          ease: "none",
+          scrollTrigger: {
+            trigger: featuredServicesRef.current,
+            start: "top center",
+            end: "bottom center",
+            scrub: 1.5,
+          },
+        });
+
+        // Service cards animation
+        gsap.utils.toArray<HTMLElement>(".service-card").forEach((card) => {
+          gsap.from(card, {
+            opacity: 0,
+            y: 50,
+            scale: 0.9,
+            duration: 0.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "restart none none reset",
+            }
+          });
+        });
+
+      } else if (headingTextRef.current) {
+        // This block runs when the layout is "initial" (centered heading)
+        // It sets up the initial entry animations for the heading text.
+
+        gsap.from(headingTextRef.current, {
+          duration: 1.2,
+          y: 50,
+          opacity: 0,
+          ease: "power3.out",
+          delay: 0.3
+        });
+
+        gsap.from(subheadingRef.current, {
+          duration: 1,
+          y: 30,
+          opacity: 0.8,
+          ease: "power2.out",
+          delay: 0.8
+        });
+
+        if (wavyUnderlineRef.current) {
+          const chars = wavyUnderlineRef.current.textContent?.split('') || [];
+          wavyUnderlineRef.current.textContent = '';
+          chars.forEach((char, i) => {
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.display = 'inline-block';
+            wavyUnderlineRef.current?.appendChild(span);
+            gsap.from(span, {
+              duration: 0.8,
+              y: -15,
+              opacity: 0,
+              ease: "back.out(1.7)",
+              delay: 0.5 + i * 0.05
+            });
+          });
+        }
+      }
+
+      // Other sections' animations
+      const sections = [mapSectionRef, clientsSectionRef, certificationsSectionRef, blogsSectionRef, aboutSectionRef];
+      sections.forEach(section => {
+        if (section.current) {
+          gsap.from(section.current, {
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power1.out",
+            scrollTrigger: {
+              trigger: section.current,
+              start: "top 85%",
+              toggleActions: "play none none none"
+            }
+          });
+        }
+      });
+    });
+
+    // Cleanup function
+    return () => {
+      ctx.revert();
+    };
+  }, [mounted, hasEnteredServices]); // Re-run animations when hasEnteredServices changes
+
+  // GSAP End 
 
   useEffect(() => {
     if (!mounted || !headingRef.current) return;
@@ -165,8 +305,8 @@ export default function Home() {
 
     observer.observe(headingRef.current);
 
-    // return () => observer.disconnect();
   }, [mounted]);
+
   useEffect(() => {
     if (!mounted) return;
 
@@ -187,7 +327,6 @@ export default function Home() {
   useEffect(() => {
     if (!mounted) return;
 
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -200,60 +339,52 @@ export default function Home() {
             }));
 
             if (id === 'featured-services' && !hasEnteredServices) {
-              setTimeout(() => {
-                setHasEnteredServices(true);
-              }, 1500); // ⏳ Delay of 1 second after section enters
+              setHasEnteredServices(true);
             }
           }
         });
       },
-      { threshold: 0.4 } // Ensures 60% visible before triggering
+      { threshold: 0.6 } // Ensures 60% visible before triggering
     );
-
-
 
     Object.values(sectionRefs.current).forEach(ref => {
       if (ref) observer.observe(ref);
     });
 
-    // return () => observer.disconnect();
-  }, [mounted]);
+  }, [mounted, hasEnteredServices]);
 
 
   const setSectionRef = (id: string) => (el: HTMLElement | null) => {
     sectionRefs.current[id] = el;
   };
 
-
-  // revert featuredServices to original
-
-  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
   const prevScrollY = useRef(0);
 
   useEffect(() => {
-    let ticking = false;
+    if (!mounted) return;
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY > prevScrollY.current) {
-        setScrollDirection('down');
-      } else if (currentScrollY < prevScrollY.current) {
-        setScrollDirection('up');
-        setHasEnteredServices(false);
+      const section = sectionRefs.current['featured-services'];
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top;
+      const sectionBottom = rect.bottom;
+
+      const isOutOfSectionScrollingUp = sectionBottom < 0 && currentScrollY < prevScrollY.current;
+
+      if (isOutOfSectionScrollingUp) {
+        if (hasEnteredServices) setHasEnteredServices(false);
       }
+
       prevScrollY.current = currentScrollY;
-      ticking = false;
-
     };
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(handleScroll);
-        ticking = true;
-      }
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true });
 
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mounted, hasEnteredServices]);
+
 
 
   if (!mounted) {
@@ -306,7 +437,7 @@ export default function Home() {
         ))}
 
         <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-          <div className={`w-full max-w-3xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <div className={`hero-content w-full max-w-3xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               {heroSlides[currentSlide].title}
             </h1>
@@ -324,15 +455,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentSlide ? 'bg-white' : 'bg-white/50'}`}
-            />
-          ))}
-        </div> */}
         {/* Dots */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
           {heroSlides.map((_, index) => (
@@ -351,31 +473,43 @@ export default function Home() {
       <section
         id="featured-services"
         ref={setSectionRef('featured-services')}
-        className="relative min-h-screen py-20 bg-gray-50"
+        className="relative min-h-screen py-20 bg-gray-50 overflow-x-clip"
       >
-
         <div
-          className={`grid grid-cols-1 gap-12 items-start transition-all duration-[1500ms] ease-in-out opacity-100 ${hasEnteredServices ? 'lg:grid-cols-5' : 'lg:grid-cols-2'
+          className={`container mx-auto px-4 grid grid-cols-1 gap-12 items-start transition-all duration-700 ease-in-out ${hasEnteredServices ? 'lg:grid-cols-5' : 'lg:grid-cols-1'
             }`}
         >
-
-
           {/* Sticky Heading Column */}
           <div
-            ref={headingRef}
-            className={`lg:col-span-2 relative transition-all duration-1000 ${hasEnteredServices ? 'sticky top-32 self-start' : 'flex items-center justify-center min-h-screen'
-              } text-center`}
+            ref={headingContainerRef}
+            className={`lg:col-span-2 relative transition-all duration-1000 ${hasEnteredServices ? 'sticky top-32 self-start' : 'flex items-center justify-center'
+              } text-center lg:text-left`}
           >
-            <div className="transition-all duration-700">
+            <div className="transition-all duration-700 w-full">
               <h2
+                ref={headingTextRef}
                 className={`font-extrabold text-gray-900 mb-6 transition-all duration-700 
-            ${false ? 'text-5xl' : 'text-6xl text-center'} wavy-text`}
+              ${hasEnteredServices ? 'text-5xl' : 'text-6xl text-center'} relative`}
               >
-                Featured Services
+                <span ref={wavyUnderlineRef}>Featured Services</span>
+                <svg
+                  className="absolute -bottom-3 left-0 w-full h-2"
+                  viewBox="0 0 500 10"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0,5 C100,0 200,10 300,5 C400,0 500,10 500,5"
+                    fill="none"
+                    stroke="#8b0303"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </h2>
               <p
+                ref={subheadingRef}
                 className={`text-gray-600 leading-relaxed transition-all duration-700 
-            ${hasEnteredServices ? 'text-xl' : 'text-2xl text-center max-w-2xl mx-auto'}`}
+              ${hasEnteredServices ? 'text-xl' : 'text-2xl text-center max-w-2xl mx-auto'}`}
               >
                 Discover our most popular technology solutions that drive business success
               </p>
@@ -383,38 +517,44 @@ export default function Home() {
           </div>
 
           {/* Cards Column */}
-          <div className="lg:col-span-3 flex flex-col gap-8 transition-opacity duration-700 ease-in">
+          <div ref={featuredServicesRef} className="lg:col-span-3 flex flex-col gap-8">
             {hasEnteredServices &&
-              scrollDirection === 'down' &&
               featuredServices.map((service, index) => (
-                <div
+                <Tilt
                   key={index}
-                  className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-3 hover:scale-105 transition-all duration-500 group"
+                  glareEnable={true}
+                  glareMaxOpacity={0.2}
+                  glareColor="#ffffff"
+                  tiltMaxAngleX={10}
+                  tiltMaxAngleY={10}
+                  className="service-card transition-transform"
                 >
-                  <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6">
-                    <i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303]`}></i>
+                  <div className="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-3 hover:scale-[1.03] transition-all duration-500 group">
+                    <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6">
+                      <i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303]`}></i>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 mb-2">{service.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {service.features.map((feature, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                    <Link
+                      href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+                    >
+                      Learn More
+                    </Link>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 mb-2">{service.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {service.features.map((feature, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                  <Link
-                    href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
-                  >
-                    Learn More
-                  </Link>
-                </div>
+                </Tilt>
               ))}
           </div>
         </div>
@@ -423,7 +563,7 @@ export default function Home() {
       {/* Maps Section (Stats Section)  */}
 
 
-      <section id="map" className="py-24 bg-white relative">
+      <section ref={mapSectionRef} id="map" className="py-24 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
 
@@ -437,48 +577,69 @@ export default function Home() {
                 />
 
                 {/* Map Markers with Tooltips */}
-
                 {/* Zambia */}
                 <div className="absolute top-[54%] left-[50%] group">
-                  <div className="w-3 h-3 bg-red-600 rounded-full animate-ping"></div>
-                  <div className="w-3 h-3 bg-red-600 rounded-full absolute top-0 left-0"></div>
+                  <div className="w-3 h-3 bg-[#198A00] rounded-full animate-ping"></div>
+                  <div className="w-3 h-3 bg-[#198A00] rounded-full absolute top-0 left-0"></div>
                   <div className="relative group">
-                    <div onMouseEnter={() => setHoverKey(prev => prev + 1)}  className=" -top-20 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition duration-300 border-r-2 border-white animate-typewriter w-fit max-w-xs text-xs sm:text-sm whitespace-normal break-words shadow-lg z-10">
+
+                    <div onMouseEnter={() => setHoverKey(prev => prev + 1)} className=" -top-20 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition duration-300 border-r-2 border-white animate-typewriter w-fit max-w-xs text-xs sm:text-sm whitespace-normal break-words shadow-lg z-10">
+                      <i className="ri-information-fill text-[#198A00] text-lg" />
                       <strong>Zambia:</strong>{" "}
                       <TypeWriter key={hoverKey}
                         text="Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
                         speed={30}
                       />
                     </div>
+
                   </div>
-
-
                 </div>
+
 
                 {/* Pakistan */}
                 <div className="absolute top-[40%] left-[60%] group">
-                  <div className="w-3 h-3 bg-blue-600 rounded-full animate-ping"></div>
-                  <div className="w-3 h-3 bg-blue-600 rounded-full absolute top-0 left-0"></div>
+                  <div className="w-3 h-3 bg-[#01411C] rounded-full animate-ping"></div>
+                  <div className="w-3 h-3 bg-[#01411C] rounded-full absolute top-0 left-0"></div>
                   <div className="relative group">
-                  
+
                     <div onMouseEnter={() => setHoverKey(prev => prev + 1)} className=" -top-20 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition duration-300 border-r-2 border-white animate-typewriter w-fit max-w-xs text-xs sm:text-sm whitespace-normal break-words shadow-lg z-10">
+                      <i className="ri-information-fill text-[#01411C] text-lg" />
                       <strong>Pakistan:</strong>{" "}
                       <TypeWriter key={hoverKey}
                         text="Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
                         speed={30}
                       />
                     </div>
-                  
+
+                  </div>
+
+                </div>
+                {/* Qatar */}
+                <div className="absolute top-[42%] left-[57%] group">
+                  <div className="w-3 h-3 bg-[#8A1538] rounded-full animate-ping"></div>
+                  <div className="w-3 h-3 bg-[#8A1538] rounded-full absolute top-0 left-0"></div>
+                  <div className="relative group">
+
+                    <div onMouseEnter={() => setHoverKey(prev => prev + 1)} className=" -top-20 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition duration-300 border-r-2 border-white animate-typewriter w-fit max-w-xs text-xs sm:text-sm whitespace-normal break-words shadow-lg z-10">
+                      <i className="ri-information-fill text-[#8A1538] text-lg" />
+                      <strong>Qatar:</strong>{" "}
+                      <TypeWriter key={hoverKey}
+                        text="Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+                        speed={30}
+                      />
+                    </div>
+
                   </div>
 
                 </div>
 
                 {/* USA */}
                 <div className="absolute top-[55%] left-[30%] group">
-                  <div className="w-3 h-3 bg-green-600 rounded-full animate-ping"></div>
-                  <div className="w-3 h-3 bg-green-600 rounded-full absolute top-0 left-0"></div>
+                  <div className="w-3 h-3 bg-[#3C3B6E] rounded-full animate-ping"></div>
+                  <div className="w-3 h-3 bg-[#3C3B6E] rounded-full absolute top-0 left-0"></div>
                   <div className="relative group">
-                    <div onMouseEnter={() => setHoverKey(prev => prev + 1)}  className=" -top-20 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition duration-300 border-r-2 border-white animate-typewriter w-fit max-w-xs text-xs sm:text-sm whitespace-normal break-words shadow-lg z-10">
+                    <div onMouseEnter={() => setHoverKey(prev => prev + 1)} className=" -top-20 bg-black text-white px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition duration-300 border-r-2 border-white animate-typewriter w-fit max-w-xs text-xs sm:text-sm whitespace-normal break-words shadow-lg z-15">
+                      <i className="ri-information-fill text-[#3C3B6E] text-lg" />
                       <strong>USA:</strong>{" "}
                       <TypeWriter key={hoverKey}
                         text="Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
@@ -537,24 +698,9 @@ export default function Home() {
         </div>
       </section>
 
-
-      {/* Stats Section */}
-      {/* <section className="py-20 bg-[#25237b]">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center transform hover:scale-110 transition-transform duration-300 cursor-pointer">
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2 hover:animate-pulse">{stat.number}</div>
-                <div className="text-lg text-blue-100">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
       {/* Clients Section */}
 
-      <section id="clients" className="py-20 bg-white relative overflow-hidden">
+      <section ref={clientsSectionRef} id="clients" className="py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#25237b] to-[#8b0303]">
             Our Valuable Clients
@@ -680,10 +826,9 @@ export default function Home() {
 
       {/* Certifications & Memberships Slider */}
 
-      {/* Dynamic section */}
       <section
         id="certifications"
-        ref={setSectionRef('certifications')}
+        ref={certificationsSectionRef}
         className="py-20 bg-gradient-to-b from-white to-blue-50 transition-all duration-1000"
       >
         <div className="container mx-auto px-4">
@@ -762,11 +907,9 @@ export default function Home() {
 
       {/* Featured Blogs Section */}
 
-
-      {/* Dynamic section */}
       <section
         id="featured-blogs"
-        ref={setSectionRef('featured-blogs')}
+        ref={blogsSectionRef}
         className="py-20 bg-gray-50"
       >
         <div className="container mx-auto px-4">
@@ -833,7 +976,7 @@ export default function Home() {
       {/* About Preview Section */}
       <section
         id="about-preview"
-        ref={setSectionRef('about-preview')}
+        ref={aboutSectionRef}
         className="py-20"
       >
         <div className="container mx-auto px-4">
