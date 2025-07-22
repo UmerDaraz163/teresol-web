@@ -69,14 +69,14 @@ export default function Footer() {
                 <div className="w-5 h-5 flex items-center justify-center">
                   <i className="ri-phone-line text-blue-400"></i>
                 </div>
-                <span className="text-gray-300">+92 11 1111 1111</span>
-              </div>
+                <a href="tel:+921111111111" className="text-gray-300">+92 11 1111 1111</a>
+               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-5 h-5 flex items-center justify-center">
                   <i className="ri-mail-line text-blue-400"></i>
                 </div>
-                <span className="text-gray-300">info@teresol.com</span>
-              </div>
+                <a href="mailto:info@teresol.com" className="text-gray-300">info@teresol.com</a>
+                </div>
             </div>
           </div>
         </div>

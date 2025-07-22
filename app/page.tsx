@@ -160,13 +160,13 @@ export default function Home() {
   }, []);
 
   // on refresh go to top
+
   useEffect(() => {
-    // Disable the browser's automatic scroll restoration.
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-    // Scroll to the top of the page on mount.
-    window.scrollTo(0, 0);
+    const timeout = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50); // small delay to let layout/rendering finish
+
+    return () => clearTimeout(timeout);
   }, []);
 
 
@@ -179,112 +179,206 @@ export default function Home() {
   useEffect(() => {
     if (!mounted) return;
 
-    const ctx = gsap.context(() => {
+    // Hero section animations
+    gsap.from(".hero-content", {
+      duration: 1.5,
+      y: 50,
+      opacity: 0,
+      ease: "power3.out",
+      delay: 0.5
+    });
 
-      // Hero section animations
-      gsap.from(".hero-content", {
-        duration: 1.5,
-        y: 50,
-        opacity: 0,
-        ease: "power3.out",
-        delay: 0.5
+    // Featured Services animations
+    if (headingContainerRef.current && featuredServicesRef.current) {
+      // Heading container movement
+      gsap.to(headingContainerRef.current, {
+        x: -50, // Move heading left on scroll
+        ease: "none",
+        scrollTrigger: {
+          trigger: featuredServicesRef.current,
+          start: "top center",
+          end: "bottom center",
+          scrub: 1.5,
+        },
       });
 
-      // Featured Services animations
-      if (hasEnteredServices && headingContainerRef.current && featuredServicesRef.current) {
-        // This block runs when the layout is "active" (sticky heading)
 
-        // Heading container movement
-        gsap.to(headingContainerRef.current, {
-          x: -50, // Move heading left on scroll
-          ease: "none",
-          scrollTrigger: {
-            trigger: featuredServicesRef.current,
-            start: "top center",
-            end: "bottom center",
-            scrub: 1.5,
-          },
-        });
+      // Heading text animation (one-time)
+      gsap.from(headingTextRef.current, {
+        duration: 1.2,
+        y: 50,
+        x: 50,
+        opacity: 0.8,
+        ease: "power3.out",
+        delay: 0.3
+      });
 
-        // Service cards animation
-        gsap.utils.toArray<HTMLElement>(".service-card").forEach((card) => {
-          gsap.from(card, {
+      // Subheading animation (one-time)
+      gsap.from(subheadingRef.current, {
+        duration: 1,
+        y: 30,
+        x: 50,
+        opacity: 0.8,
+        ease: "power2.out",
+        delay: 0.8
+      });
+
+      // Wavy underline effect (one-time)
+      if (wavyUnderlineRef.current) {
+        const chars = wavyUnderlineRef.current.textContent?.split('') || [];
+        wavyUnderlineRef.current.textContent = '';
+
+        chars.forEach((char, i) => {
+          const span = document.createElement('span');
+          span.textContent = char;
+          span.style.display = 'inline-block';
+          wavyUnderlineRef.current?.appendChild(span);
+
+          gsap.from(span, {
+            duration: 0.8,
+            y: -15,
             opacity: 0,
-            y: 50,
-            scale: 0.9,
-            duration: 0.5,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-              toggleActions: "restart none none reset",
-            }
+            ease: "back.out(1.7)",
+            delay: 0.5 + i * 0.05
           });
         });
-
-      } else if (headingTextRef.current) {
-        // This block runs when the layout is "initial" (centered heading)
-        // It sets up the initial entry animations for the heading text.
-
-        gsap.from(headingTextRef.current, {
-          duration: 1.2,
-          y: 50,
-          opacity: 0,
-          ease: "power3.out",
-          delay: 0.3
-        });
-
-        gsap.from(subheadingRef.current, {
-          duration: 1,
-          y: 30,
-          opacity: 0.8,
-          ease: "power2.out",
-          delay: 0.8
-        });
-
-        if (wavyUnderlineRef.current) {
-          const chars = wavyUnderlineRef.current.textContent?.split('') || [];
-          wavyUnderlineRef.current.textContent = '';
-          chars.forEach((char, i) => {
-            const span = document.createElement('span');
-            span.textContent = char;
-            span.style.display = 'inline-block';
-            wavyUnderlineRef.current?.appendChild(span);
-            gsap.from(span, {
-              duration: 0.8,
-              y: -15,
-              opacity: 0,
-              ease: "back.out(1.7)",
-              delay: 0.5 + i * 0.05
-            });
-          });
-        }
       }
 
-      // Other sections' animations
-      const sections = [mapSectionRef, clientsSectionRef, certificationsSectionRef, blogsSectionRef, aboutSectionRef];
-      sections.forEach(section => {
-        if (section.current) {
-          gsap.from(section.current, {
-            y: 50,
-            opacity: 0,
-            duration: 1,
-            ease: "power1.out",
-            scrollTrigger: {
-              trigger: section.current,
-              start: "top 85%",
-              toggleActions: "play none none none"
-            }
-          });
+      // --- 🌟 UPDATED: SVG Windmill "Come and Go" Animation 🌟 ---
+      const sectionTrigger = {
+        trigger: "#featured-services",
+        start: "top bottom", // Animation starts when the top of the section hits the bottom of the viewport
+        end: "bottom top", // Animation ends when the bottom of the section hits the top of the viewport
+        scrub: 1.5,
+      };
+
+      // Windmill 1: Comes from left, goes to right
+      gsap.fromTo("#windmill-1",
+        { xPercent: -100, rotation: -90 },
+        {
+          xPercent: 100,
+          rotation: 180,
+          ease: "none",
+          scrollTrigger: sectionTrigger
+        }
+      );
+
+      // Windmill 2: Comes from bottom, goes to top
+      gsap.fromTo("#windmill-2",
+        { yPercent: 100, rotation: 0 },
+        {
+          yPercent: -100,
+          rotation: -180,
+          ease: "none",
+          scrollTrigger: { ...sectionTrigger, scrub: 2.5 } // A bit slower scrub for variety
+        }
+      );
+
+      // Windmill 3: Comes from top-right, goes to bottom-left (diagonal)
+      gsap.fromTo("#windmill-3",
+        { xPercent: 150, yPercent: -150, rotation: 50 },
+        {
+          xPercent: -150,
+          yPercent: 150,
+          rotation: -270,
+          ease: "none",
+          scrollTrigger: sectionTrigger
+        }
+      );
+    }
+
+    // Service cards animation
+    gsap.utils.toArray<HTMLElement>(".service-card").forEach((card) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 50,
+        scale: 0.9,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          // Animate in on scroll down AND on scroll up
+          toggleActions: "restart none restart reset",
         }
       });
     });
 
+    // Map section animation
+    if (mapSectionRef.current) {
+      gsap.from(mapSectionRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: mapSectionRef.current,
+          start: "top 80%"
+        }
+      });
+    }
+
+    // Clients section animation
+    if (clientsSectionRef.current) {
+      gsap.from(clientsSectionRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: clientsSectionRef.current,
+          start: "top 80%"
+        }
+      });
+    }
+
+    // Certifications animation
+    if (certificationsSectionRef.current) {
+      gsap.from(certificationsSectionRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: certificationsSectionRef.current,
+          start: "top 80%"
+        }
+      });
+    }
+
+    // Blogs animation
+    if (blogsSectionRef.current) {
+      gsap.from(blogsSectionRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: blogsSectionRef.current,
+          start: "top 80%"
+        }
+      });
+    }
+
+    // About section animation
+    if (aboutSectionRef.current) {
+      gsap.from(aboutSectionRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: aboutSectionRef.current,
+          start: "top 80%"
+        }
+      });
+    }
+
     // Cleanup function
     return () => {
-      ctx.revert();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [mounted, hasEnteredServices]); // Re-run animations when hasEnteredServices changes
+  }, [mounted]);
 
   // GSAP End 
 
@@ -305,8 +399,8 @@ export default function Home() {
 
     observer.observe(headingRef.current);
 
+    // return () => observer.disconnect();
   }, [mounted]);
-
   useEffect(() => {
     if (!mounted) return;
 
@@ -327,6 +421,7 @@ export default function Home() {
   useEffect(() => {
     if (!mounted) return;
 
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -339,7 +434,9 @@ export default function Home() {
             }));
 
             if (id === 'featured-services' && !hasEnteredServices) {
-              setHasEnteredServices(true);
+              setTimeout(() => {
+                setHasEnteredServices(true);
+              }, 300); // ⏳ Delay of 1 second after section enters
             }
           }
         });
@@ -347,10 +444,13 @@ export default function Home() {
       { threshold: 0.6 } // Ensures 60% visible before triggering
     );
 
+
+
     Object.values(sectionRefs.current).forEach(ref => {
       if (ref) observer.observe(ref);
     });
 
+    // return () => observer.disconnect();
   }, [mounted, hasEnteredServices]);
 
 
@@ -358,32 +458,59 @@ export default function Home() {
     sectionRefs.current[id] = el;
   };
 
+
+  // revert featuredServices to original
+
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
+  const sectionRef = useRef<HTMLDivElement>(null);
   const prevScrollY = useRef(0);
 
   useEffect(() => {
-    if (!mounted) return;
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const section = sectionRefs.current['featured-services'];
+      const section = sectionRef.current;
       if (!section) return;
 
       const rect = section.getBoundingClientRect();
       const sectionTop = rect.top;
       const sectionBottom = rect.bottom;
 
-      const isOutOfSectionScrollingUp = sectionBottom < 0 && currentScrollY < prevScrollY.current;
+      const isInSection = sectionTop < window.innerHeight && sectionBottom > 0;
 
-      if (isOutOfSectionScrollingUp) {
-        if (hasEnteredServices) setHasEnteredServices(false);
+      // Determine scroll direction
+      if (currentScrollY > prevScrollY.current) {
+        setScrollDirection('down');
+
+        // If entering section while scrolling down
+        if (isInSection) {
+          setHasEnteredServices(true);
+        }
+      } else if (currentScrollY < prevScrollY.current) {
+        setScrollDirection('up');
+
+        // If scrolling up but still in section, re-show
+        if (isInSection) {
+          setHasEnteredServices(true);
+        } else {
+          // If scrolled out of section upward, hide
+          setHasEnteredServices(false);
+        }
       }
 
       prevScrollY.current = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [mounted, hasEnteredServices]);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
 
 
@@ -437,7 +564,7 @@ export default function Home() {
         ))}
 
         <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-          <div className={`hero-content w-full max-w-3xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <div className={`w-full max-w-3xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               {heroSlides[currentSlide].title}
             </h1>
@@ -455,6 +582,15 @@ export default function Home() {
           </div>
         </div>
 
+        {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentSlide ? 'bg-white' : 'bg-white/50'}`}
+            />
+          ))}
+        </div> */}
         {/* Dots */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
           {heroSlides.map((_, index) => (
@@ -468,6 +604,7 @@ export default function Home() {
         </div>
       </section>
 
+
       {/* Featured Services Section */}
 
       <section
@@ -475,17 +612,41 @@ export default function Home() {
         ref={setSectionRef('featured-services')}
         className="relative min-h-screen py-20 bg-gray-50 overflow-x-clip"
       >
+
+        {/* Background SVG Elements */}
+        <div className="absolute inset-0 z-0 opacity-50 pointer-events-none">
+          <svg id="windmill-1" className="absolute top-[10%] left-0 w-48 h-48 text-gray-500/50" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 50 L5 20 C10 5, 40 5, 45 20 L50 50Z" />
+            <path d="M50 50 L80 5 C70 10, 60 40, 80 45 L50 50Z" />
+            <path d="M50 50 L95 80 C90 95, 60 95, 55 80 L50 50Z" />
+            <path d="M50 50 L20 95 C30 90, 40 60, 20 55 L50 50Z" />
+          </svg>
+          <svg id="windmill-2" className="absolute bottom-[5%] right-0 w-64 h-64 text-gray-500/50" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 50 L5 20 C10 5, 40 5, 45 20 L50 50Z" />
+            <path d="M50 50 L80 5 C70 10, 60 40, 80 45 L50 50Z" />
+            <path d="M50 50 L95 80 C90 95, 60 95, 55 80 L50 50Z" />
+            <path d="M50 50 L20 95 C30 90, 40 60, 20 55 L50 50Z" />
+          </svg>
+          <svg id="windmill-3" className="absolute top-1/2 left-0 w-20 h-20 text-gray-500/50" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 50 L5 20 C10 5, 40 5, 45 20 L50 50Z" />
+            <path d="M50 50 L80 5 C70 10, 60 40, 80 45 L50 50Z" />
+            <path d="M50 50 L95 80 C90 95, 60 95, 55 80 L50 50Z" />
+            <path d="M50 50 L20 95 C30 90, 40 60, 20 55 L50 50Z" />
+          </svg>
+        </div>
+
+
         <div
-          className={`container mx-auto px-4 grid grid-cols-1 gap-12 items-start transition-all duration-700 ease-in-out ${hasEnteredServices ? 'lg:grid-cols-5' : 'lg:grid-cols-1'
+          className={`container mx-auto px-4 grid grid-cols-1 gap-12 items-start transition-all duration-[1500ms] ease-in-out ${hasEnteredServices ? 'lg:grid-cols-5' : 'lg:grid-cols-2'
             }`}
         >
           {/* Sticky Heading Column */}
           <div
             ref={headingContainerRef}
-            className={`lg:col-span-2 relative transition-all duration-1000 ${hasEnteredServices ? 'sticky top-32 self-start' : 'flex items-center justify-center'
+            className={`lg:col-span-2 relative transition-all duration-1000 ${hasEnteredServices ? 'sticky top-32 self-start' : 'flex items-center justify-center min-h-screen'
               } text-center lg:text-left`}
           >
-            <div className="transition-all duration-700 w-full">
+            <div className="transition-all duration-700">
               <h2
                 ref={headingTextRef}
                 className={`font-extrabold text-gray-900 mb-6 transition-all duration-700 
@@ -527,7 +688,7 @@ export default function Home() {
                   glareColor="#ffffff"
                   tiltMaxAngleX={10}
                   tiltMaxAngleY={10}
-                  className="service-card transition-transform"
+                  className="service-card transition-transform" // Added service-card class for GSAP
                 >
                   <div className="bg-white p-8 rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-3 hover:scale-[1.03] transition-all duration-500 group">
                     <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6">
@@ -563,7 +724,7 @@ export default function Home() {
       {/* Maps Section (Stats Section)  */}
 
 
-      <section ref={mapSectionRef} id="map" className="py-24 bg-white relative">
+      <section id="map" className="py-24 bg-white relative">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
 
@@ -577,6 +738,7 @@ export default function Home() {
                 />
 
                 {/* Map Markers with Tooltips */}
+
                 {/* Zambia */}
                 <div className="absolute top-[54%] left-[50%] group">
                   <div className="w-3 h-3 bg-[#198A00] rounded-full animate-ping"></div>
@@ -698,9 +860,24 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* Stats Section */}
+      {/* <section className="py-20 bg-[#25237b]">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center transform hover:scale-110 transition-transform duration-300 cursor-pointer">
+                <div className="text-4xl md:text-5xl font-bold text-white mb-2 hover:animate-pulse">{stat.number}</div>
+                <div className="text-lg text-blue-100">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section> */}
+
       {/* Clients Section */}
 
-      <section ref={clientsSectionRef} id="clients" className="py-20 bg-white relative overflow-hidden">
+      <section id="clients" className="py-20 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#25237b] to-[#8b0303]">
             Our Valuable Clients
@@ -826,9 +1003,10 @@ export default function Home() {
 
       {/* Certifications & Memberships Slider */}
 
+      {/* Dynamic section */}
       <section
         id="certifications"
-        ref={certificationsSectionRef}
+        ref={setSectionRef('certifications')}
         className="py-20 bg-gradient-to-b from-white to-blue-50 transition-all duration-1000"
       >
         <div className="container mx-auto px-4">
@@ -907,9 +1085,11 @@ export default function Home() {
 
       {/* Featured Blogs Section */}
 
+
+      {/* Dynamic section */}
       <section
         id="featured-blogs"
-        ref={blogsSectionRef}
+        ref={setSectionRef('featured-blogs')}
         className="py-20 bg-gray-50"
       >
         <div className="container mx-auto px-4">
@@ -976,7 +1156,7 @@ export default function Home() {
       {/* About Preview Section */}
       <section
         id="about-preview"
-        ref={aboutSectionRef}
+        ref={setSectionRef('about-preview')}
         className="py-20"
       >
         <div className="container mx-auto px-4">
