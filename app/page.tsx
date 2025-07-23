@@ -253,38 +253,29 @@ export default function Home() {
       };
 
       // Windmill 1: Comes from left, goes to right
-      gsap.fromTo("#windmill-1",
-        { xPercent: -100, rotation: -90 },
-        {
-          xPercent: 100,
-          rotation: 180,
-          ease: "none",
-          scrollTrigger: sectionTrigger
-        }
-      );
+      gsap.fromTo("#windmill-1", { xPercent: -100, rotation: -90 }, { xPercent: 100, rotation: 180, ease: "none", scrollTrigger: sectionTrigger });
+      gsap.fromTo("#windmill-2", { yPercent: 100, rotation: 0 }, { yPercent: -100, rotation: -180, ease: "none", scrollTrigger: { ...sectionTrigger, scrub: 2.5 } });
+      gsap.fromTo("#windmill-3", { xPercent: 150, yPercent: -150, rotation: 50 }, { xPercent: -150, yPercent: 150, rotation: -270, ease: "none", scrollTrigger: sectionTrigger });
 
-      // Windmill 2: Comes from bottom, goes to top
-      gsap.fromTo("#windmill-2",
-        { yPercent: 100, rotation: 0 },
-        {
-          yPercent: -100,
-          rotation: -180,
-          ease: "none",
-          scrollTrigger: { ...sectionTrigger, scrub: 2.5 } // A bit slower scrub for variety
-        }
-      );
+      const bulbGlow = document.querySelector("#bulb-glow");
+      if (bulbGlow) {
+        const flickerTimeline = gsap.timeline()
+          .to(bulbGlow, { opacity: 1, duration: 0.1 })
+          .to(bulbGlow, { opacity: 0.2, duration: 0.1 })
+          .to(bulbGlow, { opacity: 1, duration: 0.2 })
+          .to(bulbGlow, { opacity: 0, duration: 0.2 }, "+=0.3")
+          .to(bulbGlow, { opacity: 1, duration: 0.15 })
+          .to(bulbGlow, { opacity: 0.5, duration: 0.1 })
+          .to(bulbGlow, { opacity: 1, duration: 0.3 });
 
-      // Windmill 3: Comes from top-right, goes to bottom-left (diagonal)
-      gsap.fromTo("#windmill-3",
-        { xPercent: 150, yPercent: -150, rotation: 50 },
-        {
-          xPercent: -150,
-          yPercent: 150,
-          rotation: -270,
-          ease: "none",
-          scrollTrigger: sectionTrigger
-        }
-      );
+        ScrollTrigger.create({
+          animation: flickerTimeline,
+          trigger: featuredServicesRef.current,
+          start: "top center",
+          end: "bottom bottom",
+          scrub: true,
+        });
+      }
     }
 
     // Service cards animation
@@ -674,6 +665,14 @@ export default function Home() {
               >
                 Discover our most popular technology solutions that drive business success
               </p>
+              <div className={`mt-16 mx-auto flex justify-center transition-opacity duration-500 ${hasEnteredServices ? "opacity-100" : "opacity-0"}`}>
+                <svg id="idea-bulb" className="w-24 h-24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path id="bulb-glow" d="M12,6 C9.79,6 8,7.79 8,10 C8,11.83 9.17,13.42 11,13.85 L11,15 L9,15 C8.45,15 8,15.45 8,16 L8,17 L16,17 L16,16 C16,15.45 15.55,15 15,15 L13,15 L13,13.85 C14.83,13.42 16,11.83 16,10 C16,7.79 14.21,6 12,6 Z" 
+                    fill="#FBBF24" className="opacity-0"/>
+                    <path d="M12,2 C7.59,2 4,5.59 4,10 C4,13.04 5.92,15.64 8.7,16.65 L8,17 L8,18 C8,18.55 8.45,19 9,19 L15,19 C15.55,19 16,18.55 16,18 L16,17 L15.3,16.65 C18.08,15.64 20,13.04 20,10 C20,5.59 16.41,2 12,2 Z M12,17 C11.45,17 11,17.45 11,18 L11,19 L13,19 L13,18 C13,17.45 12.55,17 12,17 Z M12,4 C15.31,4 18,6.69 18,10 C18,12.53 16.36,14.61 14,15.13 L14,16 C14,16.55 13.55,17 13,17 L11,17 C10.45,17 10,16.55 10,16 L10,15.13 C7.64,14.61 6,12.53 6,10 C6,6.69 8.69,4 12,4 Z" 
+                    fill="currentColor" className="text-gray-400"/>
+                </svg>
+              </div>
             </div>
           </div>
 
