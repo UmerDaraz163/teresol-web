@@ -1,122 +1,169 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+const menuItems = [
+  { name: 'Home', href: '/' },
+  { name: 'About Us', href: '/about' },
+  { name: 'Solutions', href: '/solutions' },
+  { name: 'Products', href: '/products' },
+  { name: 'Services', href: '/services' },
+  { name: 'Resources', href: '/resources' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
+];
+
+const MenuIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+    <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+  </svg>
+);
+
+const CloseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+    <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
+  </svg>
+);
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const menuItems = [
-    { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Solutions', href: '/solutions' },
-    { name: 'Products', href: '/products' },
-    { name: 'Services', href: '/services' },
-    { name: 'Resources', href: '/resources' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Contact', href: '/contact' },
-  ];
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMenuOpen) setIsMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isMenuOpen]);
+
   return (
-    <header
-      className={`bg-white shadow-lg sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'backdrop-blur-md bg-white/95 shadow-xl' : ''
+    <>
+      <header
+        // THE FIX: Removed "opacity-0 animate-fade-in-down" from this line
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
+          isScrolled ? 'bg-white/95 shadow-md backdrop-blur-sm' : 'bg-white/80'
         }`}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link
-            href="/"
-            className="flex items-center space-x-2 transform hover:scale-105 transition-all duration-300"
-          >
-            <img
-              src="/logo.png"
-              alt="Teresol Logo"
-              className="h-10 w-auto"
-              suppressHydrationWarning={true}
-            />
-          </Link>
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            <Link href="/" className="flex-shrink-0">
+              <img
+                src="/logo.png"
+                alt="Teresol Logo"
+                className="h-12 w-auto transition-transform duration-300 hover:scale-105"
+                suppressHydrationWarning={true}
+              />
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {menuItems.map((item, index) => (
-              <Link
-                key={item.name}
-                href={'/'}
-                className="text-gray-700 hover:text-blue-600 font-medium transition-all duration-300 whitespace-nowrap cursor-pointer relative group animate-fade-in-down"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden w-6 h-6 flex items-center justify-center cursor-pointer transform hover:scale-110 transition-all duration-300 hover:bg-gray-100 rounded-full p-2"
-          >
-            <i
-              className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-xl transition-all duration-300 ${isMenuOpen ? 'rotate-180' : 'rotate-0'
-                }`}
-            ></i>
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        <div
-          className={`lg:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-            }`}
-        >
-          <div className="py-4 border-t">
-            <nav className="flex flex-col space-y-2">
-              {menuItems.map((item, index) => (
-                <Link
-                  key={item.name}
-                  href={'/'}
-                  className={`text-gray-700 hover:text-blue-600 font-medium py-2 transition-all duration-300 cursor-pointer hover:bg-blue-50 hover:pl-4 rounded-lg transform ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+            <nav className="hidden lg:flex items-center space-x-1">
+              {menuItems.map((item, index) =>
+                item.name !== 'Contact' ? (
+                  <Link
+                    key={item.name}
+                    href={'/'}
+                    className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors duration-300 opacity-0 animate-fade-in-down ${
+                      pathname === item.href
+                        ? 'text-blue-600'
+                        : 'text-gray-700 hover:text-blue-600'
                     }`}
-                  style={{
-                    transitionDelay: isMenuOpen ? `${index * 50}ms` : '0ms'
-                  }}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+                    style={{ animationDelay: `${200 + index * 50}ms` }}
+                  >
+                    {item.name}
+                    {pathname === item.href && (
+                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-1 bg-blue-600 rounded-full"></span>
+                    )}
+                  </Link>
+                ) : null
+              )}
             </nav>
+
+             <div className="hidden lg:flex items-center">
+              <Link href="/" 
+                className="ml-6 px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-300 ease-in-out transform hover:scale-105 opacity-0 animate-fade-in-down"
+                style={{ animationDelay: '600ms' }}
+              >
+                Contact Us
+              </Link>
+            </div>
+
+            <div className="lg:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-all"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+      
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`lg:hidden fixed inset-0 z-40 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity duration-300 ${
+          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      ></div>
+
+      {/* Mobile Menu Panel */}
+      <div
+        className={`lg:hidden fixed top-0 right-0 h-full w-full max-w-xs z-50 bg-white shadow-xl transition-transform duration-300 ease-in-out ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col h-full">
+          <div className="flex items-center justify-between p-4 border-b">
+            <Link href="/" className="flex-shrink-0">
+               <img src="/logo.png" alt="Teresol Logo" className="h-10 w-auto" />
+            </Link>
+             <button
+                onClick={() => setIsMenuOpen(false)}
+                className="p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100"
+                aria-label="Close menu"
+              >
+                <CloseIcon />
+              </button>
+          </div>
+          <nav className="flex-grow p-4">
+            <ul className="flex flex-col space-y-2">
+              {menuItems.map((item, index) => (
+                <li key={item.name}>
+                  <Link
+                    href={'/'}
+                    className={`block w-full px-4 py-3 text-lg font-medium text-left rounded-lg transition-all duration-300 ease-in-out ${
+                       pathname === item.href
+                        ? 'bg-blue-50 text-blue-600'
+                        : 'text-gray-700 hover:bg-gray-100 hover:pl-6'
+                    }`}
+                    style={{ transitionDelay: isMenuOpen ? `${index * 30}ms` : '0ms' }}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="p-4 border-t">
+              <Link href="/" className="w-full block text-center px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                Contact Us
+              </Link>
           </div>
         </div>
       </div>
-
-      <style jsx global>{`
-        @keyframes fade-in-down {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .animate-fade-in-down {
-          animation: fade-in-down 0.6s ease-out forwards;
-          opacity: 0;
-        }
-      `}</style>
-    </header>
+    </>
   );
 }
