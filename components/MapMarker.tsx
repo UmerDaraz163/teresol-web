@@ -1,9 +1,5 @@
-// src/components/MapMarker.tsx
-
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import TypeWriter from './TypeWriter';
-
-// Define the shape of the marker object
 interface MarkerData {
   name: string;
   position: {
@@ -14,41 +10,37 @@ interface MarkerData {
   text: string;
 }
 
-// Define the props for the component
 interface MapMarkerProps {
   marker: MarkerData;
 }
 
 const MapMarker: React.FC<MapMarkerProps> = ({ marker }) => {
-  // Key to re-trigger animations and effects on hover
+
   const [localHoverKey, setLocalHoverKey] = useState(0);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  // This effect runs after the tooltip becomes visible to adjust its position
+  // adjust tooltip position ==> after visible
   useLayoutEffect(() => {
     if (tooltipRef.current) {
       const tooltip = tooltipRef.current;
       const rect = tooltip.getBoundingClientRect();
       const viewportWidth = window.innerWidth;
-
-      // Default to being perfectly centered
+      // to center the tooltip
       tooltip.style.transform = 'translateX(-50%)';
 
-      // Check for right overflow
       if (rect.right > viewportWidth) {
-        const overflowAmount = rect.right - viewportWidth + 16; // 1rem buffer
+        const overflowAmount = rect.right - viewportWidth + 16;
         tooltip.style.transform = `translateX(calc(-50% - ${overflowAmount}px))`;
       }
-      // Check for left overflow
       else if (rect.left < 0) {
-        const overflowAmount = Math.abs(rect.left) + 16; // 1rem buffer
+        const overflowAmount = Math.abs(rect.left) + 16; 
         tooltip.style.transform = `translateX(calc(-50% + ${overflowAmount}px))`;
       }
     }
-  }, [localHoverKey]); // Re-run this check every time a new hover starts
+  }, [localHoverKey]);
 
   return (
-    // The 'group' class manages the hover state for the tooltip
+
     <div
       className="absolute group cursor-pointer"
       style={marker.position}
@@ -60,13 +52,12 @@ const MapMarker: React.FC<MapMarkerProps> = ({ marker }) => {
         <div className="w-full h-full rounded-full absolute top-0 left-0" style={{ backgroundColor: marker.color }}></div>
       </div>
 
-      {/* The tooltip itself - positioned above and centered by default */}
       <div
         ref={tooltipRef}
         className="absolute bottom-full left-1/2 mb-3 w-max max-w-xs sm:max-w-sm z-20
                    opacity-0 group-hover:opacity-100 pointer-events-none
                    transition-opacity duration-300"
-        style={{ transform: 'translateX(-50%)' }} // JS will override this transform if needed
+        style={{ transform: 'translateX(-50%)' }} 
       >
         <div className="bg-gray-900 text-white p-3 rounded-lg shadow-xl text-sm">
           <div className="flex items-start space-x-2">

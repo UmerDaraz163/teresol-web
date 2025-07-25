@@ -1,6 +1,6 @@
 import React from 'react';
-import TypeWriter from './TypeWriter'; // Adjust import path as needed
-import '../app/styles/homepage.css'; // Ensure styles are imported
+import TypeWriter from './TypeWriter'; 
+import '../app/styles/homepage.css'; 
 
 interface AnimatedTooltipProps {
   markerColor: string;
@@ -17,7 +17,7 @@ const AnimatedTooltip: React.FC<AnimatedTooltipProps> = ({
   hoverKey,
   setHoverKey,
 }) => {
-  // Calculate lighter/darker variants for the border
+
   const borderColor = markerColor;
   const textColor = markerColor;
   const shadowColor = `${markerColor.replace(')', '/0.2)').replace('rgb', 'rgba')}`;

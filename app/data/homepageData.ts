@@ -1,4 +1,4 @@
- // Data arrays (unchanged)
+ // Data arrays
  export const heroSlides = [
     {
       title: "Innovatively Creative",
@@ -20,6 +20,18 @@
       subtitle: "Powering the future with intelligent embedded solutions",
       image: "https://readdy.ai/api/search-image?query=Microprocessor%20and%20embedded%20systems%20on%20circuit%20board%2C%20close-up%20of%20advanced%20electronic%20components%2C%20blue%20accent%20lighting%2C%20modern%20technology%20background%2C%20clean%20professional%20setup&width=1920&height=1080&seq=hero3&orientation=landscape"
     }
+  ];
+  export const clients = [
+    { name: "Bank Al Habib", logo: "/clients/bank-al-habib.png" },
+    { name: "Pakistan Air Force", logo: "/clients/paf-logo.png" },
+    { name: "Heavy Industries Taxila", logo: "/clients/HIT-01.png" },
+    { name: "National Bank of Pakistan", logo: "/clients/nbp-logo.png" },
+    { name: "The First MicroFinanceBank", logo: "/clients/tfmfb.png" },
+    { name: "Honda", logo: "/clients/honda.png" },
+    { name: "Fauji Fertilizer Bin Qasim Ltd", logo: "/clients/ffbl.png" },
+    { name: "Sybrid", logo: "/clients/sybrid.png" },
+    { name: "Oil & Gas Development Company", logo: "/clients/OGDCL.png" },
+    { name: "Albayrak", logo: "/clients/Albayrak.png" }
   ];
   export const featuredServices = [
     {
@@ -57,19 +69,19 @@
     },
     {
       name: "Pakistan",
-      position: { top: '40%', left: '60%' },
+      position: { top: '38%', left: '65%' },
       color: "#01411C",
       text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
     },
     {
       name: "Qatar",
-      position: { top: '42%', left: '57%' },
+      position: { top: '44%', left: '60%' },
       color: "#8A1538",
       text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
     },
     {
       name: "USA",
-      position: { top: '55%', left: '30%' },
+      position: { top: '60%', left: '22%' },
       color: "#3C3B6E",
       text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
     }
@@ -99,7 +111,7 @@
     {
       value: "15+",
       title: "Years Experience",
-      subtitle: "A Legacy of Excellence. A Vision for the Future",
+      subtitle: "Pioneering Excellence, Shaping the Future",
       colorClasses: "text-orange-600",
       borderClasses: "from-red-600 to-pink-700"
     }

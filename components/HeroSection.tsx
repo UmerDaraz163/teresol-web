@@ -8,7 +8,6 @@ import { heroSlides } from '@/app/data/homepageData';
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Effect for the slider interval
   useEffect(() => {
     const heroInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -16,7 +15,6 @@ export default function HeroSection() {
     return () => clearInterval(heroInterval);
   }, []);
 
-  // Effect for the animation
   useEffect(() => {
     const animation = gsap.fromTo(
       ".hero-content",
@@ -25,7 +23,7 @@ export default function HeroSection() {
     );
 
     return () => {
-      animation.kill(); // Cleanup GSAP animation
+      animation.kill(); 
     };
   }, [currentSlide]);
 
@@ -67,13 +65,13 @@ export default function HeroSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/solutions"
+              href="/"
               className="bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap cursor-pointer text-center"
             >
               Explore Solutions
             </Link>
             <Link
-              href="/contact"
+              href="/"
               className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 whitespace-nowrap cursor-pointer text-center"
             >
               Get In Touch

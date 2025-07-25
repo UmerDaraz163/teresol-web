@@ -14,7 +14,7 @@ export default function Footer() {
                 src="/logo.png"
                 alt="Teresol Logo"
                 className="h-10 w-auto"
-                style={{ filter: 'brightness(0) invert(1)' }} // Ensures visibility on dark background
+                style={{ filter: 'brightness(0) invert(1)' }} //to make logo white
               />
             </div>
             <p className="text-gray-300 mb-4">
