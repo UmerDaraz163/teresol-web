@@ -8,17 +8,17 @@
     {
       title: "Innovative Software Solutions",
       subtitle: "Transforming businesses through cutting-edge technology",
-      image: "https://readdy.ai/api/search-image?query=Modern%20tech%20office%20with%20software%20development%20team%20working%20on%20multiple%20monitors%2C%20clean%20minimal%20workspace%20with%20blue%20accent%20lighting%2C%20professional%20corporate%20environment%2C%20high-tech%20atmosphere&width=1920&height=1080&seq=hero1&orientation=landscape"
+      image: "/hero1.png"
     },
     {
       title: "Advanced Hardware Systems",
       subtitle: "Custom hardware solutions for complex challenges",
-      image: "https://readdy.ai/api/search-image?query=High-tech%20hardware%20laboratory%20with%20circuit%20boards%20and%20electronic%20components%2C%20modern%20industrial%20setting%20with%20blue%20lighting%2C%20professional%20technology%20workspace%2C%20clean%20minimal%20background&width=1920&height=1080&seq=hero2&orientation=landscape"
+      image: "/hero2.png"
     },
     {
       title: "Embedded System Excellence",
       subtitle: "Powering the future with intelligent embedded solutions",
-      image: "https://readdy.ai/api/search-image?query=Microprocessor%20and%20embedded%20systems%20on%20circuit%20board%2C%20close-up%20of%20advanced%20electronic%20components%2C%20blue%20accent%20lighting%2C%20modern%20technology%20background%2C%20clean%20professional%20setup&width=1920&height=1080&seq=hero3&orientation=landscape"
+      image: "/hero3.png"
     }
   ];
   export const clients = [
@@ -118,6 +118,19 @@
   ];
   export const certifications = [
     {
+      title: "ISO 9001",
+      description: "Standard For Quality Management Systems",
+      image: "/iso9001.png"
+    }
+    ,
+    {
+      title: "ISO 20000",
+      description: "International IT Service Management Standard",
+      image: "/iso2000-01.png"
+    }
+  ];
+  export const memberships = [
+    {
       title: "P@SHA Member",
       description: "Pakistan Software Houses Association",
       image: "/PASHA.png"
@@ -136,17 +149,6 @@
       title: "PAeC",
       description: "Defense Contractor And An Aerospace Manufacturer",
       image: "/paec.png"
-    },
-    {
-      title: "ISO 9001",
-      description: "Standard For Quality Management Systems",
-      image: "/iso9001.png"
-    }
-    ,
-    {
-      title: "ISO 20000",
-      description: "International IT Service Management Standard",
-      image: "/iso2000-01.png"
     }
   ];
   export const featuredBlogs = [

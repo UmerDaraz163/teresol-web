@@ -3,112 +3,218 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { certifications } from '@/app/data/homepageData'; // Adjust path if needed
+import Tilt from 'react-parallax-tilt';
+import { certifications, memberships } from '@/app/data/homepageData';
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CertificationsSection() {
   const [currentCertSlide, setCurrentCertSlide] = useState(0);
+  const [currentMembershipSlide, setCurrentMembershipSlide] = useState(0);
+  
   const sectionRef = useRef<HTMLElement | null>(null);
-  const numPages = Math.ceil(certifications.length / 4);
+  const certSliderRef = useRef<HTMLDivElement | null>(null);
+  const membershipSliderRef = useRef<HTMLDivElement | null>(null);
+  
+  const prevCertSlide = useRef(0);
+  const certsInitialized = useRef(false);
+  const prevMembershipSlide = useRef(0);
+  const membershipsInitialized = useRef(false);
+
+  const certPages = Math.ceil(certifications.length / 4);
+  const membershipPages = Math.ceil(memberships.length / 4);
+
+  // This logic correctly handles all cases and needs no changes
+  useEffect(() => {
+    if (certPages > 1) {
+      const certInterval = setInterval(() => {
+        setCurrentCertSlide((prev) => (prev + 1) % certPages);
+      }, 4500);
+      return () => clearInterval(certInterval);
+    }
+  }, [certPages]);
 
   useEffect(() => {
-    const slideInterval = setInterval(() => {
-      setCurrentCertSlide((prev) => (prev + 1) % numPages);
-    }, 4000);
-    return () => clearInterval(slideInterval);
-  }, [numPages]);
+    if (membershipPages > 1) {
+      const membershipInterval = setInterval(() => {
+        setCurrentMembershipSlide((prev) => (prev + 1) % membershipPages);
+      }, 4500);
+      return () => clearInterval(membershipInterval);
+    }
+  }, [membershipPages]);
+  
+  useEffect(() => {
+    if (!certSliderRef.current || certPages <= 1) return;
+    const slides = gsap.utils.toArray<HTMLElement>('.cert-slide');
+
+    if (!certsInitialized.current) {
+      gsap.set(slides, {
+        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+        autoAlpha: 0, xPercent: 0, rotationY: 0
+      });
+      gsap.set(slides[0], { autoAlpha: 1 });
+      certsInitialized.current = true;
+      return;
+    }
+
+    const outgoingSlide = slides[prevCertSlide.current];
+    const incomingSlide = slides[currentCertSlide];
+    
+    const tl = gsap.timeline();
+    tl.set(incomingSlide, { autoAlpha: 1, rotationY: -80, xPercent: 100 })
+      .to(outgoingSlide, { duration: 0.8, xPercent: -100, rotationY: 80, autoAlpha: 0, ease: 'power3.inOut' })
+      .to(incomingSlide, { duration: 0.8, xPercent: 0, rotationY: 0, ease: 'power3.inOut' }, '<');
+
+    prevCertSlide.current = currentCertSlide;
+  }, [currentCertSlide, certPages]);
+
+  useEffect(() => {
+    if (!membershipSliderRef.current || membershipPages <= 1) return;
+    const slides = gsap.utils.toArray<HTMLElement>('.membership-slide');
+
+    if (!membershipsInitialized.current) {
+      gsap.set(slides, {
+        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+        autoAlpha: 0, xPercent: 0, rotationY: 0
+      });
+      gsap.set(slides[0], { autoAlpha: 1 });
+      membershipsInitialized.current = true;
+      return;
+    }
+
+    const outgoingSlide = slides[prevMembershipSlide.current];
+    const incomingSlide = slides[currentMembershipSlide];
+    
+    const tl = gsap.timeline();
+    tl.set(incomingSlide, { autoAlpha: 1, rotationY: -80, xPercent: 100 })
+      .to(outgoingSlide, { duration: 0.8, xPercent: -100, rotationY: 80, autoAlpha: 0, ease: 'power3.inOut' })
+      .to(incomingSlide, { duration: 0.8, xPercent: 0, rotationY: 0, ease: 'power3.inOut' }, '<');
+
+    prevMembershipSlide.current = currentMembershipSlide;
+  }, [currentMembershipSlide, membershipPages]);
 
   useEffect(() => {
     if (!sectionRef.current) return;
-
     const ctx = gsap.context(() => {
-
-      const heading = sectionRef.current?.querySelector('.cert-heading');
-      if (heading) {
-        gsap.from(heading, {
-          y: 50,
-          opacity: 0,
-          duration: 1,
-          ease: 'power1.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-          },
-        });
-      }
-      const certCards = gsap.utils.toArray('.cert-card') as HTMLElement[];
-      certCards.forEach(card => {
-        gsap.from(card, {
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power1.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 90%',
-          }
-        });
-      });
-
+      gsap.from('.cert-heading', { y: 50, opacity: 0, duration: 1, ease: 'power1.out', scrollTrigger: { trigger: sectionRef.current, start: 'top 80%' } });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} id="certifications" className="py-16 sm:py-20 bg-gradient-to-b from-white to-blue-50">
+    <section ref={sectionRef} id="certifications" className="py-16 sm:py-20 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 cert-heading">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
-            Certifications & Memberships
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Global Certifications & Memberships for Distinction
-          </p>
-        </div>
-        <div className="relative overflow-hidden">
-          <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${currentCertSlide * 100}%)` }}
-          >
-            {Array.from({ length: numPages }).map((_, pageIndex) => (
-              <div key={pageIndex} className="w-full flex-shrink-0">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 cert-grid">
-                  {certifications.slice(pageIndex * 4, (pageIndex + 1) * 4).map((cert) => (
-                    <div
-                      key={cert.title}
-                      className="bg-white p-6 rounded-2xl shadow-lg text-center transition-all duration-500 transform cursor-pointer group cert-card"
-                    >
+        
+        {/* Certifications Section */}
+        <div className="mb-16">
+          <h2 className="text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Certifications</h2>
+          <p className="text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Recognized for meeting international standards of quality and excellence.</p>
+          
+          {certifications.length < 4 ? (
+            <div className="flex justify-center items-start flex-wrap gap-6 md:gap-8 pt-4">
+              {certifications.map((cert) => (
+                <div key={cert.title} className="w-full max-w-[260px] sm:w-auto">
+                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card">
                       <div className="mb-4 flex justify-center items-center h-20">
-                        <img
-                          src={cert.image}
-                          alt={cert.title}
-                          className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
-                        />
+                        <img src={cert.image} alt={cert.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">
-                        {cert.title}
-                      </h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{cert.title}</h3>
                       <p className="text-gray-600 text-sm">{cert.description}</p>
                     </div>
+                  </Tilt>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              <div ref={certSliderRef} className="relative min-h-[24rem] sm:min-h-[22rem] [perspective:1200px]">
+                {Array.from({ length: certPages }).map((_, pageIndex) => (
+                  <div key={pageIndex} className="cert-slide [transform-style:preserve-3d]">
+                    <div className="w-full h-full flex justify-center items-start">
+                      <div className="inline-grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                        {certifications.slice(pageIndex * 4, (pageIndex + 1) * 4).map((cert) => (
+                          <Tilt key={cert.title} tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
+                            <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card">
+                              <div className="mb-4 flex justify-center items-center h-20">
+                                <img src={cert.image} alt={cert.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
+                              </div>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{cert.title}</h3>
+                              <p className="text-gray-600 text-sm">{cert.description}</p>
+                            </div>
+                          </Tilt>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {certPages > 1 && (
+                <div className="flex justify-center mt-6 space-x-3">
+                  {Array.from({ length: certPages }).map((_, index) => (
+                    <button key={index} onClick={() => setCurrentCertSlide(index)} className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentCertSlide ? 'bg-[#25237b]' : 'bg-gray-300'}`} aria-label={`Go to certification slide ${index + 1}`}/>
                   ))}
                 </div>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Memberships Section */}
+        <div>
+          <h2 className="text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Memberships</h2>
+          <p className="text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Partnering with global organizations to drive innovation and growth.</p>
+          
+          {memberships.length < 4 ? (
+            <div className="flex justify-center items-start flex-wrap gap-6 md:gap-8 pt-4">
+              {memberships.map((membership) => (
+                // ✨ Key prop moved to the top-level <div>
+                <div key={membership.title} className="w-full max-w-[260px] sm:w-auto">
+                  <Tilt tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
+                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card">
+                      <div className="mb-4 flex justify-center items-center h-20">
+                        <img src={membership.image} alt={membership.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
+                      </div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{membership.title}</h3>
+                      <p className="text-gray-600 text-sm">{membership.description}</p>
+                    </div>
+                  </Tilt>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              <div ref={membershipSliderRef} className="relative min-h-[24rem] sm:min-h-[22rem] [perspective:1200px]">
+                {Array.from({ length: membershipPages }).map((_, pageIndex) => (
+                  <div key={pageIndex} className="membership-slide [transform-style:preserve-3d]">
+                    <div className="w-full h-full flex justify-center items-start">
+                      <div className="inline-grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                        {memberships.slice(pageIndex * 4, (pageIndex + 1) * 4).map((membership) => (
+                          <Tilt key={membership.title} tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
+                            <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card">
+                              <div className="mb-4 flex justify-center items-center h-20">
+                                <img src={membership.image} alt={membership.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
+                              </div>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{membership.title}</h3>
+                              <p className="text-gray-600 text-sm">{membership.description}</p>
+                            </div>
+                          </Tilt>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="flex justify-center mt-16 space-x-3">
-            {Array.from({ length: numPages }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentCertSlide(index)}
-                className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentCertSlide ? 'bg-[#25237b]' : 'bg-gray-300'
-                  }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
+              {membershipPages > 1 && (
+                <div className="flex justify-center mt-6 space-x-3">
+                  {Array.from({ length: membershipPages }).map((_, index) => (
+                    <button key={index} onClick={() => setCurrentMembershipSlide(index)} className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentMembershipSlide ? 'bg-[#25237b]' : 'bg-gray-300'}`} aria-label={`Go to membership slide ${index + 1}`}/>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </section>
