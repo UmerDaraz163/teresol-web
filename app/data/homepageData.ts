@@ -24,6 +24,7 @@
   export const clients = [
     { name: "Bank Al Habib", logo: "/clients/bank-al-habib.png" },
     { name: "Pakistan Air Force", logo: "/clients/paf-logo.png" },
+    { name: "Advanced Navigation and Positioning Corporation", logo: "/clients/anpc.png" },
     { name: "Heavy Industries Taxila", logo: "/clients/HIT-01.png" },
     { name: "National Bank of Pakistan", logo: "/clients/nbp-logo.png" },
     { name: "The First MicroFinanceBank", logo: "/clients/tfmfb.png" },
@@ -95,7 +96,7 @@
       borderClasses: "from-blue-600 to-indigo-900"
     },
     {
-      value: "500+",
+      value: "200+",
       title: "Clients Served",
       subtitle: "Across various industries",
       colorClasses: "text-green-600",

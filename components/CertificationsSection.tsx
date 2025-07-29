@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Tilt from 'react-parallax-tilt';
 import { certifications, memberships } from '@/app/data/homepageData';
+import SlideIndicator from '@/components/SlideIndicator'; // ✨ 
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -150,13 +151,13 @@ export default function CertificationsSection() {
                   </div>
                 ))}
               </div>
-              {certPages > 1 && (
-                <div className="flex justify-center mt-6 space-x-3">
-                  {Array.from({ length: certPages }).map((_, index) => (
-                    <button key={index} onClick={() => setCurrentCertSlide(index)} className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentCertSlide ? 'bg-[#25237b]' : 'bg-gray-300'}`} aria-label={`Go to certification slide ${index + 1}`}/>
-                  ))}
-                </div>
-              )}
+
+              <SlideIndicator
+                count={certPages}
+                currentIndex={currentCertSlide}
+                onIndicatorClick={setCurrentCertSlide}
+                className="justify-center mt-6"
+              />
             </>
           )}
         </div>
@@ -169,7 +170,6 @@ export default function CertificationsSection() {
           {memberships.length < 4 ? (
             <div className="flex justify-center items-start flex-wrap gap-6 md:gap-8 pt-4">
               {memberships.map((membership) => (
-                // ✨ Key prop moved to the top-level <div>
                 <div key={membership.title} className="w-full max-w-[260px] sm:w-auto">
                   <Tilt tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
                     <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card">
@@ -206,13 +206,13 @@ export default function CertificationsSection() {
                   </div>
                 ))}
               </div>
-              {membershipPages > 1 && (
-                <div className="flex justify-center mt-6 space-x-3">
-                  {Array.from({ length: membershipPages }).map((_, index) => (
-                    <button key={index} onClick={() => setCurrentMembershipSlide(index)} className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 cursor-pointer hover:scale-125 ${index === currentMembershipSlide ? 'bg-[#25237b]' : 'bg-gray-300'}`} aria-label={`Go to membership slide ${index + 1}`}/>
-                  ))}
-                </div>
-              )}
+
+              <SlideIndicator
+                count={membershipPages}
+                currentIndex={currentMembershipSlide}
+                onIndicatorClick={setCurrentMembershipSlide}
+                className="justify-center mt-6"
+              />
             </>
           )}
         </div>

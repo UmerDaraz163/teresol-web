@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { heroSlides } from '@/app/data/homepageData';
+import SlideIndicator from '@/components/SlideIndicator';
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -19,9 +20,8 @@ export default function HeroSection() {
     const animation = gsap.fromTo(
       ".hero-content",
       { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1.5, ease: "power3.out", delay: 0.5 }
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
     );
-
     return () => {
       animation.kill(); 
     };
@@ -29,6 +29,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative h-screen overflow-hidden">
+      {/* Background Slides */}
       {heroSlides.map((slide, index) => (
         <div
           key={index}
@@ -43,6 +44,7 @@ export default function HeroSection() {
               muted
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
+              key={slide.video}
             >
               <source src={slide.video} type="video/mp4" />
             </video>
@@ -55,6 +57,8 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
       ))}
+      
+      {/* Hero Content */}
       <div className="relative z-20 container mx-auto px-4 h-full flex items-center">
         <div className="w-full max-w-3xl hero-content">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
@@ -65,13 +69,13 @@ export default function HeroSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/"
+              href="/solutions"
               className="bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap cursor-pointer text-center"
             >
               Explore Solutions
             </Link>
             <Link
-              href="/"
+              href="/contact"
               className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 whitespace-nowrap cursor-pointer text-center"
             >
               Get In Touch
@@ -79,19 +83,14 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-        {heroSlides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`w-4 h-4 rounded-full border border-white transition-all duration-300 cursor-pointer ${
-              index === currentSlide
-                ? 'bg-white shadow-md scale-110'
-                : 'bg-white/30 hover:scale-125'
-            }`}
-          />
-        ))}
-      </div>
+      
+      {/* ✨ 2. Use the reusable SlideIndicator component */}
+      <SlideIndicator
+        count={heroSlides.length}
+        currentIndex={currentSlide}
+        onIndicatorClick={setCurrentSlide}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+      />
     </section>
   );
 }
