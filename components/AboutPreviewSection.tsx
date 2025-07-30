@@ -58,10 +58,16 @@ export default function AboutPreviewSection() {
           <div className="about-text">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">About Teresol</h2>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed text-justify">
-            At TeReSol, we empower enterprises to thrive in the digital era with cutting-edge fintech and customized embedded solutions. Our 400+ experts—including 20+ PhDs from top global institutions—deliver next-gen omni-channel banking, intelligent IT infrastructure, and precision RF technologies. ISO 9001, 20000, and 27001 certified, we guarantee industry-leading quality. From modernizing legacy systems to tailored consulting, TeReSol is your partner for future-ready, secure, and seamless financial transformation.
+            At TeReSol, we enable enterprises to excel in the digital age through innovative, tailor-made embedded systems and enterprise software solutions. Backed by a team of 400+ experts—including over 20 PhDs from leading global institutions—and more than 10 million man-hours of development experience, we deliver next-generation technologies with a focus on precision, scalability, and performance.
+            </p>
+            <p className="text-lg text-gray-600 mb-6 leading-relaxed text-justify">
+            Our proven expertise spans the development of customized embedded products, advanced RF technologies, omni-channel banking platforms, and intelligent IT infrastructure. As an ISO 9001, 20000, and 27001 certified organization, we adhere to the highest standards of quality, security, and service management.
+            </p>
+            <p className="text-lg text-gray-600 mb-6 leading-relaxed text-justify">
+            Whether modernizing legacy systems or delivering specialized consulting, TeReSol is your trusted partner for secure, future-ready digital transformation.
             </p>
 
-            <Link href="/about">
+            <Link href="/">
               <Button btnName={"Learn More About Us"} />
             </Link>
           </div>

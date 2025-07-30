@@ -21,8 +21,8 @@ export default function SlideIndicator({
           onClick={() => onIndicatorClick(index)}
           className={`w-12 h-1.5 rounded-full transition-colors duration-300 cursor-pointer ${
             index === currentIndex
-              ? 'bg-white' // Active bar
-              : 'bg-white/40 hover:bg-white/70' // Inactive bar
+              ? 'bg-[#25237b]' // Active bar
+              : 'bg-[#8b0303] hover:bg-white/70' // Inactive bar
           }`}
           aria-label={`Go to slide ${index + 1}`}
         />

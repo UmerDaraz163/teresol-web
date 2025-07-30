@@ -81,8 +81,20 @@
       text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
     },
     {
+      name: "Singapore",
+      position: { top: '51%', left: '85%' },
+      color: "#EE2536",
+      text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+    },
+    {
+      name: "France",
+      position: { top: '25%', left: '42%' },
+      color: "#EF4135",
+      text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+    },
+    {
       name: "USA",
-      position: { top: '60%', left: '22%' },
+      position: { top: '30%', left: '15%' },
       color: "#3C3B6E",
       text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
     }
@@ -96,7 +108,7 @@
       borderClasses: "from-blue-600 to-indigo-900"
     },
     {
-      value: "200+",
+      value: "100+",
       title: "Clients Served",
       subtitle: "Across various industries",
       colorClasses: "text-green-600",
@@ -122,13 +134,27 @@
       title: "ISO 9001",
       description: "Standard For Quality Management Systems",
       image: "/iso9001.png"
-    }
-    ,
+    },
     {
       title: "ISO 20000",
       description: "International IT Service Management Standard",
       image: "/iso2000-01.png"
-    }
+    },
+    {
+      title: "MIL-STD-704 COMPLIANT",
+      description: "    U.S. military standard that defines the characteristics of electrical power provided to equipment on military aircraft.",
+      image: "/mil-std-704.png"
+    },
+    {
+      title: "MIL-STD-461 COMPLIANT",
+      description: "Military standard that specifies requirements for the control of electromagnetic interference (EMI) characteristics of electronic equipment and subsystems",
+      image: "/mil-std-461.png"
+    },
+    {
+      title: "MIL-STD-810 COMPLIANT",
+      description: "Military standard that establishes environmental engineering considerations and laboratory tests to assess the performance of equipment under various environmental conditions.",
+      image: "/mil-std-810.png"
+    },
   ];
   export const memberships = [
     {
@@ -154,27 +180,27 @@
   ];
   export const featuredBlogs = [
     {
-      title: "Lorem Ipsum Dolor Sit Amet",
-      excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non urna eu justo vehicula commodo.",
+      title: "TeReSol featured in top ICT companies list in latest report by Japan International Cooperation Agency (JICA)",
+      excerpt: "State-run Japan International Cooperation Agency (JICA) has termed Pakistan as ‘the next ICT powerhouse’ as the country’s tech exports climbed six times over a decade. The report is based on a yearlong study by JICA in collaboration with Pakistan Embassy Tokyo. <br> TeReSol got recognized as a fast-growing R&D company and is included in ‘Featured ICT Companies’",
       date: "December 15, 2024",
       category: "Technology",
-      image: "https://readdy.ai/api/search-image?query=IoT%20embedded%20systems%20and%20connected%20devices%20in%20modern%20smart%20environment%2C%20circuit%20boards%20and%20sensors%2C%20blue%20accent%20lighting%2C%20futuristic%20technology%20background&width=400&height=250&seq=blog1&orientation=landscape",
-      readTime: "5 min read"
+      image: "/blogs/JICA-News.jpg",
+      readTime: "1 min read"
     },
     {
-      title: "Consectetur Adipiscing Elit",
-      excerpt: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+      title: "Signing of MoU with the Institute of Space Technology (IST)",
+      excerpt: "TeReSol has joined hands with Institute of Space Technology (IST) by signing Memorandum of Understanding (MoU) to promote University-Industry collaboration through joint research and development activities.",
       date: "December 10, 2024",
-      category: "Development",
-      image: "https://readdy.ai/api/search-image?query=Software%20development%20coding%20on%20computer%20screens%2C%20modern%20programming%20environment%20with%20code%20editor%2C%20professional%20workspace%20with%20blue%20lighting&width=400&height=250&seq=blog2&orientation=landscape",
-      readTime: "7 min read"
+      category: "Corporate News",
+      image: "/blogs/mou-ist-teresol.png",
+      readTime: "3 min read"
     },
     {
-      title: "Ut Enim Ad Minim Veniam",
-      excerpt: "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      title: "TeReSol won an award at PaSHA ICT Awards 2016",
+      excerpt: "P@SHA organised its 13th annual ICT Awards Ceremony, lauding innovation and excellence in the Pakistan ICT industry and recognized the efforts of outstanding achievers who have been making waves locally and internationally.",
       date: "December 5, 2024",
-      category: "Hardware",
-      image: "https://readdy.ai/api/search-image?query=Hardware%20integration%20laboratory%20with%20electronic%20components%20and%20testing%20equipment%2C%20professional%20engineering%20workspace%2C%20blue%20accent%20lighting&width=400&height=250&seq=blog3&orientation=landscape",
+      category: "Corporate News",
+      image: "/blogs/pasha-award.png",
       readTime: "6 min read"
     }
   ];

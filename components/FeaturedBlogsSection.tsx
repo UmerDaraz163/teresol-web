@@ -48,7 +48,7 @@ export default function FeaturedBlogsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="featured-blogs" className="py-20 bg-gray-50">
+    <section ref={sectionRef} id="featured-blogs" className="py-10 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 blog-heading">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Latest Insights</h2>
@@ -85,7 +85,7 @@ export default function FeaturedBlogsSection() {
                 <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
                   {blog.excerpt}
                 </p>
-                <Link href="/blog" className="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 cursor-pointer">
+                <Link href="/" className="text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 cursor-pointer">
                   Read More →
                 </Link>
               </div>
@@ -94,7 +94,7 @@ export default function FeaturedBlogsSection() {
         </div>
         <div className="text-center mt-16">
           <Link 
-            href="/blog" 
+            href="/" 
             className="bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap cursor-pointer inline-block"
           >
             View All Articles

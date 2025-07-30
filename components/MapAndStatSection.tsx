@@ -53,7 +53,7 @@ export default function MapAndStatSection() {
           {/* Stats Column */}
           <div className="lg:col-span-2 space-y-8">
             <h2 className="text-4xl font-extrabold text-gray-800 mb-6">
-              Worldwide Impact
+              International Footprint
             </h2>
             {stats.map(stat => (
               <StatCard key={stat.title} stat={stat} />

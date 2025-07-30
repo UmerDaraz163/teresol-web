@@ -5,9 +5,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Tilt from 'react-parallax-tilt';
 import { certifications, memberships } from '@/app/data/homepageData';
-import SlideIndicator from '@/components/SlideIndicator'; // ✨ 
+import SlideIndicator from '@/components/SlideIndicator';
 
-// Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CertificationsSection() {
@@ -23,10 +22,11 @@ export default function CertificationsSection() {
   const prevMembershipSlide = useRef(0);
   const membershipsInitialized = useRef(false);
 
-  const certPages = Math.ceil(certifications.length / 4);
-  const membershipPages = Math.ceil(memberships.length / 4);
+  const ITEMS_PER_PAGE = 4;
+  const certPages = Math.ceil(certifications.length / ITEMS_PER_PAGE);
+  const membershipPages = Math.ceil(memberships.length / ITEMS_PER_PAGE);
 
-  // This logic correctly handles all cases and needs no changes
+  // No changes in this section
   useEffect(() => {
     if (certPages > 1) {
       const certInterval = setInterval(() => {
@@ -104,7 +104,7 @@ export default function CertificationsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="certifications" className="py-16 sm:py-20 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
+    <section ref={sectionRef} id="certifications" className="sm:py-20 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
       <div className="container mx-auto px-4">
         
         {/* Certifications Section */}
@@ -112,17 +112,20 @@ export default function CertificationsSection() {
           <h2 className="text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Certifications</h2>
           <p className="text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Recognized for meeting international standards of quality and excellence.</p>
           
-          {certifications.length < 4 ? (
-            <div className="flex justify-center items-start flex-wrap gap-6 md:gap-8 pt-4">
+          {certifications.length < ITEMS_PER_PAGE ? (
+            <div className="flex justify-center items-stretch flex-wrap gap-6 md:gap-8 pt-4"> {/* ✨ items-stretch */}
               {certifications.map((cert) => (
-                <div key={cert.title} className="w-full max-w-[260px] sm:w-auto">
-                  <Tilt tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
-                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card">
+                <div key={cert.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
+                  <Tilt className="h-full w-full" tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
+                    {/* ✨ Card structure updated for consistent height */}
+                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                       <div className="mb-4 flex justify-center items-center h-20">
                         <img src={cert.image} alt={cert.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{cert.title}</h3>
-                      <p className="text-gray-600 text-sm">{cert.description}</p>
+                      <div className="flex flex-col flex-grow justify-center">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{cert.title}</h3>
+                        <p className="text-gray-600 text-sm">{cert.description}</p>
+                      </div>
                     </div>
                   </Tilt>
                 </div>
@@ -131,25 +134,39 @@ export default function CertificationsSection() {
           ) : (
             <>
               <div ref={certSliderRef} className="relative min-h-[24rem] sm:min-h-[22rem] [perspective:1200px]">
-                {Array.from({ length: certPages }).map((_, pageIndex) => (
-                  <div key={pageIndex} className="cert-slide [transform-style:preserve-3d]">
-                    <div className="w-full h-full flex justify-center items-start">
-                      <div className="inline-grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-                        {certifications.slice(pageIndex * 4, (pageIndex + 1) * 4).map((cert) => (
-                          <Tilt key={cert.title} tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
-                            <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card">
-                              <div className="mb-4 flex justify-center items-center h-20">
-                                <img src={cert.image} alt={cert.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
-                              </div>
-                              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{cert.title}</h3>
-                              <p className="text-gray-600 text-sm">{cert.description}</p>
+                {Array.from({ length: certPages }).map((_, pageIndex) => {
+                  const slideItems = certifications.slice(pageIndex * ITEMS_PER_PAGE, (pageIndex + 1) * ITEMS_PER_PAGE);
+                  const isFullSlide = slideItems.length === ITEMS_PER_PAGE;
+                  
+                  return (
+                    <div key={pageIndex} className="cert-slide [transform-style:preserve-3d]">
+                      <div className="w-full h-full flex justify-center items-stretch"> {/* ✨ items-stretch */}
+                        <div className={
+                          isFullSlide
+                            ? "inline-grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
+                            : "flex justify-center items-stretch flex-wrap gap-6 md:gap-8" // ✨ items-stretch
+                        }>
+                          {slideItems.map((cert) => (
+                            <div key={cert.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
+                                <Tilt className="h-full w-full" tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
+                                  {/* ✨ Card structure updated for consistent height */}
+                                  <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
+                                    <div className="mb-4 flex justify-center items-center h-20">
+                                      <img src={cert.image} alt={cert.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
+                                    </div>
+                                    <div className="flex flex-col flex-grow justify-center">
+                                      <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{cert.title}</h3>
+                                      <p className="text-gray-600 text-sm">{cert.description}</p>
+                                    </div>
+                                  </div>
+                                </Tilt>
                             </div>
-                          </Tilt>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <SlideIndicator
@@ -167,17 +184,20 @@ export default function CertificationsSection() {
           <h2 className="text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Memberships</h2>
           <p className="text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Partnering with global organizations to drive innovation and growth.</p>
           
-          {memberships.length < 4 ? (
-            <div className="flex justify-center items-start flex-wrap gap-6 md:gap-8 pt-4">
+          {memberships.length < ITEMS_PER_PAGE ? (
+            <div className="flex justify-center items-stretch flex-wrap gap-6 md:gap-8 pt-4"> {/* ✨ items-stretch */}
               {memberships.map((membership) => (
-                <div key={membership.title} className="w-full max-w-[260px] sm:w-auto">
-                  <Tilt tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
-                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card">
+                <div key={membership.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
+                  <Tilt className="h-full w-full" tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
+                    {/* ✨ Card structure updated for consistent height */}
+                    <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                       <div className="mb-4 flex justify-center items-center h-20">
                         <img src={membership.image} alt={membership.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{membership.title}</h3>
-                      <p className="text-gray-600 text-sm">{membership.description}</p>
+                      <div className="flex flex-col flex-grow justify-center">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{membership.title}</h3>
+                        <p className="text-gray-600 text-sm">{membership.description}</p>
+                      </div>
                     </div>
                   </Tilt>
                 </div>
@@ -186,25 +206,39 @@ export default function CertificationsSection() {
           ) : (
             <>
               <div ref={membershipSliderRef} className="relative min-h-[24rem] sm:min-h-[22rem] [perspective:1200px]">
-                {Array.from({ length: membershipPages }).map((_, pageIndex) => (
-                  <div key={pageIndex} className="membership-slide [transform-style:preserve-3d]">
-                    <div className="w-full h-full flex justify-center items-start">
-                      <div className="inline-grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-                        {memberships.slice(pageIndex * 4, (pageIndex + 1) * 4).map((membership) => (
-                          <Tilt key={membership.title} tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
-                            <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card">
-                              <div className="mb-4 flex justify-center items-center h-20">
-                                <img src={membership.image} alt={membership.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
-                              </div>
-                              <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{membership.title}</h3>
-                              <p className="text-gray-600 text-sm">{membership.description}</p>
+                {Array.from({ length: membershipPages }).map((_, pageIndex) => {
+                  const slideItems = memberships.slice(pageIndex * ITEMS_PER_PAGE, (pageIndex + 1) * ITEMS_PER_PAGE);
+                  const isFullSlide = slideItems.length === ITEMS_PER_PAGE;
+
+                  return (
+                    <div key={pageIndex} className="membership-slide [transform-style:preserve-3d]">
+                      <div className="w-full h-full flex justify-center items-stretch"> {/* ✨ items-stretch */}
+                        <div className={
+                          isFullSlide
+                            ? "inline-grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
+                            : "flex justify-center items-stretch flex-wrap gap-6 md:gap-8" // ✨ items-stretch
+                        }>
+                          {slideItems.map((membership) => (
+                            <div key={membership.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
+                                <Tilt className="h-full w-full" tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
+                                  {/* ✨ Card structure updated for consistent height */}
+                                  <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
+                                    <div className="mb-4 flex justify-center items-center h-20">
+                                      <img src={membership.image} alt={membership.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
+                                    </div>
+                                    <div className="flex flex-col flex-grow justify-center">
+                                      <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-[#25237b] transition-colors duration-300">{membership.title}</h3>
+                                      <p className="text-gray-600 text-sm">{membership.description}</p>
+                                    </div>
+                                  </div>
+                                </Tilt>
                             </div>
-                          </Tilt>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <SlideIndicator
