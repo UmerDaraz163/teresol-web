@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { heroSlides } from '@/app/data/homepageData';
@@ -9,12 +9,15 @@ import SlideIndicator from '@/components/SlideIndicator';
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const videoRefs = useRef<HTMLVideoElement[]>([]);
+
   useEffect(() => {
-    const heroInterval = setInterval(() => {
+    const slideDuration = heroSlides[currentSlide]?.duration || 5000;
+    const timer = setTimeout(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(heroInterval);
-  }, []);
+    }, slideDuration);
+    return () => clearTimeout(timer);
+  }, [currentSlide]);
 
   useEffect(() => {
     const animation = gsap.fromTo(
@@ -23,13 +26,33 @@ export default function HeroSection() {
       { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
     );
     return () => {
-      animation.kill(); 
+      animation.kill();
     };
+  }, [currentSlide]);
+
+  // manually control video playback
+  useEffect(() => {
+    const activeVideo = videoRefs.current[currentSlide];
+
+    if (activeVideo) {
+      // Reset and play the current video
+      activeVideo.currentTime = 0;
+      activeVideo.play().catch(error => {
+        console.error("Video play failed:", error);
+      });
+    }
+
+    // Pause all other videos
+    videoRefs.current.forEach((video, index) => {
+      if (video && index !== currentSlide) {
+        video.pause();
+      }
+    });
+
   }, [currentSlide]);
 
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background Slides */}
       {heroSlides.map((slide, index) => (
         <div
           key={index}
@@ -39,12 +62,13 @@ export default function HeroSection() {
         >
           {slide.video ? (
             <video
-              autoPlay
+              ref={el => {
+                if (el) videoRefs.current[index] = el;
+              }}
               loop
               muted
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
-              key={slide.video}
             >
               <source src={slide.video} type="video/mp4" />
             </video>
@@ -57,7 +81,7 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
       ))}
-      
+
       {/* Hero Content */}
       <div className="relative z-20 container mx-auto px-4 h-full flex items-center">
         <div className="w-full max-w-3xl hero-content">
@@ -83,8 +107,8 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      
-      {/* ✨ 2. Use the reusable SlideIndicator component */}
+
+      {/* SlideIndicator component */}
       <SlideIndicator
         count={heroSlides.length}
         currentIndex={currentSlide}
@@ -93,4 +117,4 @@ export default function HeroSection() {
       />
     </section>
   );
-}
+} 

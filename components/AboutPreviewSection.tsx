@@ -74,7 +74,7 @@ export default function AboutPreviewSection() {
           {/* Image Content */}
           <div className="relative about-image">
             <img 
-              src="https://readdy.ai/api/search-image?query=Professional%20team%20of%20software%20engineers%20and%20hardware%20specialists%20working%20together%20in%20modern%20office%20environment%2C%20diverse%20group%20collaborating%20on%20technology%20projects%2C%20clean%20corporate%20setting%20with%20natural%20lighting&width=600&height=400&seq=about1&orientation=landscape" 
+              src="/about-us1.png" 
               alt="Teresol Team" 
               className="w-full h-96 object-cover object-top rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105" 
             />

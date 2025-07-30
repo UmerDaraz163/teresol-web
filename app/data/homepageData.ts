@@ -1,25 +1,26 @@
+import { image } from "framer-motion/client";
+
  // Data arrays
  export const heroSlides = [
-    {
-      title: "Innovatively Creative",
-      subtitle: "Transforming businesses through cutting-edge technology",
-      video: "/teresol.mp4"
-    },
+  {
+    title: "Advanced Hardware Systems",
+    subtitle: "Custom hardware solutions for complex challenges",
+    video: "/hw720.mp4",
+    duration : 22000
+  },  
     {
       title: "Innovative Software Solutions",
       subtitle: "Transforming businesses through cutting-edge technology",
-      image: "/hero1.png"
+      video: "/sw_720.mp4",
+      duration : 31000
     },
     {
-      title: "Advanced Hardware Systems",
-      subtitle: "Custom hardware solutions for complex challenges",
-      image: "/hero2.png"
-    },
-    {
-      title: "Embedded System Excellence",
-      subtitle: "Powering the future with intelligent embedded solutions",
-      image: "/hero3.png"
+      title: "Innovatively Creative",
+      subtitle: "Transforming businesses through cutting-edge technology",
+      image: "/hero2.png",
+      duration : 5000
     }
+    
   ];
   export const clients = [
     { name: "Bank Al Habib", logo: "/clients/bank-al-habib.png" },
@@ -66,37 +67,37 @@
       name: "Zambia",
       position: { top: '54%', left: '50%' },
       color: "#198A00",
-      text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+      text: ""
     },
     {
       name: "Pakistan",
       position: { top: '38%', left: '65%' },
       color: "#01411C",
-      text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+      text: ""
     },
     {
       name: "Qatar",
       position: { top: '44%', left: '60%' },
       color: "#8A1538",
-      text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+      text: ""
     },
     {
       name: "Singapore",
       position: { top: '51%', left: '85%' },
       color: "#EE2536",
-      text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+      text: ""
     },
     {
       name: "France",
       position: { top: '25%', left: '42%' },
       color: "#EF4135",
-      text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+      text: ""
     },
     {
       name: "USA",
       position: { top: '30%', left: '15%' },
       color: "#3C3B6E",
-      text: "Welcome to Our Tech Company. Discover our most popular technology solutions that drive business success"
+      text: ""
     }
   ];
   export const stats = [
