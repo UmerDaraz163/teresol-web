@@ -8,9 +8,9 @@ import SlideIndicator from '@/components/SlideIndicator';
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-
   const videoRefs = useRef<HTMLVideoElement[]>([]);
 
+  // Timer for automatic slide transition
   useEffect(() => {
     const slideDuration = heroSlides[currentSlide]?.duration || 5000;
     const timer = setTimeout(() => {
@@ -19,36 +19,55 @@ export default function HeroSection() {
     return () => clearTimeout(timer);
   }, [currentSlide]);
 
+  // GSAP animation for text content
   useEffect(() => {
-    const animation = gsap.fromTo(
-      ".hero-content",
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
-    );
+    gsap.set(".hero-text", { opacity: 0, y: 50 });
+
+    const revealAnimation = gsap.to(".hero-text", {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power3.out",
+      delay: 0.2,
+    });
+
+    let hideTimerId: NodeJS.Timeout | undefined;
+
+    if (currentSlide === 1) {
+      hideTimerId = setTimeout(() => {
+        gsap.to(".hero-text", {
+          opacity: 0,
+          y: -20,
+          duration: 0.5,
+          ease: "power3.in",
+        });
+      }, 5000);
+    }
+
     return () => {
-      animation.kill();
+      revealAnimation.kill();
+      if (hideTimerId) {
+        clearTimeout(hideTimerId);
+      }
     };
   }, [currentSlide]);
 
-  // manually control video playback
+  // Manually control video playback
   useEffect(() => {
     const activeVideo = videoRefs.current[currentSlide];
-
     if (activeVideo) {
-      // Reset and play the current video
       activeVideo.currentTime = 0;
       activeVideo.play().catch(error => {
-        console.error("Video play failed:", error);
+        if (error.name !== 'NotAllowedError') {
+          console.error("An unexpected video error occurred:", error);
+        }
       });
     }
-
-    // Pause all other videos
     videoRefs.current.forEach((video, index) => {
       if (video && index !== currentSlide) {
         video.pause();
       }
     });
-
   }, [currentSlide]);
 
   return (
@@ -85,12 +104,14 @@ export default function HeroSection() {
       {/* Hero Content */}
       <div className="relative z-20 container mx-auto px-4 h-full flex items-center">
         <div className="w-full max-w-3xl hero-content">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            {heroSlides[currentSlide].title}
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
-            {heroSlides[currentSlide].subtitle}
-          </p>
+          <div className="hero-text">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              {heroSlides[currentSlide].title}
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
+              {heroSlides[currentSlide].subtitle}
+            </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/"
@@ -117,4 +138,4 @@ export default function HeroSection() {
       />
     </section>
   );
-} 
+}

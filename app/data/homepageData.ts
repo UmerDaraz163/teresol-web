@@ -5,14 +5,14 @@ import { image } from "framer-motion/client";
   {
     title: "Advanced Hardware Systems",
     subtitle: "Custom hardware solutions for complex challenges",
-    video: "/hw720.mp4",
+    video: "/HW1.1.mp4",
     duration : 22000
   },  
     {
       title: "Innovative Software Solutions",
       subtitle: "Transforming businesses through cutting-edge technology",
-      video: "/sw_720.mp4",
-      duration : 31000
+      video: "/SW1.3.mp4",
+      duration : 32000
     },
     {
       title: "Innovatively Creative",
