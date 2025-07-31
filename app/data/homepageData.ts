@@ -37,30 +37,49 @@ import { image } from "framer-motion/client";
   ];
   export const featuredServices = [
     {
+      icon: "ri-cpu-line",
+      title: "Embedded Hardware Design Services",
+      description: "Our embedded design includes complex multi layers (18-24) high speed signal processing PCBs, Single Board Computers (SBC) for time sched-uled applications, their board support packages/APIs for external integration and complete customized end to end product (qualified for tough temperature environment) with multiple designed cards.",
+      features:[],
+      techIcons: [
+        'https://i.imgur.com/gJ50eJ0.png', // C++
+        'https://i.imgur.com/422GZmS.png', // C
+        'https://i.imgur.com/tL4g1zX.png'  // Linux
+      ]  
+  
+      // features: ["Single Board Computers (SBCs)", "Military Avionics", "Display Computer", "Control Computer", "Mission Data Recorders", "Ground-based Defense Solutions", "AI based Autotracking System", "Ruggedized Field Equipment"]
+    },
+    {
       icon: "ri-code-line",
       title: "Enterprise Software Solutions",
       description: "Well-reputed Research and Innovation (R&I) company with a proven track record in developing customized, cost efficient and scalable enterprise software solutions. We offer a comprehensive suite of services. We are a team of over 400 professionals includ- ing 20 PhDs from esteemed global institutes. We are ISO 9001, 20000, 27001 certified, guaranteeing industry-leading quality.",
-      features: ["Command, Control, Communications, Computers and Intelligence (C4I) System", "Banking", "Fintech", "Embedded Solutions"]
-    },
-    {
-      icon: "ri-cpu-line",
-      title: "Embedded Design Services",
-      description: "Our embedded design includes complex multi layers (18-24) high speed signal processing PCBs, Single Board Computers (SBC) for time sched-uled applications, their board support packages/APIs for external integration and complete customized end to end product (qualified for tough temperature environment) with multiple designed cards.",
-      features: ["Single Board Computers (SBCs)", "Military Avionics", "Display Computer", "Control Computer", "Mission Data Recorders", "Ground-based Defense Solutions", "AI based Autotracking System", "Ruggedized Field Equipment"]
+      features:[],
+      techIcons: [
+        '/PASHA.png', // Python
+        '/PASHA.png', // TensorFlow
+        '/PASHA.png'  // PyTorch
+      ]
+  
+      // features: ["Command, Control, Communications, Computers and Intelligence (C4I) System", "Banking", "Fintech", "Embedded Solutions"]
     },
     {
       icon: "ri-brain-line",
       title: "AI Devevelopment Services",
       description: "The future of businesses reside in the transformative capabilities of Artificial Intelligence (AI). We help you integrate AI in your current infrastructure by delivering state-of-art AI software development services. Our competent developers provide you with custom solutions perfectly tailored to your requirements.",
-      features: ["Business Analytics Suite", "AI Detection and Tracking System", "Wind Power Estimation", "Brain Image Processing", "Eye Blob Remover",]
-    },
-
-    {
-      icon: "ri-dashboard-line",
-      title: "Automotive Electronics",
-      description: "TeReSol has successfully developed and delivered advanced automotive electronics and access control systems, offering end-to-end lifecycle support. Trusted by leading corporate clients across Pakistan, our solutions ensure reliability, efficiency, and innovation",
-      features: ["Fleet Management Solution", "Vehicle Infotainment System"]
+      features:[],
+      techIcons: [
+        'https://i.imgur.com/nJt8S5s.png', // Python
+        'https://i.imgur.com/nN1sA20.png', // TensorFlow
+        'https://i.imgur.com/D3uPcoV.png'  // PyTorch
+      ]
+      // features: ["Business Analytics Suite", "AI Detection and Tracking System", "Wind Power Estimation", "Brain Image Processing", "Eye Blob Remover",]
     }
+    // {
+    //   icon: "ri-dashboard-line",
+    //   title: "Automotive Electronics",
+    //   description: "TeReSol has successfully developed and delivered advanced automotive electronics and access control systems, offering end-to-end lifecycle support. Trusted by leading corporate clients across Pakistan, our solutions ensure reliability, efficiency, and innovation",
+    //   features: ["Fleet Management Solution", "Vehicle Infotainment System"]
+    // }
   ];
   export const markers = [
     {
@@ -83,7 +102,7 @@ import { image } from "framer-motion/client";
     },
     {
       name: "Singapore",
-      position: { top: '51%', left: '85%' },
+      position: { top: '49%', left: '83%' },
       color: "#EE2536",
       text: ""
     },
@@ -176,7 +195,7 @@ import { image } from "framer-motion/client";
     {
       title: "PAeC",
       description: "Defense Contractor And An Aerospace Manufacturer",
-      image: "/paec.png"
+      image: "/PAec-01.png"
     }
   ];
   export const featuredBlogs = [

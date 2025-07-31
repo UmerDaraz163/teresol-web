@@ -109,7 +109,7 @@ export default function CertificationsSection() {
         
         {/* Certifications Section */}
         <div className="mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Certifications</h2>
+          <h2 className="text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Certifications and Compliance</h2>
           <p className="text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Recognized for meeting international standards of quality and excellence.</p>
           
           {certifications.length < ITEMS_PER_PAGE ? (

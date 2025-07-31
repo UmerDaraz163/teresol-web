@@ -29,10 +29,10 @@ export default function Home() {
         <HeroSection />
         <FeaturedServicesSection />
         <MapAndStatSection />
-        <ClientsSection />
         <CertificationsSection />
-        <FeaturedBlogsSection />
-        <AboutPreviewSection />
+        <ClientsSection />
+        {/* <FeaturedBlogsSection /> */}
+        {/* <AboutPreviewSection /> */}
         <CTASection />
       </main>
       <Footer />

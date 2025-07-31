@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { clients } from '@/app/data/homepageData'; // 
+import { clients } from '@/app/data/homepageData'; 
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -42,22 +42,26 @@ export default function ClientsSection() {
                     Our Valuable Clients
                 </h2>
                 <p className="text-lg mb-12 max-w-2xl mx-auto text-gray-600">
-                    Trusted by Global Industry Leaders and Renowned Institutions Worldwide        </p>
+                    Trusted by Global Industry Leaders and Renowned Institutions Worldwide
+                </p>
                 <div className="relative group">
-                    <div className="flex space-x-12 w-max animate-marquee group-hover:[animation-play-state:paused]">
+                    {/* MODIFIED: Increased spacing for larger cards */}
+                    <div className="flex space-x-20 w-max animate-marquee group-hover:[animation-play-state:paused]">
                         {duplicatedClients.map((client, index) => (
+                            // MODIFIED: Increased width and height of the card
                             <div
                                 key={index}
-                                className="relative group flex-shrink-0 w-48 h-28 bg-gradient-to-br from-gray-50 to-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300"
+                                className="relative group flex-shrink-0 w-72 h-40 bg-gradient-to-br from-gray-50 to-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center transform hover:scale-105 transition-transform duration-300"
                             >
                                 <img
                                     src={client.logo}
                                     alt={client.name}
-                                    className="group-hover:mb-8 max-h-16 max-w-full object-contain transition duration-300"
+                                    // MODIFIED: Increased max-height of the logo
+                                    className="max-h-28 max-w-full object-contain transition duration-300"
                                 />
-                                <div className="absolute bottom-2 opacity-0 group-hover:opacity-100 text-sm font-medium text-[#8b0303] transition-opacity duration-300">
+                                {/* <div className="absolute bottom-2 opacity-0 group-hover:opacity-100 text-sm font-medium text-[#8b0303] transition-opacity duration-300">
                                     {client.name}
-                                </div>
+                                </div> */}
                             </div>
                         ))}
                     </div>

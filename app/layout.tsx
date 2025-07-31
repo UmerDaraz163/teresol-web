@@ -1,24 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Pacifico } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import type { ReactNode } from 'react';
-import SmoothScroll from '@/components/SmoothScroll'
+import SmoothScroll from '@/components/SmoothScroll';
 
-const pacifico = Pacifico({
-  weight: '400',
+// Instantiate the Plus Jakarta Sans font
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-pacifico',
-})
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-plus-jakarta-sans', // Assign a CSS variable
 });
 
 export const metadata: Metadata = {
@@ -34,11 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${pacifico.variable} antialiased`}
+        // Apply the font variable to the body
+        className={`${plusJakartaSans.variable} antialiased`}
         suppressHydrationWarning={true}
       >
         <SmoothScroll />
-
         {children}
       </body>
     </html>

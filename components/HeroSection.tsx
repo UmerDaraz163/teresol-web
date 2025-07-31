@@ -19,53 +19,20 @@ export default function HeroSection() {
     return () => clearTimeout(timer);
   }, [currentSlide]);
 
-  // GSAP animation for text content
+  // MODIFIED: Manually control video playback
   useEffect(() => {
-    gsap.set(".hero-text", { opacity: 0, y: 50 });
-
-    const revealAnimation = gsap.to(".hero-text", {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power3.out",
-      delay: 0.2,
-    });
-
-    let hideTimerId: NodeJS.Timeout | undefined;
-
-    if (currentSlide === 1) {
-      hideTimerId = setTimeout(() => {
-        gsap.to(".hero-text", {
-          opacity: 0,
-          y: -20,
-          duration: 0.5,
-          ease: "power3.in",
-        });
-      }, 5000);
-    }
-
-    return () => {
-      revealAnimation.kill();
-      if (hideTimerId) {
-        clearTimeout(hideTimerId);
-      }
-    };
-  }, [currentSlide]);
-
-  // Manually control video playback
-  useEffect(() => {
-    const activeVideo = videoRefs.current[currentSlide];
-    if (activeVideo) {
-      activeVideo.currentTime = 0;
-      activeVideo.play().catch(error => {
-        if (error.name !== 'NotAllowedError') {
-          console.error("An unexpected video error occurred:", error);
-        }
-      });
-    }
     videoRefs.current.forEach((video, index) => {
-      if (video && index !== currentSlide) {
-        video.pause();
+      // Check if the video element exists in the ref array
+      if (video) {
+        if (index === currentSlide) {
+          video.currentTime = 0; // Reset to the beginning
+          // Play the video and catch any potential browser errors
+          video.play().catch(error => {
+            console.error("Video autoplay failed:", error);
+          });
+        } else {
+          video.pause();
+        }
       }
     });
   }, [currentSlide]);
