@@ -51,7 +51,8 @@ export default function FeaturedServicesSection() {
           servicesTimeline.to(headingRef.current, { 
             xPercent: 0,
             scale: 1,
-            ease: 'power2.out' 
+            duration: 3.5,
+            ease: "slow(0.7,0.7,false)",
           });
 
           if (flippingWord) {
@@ -139,7 +140,7 @@ export default function FeaturedServicesSection() {
         <div ref={leftColumnRef} className="lg:col-span-2 text-center lg:text-left">
           <div ref={headingContentRef}>
             {/* MODIFIED: Restructured H2 for separate styling */}
-            <h2 ref={headingRef} className="font-extrabold mb-8 text-4xl md:text-5xl relative [perspective:1000px] [transform-style:preserve-3d] whitespace-nowrap">
+            <h2 ref={headingRef} className="font-extrabold mb-8 text-[14px] md:text-5xl relative [perspective:1000px] [transform-style:preserve-3d] whitespace-nowrap">
               <span className="bg-gradient-to-r from-[#25237b] to-[#8b0303] bg-clip-text text-transparent">Featured</span>{' '}
               <span id="flipping-word" className="inline-block backface-hidden text-[#25237b]">Services</span>
             </h2>

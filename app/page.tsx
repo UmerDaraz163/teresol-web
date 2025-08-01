@@ -9,8 +9,8 @@ import FeaturedServicesSection from '@/components/FeaturedServicesSection';
 import MapAndStatSection from '@/components/MapAndStatSection';
 import ClientsSection from '@/components/ClientsSection';
 import CertificationsSection from '@/components/CertificationsSection';
-import FeaturedBlogsSection from '@/components/FeaturedBlogsSection';
-import AboutPreviewSection from '@/components/AboutPreviewSection';
+// import FeaturedBlogsSection from '@/components/FeaturedBlogsSection';
+// import AboutPreviewSection from '@/components/AboutPreviewSection';
 import CTASection from '@/components/CTASection';
 
 //  Styles

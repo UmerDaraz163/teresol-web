@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
-import TypeWriter from './TypeWriter'; 
+// import TypeWriter from './TypeWriter'; 
 
 interface MarkerData {
   name: string;
