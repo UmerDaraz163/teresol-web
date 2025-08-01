@@ -34,7 +34,7 @@ export default function FeaturedServicesSection() {
           
           const flippingWord = headingRef.current?.querySelector("#flipping-word");
 
-          gsap.set(paragraphRef.current, { opacity: 0, y: 20 });
+          gsap.set(paragraphRef.current, { opacity: 0, x: -50 });
           gsap.set(headingRef.current, { xPercent: 100, scale: 1.5 }); 
           const serviceCards = gsap.utils.toArray(cardsContainerRef.current!.children);
           gsap.set(serviceCards, { opacity: 0, y: 30 });
@@ -63,10 +63,12 @@ export default function FeaturedServicesSection() {
           }
 
           servicesTimeline
+            // MODIFIED: Added a bouncy 'elastic' ease to the paragraph animation
             .to(paragraphRef.current, {
               opacity: 1,
-              y: 0,
-              ease: 'power2.out',
+              x: 0,
+              ease: 'elastic.out(1, 0.75)',
+              duration: 1.5
             }, "-=0.5")
             .to(serviceCards, { 
               opacity: 1, 
@@ -136,8 +138,10 @@ export default function FeaturedServicesSection() {
       <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
         <div ref={leftColumnRef} className="lg:col-span-2 text-center lg:text-left">
           <div ref={headingContentRef}>
-            <h2 ref={headingRef} className="font-extrabold mb-6 text-4xl md:text-5xl relative bg-gradient-to-r from-[#25237b] to-[#8b0303] bg-clip-text [perspective:1000px] [transform-style:preserve-3d] whitespace-nowrap">
-              Featured <span id="flipping-word" className="inline-block backface-hidden">Services</span>
+            {/* MODIFIED: Restructured H2 for separate styling */}
+            <h2 ref={headingRef} className="font-extrabold mb-8 text-4xl md:text-5xl relative [perspective:1000px] [transform-style:preserve-3d] whitespace-nowrap">
+              <span className="bg-gradient-to-r from-[#25237b] to-[#8b0303] bg-clip-text text-transparent">Featured</span>{' '}
+              <span id="flipping-word" className="inline-block backface-hidden text-[#25237b]">Services</span>
             </h2>
             <p ref={paragraphRef} className="leading-relaxed text-lg md:text-xl bg-gradient-to-r from-[#25237b] to-[#8b0303] text-transparent bg-clip-text">
               Discover our most popular technology solutions that drive business success
@@ -151,24 +155,24 @@ export default function FeaturedServicesSection() {
           {featuredServices.map((service) => (
             <Tilt key={service.title} glareEnable={true} glareMaxOpacity={0.2} glareColor="#ffffff" tiltMaxAngleX={10} tiltMaxAngleY={10}>
               <div className="bg-white p-6 md:p-8 rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-3 hover:scale-[1.03] transition-all duration-500 group service-card">
-                <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6"><i className={`${service.icon} text-2xl text-blue-600 group-hover:text-[#8b0303]`}></i></div>
+                <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6"><i className={`${service.icon} text-4xl text-blue-600 group-hover:text-[#8b0303]`}></i></div>
                 <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600">{service.title}</h3>
                 <p className="text-sm md:text-base text-gray-600 mb-2">{service.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">{service.features.map((feature, i) => (<span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 text-xs sm:text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800">{feature}</span>))}</div>
 
-                {/* MODIFIED: Tech Icons Section */}
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 my-4">
+                <div className="flex justify-between items-center my-4">
                   {service.techIcons?.map((iconUrl, index) => (
                     <img
                       key={index}
                       src={iconUrl}
                       alt={`Tech icon ${index + 1}`}
-                      className="w-full h-auto object-contain" 
+                      className="w-full object-contain max-w-[180px] rounded-lg" 
                     />
                   ))}
                 </div>
+                <Link href={`/`} className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium text-sm md:text-base transition-all duration-300 hover:scale-105">Learn More</Link>
 
-                <Link href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`} className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium text-sm md:text-base transition-all duration-300 hover:scale-105">Learn More</Link>
+                {/* <Link href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`} className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium text-sm md:text-base transition-all duration-300 hover:scale-105">Learn More</Link> */}
               </div>
             </Tilt>
           ))}

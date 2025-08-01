@@ -4,16 +4,17 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+// Data with unique hrefs for active state checking 
 const menuItems = [
   { name: 'Home', href: '/' },
-  { name: 'About Us', href: '/' },
-  { name: 'Solutions', href: '/' },
-  { name: 'Products', href: '/' },
-  { name: 'Services', href: '/' },
-  { name: 'Resources', href: '/' },
-  { name: 'Blog', href: '/' },
-  { name: 'Careers', href: '/' },
-  { name: 'Contact', href: '/' },
+  { name: 'About Us', href: '/about' },
+  { name: 'Solutions', href: '/solutions' },
+  { name: 'Products', href: '/products' },
+  { name: 'Services', href: '/services' },
+  { name: 'Resources', href: '/resources' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Careers', href: '/careers' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 const MenuIcon = () => (
@@ -34,25 +35,21 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Set scrolled state based on scroll position (10px threshold)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
     
-    // Add and remove the scroll event listener
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    // Close mobile menu on route change
     if (isMenuOpen) {
       setIsMenuOpen(false);
     }
   }, [pathname]);
 
   useEffect(() => {
-    // Prevent body scroll when mobile menu is open
     document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
     return () => {
       document.body.style.overflow = 'auto';
@@ -63,7 +60,6 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
-          // CHANGE 1: Use transparent background when not scrolled
           isScrolled 
             ? 'bg-white/95 shadow-md backdrop-blur-sm' 
             : 'bg-transparent'
@@ -85,9 +81,8 @@ export default function Header() {
                 item.name !== 'Contact' ? (
                   <Link
                     key={item.name}
-                    href={'/'} // Corrected: use item.href
+                    href="/" // MODIFIED: All links point to home
                     className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors duration-300 ${
-                      // CHANGE 2: Conditionally set text color based on scroll
                       isScrolled
                         ? pathname === item.href ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
                         : 'text-white hover:bg-white/10'
@@ -104,9 +99,8 @@ export default function Header() {
 
              <div className="hidden lg:flex items-center">
               <Link 
-                href="/"
+                href="/" // MODIFIED: Contact button also points to home
                 className={`ml-6 px-5 py-2.5 text-sm font-semibold rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 ${
-                  // CHANGE 3: Conditionally style button based on scroll
                   isScrolled
                     ? 'text-white bg-blue-600 hover:bg-blue-700'
                     : 'text-white border border-white hover:bg-white hover:text-blue-600'
@@ -120,7 +114,6 @@ export default function Header() {
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className={`p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors duration-300 ${
-                    // CHANGE 4: Conditionally set icon color
                     isScrolled ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100' : 'text-white hover:bg-white/20'
                 }`}
                 aria-label="Toggle menu"
@@ -164,7 +157,7 @@ export default function Header() {
               {menuItems.map((item, index) => (
                 <li key={item.name}>
                   <Link
-                    href={'/'} // Corrected: use item.href
+                    href="/" // MODIFIED: All links point to home
                     className={`block w-full px-4 py-3 text-lg font-medium text-left rounded-lg transition-all duration-300 ease-in-out ${
                        pathname === item.href
                         ? 'bg-blue-50 text-blue-600'

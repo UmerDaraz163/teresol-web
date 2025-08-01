@@ -1,14 +1,17 @@
+// app/layout.tsx
+
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import type { ReactNode } from 'react';
 import SmoothScroll from '@/components/SmoothScroll';
 
-// Instantiate the Plus Jakarta Sans font
+// Request specific font weights and assign a CSS variable
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-plus-jakarta-sans', // Assign a CSS variable
+  variable: '--font-plus-jakarta-sans',
+  weight: ['400', '700'], // Specify the weights you'll use
 });
 
 export const metadata: Metadata = {
@@ -19,13 +22,13 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        // Apply the font variable to the body
-        className={`${plusJakartaSans.variable} antialiased`}
+        // Apply the font variable AND the Tailwind font-sans utility class
+        className={`${plusJakartaSans.variable} font-sans antialiased`}
         suppressHydrationWarning={true}
       >
         <SmoothScroll />

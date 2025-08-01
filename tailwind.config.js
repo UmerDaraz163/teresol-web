@@ -1,9 +1,17 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./{app,components,libs,pages,hooks}/**/*.{html,js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      // --- Added animation configuration ---
+      // --- Added font configuration ---
+      fontFamily: {
+        sans: ['var(--font-plus-jakarta-sans)', ...fontFamily.sans],
+      },
+      // ------------------------------------
+      
+      // --- Existing animation configuration ---
       keyframes: {
         'fade-in-down': {
           '0%': {

@@ -8,9 +8,12 @@ import SlideIndicator from '@/components/SlideIndicator';
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  // Default state for text is now empty
+  const [displayText, setDisplayText] = useState({ title: '', subtitle: '' });
   const videoRefs = useRef<HTMLVideoElement[]>([]);
+  const heroTextRef = useRef<HTMLDivElement>(null);
 
-  // Timer for automatic slide transition
+  // Effect for automatic slide transition
   useEffect(() => {
     const slideDuration = heroSlides[currentSlide]?.duration || 5000;
     const timer = setTimeout(() => {
@@ -19,23 +22,68 @@ export default function HeroSection() {
     return () => clearTimeout(timer);
   }, [currentSlide]);
 
-  // MODIFIED: Manually control video playback
+  // Effect to control video playback and set initial text
   useEffect(() => {
+    const slideData = heroSlides[currentSlide];
+    
+    // Check for an active cue at the very beginning (time = 0)
+    let initialText = { title: '', subtitle: '' };
+    if (slideData.textCues) {
+      const initialCue = slideData.textCues.find(cue => cue.startTime === 0);
+      if (initialCue) {
+        initialText = initialCue;
+      }
+    } else {
+      initialText = { title: slideData.title, subtitle: slideData.subtitle };
+    }
+    setDisplayText(initialText);
+
+    // GSAP animation for the text container
+    if (heroTextRef.current) {
+        gsap.fromTo(heroTextRef.current, 
+            { opacity: 0, y: 20 }, 
+            { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 }
+        );
+    }
+    
+    // Manage video playback
     videoRefs.current.forEach((video, index) => {
-      // Check if the video element exists in the ref array
       if (video) {
         if (index === currentSlide) {
-          video.currentTime = 0; // Reset to the beginning
-          // Play the video and catch any potential browser errors
-          video.play().catch(error => {
-            console.error("Video autoplay failed:", error);
-          });
+          video.currentTime = 0;
+          video.play().catch(error => console.error("Video autoplay failed:", error));
         } else {
           video.pause();
         }
       }
     });
+
   }, [currentSlide]);
+
+  // MODIFIED: Handler now checks for a time range (start and end)
+  const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const video = e.currentTarget;
+    const slideData = heroSlides[currentSlide];
+
+    if (!slideData.textCues) return;
+
+    // Find a cue where the currentTime is within its start and end time
+    const activeCue = slideData.textCues.find(
+      cue => video.currentTime >= cue.startTime && video.currentTime < cue.endTime
+    );
+      
+    if (activeCue) {
+      // If a cue is found, update the text only if it's different
+      if (activeCue.title !== displayText.title) {
+        setDisplayText(activeCue);
+      }
+    } else {
+      // If no cue is found (i.e., we are in a gap), clear the text
+      if (displayText.title !== '') {
+        setDisplayText({ title: '', subtitle: '' });
+      }
+    }
+  };
 
   return (
     <section className="relative h-screen overflow-hidden">
@@ -48,9 +96,8 @@ export default function HeroSection() {
         >
           {slide.video ? (
             <video
-              ref={el => {
-                if (el) videoRefs.current[index] = el;
-              }}
+              ref={el => { if (el) videoRefs.current[index] = el; }}
+              onTimeUpdate={handleTimeUpdate}
               loop
               muted
               playsInline
@@ -71,32 +118,23 @@ export default function HeroSection() {
       {/* Hero Content */}
       <div className="relative z-20 container mx-auto px-4 h-full flex items-center">
         <div className="w-full max-w-3xl hero-content">
-          <div className="hero-text">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              {heroSlides[currentSlide].title}
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
-              {heroSlides[currentSlide].subtitle}
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/"
-              className="bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap cursor-pointer text-center"
-            >
-              Explore Solutions
-            </Link>
-            <Link
-              href="/"
-              className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 whitespace-nowrap cursor-pointer text-center"
-            >
-              Get In Touch
-            </Link>
+          {/* The key prop handles the hide/show animation when displayText becomes empty or populated */}
+          <div key={displayText.title} ref={heroTextRef} className="hero-text">
+            {/* Render only if there's a title to prevent an empty block */}
+            {displayText.title && (
+              <>
+                <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 animate-pulse leading-tight">
+                  {displayText.title}
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-200 mb-8 animate-pulse leading-relaxed">
+                  {displayText.subtitle}
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>
 
-      {/* SlideIndicator component */}
       <SlideIndicator
         count={heroSlides.length}
         currentIndex={currentSlide}

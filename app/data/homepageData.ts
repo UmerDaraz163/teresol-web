@@ -1,27 +1,35 @@
 import { image } from "framer-motion/client";
 
  // Data arrays
- export const heroSlides = [
+
+export const heroSlides = [
   {
-    title: "Advanced Hardware Systems",
-    subtitle: "Custom hardware solutions for complex challenges",
     video: "/HW1.1.mp4",
-    duration : 22000
-  },  
-    {
-      title: "Innovative Software Solutions",
-      subtitle: "Transforming businesses through cutting-edge technology",
-      video: "/SW1.3.mp4",
-      duration : 32000
-    },
-    {
-      title: "Innovatively Creative",
-      subtitle: "Transforming businesses through cutting-edge technology",
-      image: "/hero2.png",
-      duration : 5000
-    }
-    
-  ];
+    duration: 19000,
+    textCues: [
+      { startTime: 0, endTime: 2.16, title: "Innovatively Creative", subtitle: "Engineering forward-thinking ideas into reality." },
+      { startTime: 2.16, endTime: 7.14, title: "Embedded Design Service", subtitle: "Expert solutions for your custom hardware challenges." },
+      { startTime: 7.15, endTime: 9.55, title: "Wide Range of Single Board Computers", subtitle: "Powerful and versatile platforms for any project." },
+      { startTime: 9.56, endTime: 13.92, title: "AI Embedded Systems", subtitle: "Bringing intelligent processing and machine learning to the edge." },
+      { startTime: 13.93, endTime: 18.92, title: "Next-Gen RF Solutions", subtitle: "Advanced wireless technology for seamless connectivity." },
+    ]
+  },
+  {
+    video: "/SW1.3.mp4",
+    duration: 10000,
+    textCues: [
+      { startTime: 0, endTime: 4, title: "Enterprise Software Solutions", subtitle: "Scalable and robust applications to empower your business." },
+      { startTime: 4.01, endTime: 6.9, title: "Modernization of Core Banking", subtitle: "Transforming financial services for the digital age." },
+      { startTime: 7, endTime: 10, title: "Serving Your World", subtitle: "Delivering technology that makes a global impact." },
+    ]
+  },
+  {
+    title: "Innovatively Creative",
+    subtitle: "Transforming businesses through cutting-edge technology",
+    image: "/hero2.png",
+    duration: 5000
+  }
+];
   export const clients = [
     { name: "Bank Al Habib", logo: "/clients/bank-al-habib.png" },
     { name: "Pakistan Air Force", logo: "/clients/paf-logo.png" },
@@ -42,9 +50,9 @@ import { image } from "framer-motion/client";
       description: "Our embedded design includes complex multi layers (18-24) high speed signal processing PCBs, Single Board Computers (SBC) for time sched-uled applications, their board support packages/APIs for external integration and complete customized end to end product (qualified for tough temperature environment) with multiple designed cards.",
       features:[],
       techIcons: [
-        'https://i.imgur.com/gJ50eJ0.png', // C++
-        'https://i.imgur.com/422GZmS.png', // C
-        'https://i.imgur.com/tL4g1zX.png'  // Linux
+        '/services/hw1.png',
+        '/services/hw2.png',
+        '/services/hw3.png',
       ]  
   
       // features: ["Single Board Computers (SBCs)", "Military Avionics", "Display Computer", "Control Computer", "Mission Data Recorders", "Ground-based Defense Solutions", "AI based Autotracking System", "Ruggedized Field Equipment"]
@@ -55,9 +63,9 @@ import { image } from "framer-motion/client";
       description: "Well-reputed Research and Innovation (R&I) company with a proven track record in developing customized, cost efficient and scalable enterprise software solutions. We offer a comprehensive suite of services. We are a team of over 400 professionals includ- ing 20 PhDs from esteemed global institutes. We are ISO 9001, 20000, 27001 certified, guaranteeing industry-leading quality.",
       features:[],
       techIcons: [
-        '/PASHA.png', // Python
-        '/PASHA.png', // TensorFlow
-        '/PASHA.png'  // PyTorch
+        '/services/sw1.png',
+        '/services/sw2.png',
+        '/services/sw3.png',
       ]
   
       // features: ["Command, Control, Communications, Computers and Intelligence (C4I) System", "Banking", "Fintech", "Embedded Solutions"]
@@ -68,9 +76,9 @@ import { image } from "framer-motion/client";
       description: "The future of businesses reside in the transformative capabilities of Artificial Intelligence (AI). We help you integrate AI in your current infrastructure by delivering state-of-art AI software development services. Our competent developers provide you with custom solutions perfectly tailored to your requirements.",
       features:[],
       techIcons: [
-        'https://i.imgur.com/nJt8S5s.png', // Python
-        'https://i.imgur.com/nN1sA20.png', // TensorFlow
-        'https://i.imgur.com/D3uPcoV.png'  // PyTorch
+        '/services/ai1.png',
+        '/services/ai2.png',
+        '/services/ai3.png',
       ]
       // features: ["Business Analytics Suite", "AI Detection and Tracking System", "Wind Power Estimation", "Brain Image Processing", "Eye Blob Remover",]
     }
