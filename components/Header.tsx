@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-// Data with unique hrefs for active state checking 
+// Data with unique hrefs for active state checking
 const menuItems = [
   { name: 'Home', href: '/' },
   { name: 'About Us', href: '/about' },
@@ -38,7 +38,7 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -60,8 +60,8 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
-          isScrolled 
-            ? 'bg-white/95 shadow-md backdrop-blur-sm' 
+          isScrolled
+            ? 'bg-white/95 shadow-md backdrop-blur-sm'
             : 'bg-transparent'
         }`}
       >
@@ -69,9 +69,11 @@ export default function Header() {
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex-shrink-0">
               <img
-                src="/logo.png"
+                src='/logo.png'
                 alt="Teresol Logo"
-                className="h-12 w-auto transition-transform duration-300 hover:scale-105"
+                className={`h-20 w-auto transition-all duration-300 hover:scale-105 ${ // Changed h-12 to h-16
+                  !isScrolled ? 'brightness-0 invert' : ''
+                }`}
                 suppressHydrationWarning={true}
               />
             </Link>
@@ -98,7 +100,7 @@ export default function Header() {
             </nav>
 
              <div className="hidden lg:flex items-center">
-              <Link 
+              <Link
                 href="/" // MODIFIED: Contact button also points to home
                 className={`ml-6 px-5 py-2.5 text-sm font-semibold rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 ${
                   isScrolled
@@ -124,7 +126,7 @@ export default function Header() {
           </div>
         </div>
       </header>
-      
+
       {/* Mobile Menu Overlay */}
       <div
         className={`lg:hidden fixed inset-0 z-40 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity duration-300 ${

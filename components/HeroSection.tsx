@@ -123,10 +123,10 @@ export default function HeroSection() {
             {/* Render only if there's a title to prevent an empty block */}
             {displayText.title && (
               <>
-                <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 animate-pulse leading-tight">
+                <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
                   {displayText.title}
                 </h1>
-                <p className="text-xl md:text-2xl text-gray-200 mb-8 animate-pulse leading-relaxed">
+                <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
                   {displayText.subtitle}
                 </p>
               </>

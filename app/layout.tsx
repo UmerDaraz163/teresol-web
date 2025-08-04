@@ -6,7 +6,7 @@ import "./globals.css";
 import type { ReactNode } from 'react';
 import SmoothScroll from '@/components/SmoothScroll';
 
-// Request specific font weights and assign a CSS variable
+// 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',

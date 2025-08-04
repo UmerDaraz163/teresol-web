@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Tilt from 'react-parallax-tilt';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { featuredServices } from '@/app/data/homepageData'; 
+import { featuredServices } from '@/app/data/homepageData';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,70 +24,73 @@ export default function FeaturedServicesSection() {
 
     const ctx = gsap.context(() => {
       ScrollTrigger.matchMedia({
-        '(min-width: 1024px)': function() {
+        '(min-width: 1024px)': function () {
           ScrollTrigger.create({
             trigger: sectionRef.current,
             pin: leftColumnRef.current,
             start: 'top 128px',
             end: () => `+=${cardsContainerRef.current!.offsetHeight - leftColumnRef.current!.offsetHeight}`,
           });
-          
+
           const flippingWord = headingRef.current?.querySelector("#flipping-word");
 
-          gsap.set(paragraphRef.current, { opacity: 0, x: -50 });
-          gsap.set(headingRef.current, { xPercent: 100, scale: 1.5 }); 
+          gsap.set(headingRef.current, { xPercent: 100, scale: 1.5 });
+          gsap.set(paragraphRef.current, { xPercent: 100, opacity: 70 });
+
           const serviceCards = gsap.utils.toArray(cardsContainerRef.current!.children);
           gsap.set(serviceCards, { opacity: 0, y: 30 });
 
-          const servicesTimeline = gsap.timeline({ 
-            scrollTrigger: { 
-              trigger: sectionRef.current, 
-              start: "top 60%", 
-              end: "top 10%", 
-              scrub: 2 
-            } 
+          const servicesTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 40%",
+              end: "top 10%",
+              scrub: 2,
+            }
           });
 
-          servicesTimeline.to(headingRef.current, { 
+          servicesTimeline.to(headingRef.current, {
             xPercent: 0,
             scale: 1,
-            duration: 3.5,
+            x: 20,
+            duration: 5,
             ease: "slow(0.7,0.7,false)",
           });
+
+          servicesTimeline.to(paragraphRef.current, {
+            xPercent: 0,
+            opacity: 1,
+            x: 20,
+            duration: 5,
+            ease: "slow(0.7,0.7,false)",
+          }, "<");
 
           if (flippingWord) {
             servicesTimeline.from(flippingWord, {
               rotationX: -360,
               ease: 'power3.inOut',
-              duration: 1.5 
-            }, "<"); 
+              duration: 1.5
+            }, "<");
           }
 
           servicesTimeline
-            // MODIFIED: Added a bouncy 'elastic' ease to the paragraph animation
-            .to(paragraphRef.current, {
+            .to(serviceCards, {
               opacity: 1,
-              x: 0,
-              ease: 'elastic.out(1, 0.75)',
-              duration: 1.5
-            }, "-=0.5")
-            .to(serviceCards, { 
-              opacity: 1, 
-              y: 0, 
-              stagger: 0.1, 
-              ease: 'power2.out' 
-            }, "<0.2")
-            .to(headingContentRef.current, { 
+              y: 0,
+              stagger: 0.1,
+              ease: 'power2.out'
+            }, "-=1.5")
+            .to(headingContentRef.current, {
               y: 45,
-              x: -20,
-              ease: 'sine.inOut' 
+              x: 20,
+              ease: 'sine.inOut'
             }, "<");
 
           return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
           };
         },
-        '(max-width: 1023px)': function() {
+        '(max-width: 1023px)': function () {
           gsap.from([headingContentRef.current, cardsContainerRef.current], {
             opacity: 0,
             y: 50,
@@ -100,24 +103,24 @@ export default function FeaturedServicesSection() {
               toggleActions: 'play none none none'
             }
           });
-          
+
           return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
           };
         }
       });
 
-      const sectionTrigger = { 
-        trigger: sectionRef.current, 
-        start: "top bottom", 
-        end: "bottom top", 
-        scrub: 1.5 
+      const sectionTrigger = {
+        trigger: sectionRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.5
       };
 
       gsap.fromTo("#windmill-1", { xPercent: -100, rotation: -90 }, { xPercent: 100, rotation: 180, ease: "none", scrollTrigger: sectionTrigger });
       gsap.fromTo("#windmill-2", { yPercent: 100, rotation: 0 }, { yPercent: -100, rotation: -180, ease: "none", scrollTrigger: { ...sectionTrigger, scrub: 2.5 } });
       gsap.fromTo("#windmill-3", { xPercent: 150, yPercent: -150, rotation: 50 }, { xPercent: -150, yPercent: 150, rotation: -270, ease: "none", scrollTrigger: sectionTrigger });
-      
+
       const bulbGlow = sectionRef.current?.querySelector("#bulb-glow");
       if (bulbGlow) {
         gsap.set(bulbGlow, { opacity: 0 });
@@ -139,7 +142,6 @@ export default function FeaturedServicesSection() {
       <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
         <div ref={leftColumnRef} className="lg:col-span-2 text-center lg:text-left">
           <div ref={headingContentRef}>
-            {/* MODIFIED: Restructured H2 for separate styling */}
             <h2 ref={headingRef} className="font-extrabold mb-8 text-[14px] md:text-5xl relative [perspective:1000px] [transform-style:preserve-3d] whitespace-nowrap">
               <span className="bg-gradient-to-r from-[#25237b] to-[#8b0303] bg-clip-text text-transparent">Featured</span>{' '}
               <span id="flipping-word" className="inline-block backface-hidden text-[#25237b]">Services</span>
@@ -156,24 +158,42 @@ export default function FeaturedServicesSection() {
           {featuredServices.map((service) => (
             <Tilt key={service.title} glareEnable={true} glareMaxOpacity={0.2} glareColor="#ffffff" tiltMaxAngleX={10} tiltMaxAngleY={10}>
               <div className="bg-white p-6 md:p-8 rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-3 hover:scale-[1.03] transition-all duration-500 group service-card">
-                <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6"><i className={`${service.icon} text-4xl text-blue-600 group-hover:text-[#8b0303]`}></i></div>
-                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600">{service.title}</h3>
+                <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6">
+                  {service.icon.includes('.') ? (
+
+                    <div
+                      className={`${service.icon.includes('ai.png') ? 'w-12 h-12' : 'w-10 h-10'
+                        } bg-[#25237b] group-hover:bg-[#8b0303] transition-colors duration-300`} style={{
+                          maskImage: `url(${service.icon})`,
+                          WebkitMaskImage: `url(${service.icon})`,
+                          maskSize: 'contain',
+                          WebkitMaskSize: 'contain',
+                          maskRepeat: 'no-repeat',
+                          WebkitMaskRepeat: 'no-repeat',
+                          maskPosition: 'center',
+                          WebkitMaskPosition: 'center',
+                        }}
+                    ></div>
+                  ) : (
+                    // Standard icon font rendering
+                    <i className={`${service.icon} text-5xl text-[#25237b] group-hover:text-[#8b0303] transition-colors duration-300`}></i>
+                  )}
+                </div>                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600">{service.title}</h3>
                 <p className="text-sm md:text-base text-gray-600 mb-2">{service.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">{service.features.map((feature, i) => (<span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 text-xs sm:text-sm rounded-full group-hover:bg-blue-100 group-hover:text-blue-800">{feature}</span>))}</div>
 
-                <div className="flex justify-between items-center my-4">
+                <div className="flex flex-wrap justify-start items-center gap-4 my-4 lg:flex-nowrap lg:justify-between lg:gap-0">
                   {service.techIcons?.map((iconUrl, index) => (
                     <img
                       key={index}
                       src={iconUrl}
                       alt={`Tech icon ${index + 1}`}
-                      className="w-full object-contain max-w-[180px] rounded-lg" 
+                      className="h-8 w-auto object-contain lg:h-auto lg:w-full lg:max-w-[180px] lg:rounded-lg"
                     />
                   ))}
                 </div>
                 <Link href={`/`} className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium text-sm md:text-base transition-all duration-300 hover:scale-105">Learn More</Link>
 
-                {/* <Link href={`/services/${service.title.toLowerCase().replace(/\s+/g, '-')}`} className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium text-sm md:text-base transition-all duration-300 hover:scale-105">Learn More</Link> */}
               </div>
             </Tilt>
           ))}

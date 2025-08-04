@@ -58,7 +58,7 @@ export const heroSlides = [
       // features: ["Single Board Computers (SBCs)", "Military Avionics", "Display Computer", "Control Computer", "Mission Data Recorders", "Ground-based Defense Solutions", "AI based Autotracking System", "Ruggedized Field Equipment"]
     },
     {
-      icon: "ri-code-line",
+      icon: "/icons/esw.png",
       title: "Enterprise Software Solutions",
       description: "Well-reputed Research and Innovation (R&I) company with a proven track record in developing customized, cost efficient and scalable enterprise software solutions. We offer a comprehensive suite of services. We are a team of over 400 professionals includ- ing 20 PhDs from esteemed global institutes. We are ISO 9001, 20000, 27001 certified, guaranteeing industry-leading quality.",
       features:[],
@@ -71,8 +71,8 @@ export const heroSlides = [
       // features: ["Command, Control, Communications, Computers and Intelligence (C4I) System", "Banking", "Fintech", "Embedded Solutions"]
     },
     {
-      icon: "ri-brain-line",
-      title: "AI Devevelopment Services",
+      icon: "/icons/ai.png",
+      title: "AI Development Services",
       description: "The future of businesses reside in the transformative capabilities of Artificial Intelligence (AI). We help you integrate AI in your current infrastructure by delivering state-of-art AI software development services. Our competent developers provide you with custom solutions perfectly tailored to your requirements.",
       features:[],
       techIcons: [
