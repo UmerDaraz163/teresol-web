@@ -12,7 +12,7 @@ export default function Products() {
       description: "Comprehensive IoT management platform for device monitoring and data analytics",
       features: ["Real-time monitoring", "Advanced analytics", "Cloud connectivity", "Mobile app support"],
       image: "https://readdy.ai/api/search-image?query=IoT%20dashboard%20interface%20showing%20device%20monitoring%20and%20analytics%2C%20modern%20software%20platform%20with%20blue%20interface%20elements%2C%20clean%20professional%20design%20with%20data%20visualization&width=400&height=300&seq=prod1&orientation=landscape",
-      price: "Starting from $299/month"
+      price: "Starting from 299/month"
     },
     {
       title: "TeresoCTRL Industrial Controller",
@@ -20,7 +20,7 @@ export default function Products() {
       description: "Advanced industrial control system for manufacturing and automation applications",
       features: ["Multi-channel I/O", "Real-time processing", "Industrial protocols", "Rugged design"],
       image: "https://readdy.ai/api/search-image?query=Industrial%20control%20system%20hardware%20with%20multiple%20input%20output%20ports%2C%20professional%20manufacturing%20equipment%20with%20blue%20accent%20lighting%2C%20robust%20industrial%20design&width=400&height=300&seq=prod2&orientation=landscape",
-      price: "Starting from $1,299"
+      price: "Starting from 1,299"
     },
     {
       title: "TeresoSense Smart Sensor Array",
@@ -28,7 +28,7 @@ export default function Products() {
       description: "Intelligent sensor network solution for environmental monitoring and data collection",
       features: ["Multi-sensor fusion", "Wireless connectivity", "Low power consumption", "Weather resistant"],
       image: "https://readdy.ai/api/search-image?query=Smart%20sensor%20array%20devices%20with%20wireless%20connectivity%2C%20modern%20IoT%20sensors%20for%20environmental%20monitoring%2C%20clean%20tech%20design%20with%20blue%20LED%20indicators&width=400&height=300&seq=prod3&orientation=landscape",
-      price: "Starting from $199 per unit"
+      price: "Starting from 199 per unit"
     },
     {
       title: "TeresoSecure Access System",
@@ -36,7 +36,7 @@ export default function Products() {
       description: "Integrated access control system combining hardware and software for security management",
       features: ["Biometric authentication", "Cloud management", "Mobile access", "Audit trails"],
       image: "https://readdy.ai/api/search-image?query=Modern%20access%20control%20system%20with%20biometric%20scanner%20and%20security%20interface%2C%20professional%20security%20hardware%20with%20blue%20interface%20lighting%2C%20corporate%20security%20solution&width=400&height=300&seq=prod4&orientation=landscape",
-      price: "Starting from $899"
+      price: "Starting from 899"
     },
     {
       title: "TeresoEnergy Management Suite",
@@ -44,7 +44,7 @@ export default function Products() {
       description: "Comprehensive energy monitoring and management solution for smart buildings",
       features: ["Real-time monitoring", "Energy optimization", "Cost analysis", "Sustainability reporting"],
       image: "https://readdy.ai/api/search-image?query=Energy%20management%20software%20dashboard%20showing%20power%20consumption%20analytics%20and%20optimization%20charts%2C%20professional%20interface%20with%20blue%20color%20scheme%2C%20clean%20data%20visualization&width=400&height=300&seq=prod5&orientation=landscape",
-      price: "Starting from $499/month"
+      price: "Starting from 499/month"
     },
     {
       title: "TeresoConnect Gateway",
@@ -52,7 +52,7 @@ export default function Products() {
       description: "Universal communication gateway for connecting legacy systems to modern networks",
       features: ["Protocol conversion", "Edge computing", "Secure tunneling", "Remote management"],
       image: "https://readdy.ai/api/search-image?query=Network%20gateway%20device%20with%20multiple%20connectivity%20ports%20and%20LED%20indicators%2C%20industrial%20communication%20hardware%20with%20modern%20design%2C%20blue%20accent%20lighting&width=400&height=300&seq=prod6&orientation=landscape",
-      price: "Starting from $799"
+      price: "Starting from 799"
     }
   ];
 
