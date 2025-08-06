@@ -117,7 +117,6 @@ export default function CertificationsSection() {
               {certifications.map((cert) => (
                 <div key={cert.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
                   <Tilt className="h-full w-full" tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
-                    {/* ✨ Card structure updated for consistent height */}
                     <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                       <div className="mb-4 flex justify-center items-center h-20">
                         <img src={cert.image} alt={cert.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
@@ -133,7 +132,8 @@ export default function CertificationsSection() {
             </div>
           ) : (
             <>
-              <div ref={certSliderRef} className="relative min-h-[24rem] sm:min-h-[22rem] [perspective:1200px]">
+              {/* ▼▼▼ CHANGE IS HERE ▼▼▼ */}
+              <div ref={certSliderRef} className="relative min-h-[36rem] md:min-h-[22rem] [perspective:1200px]">
                 {Array.from({ length: certPages }).map((_, pageIndex) => {
                   const slideItems = certifications.slice(pageIndex * ITEMS_PER_PAGE, (pageIndex + 1) * ITEMS_PER_PAGE);
                   const isFullSlide = slideItems.length === ITEMS_PER_PAGE;
@@ -149,7 +149,6 @@ export default function CertificationsSection() {
                           {slideItems.map((cert) => (
                             <div key={cert.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
                                 <Tilt className="h-full w-full" tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
-                                  {/* ✨ Card structure updated for consistent height */}
                                   <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                                     <div className="mb-4 flex justify-center items-center h-20">
                                       <img src={cert.image} alt={cert.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
@@ -189,7 +188,6 @@ export default function CertificationsSection() {
               {memberships.map((membership) => (
                 <div key={membership.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
                   <Tilt className="h-full w-full" tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
-                    {/* ✨ Card structure updated for consistent height */}
                     <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                       <div className="mb-4 flex justify-center items-center h-20">
                         <img src={membership.image} alt={membership.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
@@ -205,7 +203,8 @@ export default function CertificationsSection() {
             </div>
           ) : (
             <>
-              <div ref={membershipSliderRef} className="relative min-h-[24rem] sm:min-h-[22rem] [perspective:1200px]">
+              {/* ▼▼▼ CHANGE IS HERE ▼▼▼ */}
+              <div ref={membershipSliderRef} className="relative min-h-[36rem] md:min-h-[22rem] [perspective:1200px]">
                 {Array.from({ length: membershipPages }).map((_, pageIndex) => {
                   const slideItems = memberships.slice(pageIndex * ITEMS_PER_PAGE, (pageIndex + 1) * ITEMS_PER_PAGE);
                   const isFullSlide = slideItems.length === ITEMS_PER_PAGE;
@@ -221,7 +220,6 @@ export default function CertificationsSection() {
                           {slideItems.map((membership) => (
                             <div key={membership.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
                                 <Tilt className="h-full w-full" tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
-                                  {/* ✨ Card structure updated for consistent height */}
                                   <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                                     <div className="mb-4 flex justify-center items-center h-20">
                                       <img src={membership.image} alt={membership.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>

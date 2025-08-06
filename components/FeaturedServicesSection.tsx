@@ -35,7 +35,7 @@ export default function FeaturedServicesSection() {
           const flippingWord = headingRef.current?.querySelector("#flipping-word");
 
           gsap.set(headingRef.current, { xPercent: 100, scale: 1.5 });
-          gsap.set(paragraphRef.current, { xPercent: 100, opacity: 70 });
+          gsap.set(paragraphRef.current, { xPercent: 75, opacity: 70 });
 
           const serviceCards = gsap.utils.toArray(cardsContainerRef.current!.children);
           gsap.set(serviceCards, { opacity: 0, y: 30 });

@@ -7,14 +7,14 @@ import { usePathname } from 'next/navigation';
 // Data with unique hrefs for active state checking
 const menuItems = [
   { name: 'Home', href: '/' },
-  { name: 'About Us', href: '/about' },
-  { name: 'Solutions', href: '/solutions' },
-  { name: 'Products', href: '/products' },
+  { name: 'About Us', href: '/' },
+  { name: 'Solutions', href: '/' },
+  { name: 'Products', href: '/' },
   { name: 'Services', href: '/services' },
-  { name: 'Resources', href: '/resources' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Careers', href: '/careers' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Resources', href: '/' },
+  { name: 'Blog', href: '/' },
+  { name: 'Careers', href: '/' },
+  { name: 'Contact', href: '/' },
 ];
 
 const MenuIcon = () => (
@@ -83,7 +83,7 @@ export default function Header() {
                 item.name !== 'Contact' ? (
                   <Link
                     key={item.name}
-                    href="/" // MODIFIED: All links point to home
+                    href={item.href} 
                     className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors duration-300 ${
                       isScrolled
                         ? pathname === item.href ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
@@ -159,7 +159,7 @@ export default function Header() {
               {menuItems.map((item, index) => (
                 <li key={item.name}>
                   <Link
-                    href="/" // MODIFIED: All links point to home
+                    href={item.href} 
                     className={`block w-full px-4 py-3 text-lg font-medium text-left rounded-lg transition-all duration-300 ease-in-out ${
                        pathname === item.href
                         ? 'bg-blue-50 text-blue-600'
