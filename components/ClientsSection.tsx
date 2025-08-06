@@ -57,7 +57,7 @@ export default function ClientsSection() {
                                     src={client.logo}
                                     alt={client.name}
                                     // MODIFIED: Increased max-height of the logo
-                                    className="max-h-28 max-w-full object-contain transition duration-300"
+                                    className="max-h-28 max-w-full object-contain transition duration-150"
                                 />
                                 {/* <div className="absolute bottom-2 opacity-0 group-hover:opacity-100 text-sm font-medium text-[#8b0303] transition-opacity duration-300">
                                     {client.name}
