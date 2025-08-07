@@ -83,7 +83,7 @@ export default function Header() {
                 item.name !== 'Contact' ? (
                   <Link
                     key={item.name}
-                    href="/" // MODIFIED: All links point to home
+                    href={item.href} // MODIFIED: All links point to home
                     className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors duration-300 ${
                       isScrolled
                         ? pathname === item.href ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
@@ -159,7 +159,7 @@ export default function Header() {
               {menuItems.map((item, index) => (
                 <li key={item.name}>
                   <Link
-                    href="/" // MODIFIED: All links point to home
+                    href="/contact" // MODIFIED: All links point to home
                     className={`block w-full px-4 py-3 text-lg font-medium text-left rounded-lg transition-all duration-300 ease-in-out ${
                        pathname === item.href
                         ? 'bg-blue-50 text-blue-600'
@@ -175,7 +175,7 @@ export default function Header() {
             </ul>
           </nav>
           <div className="p-4 border-t">
-              <Link href="/" className="w-full block text-center px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+              <Link href="/contact" className="w-full block text-center px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
                 Contact Us
               </Link>
           </div>
