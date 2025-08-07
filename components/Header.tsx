@@ -175,7 +175,7 @@ export default function Header() {
             </ul>
           </nav>
           <div className="p-4 border-t">
-              <Link href="/" className="w-full block text-center px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+              <Link href="/contact" className="w-full block text-center px-6 py-3 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
                 Contact Us
               </Link>
           </div>
