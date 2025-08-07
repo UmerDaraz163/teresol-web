@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 const menuItems = [
   { name: 'Home', href: '/' },
   { name: 'About Us', href: '/' },
-  { name: 'Solutions', href: '/' },
+  // { name: 'Solutions', href: '/' },
   { name: 'Products', href: '/' },
   { name: 'Services', href: '/services' },
   { name: 'Resources', href: '/' },
