@@ -6,7 +6,6 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Link from "next/link";
 
-
 export default function Products() {
   const [expandedGroups, setExpandedGroups] = useState<{
     [key: number]: boolean;
@@ -112,7 +111,7 @@ export default function Products() {
         },
       ],
     },
-     {
+    {
       groupTitle: "I/O & Bus Interface Cards",
       category: "Hardware Product",
       description:
@@ -146,14 +145,14 @@ export default function Products() {
               image: "/products/interface-cards/card4.png",
               shortDescription: "Efficient hardware-level video compression.",
             },
-             {
+            {
               title: "System Interface Module in 3U form factor-VME",
               image: "/products/interface-cards/card5.png",
               shortDescription: "Efficient hardware-level video compression.",
             },
           ],
         },
-         {
+        {
           type: "Synchronous/Adaptation Cards",
           models: [
             {
@@ -165,7 +164,7 @@ export default function Products() {
         },
       ],
     },
-      {
+    {
       groupTitle: "Mission Ready Systems",
       category: "Hardware Product",
       description:
@@ -189,7 +188,7 @@ export default function Products() {
               image: "/products/mission-systems/system3.png",
               shortDescription: "AI-optimized graphic processing SBC.",
             },
-             {
+            {
               title: "Three Channel MIL-STD-1553B 3U VME",
               image: "/products/mission-systems/system4.png",
               shortDescription: "AI-optimized graphic processing SBC.",
@@ -199,19 +198,19 @@ export default function Products() {
         {
           type: "Avionics Computers",
           models: [
-             {
+            {
               title: "Three Channel MIL-STD-1553B 3U VME",
               image: "/products/mission-systems/system5.png",
               shortDescription: "AI-optimized graphic processing SBC.",
             },
-             {
+            {
               title: "Three Channel MIL-STD-1553B 3U VME",
               image: "/products/mission-systems/system6.png",
               shortDescription: "AI-optimized graphic processing SBC.",
             },
           ],
         },
-         {
+        {
           type: "Multifunction Displays",
           models: [
             {
@@ -219,14 +218,14 @@ export default function Products() {
               image: "/products/mission-systems/system7.png",
               shortDescription: "Efficient hardware-level video compression.",
             },
-              {
+            {
               title: "Smart Display Unit-II",
               image: "/products/mission-systems/system8.png",
               shortDescription: "Efficient hardware-level video compression.",
             },
           ],
         },
-          {
+        {
           type: "Power Supplies",
           models: [
             {
@@ -261,6 +260,24 @@ export default function Products() {
               title: "Harnessing",
               image: "/products/auto-systems/system3.png",
               shortDescription: "AI-optimized graphic processing SBC.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      groupTitle: "HR Management Systems",
+      category: "Hardware Product",
+      description:
+        "TeReSol’s indigenous product i-MPLOYEE is a unique, comprehensive and innovative attendance, access and reporting system based on modern biometric and RFID technology. i-MPLOYEE is one of a kind, on the go, plug-n-play solution which enables customer’s flexibility to get attendance and access data from any temporary or permanent location through smart phone application or web portal",
+      types: [
+        {
+          type: "Imployee Biometric System",
+          models: [
+            {
+              title: "I-MPLOYEE",
+              image: "/products/hr-systems/imployee.png",
+              shortDescription: "High-performance video processing card.",
             },
           ],
         },
@@ -304,7 +321,12 @@ export default function Products() {
             Product Portfolio
           </h1>
           <p className="text-gray-600 mb-8 text-center">
-            TeReSol’s Product Portfolio spans advanced embedded systems, ruggedized computing platforms, and mission-critical electronics tailored for defense, aerospace, automotive, and industrial sectors. From high-performance Single Board Computers and video processing modules to avionics computers and AI-powered solutions, our products meet the toughest operational and environmental standards.
+            TeReSol’s Product Portfolio spans advanced embedded systems,
+            ruggedized computing platforms, and mission-critical electronics
+            tailored for defense, aerospace, automotive, and industrial sectors.
+            From high-performance Single Board Computers and video processing
+            modules to avionics computers and AI-powered solutions, our products
+            meet the toughest operational and environmental standards.
           </p>
 
           {groupedProducts.map((group, groupIndex) => {
@@ -357,7 +379,7 @@ export default function Products() {
                                 onClick={() => toggleType(typeKey)}
                                 className="whitespace-nowrap text-white px-4 py-2 rounded-full font-semibold text-sm bg-[#25237b] hover:bg-[#8b0303] transition-all duration-300 transform hover:scale-105"
                               >
-                                {isTypeExpanded ? "Close" : "View Models"}
+                                {isTypeExpanded ? "View Less" : "View Models"}
                               </button>
 
                               <AnimatePresence initial={false}>
@@ -407,7 +429,6 @@ export default function Products() {
           })}
         </div>
       </section>
-
 
       {/* Product Benefits */}
       <section className="py-20 bg-gray-50">
@@ -477,7 +498,7 @@ export default function Products() {
             </div>
             <div>
               <img
-                src="https://readdy.ai/api/search-image?query=Professional%20team%20testing%20and%20validating%20technology%20products%20in%20modern%20laboratory%2C%20quality%20assurance%20process%20with%20electronic%20equipment%20and%20software%20testing%2C%20blue%20accent%20lighting&width=600&height=400&seq=benefits&orientation=landscape"
+                src="/products/about-us1.png"
                 alt="Product Benefits"
                 className="w-full h-96 object-cover object-top rounded-xl shadow-lg"
               />
@@ -486,7 +507,7 @@ export default function Products() {
         </div>
       </section>
 
-        {/* CTA Section */}
+      {/* CTA Section */}
       <section className="py-20 bg-[#25237b] ">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
@@ -512,7 +533,6 @@ export default function Products() {
           </div>
         </div>
       </section>
-
 
       <Footer />
     </div>
