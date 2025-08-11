@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { offices, contactMethods, faqs } from '@/app/data/contactUsData'; // Adjust path if needed
+
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,13 +15,11 @@ export default function Contact() {
     service: '',
     message: ''
   });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-  };
+  
+  const [status, setStatus] = useState<'success' | 'error' | 'submitting' | null>(null);
+  
+  // State to manage which FAQ is open
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -28,56 +28,44 @@ export default function Contact() {
     });
   };
 
-  const offices = [
-    {
-      city: "Islamabad",
-      address: "15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA, Phase-II Islamabad , Pakistan",
-      phone: "+518430644",
-      email: "info@teresol.com",
-      isMain: true
-    },
-    {
-      city: "Karachi",
-      address: "Shaheed-e-Millat Expressway, KPT Interchange, Qayyumabad, Karachi",
-      phone: "+518430644",
-      email: "info@teresol.com",
-      isMain: false
-    }
-  ];
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('submitting');
 
-  const contactMethods = [
-    {
-      icon: "ri-phone-line",
-      title: "Call Us",
-      description: "Speak directly with our experts",
-      detail: "+92 21 1234 5678",
-      action: "Call Now"
-    },
-    {
-      icon: "ri-mail-line",
-      title: "Email Us",
-      description: "Send us your detailed requirements",
-      detail: "info@teresol.com",
-      action: "Send Email"
-    },
-    {
-      icon: "ri-calendar-line",
-      title: "Schedule Meeting",
-      description: "Book a consultation session",
-      detail: "Available Mon-Fri 9AM-6PM",
-      action: "Book Now"
-    },
-    {
-      icon: "ri-customer-service-line",
-      title: "Live Chat",
-      description: "Get instant support online",
-      detail: "Available 24/7",
-      action: "Start Chat"
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          service: '',
+          message: ''
+        });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
     }
-  ];
+  };
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Header />
       
       {/* Hero Section */}
@@ -91,7 +79,7 @@ export default function Contact() {
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">Contact Us</h1>
           <p className="text-xl text-gray-200 max-w-3xl mx-auto">
-            Ready to discuss your project? Get in touch with our team of experts today
+            Ready to discuss your project? Get in touch with our team of experts today.
           </p>
         </div>
       </section>
@@ -102,11 +90,11 @@ export default function Contact() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
             <p className="text-xl text-gray-600">
-              Choose the most convenient way to reach us
+              Choose the most convenient way to reach us.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {contactMethods.map((method, index) => (
               <div key={index} className="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
                 <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 mx-auto">
@@ -128,6 +116,7 @@ export default function Contact() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
             {/* Contact Form */}
             <div className="bg-white p-8 rounded-xl shadow-lg">
               <h3 className="text-3xl font-bold text-gray-900 mb-8">Send us a Message</h3>
@@ -209,12 +198,9 @@ export default function Contact() {
                       className="w-full px-4 py-3 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm appearance-none"
                     >
                       <option value="">Select a service</option>
-                      <option value="software-development">Software Development</option>
-                      <option value="hardware-solutions">Hardware Solutions</option>
-                      <option value="embedded-systems">Embedded Systems</option>
-                      <option value="system-integration">System Integration</option>
-                      <option value="consulting">Consulting Services</option>
-                      <option value="support">Technical Support</option>
+                      <option value="hardware-solutions">Embedded Hardware Solutions</option>
+                      <option value="software-development">Enterprise Software Solutions</option>
+                      <option value="AI-development">AI Development Services</option>
                     </select>
                     <div className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center pointer-events-none">
                       <i className="ri-arrow-down-s-line text-gray-400"></i>
@@ -241,23 +227,30 @@ export default function Contact() {
                     {formData.message.length}/500 characters
                   </div>
                 </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  Send Message
-                </button>
+                
+                <div>
+                  <button
+                    type="submit"
+                    disabled={status === 'submitting'}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer disabled:bg-gray-400"
+                  >
+                    {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                  </button>
+                  {status === 'success' && (
+                    <p className="mt-4 text-center text-green-600">Message sent successfully! We'll be in touch soon.</p>
+                  )}
+                  {status === 'error' && (
+                    <p className="mt-4 text-center text-red-600">Something went wrong. Please try again.</p>
+                  )}
+                </div>
               </form>
             </div>
 
             {/* Map & Office Info */}
             <div className="space-y-8">
-              {/* Google Map */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-               
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13306.794879192827!2d73.17094399999999!3d33.509214850000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dff205c9b0a7ad%3A0x1b35673c184d0c8a!2sTeReSol%20Pvt.%20Ltd.!5e0!3m2!1sen!2s!4v1754889169106!5m2!1sen!2s"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3320.106633611317!2d73.1517094151978!3d33.68067398070859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df9487c9634b0b%3A0x7286a6327defa289!2sTERESOL!5e0!3m2!1sen!2s!4v1628766195721!5m2!1sen!2s"
                   width="100%"
                   height="300"
                   style={{ border: 0 }}
@@ -267,8 +260,6 @@ export default function Contact() {
                   title="Teresol Office Location"
                 ></iframe>
               </div>
-
-              {/* Office Locations */}
               <div className="bg-white p-8 rounded-xl shadow-lg">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Offices</h3>
                 <div className="space-y-6">
@@ -284,22 +275,16 @@ export default function Contact() {
                       </div>
                       <div className="space-y-2 text-sm text-gray-600">
                         <div className="flex items-start space-x-2">
-                          <div className="w-4 h-4 flex items-center justify-center mt-0.5">
-                            <i className="ri-map-pin-line"></i>
-                          </div>
+                          <div className="w-4 h-4 flex items-center justify-center mt-0.5"><i className="ri-map-pin-line"></i></div>
                           <span>{office.address}</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-4 h-4 flex items-center justify-center">
-                            <i className="ri-phone-line"></i>
-                          </div>
+                          <div className="w-4 h-4 flex items-center justify-center"><i className="ri-phone-line"></i></div>
                           <span>{office.phone}</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-4 h-4 flex items-center justify-center">
-                            <i className="ri-mail-line"></i>
-                          </div>
-                          <span>{office.email}</span>
+                           <div className="w-4 h-4 flex items-center justify-center"><i className="ri-mail-line"></i></div>
+                           <span>{office.email}</span>
                         </div>
                       </div>
                     </div>
@@ -307,6 +292,7 @@ export default function Contact() {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -317,36 +303,33 @@ export default function Contact() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
             <p className="text-xl text-gray-600">
-              Quick answers to common questions about our services
+              Quick answers to common questions about our services.
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-6">
-            {[
-              {
-                question: "What types of projects do you specialize in?",
-                answer: "We specialize in software development, hardware design, embedded systems, and system integration projects across various industries including manufacturing, healthcare, finance, and telecommunications."
-              },
-              {
-                question: "How long does a typical project take?",
-                answer: "Project timelines vary based on complexity and scope. Simple projects may take 2-4 weeks, while complex enterprise solutions can take 3-12 months. We provide detailed timelines during our initial consultation."
-              },
-              {
-                question: "Do you provide ongoing support after project completion?",
-                answer: "Yes, we offer comprehensive support packages including 24/7 monitoring, regular updates, maintenance, and technical assistance to ensure your systems continue to perform optimally."
-              },
-              {
-                question: "Can you work with our existing systems?",
-                answer: "Absolutely! We have extensive experience in system integration and can work with your existing infrastructure to add new capabilities or modernize current systems."
-              },
-              {
-                question: "What is your pricing model?",
-                answer: "Our pricing depends on project scope, complexity, and timeline. We offer fixed-price contracts for well-defined projects and time-and-materials pricing for ongoing development work."
-              }
-            ].map((faq, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+          <div className="max-w-4xl mx-auto space-y-4">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full flex justify-between items-center text-left p-6 font-semibold text-gray-800 hover:bg-gray-50 focus:outline-none"
+                >
+                  <span className="text-lg">{faq.question}</span>
+                  <i
+                    className={`ri-arrow-down-s-line text-2xl text-blue-600 transform transition-transform duration-300 ${
+                      openFaqIndex === index ? 'rotate-180' : ''
+                    }`}
+                  ></i>
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                    openFaqIndex === index ? 'max-h-screen' : 'max-h-0'
+                  }`}
+                >
+                  <div className="p-6 pt-0 text-gray-600 leading-relaxed">
+                    <p>{faq.answer}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

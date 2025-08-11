@@ -11,10 +11,10 @@ const menuItems = [
   // { name: 'Solutions', href: '/' },
   { name: 'Products', href: '/products' },
   { name: 'Services', href: '/services' },
-  { name: 'Resources', href: '/' },
+  // { name: 'Resources', href: '/' },
   { name: 'Blog', href: '/' },
   { name: 'Careers', href: '/' },
-  { name: 'Contact', href: '/' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 const MenuIcon = () => (
@@ -101,7 +101,7 @@ export default function Header() {
 
              <div className="hidden lg:flex items-center">
               <Link
-                href="/" // MODIFIED: Contact button also points to home
+                href="/contact" 
                 className={`ml-6 px-5 py-2.5 text-sm font-semibold rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 ${
                   isScrolled
                     ? 'text-white bg-blue-600 hover:bg-blue-700'
