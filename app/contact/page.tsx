@@ -32,14 +32,14 @@ export default function Contact() {
     {
       city: "Islamabad",
       address: "15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA, Phase-II Islamabad , Pakistan",
-      phone: "+11 111 111111",
+      phone: "+518430644",
       email: "info@teresol.com",
       isMain: true
     },
     {
       city: "Karachi",
       address: "Shaheed-e-Millat Expressway, KPT Interchange, Qayyumabad, Karachi",
-      phone: "+11 111 111111",
+      phone: "+518430644",
       email: "info@teresol.com",
       isMain: false
     }
@@ -255,8 +255,9 @@ export default function Contact() {
             <div className="space-y-8">
               {/* Google Map */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+               
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.1741827806285!2d67.0366084!3d24.860966799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e06651d4bbf%3A0x9cf92f44555a0c23!2sKarachi%2C%20Pakistan!5e0!3m2!1sen!2s!4v1643723450000!5m2!1sen!2s"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13306.794879192827!2d73.17094399999999!3d33.509214850000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dff205c9b0a7ad%3A0x1b35673c184d0c8a!2sTeReSol%20Pvt.%20Ltd.!5e0!3m2!1sen!2s!4v1754889169106!5m2!1sen!2s"
                   width="100%"
                   height="300"
                   style={{ border: 0 }}
