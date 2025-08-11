@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 // Data with unique hrefs for active state checking
 const menuItems = [
   { name: 'Home', href: '/' },
-  { name: 'About Us', href: '/' },
+  { name: 'About Us', href: '/about' },
   // { name: 'Solutions', href: '/' },
   { name: 'Products', href: '/products' },
   { name: 'Services', href: '/services' },
@@ -65,7 +65,7 @@ export default function Header() {
             : 'bg-transparent'
         }`}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-0 sm:px-0 lg:px-0">
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex-shrink-0">
               <img

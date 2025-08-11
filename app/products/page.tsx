@@ -316,7 +316,7 @@ export default function Products() {
 
       {/* Products */}
       <section className="py-20">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 text-center">
             Product Portfolio
           </h1>
@@ -508,7 +508,7 @@ export default function Products() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-[#25237b] ">
+      <section className="py-20 bg-gray-900 ">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Ready to Explore Our Products?
@@ -520,13 +520,13 @@ export default function Products() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
-              className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
+              className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
             >
               Request Demo
             </Link>
             <Link
               href="/contact"
-              className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold transition-colors whitespace-nowrap cursor-pointer"
+              className="bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap cursor-pointer inline-block"
             >
               Get Quote
             </Link>

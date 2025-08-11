@@ -67,9 +67,9 @@ export default function AboutPreviewSection() {
             Whether modernizing legacy systems or delivering specialized consulting, TeReSol is your trusted partner for secure, future-ready digital transformation.
             </p>
 
-            <Link href="/">
+            {/* <Link href="/">
               <Button btnName={"Learn More About Us"} />
-            </Link>
+            </Link> */}
           </div>
           {/* Image Content */}
           <div className="relative about-image">
