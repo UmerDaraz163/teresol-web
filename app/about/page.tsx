@@ -23,8 +23,8 @@ export default function About() {
       image: "/place-holder.jpg",
     },
     {
-      name: "Air Cdre Asim Adnan (R)",
-      role: "Advisor Aviation & Special Projects",
+      name: "Farooq Umer Khan",
+      role: "CTO",
       image: "/place-holder.jpg",
     },
   ];
