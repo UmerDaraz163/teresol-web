@@ -192,7 +192,7 @@ export default function FeaturedServicesSection() {
                     />
                   ))}
                 </div>
-                <Link href={`/`} className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium text-sm md:text-base transition-all duration-300 hover:scale-105">Learn More</Link>
+                <Link href={`/services#${service.slug}`} className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-6 py-2 rounded-lg font-medium text-sm md:text-base transition-all duration-300 hover:scale-105">Learn More</Link>
 
               </div>
             </Tilt>

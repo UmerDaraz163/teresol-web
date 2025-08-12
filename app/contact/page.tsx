@@ -250,7 +250,7 @@ export default function Contact() {
             <div className="space-y-8">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3320.106633611317!2d73.1517094151978!3d33.68067398070859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df9487c9634b0b%3A0x7286a6327defa289!2sTERESOL!5e0!3m2!1sen!2s!4v1628766195721!5m2!1sen!2s"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13306.552767271369!2d73.17133023809812!3d33.5107892739115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dff205c9b0a7ad%3A0x1b35673c184d0c8a!2sTeReSol%20Pvt.%20Ltd.!5e0!3m2!1sen!2s!4v1754983634876!5m2!1sen!2s"
                   width="100%"
                   height="300"
                   style={{ border: 0 }}

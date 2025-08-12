@@ -8,6 +8,7 @@ export type FeatureDetail = {
     icon: string;
     title:string;
     description: string;
+    slug: string; // Unique identifier for the service, used in URLs
     features: string[] | FeatureDetail[];
     techIcons: string[];
     // techIconsLarge?: string[]; // New property for large images
@@ -19,6 +20,7 @@ export type FeatureDetail = {
       icon: "ri-cpu-line",
       title: "Embedded Hardware Design Services",
       description: "Our embedded design includes complex multi-layers (18-24) high-speed signal processing PCBs, Single Board Computers (SBC) for time-scheduled applications, their board support packages/APIs for external integration, and complete customized end-to-end product (qualified for tough temperature environment) with multiple designed cards.",
+      slug: "embedded-hardware-design-services",
       features: [
       {
           title: "Single Board Computers (SBCs)",
@@ -85,6 +87,7 @@ export type FeatureDetail = {
     "icon": "/icons/esw.png",
     "title": "Enterprise Software Solutions",
     "description": "Well-reputed Research and Innovation (R&I) company with a proven track record in developing customized, cost efficient and scalable enterprise software solutions. We offer a comprehensive suite of services. We are a team of over 400 professionals includ- ing 20 PhDs from esteemed global institutes. We are ISO 9001, 20000, 27001 certified, guaranteeing industry-leading quality.",
+    "slug": "enterprise-software-solutions",
     "features": [
       {
         "title": "Cloud-Native Banking & Fintech Solutions",
@@ -96,15 +99,15 @@ export type FeatureDetail = {
           "Utilizes modern, scalable tech stacks including Microservices, Kubernetes, Open Stack, Kafka, and enterprise APIs (e.g., Temenos) within a secure mesh network."
         ]
       },
-      {
-        "title": "Command & Control (C4I) Systems",
-        "details": [
-          "Develops state-of-the-art C4I systems designed to NATO standards for decisive action in complex operational scenarios.",
-          "Built on an Enterprise Service Bus architecture with a robust AAA security framework.",
-          "Integrates GIS, MIL-STD 2525C symbology, and various sensors to enable seamless Sensor-to-Shooter connectivity.",
-          "Key components include Blue Force Tracking, an enterprise Video Management System (VMS) with H.265 compression, and handheld device applications."
-        ]
-      },
+      // {
+      //   "title": "Command & Control (C4I) Systems",
+      //   "details": [
+      //     "Develops state-of-the-art C4I systems designed to NATO standards for decisive action in complex operational scenarios.",
+      //     "Built on an Enterprise Service Bus architecture with a robust AAA security framework.",
+      //     "Integrates GIS, MIL-STD 2525C symbology, and various sensors to enable seamless Sensor-to-Shooter connectivity.",
+      //     "Key components include Blue Force Tracking, an enterprise Video Management System (VMS) with H.265 compression, and handheld device applications."
+      //   ]
+      // },
       {
         "title": "Remote IT Team & Consultancy Services",
         "details": [
@@ -138,6 +141,7 @@ export type FeatureDetail = {
     "icon": "/icons/ai.png",
     "title": "AI Development Services",
     "description": "The future of businesses resides in the transformative capabilities of Artificial Intelligence (AI). We help you integrate AI in your current infrastructure by delivering state-of-the-art AI software development services. Our competent developers provide you with custom solutions perfectly tailored to your requirements.",
+    "slug": "ai-development-services",
     "features": [
       {
         "title": "Custom Integration & Tailored Solutions",
