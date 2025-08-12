@@ -266,6 +266,43 @@ export default function Products() {
       ],
     },
     {
+      groupTitle: "Enterprise Software Solutions",
+      category: "Software Product",
+      description:
+        "TeReSol’s Enterprise Fintech Solutions empower businesses to thrive in the digital age through a comprehensive suite of services delivered by a team of over 400 professionals, including 20 PhDs from esteemed global institutes. As an ISO 9001, 20000, and 27001 certified company, we ensure industry-leading quality while specializing in transforming outdated systems, delivering omni-channel banking experiences, managing IT infrastructure, and providing expert consultancy.",
+      types: [
+        {
+          type: "Fintech Solution/Services",
+          models: [
+            {
+              title: "Cloud Native Banking Solutions",
+              image: "/products/software/cloud.jpg",
+              shortDescription:
+                "TeReSol modernizes legacy systems into scalable, cloud-native, open-source platforms with microservices and high-performance orchestration.",
+            },
+            {
+              title: "Digital Banking Solutions",
+              image: "/products/software/dbs.png",
+              shortDescription:
+                "TeReSol’s Digital Banking Solutions enable secure, branchless banking with biometric verification and 24/7 support.",
+            },
+            {
+              title: "Remote IT Team Establishment",
+              image: "/products/software/remote.jpeg",
+              shortDescription:
+                "We provide skilled teams with 24/7 support, flexible scaling, and lower costs than in-house staffing.",
+            },
+            {
+              title: "Consultancy Services",
+              image: "/products/software/consultancy.jpg",
+              shortDescription:
+                "We optimize IT teams through restructuring, PMO setup, recruitment, process guidelines, and training.",
+            },
+          ],
+        },
+      ],
+    },
+    {
       groupTitle: "HR Management Systems",
       category: "Hardware Product",
       description:
