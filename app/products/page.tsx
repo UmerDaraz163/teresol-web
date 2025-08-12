@@ -256,11 +256,11 @@ export default function Products() {
               image: "/products/auto-systems/system2.png",
               shortDescription: "Versatile video and graphics card.",
             },
-            {
-              title: "Harnessing",
-              image: "/products/auto-systems/system3.png",
-              shortDescription: "AI-optimized graphic processing SBC.",
-            },
+            // {
+            //   title: "Harnessing",
+            //   image: "/products/auto-systems/system3.png",
+            //   shortDescription: "AI-optimized graphic processing SBC.",
+            // },
           ],
         },
       ],
@@ -298,6 +298,35 @@ export default function Products() {
               shortDescription:
                 "We optimize IT teams through restructuring, PMO setup, recruitment, process guidelines, and training.",
             },
+          ],
+        },
+         {
+          type: "Access Control Platform",
+          models: [
+            {
+              title: "i-EMPLOYEE Software",
+              image: "/products/software/imployee.jpg",
+              shortDescription:
+                "TeReSol modernizes legacy systems into scalable, cloud-native, open-source platforms with microservices and high-performance orchestration.",
+            },
+          ],
+        },
+         {
+          type: "Infotainment System",
+          models: [
+            {
+              title: "Software Suite",
+              image: "/products/software/infotainment.jpeg",
+              shortDescription:
+                "TeReSol modernizes legacy systems into scalable, cloud-native, open-source platforms with microservices and high-performance orchestration.",
+            },
+                 {
+              title: "TereTrack",
+              image: "/products/software/teretrack.png",
+              shortDescription:
+                "TeReSol modernizes legacy systems into scalable, cloud-native, open-source platforms with microservices and high-performance orchestration.",
+            },
+
           ],
         },
       ],
