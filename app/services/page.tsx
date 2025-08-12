@@ -50,7 +50,7 @@ export default function Services() {
               const isExpanded = !!expandedServices[service.title];
 
               return (
-                <div key={service.title} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <div id={service.slug} key={service.title} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
                   {/* Text Content Column */}
                   <div className={`flex flex-col ${index % 2 !== 0 ? 'lg:order-last' : ''}`}>
@@ -144,7 +144,7 @@ export default function Services() {
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Mission-Critical Lifecycle Support
+              24/7 Support
             </h2>
             <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
               From initial deployment to long-term maintenance, we are your dedicated technology partner, ensuring operational excellence and peace of mind.
