@@ -256,11 +256,11 @@ export default function Products() {
               image: "/products/auto-systems/system2.png",
               shortDescription: "Versatile video and graphics card.",
             },
-            {
-              title: "Harnessing",
-              image: "/products/auto-systems/system3.png",
-              shortDescription: "AI-optimized graphic processing SBC.",
-            },
+            // {
+            //   title: "Harnessing",
+            //   image: "/products/auto-systems/system3.png",
+            //   shortDescription: "AI-optimized graphic processing SBC.",
+            // },
           ],
         },
       ],
@@ -297,6 +297,34 @@ export default function Products() {
               image: "/products/software/consultancy.jpg",
               shortDescription:
                 "We optimize IT teams through restructuring, PMO setup, recruitment, process guidelines, and training.",
+            },
+          ],
+        },
+        {
+          type: "Access Control Platform",
+          models: [
+            {
+              title: "i-EMPLOYEE Software",
+              image: "/products/software/imployee.jpg",
+              shortDescription:
+                "A state-of-the-art access control system with a fast, energy-efficient processor, multi-step authentication, dual storage, and up to 8 hours of battery backup.",
+            },
+          ],
+        },
+        {
+          type: "Infotainment System",
+          models: [
+            {
+              title: "Software Suite",
+              image: "/products/software/infotainment.jpeg",
+              shortDescription:
+                "A state-of-the-art infotainment system offering multiple driver profiles, Bluetooth/WiFi/GSM connectivity with video calls, telephony features, and sensor integration for camera, tyre pressure, battery, temperature, and engine load.",
+            },
+            {
+              title: "TereTrack",
+              image: "/products/software/teretrack.png",
+              shortDescription:
+                "The TeReTrack Fleet Management platform is a web and mobile-based solution offering real-time monitoring and updates, deeper insights for fleet maintenance, fuel consumption, and workforce planning, alerts for geo-fencing and driver behavior, comprehensive reports for actionable analytics, biometrics authentication, and sensor integration with devices like dashcams and temperature sensors.",
             },
           ],
         },
