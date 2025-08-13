@@ -15,9 +15,9 @@ export default function Contact() {
     service: '',
     message: ''
   });
-  
+
   const [status, setStatus] = useState<'success' | 'error' | 'submitting' | null>(null);
-  
+
   // State to manage which FAQ is open
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
@@ -67,7 +67,7 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      
+
       {/* Hero Section */}
       <section
         className="relative py-32 bg-cover bg-center"
@@ -116,7 +116,7 @@ export default function Contact() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            
+
             {/* Contact Form */}
             <div className="bg-white p-8 rounded-xl shadow-lg">
               <h3 className="text-3xl font-bold text-gray-900 mb-8">Send us a Message</h3>
@@ -227,7 +227,7 @@ export default function Contact() {
                     {formData.message.length}/500 characters
                   </div>
                 </div>
-                
+
                 <div>
                   <button
                     type="submit"
@@ -264,9 +264,17 @@ export default function Contact() {
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Offices</h3>
                 <div className="space-y-6">
                   {offices.map((office, index) => (
-                    <div key={index} className={`p-4 rounded-lg ${office.isMain ? 'bg-blue-50 border-2 border-blue-200' : 'bg-gray-50'}`}>
+                    <div
+                      key={index}
+                      className={`p-4 rounded-lg ${office.isMain
+                          ? 'bg-blue-50 border-2 border-blue-200'
+                          : 'bg-gray-50'
+                        }`}
+                    >
                       <div className="flex items-start justify-between mb-3">
-                        <h4 className="text-lg font-semibold text-gray-900">{office.city}</h4>
+                        <h4 className="text-lg font-semibold text-gray-900">
+                          {office.city}
+                        </h4>
                         {office.isMain && (
                           <span className="px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded">
                             Main Office
@@ -275,21 +283,35 @@ export default function Contact() {
                       </div>
                       <div className="space-y-2 text-sm text-gray-600">
                         <div className="flex items-start space-x-2">
-                          <div className="w-4 h-4 flex items-center justify-center mt-0.5"><i className="ri-map-pin-line"></i></div>
-                          <span>{office.address}</span>
+                          <div className="w-4 h-4 flex items-center justify-center mt-0.5">
+                            <i className="ri-map-pin-line"></i>
+                          </div>
+                          <a
+                            href={office.mapLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline text-blue-600"
+                          >
+                            {office.address}
+                          </a>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-4 h-4 flex items-center justify-center"><i className="ri-phone-line"></i></div>
+                          <div className="w-4 h-4 flex items-center justify-center">
+                            <i className="ri-phone-line"></i>
+                          </div>
                           <span>{office.phone}</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                           <div className="w-4 h-4 flex items-center justify-center"><i className="ri-mail-line"></i></div>
-                           <span>{office.email}</span>
+                          <div className="w-4 h-4 flex items-center justify-center">
+                            <i className="ri-mail-line"></i>
+                          </div>
+                          <span>{office.email}</span>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
+
               </div>
             </div>
 
@@ -316,15 +338,13 @@ export default function Contact() {
                 >
                   <span className="text-lg">{faq.question}</span>
                   <i
-                    className={`ri-arrow-down-s-line text-2xl text-blue-600 transform transition-transform duration-300 ${
-                      openFaqIndex === index ? 'rotate-180' : ''
-                    }`}
+                    className={`ri-arrow-down-s-line text-2xl text-blue-600 transform transition-transform duration-300 ${openFaqIndex === index ? 'rotate-180' : ''
+                      }`}
                   ></i>
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                    openFaqIndex === index ? 'max-h-screen' : 'max-h-0'
-                  }`}
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${openFaqIndex === index ? 'max-h-screen' : 'max-h-0'
+                    }`}
                 >
                   <div className="p-6 pt-0 text-gray-600 leading-relaxed">
                     <p>{faq.answer}</p>

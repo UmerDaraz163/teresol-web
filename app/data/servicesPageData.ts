@@ -122,7 +122,7 @@ export type FeatureDetail = {
           "Creates robust and efficient embedded solutions for critical applications.",
           "Follows industry best practices for coding standards, version control, and traceability.",
           "Expertise in designing complex, multi-layer (18-24) high-speed signal processing PCBs.",
-          "Delivers end-to-end products qualified for harsh environments and compliant with military standards (MIL-STD)."
+          "Delivers end-to-end products qualified for harsh environments."
         ]
       }
     ],
