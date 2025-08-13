@@ -6,13 +6,15 @@
       address: "15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA, Phase-II Islamabad , Pakistan",
       phone: "+518430644",
       email: "info@teresol.com",
+      mapLink: "https://maps.app.goo.gl/ePqb6Wpy4dbfVMoF8",
       isMain: true
     },
     {
       city: "Karachi",
-      address: "Shaheed-e-Millat Expressway, KPT Interchange, Qayyumabad, Karachi",
+      address: "Centerpoint Tower, Shaheed-e-Millat Expressway, KPT Interchange, Qayyumabad, Karachi",
       phone: "+518430644",
       email: "info@teresol.com",
+      mapLink: "https://maps.app.goo.gl/iLnpc76qWW9xouYn9",
       isMain: false
     }
   ];
@@ -22,7 +24,7 @@
       icon: "ri-phone-line",
       title: "Call Us",
       description: "Speak directly with our experts",
-      detail: "+518430644",
+      detail: "+92518430644",
       action: "Call Now"
     },
     {
