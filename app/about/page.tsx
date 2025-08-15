@@ -10,17 +10,17 @@ export default function About() {
     {
       name: "Dr. Muhammad Faisal Khan",
       role: "CEO",
-      image: "/place-holder.jpg",
+      image: "/leadership/CEO.png",
     },
     {
       name: "Dr. Naveed Iqbal",
       role: "COO",
-      image: "/place-holder.jpg",
+      image: "/leadership/COO.png",
     },
     {
       name: "Dr. Mansoor Ahmad Khan",
       role: "CMO",
-      image: "/place-holder.jpg",
+      image: "/leadership/CMO.png",
     },
     {
       name: "Farooq Umer Khan",
