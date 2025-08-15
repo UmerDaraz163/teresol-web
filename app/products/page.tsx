@@ -304,7 +304,7 @@ export default function Products() {
           type: "Access Control Platform",
           models: [
             {
-              title: "i-EMPLOYEE Software",
+              title: "i-MPLOYEE Software",
               image: "/products/software/imployee.jpg",
               shortDescription:
                 "A state-of-the-art access control system with a fast, energy-efficient processor, multi-step authentication, dual storage, and up to 8 hours of battery backup.",
