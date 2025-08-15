@@ -2,13 +2,13 @@ import { createClient } from '@/lib/supabase/server';
 import EditBlogForm from '@/components/EditBlogForm';
 import { notFound } from 'next/navigation';
 
-type EditPageProps = {
-  params: {
-    slug: string;
-  };
-};
+// type EditPageProps = {
+//   params: {
+//     slug: string;
+//   };
+// };
 
-export default async function EditBlogPage({ params }: EditPageProps) {
+export default async function EditBlogPage({ params }: { params: { slug: string } }) {
   const supabase = createClient();
   const { data: blog } = await supabase
     .from('blogs')
