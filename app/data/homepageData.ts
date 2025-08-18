@@ -5,10 +5,10 @@ import { image } from "framer-motion/client";
 export const heroSlides = [
   {
     video: "/HW1.1.mp4",
-    duration: 19000,
+    duration: 18000,
     textCues: [
       { startTime: 0, endTime: 2.16, title: "Innovatively Creative", subtitle: "Engineering forward-thinking ideas into reality." },
-      { startTime: 2.16, endTime: 7.14, title: "Embedded Design Service", subtitle: "Expert solutions for your custom hardware challenges." },
+      { startTime: 2.16, endTime: 7.14, title: "Embedded Design Services", subtitle: "Expert solutions for your custom hardware challenges." },
       { startTime: 7.15, endTime: 9.55, title: "Wide Range of Single Board Computers", subtitle: "Powerful and versatile platforms for any project." },
       { startTime: 9.56, endTime: 13.92, title: "AI Embedded Systems", subtitle: "Bringing intelligent processing and machine learning to the edge." },
       { startTime: 13.93, endTime: 18.92, title: "Next-Gen RF Solutions", subtitle: "Advanced wireless technology for seamless connectivity." },
@@ -19,7 +19,7 @@ export const heroSlides = [
     duration: 10000,
     textCues: [
       { startTime: 0, endTime: 4, title: "Enterprise Software Solutions", subtitle: "Scalable and robust applications to empower your business." },
-      { startTime: 4.01, endTime: 6.9, title: "Modernization of Core Banking", subtitle: "Transforming financial services for the digital age." },
+      { startTime: 4.01, endTime: 6.9, title: "Modernization of Legacy Systems", subtitle: "Transforming financial services for the digital age." },
       { startTime: 7, endTime: 10, title: "Serving Your World", subtitle: "Delivering technology that makes a global impact." },
     ]
   },

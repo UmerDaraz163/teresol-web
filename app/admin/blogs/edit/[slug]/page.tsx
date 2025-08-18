@@ -1,29 +1,24 @@
+// app/admin/blogs/edit/[slug]/page.tsx
+
 import { createClient } from '@/lib/supabase/server';
-import EditBlogForm from '@/components/EditBlogForm';
 import { notFound } from 'next/navigation';
+import EditBlogForm from '@/components/EditBlogForm'; // Adjust this import path if needed
 
-// type EditPageProps = {
-//   params: {
-//     slug: string;
-//   };
-// };
+export default async function EditBlogPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; // ✅ await params
 
-export default async function EditBlogPage({ params }: { params: { slug: string } }) {
-  const supabase = createClient();
-  const { data: blog } = await supabase
+  const supabase = await createClient();
+
+  const { data: blog, error } = await supabase
     .from('blogs')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .single();
 
-  if (!blog) {
+  if (error || !blog) {
     notFound();
   }
 
-  return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">Edit Blog Post</h1>
-      <EditBlogForm blog={blog} />
-    </div>
-  );
+  return <EditBlogForm blog={blog} />;
 }
+
