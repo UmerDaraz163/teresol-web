@@ -1,33 +1,36 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
-import { motion } from 'framer-motion';
-import Tilt from 'react-parallax-tilt';
-import { gsap } from 'gsap';
-import Image from 'next/image';
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import Tilt from 'react-parallax-tilt'
+import { gsap } from 'gsap'
+import Image from 'next/image'
+import { login } from './actions'  // <-- server action
 
 export default function AdminLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const router = useRouter();
-  const supabase = createClient();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
 
-    if (error) {
-      gsap.fromTo('#login-card', { x: 0 }, { x: 10, yoyo: true, repeat: 5, duration: 0.05 });
-    } else {
-      router.push('/admin/blogs');
+    try {
+      const formData = new FormData()
+      formData.append('email', email)
+      formData.append('password', password)
+
+      await login(formData) // <-- calls server action
+      // no need to router.push, server action will `redirect('/admin/blogs')`
+    } catch (err: any) {
+      setError(err.message)
+      gsap.fromTo('#login-card', { x: 0 }, { x: 10, yoyo: true, repeat: 5, duration: 0.05 })
     }
-  };
+  }
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-r from-[#25237b] to-[#8b0303] overflow-hidden">
-      {/* Animated Background Blobs */}
+      {/* Background */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.2 }}
@@ -42,14 +45,14 @@ export default function AdminLogin() {
       />
 
       {/* Login Card */}
-      <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10} glareEnable={true} glareColor="#fff" glareMaxOpacity={0.2}>
+      <Tilt tiltMaxAngleX={10} tiltMaxAngleY={10} glareEnable glareColor="#fff" glareMaxOpacity={0.2}>
         <motion.form
           id="login-card"
-          onSubmit={handleSignIn}
+          onSubmit={handleSubmit}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: 'spring', stiffness: 120, damping: 10 }}
-          className="relative z-10 p-8 bg-black rounded-2xl shadow-2xl border border-white/20 w-[450px] h-[450px]"
+          className="relative z-10 p-8 bg-black rounded-2xl shadow-2xl border border-white/20 w-[450px] h-[480px]"
         >
           <h1 className="text-3xl font-bold mb-6 text-center text-white">Admin Login</h1>
 
@@ -78,7 +81,9 @@ export default function AdminLogin() {
             Sign In
           </motion.button>
 
-            {/* Logo Section */}
+          {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+
+          {/* Logo */}
           <div className="mt-6 flex justify-center">
             <Image
               src="/logo.png"
@@ -86,11 +91,11 @@ export default function AdminLogin() {
               width={120}
               height={120}
               className="opacity-80 hover:opacity-100 transition-opacity duration-300"
-              style={{ filter: "brightness(0) invert(1)" }}
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
-          </div>  
+          </div>
         </motion.form>
       </Tilt>
     </div>
-  );
+  )
 }
