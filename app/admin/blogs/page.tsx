@@ -1,59 +1,83 @@
+// app/admin/blogs/page.tsx
+
 import Link from 'next/link';
-import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from 'next/navigation';
+import pool from '@/lib/db';
 import SignOutButton from '@/components/SignOutButton';
-import DeleteBlogButton from '@/components/DeleteBlogButton';
+import { PlusCircle, FileText, LayoutDashboard } from "lucide-react";
+import BlogActions from '@/components/BlogActions';
+
+type Blog = {
+  id: number;
+  title: string;
+  slug: string;
+};
 
 export default async function AdminBlogsPage() {
-  const cookieStore = await cookies();
+  const session = await getServerSession(authOptions);
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value;
-        },
-      },
-    }
-  );
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    return redirect('/admin/login');
+  // @ts-ignore
+  if (!session || session.user?.role !== 'admin') {
+    redirect('/admin/login');
   }
 
-  const { data: blogs } = await supabase.from('blogs').select('id, title, slug');
+  let blogs: Blog[] = [];
+  try {
+    const [rows] = await pool.query<any[]>(
+      'SELECT id, title, slug FROM blogs ORDER BY created_at DESC'
+    );
+    blogs = rows as Blog[];
+  } catch (error) {
+    console.error("Failed to fetch blogs:", error);
+  }
 
   return (
-    <div className="container mx-auto p-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <div className="flex items-center gap-4">
-          <Link href="/admin/blogs/new" className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
-            + Add New Blog
+    <div className="container mx-auto px-6 py-10">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-10">
+        <div className="flex items-center gap-2">
+          <LayoutDashboard className="w-7 h-7 text-indigo-600" />
+          <h1 className="text-3xl font-extrabold tracking-tight text-gray-800">
+            Admin Dashboard
+          </h1>
+        </div>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/blogs/new"
+            className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl shadow-md transition"
+          >
+            <PlusCircle className="w-5 h-5" />
+            Add Blog
           </Link>
           <SignOutButton />
         </div>
       </div>
-      
+
+      {/* Blog List */}
       <div className="space-y-4">
-        {blogs?.map((blog) => (
-          <div key={blog.id} className="flex justify-between items-center p-4 border rounded-lg shadow-sm">
-            <h3 className="font-semibold">{blog.title}</h3>
-            <div className="flex items-center gap-4">
-              <Link href={`/blog/${blog.slug}`} target="_blank" className="text-sm text-gray-500 hover:underline">
-                View
-              </Link>
-              <Link href={`/admin/blogs/edit/${blog.slug}`} className="text-sm text-blue-500 hover:underline">
-                Edit
-              </Link>
-              <DeleteBlogButton id={blog.id} />
+        {blogs.length > 0 ? (
+          blogs.map((blog) => (
+            <div
+              key={blog.id}
+              className="flex items-center justify-between p-5 rounded-xl border bg-gray-50 shadow-sm hover:shadow-md transition"
+            >
+              {/* Left side */}
+              <div className="flex items-center gap-3">
+                <FileText className="w-6 h-6 text-indigo-500" />
+                <span className="text-lg font-semibold text-gray-700">
+                  {blog.title}
+                </span>
+              </div>
+
+              {/* Right side (Client Component) */}
+              <BlogActions blogId={blog.id} slug={blog.slug} />
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center text-gray-500">No blog posts found.</p>
+        )}
       </div>
     </div>
   );

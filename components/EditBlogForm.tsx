@@ -1,13 +1,9 @@
 'use client';
-import { useState } from 'react';
-// Note: 'next/navigation' is the standard import for routing hooks in the Next.js App Router.
-// This error can occur in isolated build environments that don't have the full Next.js context.
-import { useRouter } from 'next/navigation';
-// Note: '@/...' is a common path alias. For this to work, it must be configured
-// in a jsconfig.json or tsconfig.json file at the project root.
-import { createClient } from '@/lib/supabase/client';
 
-// Expanded type to match the full database schema
+import { useState } from 'react';
+import { updateBlogAction } from '@/app/admin/blogs/actions'; // Adjust path if needed
+
+// Define the type for the blog prop
 type Blog = {
   id: number;
   title: string;
@@ -18,54 +14,25 @@ type Blog = {
   read_time: string | null;
   category: string | null;
   is_featured: boolean | null;
-  slug: string | null;
 };
 
 export default function EditBlogForm({ blog }: { blog: Blog }) {
-  const router = useRouter();
-  const supabase = createClient();
-  
-  // Initialize state with all the blog's properties
-  const [title, setTitle] = useState(blog.title);
-  const [short_desc, setShortDesc] = useState(blog.short_desc || '');
-  const [content, setContent] = useState(blog.content || '');
-  const [imageUrl, setImageUrl] = useState(blog.image_url || '');
-  const [author, setAuthor] = useState(blog.author || '');
-  const [readTime, setReadTime] = useState(blog.read_time || '');
-  const [category, setCategory] = useState(blog.category || '');
-  const [isFeatured, setIsFeatured] = useState(blog.is_featured || false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage('');
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
 
-    // Update the blog post with all the current state values
-    const { error } = await supabase
-      .from('blogs')
-      .update({ 
-        title, 
-        short_desc,
-        content,
-        image_url: imageUrl,
-        author,
-        read_time: readTime,
-        category,
-        is_featured: isFeatured,
-      })
-      .eq('id', blog.id);
+    const formData = new FormData(event.currentTarget);
+    const result = await updateBlogAction(blog.id, formData);
 
-    if (!error) {
-      // On success, navigate back and refresh the data
-      router.push('/admin/blogs');
-      router.refresh();
-    } else {
-      console.error('Error updating post:', error);
-      setErrorMessage(`Error updating post: ${error.message}`);
+    if (result?.error) {
+      setError(result.error);
+      setIsSubmitting(false);
     }
-    setIsLoading(false);
+    // On success, the action redirects automatically.
   };
 
   return (
@@ -73,62 +40,57 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
       {/* Title Field */}
       <div>
         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
-        <input id="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" required />
+        <input id="title" name="title" type="text" defaultValue={blog.title} className="w-full p-2 mt-1 border border-gray-300 rounded-md" required />
       </div>
 
-      {/* Short Description (Excerpt) Field */}
+      {/* Short Description Field */}
       <div>
-        <label htmlFor="short_desc" className="block text-sm font-medium text-gray-700">Short Description (Excerpt)</label>
-        <textarea id="short_desc" value={short_desc} onChange={(e) => setShortDesc(e.target.value)} className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" rows={3} />
+        <label htmlFor="short_desc" className="block text-sm font-medium text-gray-700">Short Description</label>
+        <textarea id="short_desc" name="short_desc" defaultValue={blog.short_desc || ''} className="w-full p-2 mt-1 border border-gray-300 rounded-md" rows={3} />
       </div>
 
       {/* Content Field */}
       <div>
         <label htmlFor="content" className="block text-sm font-medium text-gray-700">Content</label>
-        <textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" rows={12} required />
+        <textarea id="content" name="content" defaultValue={blog.content || ''} className="w-full p-2 mt-1 border border-gray-300 rounded-md" rows={12} required />
       </div>
 
       {/* Image URL Field */}
       <div>
-        <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">Image URL</label>
-        <input id="imageUrl" type="url" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="https://example.com/image.png" className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+        <label htmlFor="image_url" className="block text-sm font-medium text-gray-700">Image URL</label>
+        <input id="image_url" name="image_url" type="url" defaultValue={blog.image_url || ''} className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
       </div>
 
-      {/* Author and Read Time in a grid */}
+      {/* Author and Read Time */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="author" className="block text-sm font-medium text-gray-700">Author</label>
-          <input id="author" type="text" value={author} onChange={(e) => setAuthor(e.target.value)} className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+          <input id="author" name="author" type="text" defaultValue={blog.author || ''} className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
         </div>
         <div>
-          <label htmlFor="readTime" className="block text-sm font-medium text-gray-700">Read Time</label>
-          <input id="readTime" type="text" value={readTime} onChange={(e) => setReadTime(e.target.value)} placeholder="e.g., 5 min read" className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+          <label htmlFor="read_time" className="block text-sm font-medium text-gray-700">Read Time</label>
+          <input id="read_time" name="read_time" type="text" defaultValue={blog.read_time || ''} className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
         </div>
       </div>
 
       {/* Category Field */}
       <div>
         <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
-        <input id="category" type="text" value={category} onChange={(e) => setCategory(e.target.value)} placeholder="e.g., Technology" className="w-full p-2 mt-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+        <input id="category" name="category" type="text" defaultValue={blog.category || ''} className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
       </div>
 
       {/* Is Featured Checkbox */}
       <div className="flex items-center">
-        <input id="isFeatured" name="isFeatured" type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
-        <label htmlFor="isFeatured" className="ml-2 block text-sm text-gray-900">Mark as Featured Post</label>
+        <input id="is_featured" name="is_featured" type="checkbox" defaultChecked={blog.is_featured || false} className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+        <label htmlFor="is_featured" className="ml-2 block text-sm text-gray-900">Mark as Featured Post</label>
       </div>
 
-      {/* Error Message Display */}
-      {errorMessage && (
-        <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
-          <p>{errorMessage}</p>
-        </div>
-      )}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
 
       {/* Submit Button */}
       <div>
-        <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400" disabled={isLoading}>
-          {isLoading ? 'Saving...' : 'Save Changes'}
+        <button type="submit" disabled={isSubmitting} className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400">
+          {isSubmitting ? 'Saving...' : 'Save Changes'}
         </button>
       </div>
     </form>
