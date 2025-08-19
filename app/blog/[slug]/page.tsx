@@ -1,26 +1,47 @@
-import { createClient } from '@/lib/supabase/server';
+// app/blog/[slug]/page.tsx
+
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import pool from '@/lib/db'; // Your MySQL connection
 
 type PageProps = {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
+};
+
+// Define a type for the blog post data from MySQL
+type Blog = {
+  title: string;
+  content: string;
+  image_url: string | null;
+  author: string | null;
+  created_at: string;
+  read_time: string | null;
+  category: string | null;
 };
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = params;
 
-  const supabase = await createClient();
-  
-  const { data: blog, error } = await supabase
-    .from('blogs')
-    .select('title, content, image_url, author, created_at, read_time, category')
-    .eq('slug', slug)
-    .single();
+  let blog: Blog | null = null;
+  try {
+    const [rows]: any[] = await pool.query(
+      `SELECT title, content, image_url, author, created_at, read_time, category 
+       FROM blogs 
+       WHERE slug = ?`,
+      [slug]
+    );
+    
+    if (rows.length > 0) {
+      blog = rows[0];
+    }
+  } catch (error) {
+    console.error("Failed to fetch blog post:", error);
+  }
 
-  if (error || !blog) {
+  if (!blog) {
     notFound();
   }
 
@@ -66,9 +87,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
 
           {/* Blog Content */}
-          <div className="prose prose-lg prose-blue max-w-none">
-            {blog.content}
-          </div>
+          <div className="prose prose-lg prose-blue max-w-none" dangerouslySetInnerHTML={{ __html: blog.content || '' }} />
 
           {/* Author Box */}
           <div className="mt-12 border-t pt-6 flex items-center gap-4">

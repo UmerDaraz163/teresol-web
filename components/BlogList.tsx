@@ -1,14 +1,13 @@
+// components/BlogList.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
-import { createClient } from '@/lib/supabase/client';
 
 type Blog = {
   id: number;
   created_at: string;
   title: string;
   short_desc: string;
-  content?: string;
   author?: string; 
   image_url?: string;
   category?: string; 
@@ -17,21 +16,22 @@ type Blog = {
 export default function BlogList() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
 
   useEffect(() => {
     const getBlogs = async () => {
-      
-      const { data, error } = await supabase
-        .from('blogs')
-        .select('*'); 
-
-      if (error) {
-        console.error('Error fetching blogs:', error);
-      } else {
+      try {
+        // Fetch data from your new API route
+        const response = await fetch('/api/blogs');
+        if (!response.ok) {
+          throw new Error('Failed to fetch blogs');
+        }
+        const data = await response.json();
         setBlogs(data);
-      } 
-      setLoading(false);
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     getBlogs();

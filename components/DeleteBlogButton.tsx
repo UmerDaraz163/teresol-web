@@ -1,26 +1,28 @@
-'use client';
-import { createClient } from '@/lib/supabase/client';
-import { useRouter } from 'next/navigation';
+// app/admin/blogs/actions.ts
+'use server'
 
-export default function DeleteBlogButton({ id }: { id: number }) {
-  const router = useRouter();
+import pool from '@/lib/db'; // Make sure this path points to your db connection setup
+import { revalidatePath } from 'next/cache';
 
-  const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this post?')) {
-      const supabase = createClient();
-      const { error } = await supabase.from('blogs').delete().eq('id', id);
+export async function deleteBlogAction(id: number) {
+  if (!id) {
+    return { error: 'Invalid blog post ID.' };
+  }
 
-      if (!error) {
-        router.refresh();
-      } else {
-        alert('Error deleting post: ' + error.message);
-      }
+  try {
+    const [result]: any = await pool.query('DELETE FROM blogs WHERE id = ?', [id]);
+
+    if (result.affectedRows === 0) {
+      return { error: 'Blog post not found or already deleted.' };
     }
-  };
 
-  return (
-    <button onClick={handleDelete} className="text-sm text-red-500 hover:underline">
-      Delete
-    </button>
-  );
+    // This will refresh the data on the admin blogs page
+    revalidatePath('/admin/blogs'); 
+    
+    return { success: true };
+
+  } catch (error) {
+    console.error('Database Error:', error);
+    return { error: 'Failed to delete the blog post.' };
+  }
 }
