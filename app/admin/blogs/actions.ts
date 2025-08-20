@@ -1,52 +1,60 @@
-// app/admin/blogs/actions.ts
-'use server'
+'use server';
 
 import pool from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-// --- ADD THIS NEW UPDATE FUNCTION ---
-export async function updateBlogAction(id: number, formData: FormData) {
-  const blogData = {
-    title: formData.get('title') as string,
-    short_desc: formData.get('short_desc') as string,
-    content: formData.get('content') as string,
-    image_url: formData.get('image_url') as string,
-    author: formData.get('author') as string,
-    read_time: formData.get('read_time') as string,
-    category: formData.get('category') as string,
-    is_featured: formData.get('is_featured') === 'on',
-  };
-
-  if (!blogData.title) {
-    return { error: 'Title is required.' };
-  }
-
+export async function createBlogAction(formData: FormData) {
   try {
-    const query = `
-      UPDATE blogs SET 
-        title = ?, short_desc = ?, content = ?, image_url = ?, 
-        author = ?, read_time = ?, category = ?, is_featured = ?
-      WHERE id = ?
-    `;
-    await pool.query(query, [
-      blogData.title,
-      blogData.short_desc,
-      blogData.content,
-      blogData.image_url,
-      blogData.author,
-      blogData.read_time,
-      blogData.category,
-      blogData.is_featured,
-      id
-    ]);
-  } catch (error) {
-    console.error('Database Error:', error);
-    return { error: 'Failed to update blog post.' };
-  }
+    const title = formData.get('title') as string;
+    const slug = formData.get('slug') as string;
+    const short_desc = formData.get('short_desc') as string | null;
+    const content = formData.get('content') as string | null;
+    const image_url = formData.get('image_url') as string | null;
+    const author = formData.get('author') as string | null;
+    const read_time = formData.get('read_time') as string | null;
+    const category = formData.get('category') as string | null;
+    const is_featured = formData.get('is_featured') ? 1 : 0;
 
-  revalidatePath('/admin/blogs');
-  redirect('/admin/blogs');
+    await pool.query(
+      `INSERT INTO blogs 
+        (title, slug, short_desc, content, image_url, author, read_time, category, is_featured, created_at) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())`,
+      [title, slug, short_desc, content, image_url, author, read_time, category, is_featured]
+    );
+
+    revalidatePath('/admin/blogs');
+    return { success: true };
+  } catch (error: any) {
+    console.error('Failed to create blog:', error);
+    return { error: 'Failed to create blog. Please try again.' };
+  }
 }
 
-// ... your existing create and delete actions ...
+export async function updateBlogAction(id: number, formData: FormData) {
+  try {
+    const title = formData.get('title') as string;
+    const slug = formData.get('slug') as string;
+    const short_desc = formData.get('short_desc') as string | null;
+    const content = formData.get('content') as string | null;
+    const image_url = formData.get('image_url') as string | null;
+    const author = formData.get('author') as string | null;
+    const read_time = formData.get('read_time') as string | null;
+    const category = formData.get('category') as string | null;
+    const is_featured = formData.get('is_featured') ? 1 : 0;
+
+    await pool.query(
+      `UPDATE blogs 
+       SET title = ?, slug = ?, short_desc = ?, content = ?, image_url = ?, 
+           author = ?, read_time = ?, category = ?, is_featured = ?
+       WHERE id = ?`,
+      [title, slug, short_desc, content, image_url, author, read_time, category, is_featured, id]
+    );
+
+    revalidatePath('/admin/blogs');
+    return { success: true };
+  } catch (error: any) {
+    console.error('Failed to update blog:', error);
+    return { error: 'Failed to update blog. Please try again.' };
+  }
+}

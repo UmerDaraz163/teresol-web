@@ -17,7 +17,7 @@ export default function BlogActions({ blogId, slug }: Props) {
 
   return (
     <div className="flex items-center gap-4 text-gray-500">
-      <Link href={`/blogs/${slug}`} title="View">
+      <Link href={`/blog/${slug}`} title="View">
         <Eye className="w-5 h-5 hover:text-indigo-600 cursor-pointer transition" />
       </Link>
       <Link href={`/admin/blogs/edit/${slug}`} title="Edit">

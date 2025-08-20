@@ -31,17 +31,18 @@ export const heroSlides = [
   }
 ];
   export const clients = [
-    { name: "Bank Al Habib", logo: "/clients/bank-al-habib.png" },
-    { name: "Pakistan Air Force", logo: "/clients/paf-logo.png" },
     { name: "Advanced Navigation and Positioning Corporation", logo: "/clients/anpc.png" },
+    { name: "Pakistan Air Force", logo: "/clients/paf-logo.png" },
     { name: "Heavy Industries Taxila", logo: "/clients/HIT-01.png" },
-    { name: "National Bank of Pakistan", logo: "/clients/nbp-logo.png" },
+    { name: "Bank Al Habib", logo: "/clients/bank-al-habib.png" },
     { name: "The First MicroFinanceBank", logo: "/clients/tfmfb.png" },
+    { name: "National Bank of Pakistan", logo: "/clients/nbp-logo.png" },
     { name: "Honda", logo: "/clients/honda.png" },
-    { name: "Fauji Fertilizer Bin Qasim Ltd", logo: "/clients/ffbl.png" },
-    { name: "Sybrid", logo: "/clients/sybrid.png" },
     { name: "Oil & Gas Development Company", logo: "/clients/OGDCL.png" },
-    { name: "Albayrak", logo: "/clients/Albayrak.png" }
+    { name: "Go", logo: "/clients/go.png" },
+    { name: "Sybrid", logo: "/clients/sybrid.png" },
+    { name: "Albayrak", logo: "/clients/Albayrak.png" },
+    { name: "Fauji Fertilizer Bin Qasim Ltd", logo: "/clients/ffbl.png" },
   ];
   export const featuredServices = [
     {
@@ -132,18 +133,18 @@ export const heroSlides = [
   ];
   export const stats = [
     {
-      value: "5+",
-      title: "Countries Reached",
-      subtitle: "Expanding worldwide every year",
-      colorClasses: "text-blue-700",
-      borderClasses: "from-blue-600 to-indigo-900"
-    },
-    {
       value: "100+",
       title: "Clients Served",
       subtitle: "Across various industries",
       colorClasses: "text-green-600",
       borderClasses: "from-green-500 to-emerald-700"
+    },
+    {
+      value: "15+",
+      title: "Years Experience",
+      subtitle: "Pioneering Excellence, Shaping the Future",
+      colorClasses: "text-orange-600",
+      borderClasses: "from-red-600 to-pink-700"
     },
     {
       value: "24/7",
@@ -153,12 +154,13 @@ export const heroSlides = [
       borderClasses: "from-red-600 to-pink-700"
     },
     {
-      value: "15+",
-      title: "Years Experience",
-      subtitle: "Pioneering Excellence, Shaping the Future",
-      colorClasses: "text-orange-600",
-      borderClasses: "from-red-600 to-pink-700"
-    }
+      value: "5+",
+      title: "Countries Reached",
+      subtitle: "Expanding worldwide every year",
+      colorClasses: "text-blue-700",
+      borderClasses: "from-blue-600 to-indigo-900"
+    },
+    
   ];
   export const certifications = [
     {

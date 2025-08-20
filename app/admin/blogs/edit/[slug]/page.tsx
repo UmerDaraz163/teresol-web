@@ -1,10 +1,9 @@
 // app/admin/blogs/edit/[slug]/page.tsx
-
 import { notFound } from 'next/navigation';
 import pool from '@/lib/db';
-import EditBlogForm from '@/components/EditBlogForm'; // Adjust this import path if needed
+import EditBlogForm from '@/components/EditBlogForm';
 
-// Define a more complete type for the blog data
+// Define Blog type
 type Blog = {
   id: number;
   title: string;
@@ -15,28 +14,37 @@ type Blog = {
   read_time: string | null;
   category: string | null;
   is_featured: boolean | null;
-  slug: string | null;
 };
 
-export default async function EditBlogPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+type EditBlogPageProps = {
+  params: { slug: string };
+};
+
+export default async function EditBlogPage({ params }: EditBlogPageProps) {
+  // Await params before using
+  const { slug } = await params;
 
   let blog: Blog | null = null;
+
   try {
-    const [rows]: any[] = await pool.query(
-      'SELECT * FROM blogs WHERE slug = ?',
+    const [rows]: any = await pool.query(
+      `SELECT id, title, short_desc, content, image_url, author, read_time, category, is_featured 
+       FROM blogs WHERE slug = ? LIMIT 1`,
       [slug]
     );
-    if (rows.length > 0) {
-      // Convert the is_featured field from 0/1 to boolean
-      blog = { ...rows[0], is_featured: !!rows[0].is_featured };
+
+    if (!rows || rows.length === 0) {
+      return notFound(); // Show 404 if blog not found
     }
+
+    blog = rows[0];
   } catch (error) {
-    console.error("Failed to fetch blog for editing:", error);
+    console.error('Failed to fetch blog:', error);
+    return notFound();
   }
 
   if (!blog) {
-    notFound();
+    return notFound();
   }
 
   return <EditBlogForm blog={blog} />;

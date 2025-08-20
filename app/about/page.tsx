@@ -18,13 +18,43 @@ export default function About() {
       image: "/leadership/COO.png",
     },
     {
-      name: "Dr. Mansoor Ahmad Khan",
+      name: "Mansoor Ahmad Khan",
       role: "CMO",
       image: "/leadership/CMO.png",
     },
     {
       name: "Farooq Umer Khan",
       role: "CTO",
+      image: "/place-holder.jpg",
+    },
+    {
+      name: "New Member",
+      role: "CCC",
+      image: "/place-holder.jpg",
+    },
+    {
+      name: "New Member",
+      role: "CCC",
+      image: "/place-holder.jpg",
+    },
+    {
+      name: "New Member",
+      role: "CCC",
+      image: "/place-holder.jpg",
+    },
+    {
+      name: "New Member",
+      role: "CCC",
+      image: "/place-holder.jpg",
+    },
+    {
+      name: "New Member",
+      role: "CCC",
+      image: "/place-holder.jpg",
+    },
+    {
+      name: "New Member",
+      role: "CCC",
       image: "/place-holder.jpg",
     },
   ];
@@ -56,15 +86,6 @@ export default function About() {
     },
   ];
 
-  // const milestones = [
-  //   { year: "2009", event: "Teresol Pvt Ltd founded" },
-  //   { year: "2012", event: "Expanded to hardware solutions" },
-  //   { year: "2015", event: "Launched embedded systems division" },
-  //   { year: "2018", event: "Achieved ISO 9001 certification" },
-  //   { year: "2020", event: "Reached 500+ completed projects" },
-  //   { year: "2024", event: "15 years of excellence in technology" }
-  // ];
-
   return (
     <div className="min-h-screen">
       <Header />
@@ -89,59 +110,7 @@ export default function About() {
       </section>
 
       <AboutPreviewSection />
-      {/* Company Story */}
-      {/* <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Founded in 2009, Teresol Pvt Ltd began as a small software development company with a vision to transform businesses through innovative technology solutions. Over the past 15 years, we have evolved into a comprehensive technology partner, offering software development, hardware solutions, and embedded systems.
-              </p>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Our journey has been marked by continuous growth, technological advancement, and an unwavering commitment to client satisfaction. Today, we serve over 50 clients across various industries, having successfully completed more than 500 projects.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                At Teresol, we believe that technology should be accessible, reliable, and transformative. This philosophy drives everything we do, from initial consultation to ongoing support.
-              </p>
-            </div>
-            <div>
-              <img
-                src="https://readdy.ai/api/search-image?query=Pakistani%20technology%20company%20office%20interior%20showing%20modern%20workspace%20with%20developers%20and%20engineers%20collaborating%2C%20clean%20professional%20environment%20with%20computers%20and%20hardware%20equipment%2C%20natural%20lighting&width=600&height=400&seq=story1&orientation=landscape"
-                alt="Our Story"
-                className="w-full h-96 object-cover object-top rounded-xl shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-      {/* Timeline
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Journey</h2>
-            <p className="text-xl text-gray-600">
-              Key milestones in our 15-year journey of innovation and growth
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            {milestones.map((milestone, index) => (
-              <div key={index} className="flex items-center mb-8 last:mb-0">
-                <div className="w-20 text-right mr-8">
-                  <span className="text-2xl font-bold text-blue-600">{milestone.year}</span>
-                </div>
-                <div className="w-4 h-4 bg-blue-600 rounded-full mr-8 flex-shrink-0"></div>
-                <div className="flex-1">
-                  <p className="text-lg text-gray-700">{milestone.event}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
+      
       {/* Team Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -154,7 +123,8 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* This grid will now show 1 column on small screens, 2 on medium, 3 on large, and 5 on extra-large screens. */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {team.map((member, index) => (
               <div
                 key={index}
@@ -164,6 +134,7 @@ export default function About() {
                   src={member.image}
                   alt={member.name}
                   className="w-full h-64 object-cover object-top"
+                  onError={(e) => { e.currentTarget.src = 'https://placehold.co/600x400/eee/ccc?text=Image'; }}
                 />
                 <div className="p-6 text-center">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -178,7 +149,7 @@ export default function About() {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -194,7 +165,7 @@ export default function About() {
             {values.map((value, index) => (
               <div
                 key={index}
-                className="bg-white p-8 rounded-xl shadow-lg text-center"
+                className="bg-gray-50 p-8 rounded-xl shadow-lg text-center"
               >
                 <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 mx-auto">
                   <i className={`${value.icon} text-2xl text-blue-600`}></i>
