@@ -148,7 +148,7 @@ export const heroSlides = [
     },
     {
       value: "24/7",
-      title: "Global Support",
+      title: "Client Support",
       subtitle: "Round-the-clock availability",
       colorClasses: "text-red-600",
       borderClasses: "from-red-600 to-pink-700"
