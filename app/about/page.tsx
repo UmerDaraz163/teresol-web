@@ -17,6 +17,11 @@ export default function About() {
       role: "COO",
       image: "/leadership/COO.png",
     },
+      {
+      name: "Ahmad Muqeem Sheri",
+      role: "CDO",
+      image: "/leadership/CDO.jpeg",
+    },
     {
       name: "Mansoor Ahmad Khan",
       role: "CMO",
@@ -28,33 +33,28 @@ export default function About() {
       image: "/place-holder.jpg",
     },
     {
-      name: "New Member",
-      role: "CCC",
+      name: "Dr. Bilal Rauf",
+      role: "CIO",
+      image: "/place-holder.jpg",
+    },
+    {
+      name: "Dr. Aamir Masood ",
+      role: "CPO",
       image: "/place-holder.jpg",
     },
     {
       name: "New Member",
-      role: "CCC",
+      role: "Adv Intl Project",
       image: "/place-holder.jpg",
     },
     {
-      name: "New Member",
-      role: "CCC",
-      image: "/place-holder.jpg",
+      name: "Asim Adnan",
+      role: "Adv Avcs",
+      image: "/leadership/Adv Avcs.jpeg",
     },
     {
       name: "New Member",
-      role: "CCC",
-      image: "/place-holder.jpg",
-    },
-    {
-      name: "New Member",
-      role: "CCC",
-      image: "/place-holder.jpg",
-    },
-    {
-      name: "New Member",
-      role: "CCC",
+      role: "Adv Grd Def Proj",
       image: "/place-holder.jpg",
     },
   ];
@@ -92,9 +92,9 @@ export default function About() {
 
       {/* Hero Section */}
       <section
-        className="relative py-32 bg-cover bg-center"
+        className="relative py-32 bg-cover"
         style={{
-          backgroundImage: `url(https://readdy.ai/api/search-image?query=Modern%20corporate%20office%20building%20exterior%20with%20glass%20facade%20and%20blue%20accent%20lighting%2C%20professional%20business%20environment%20with%20clean%20architectural%20design%2C%20Pakistani%20technology%20company%20headquarters&width=1920&height=600&seq=abouthero&orientation=landscape)`,
+          backgroundImage: "url(/about-us3.jpg)",
         }}
       >
         <div className="absolute inset-0 bg-black/60"></div>
