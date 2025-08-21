@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { updateBlogAction } from '@/app/admin/blogs/actions'; // ✅ new import
+import { useState, useEffect } from 'react';
+import { updateBlogAction } from '@/app/admin/blogs/actions';
 
-// Define the type for the blog prop
+// Define the type for the blog prop, including the slug
 type Blog = {
   id: number;
   title: string;
+  slug: string;
   short_desc: string | null;
   content: string | null;
   image_url: string | null;
@@ -20,6 +21,31 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Set up state for controlled title and slug fields
+  const [title, setTitle] = useState(blog.title);
+  const [slug, setSlug] = useState(blog.slug);
+
+  // Effect to reset state if a different blog is loaded into the form
+  useEffect(() => {
+    setTitle(blog.title);
+    setSlug(blog.slug);
+  }, [blog]);
+
+  // Function to handle title changes and auto-generate the slug
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newTitle = event.target.value;
+    setTitle(newTitle);
+
+    const newSlug = newTitle
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-')          // Replace spaces with hyphens
+      .replace(/-+/g, '-');           // Replace multiple hyphens with one
+    
+    setSlug(newSlug);
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
@@ -27,14 +53,14 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
 
     const formData = new FormData(event.currentTarget);
 
-    // ✅ Call update action with id + form data
+    // Call update action with id + form data
     const result = await updateBlogAction(blog.id, formData);
 
     if (result?.error) {
       setError(result.error);
       setIsSubmitting(false);
     }
-    // ✅ On success, action can redirect to /admin/blogs
+    // On success, the action will handle redirection.
   };
 
   return (
@@ -42,18 +68,36 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
       onSubmit={handleSubmit}
       className="space-y-6 max-w-3xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-md"
     >
-      {/* Title Field */}
+      {/* Title Field - Now a controlled component */}
       <div>
         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
         <input
           id="title"
           name="title"
           type="text"
-          defaultValue={blog.title}
+          value={title}
+          onChange={handleTitleChange}
           className="w-full p-2 mt-1 border border-gray-300 rounded-md"
           required
         />
       </div>
+
+      {/* Slug Field - Now a controlled component */}
+      <div>
+        <label htmlFor="slug" className="block text-sm font-medium text-gray-700">Slug</label>
+        <input
+          id="slug"
+          name="slug"
+          type="text"
+          value={slug}
+          onChange={(e) => setSlug(e.target.value)} // Allow manual override
+          className="w-full p-2 mt-1 border border-gray-300 rounded-md bg-gray-50"
+          required
+        />
+         <p className="mt-1 text-xs text-gray-500">The URL-friendly version of the title. Be careful changing this on a live post.</p>
+      </div>
+
+      {/* --- Other fields remain the same --- */}
 
       {/* Short Description Field */}
       <div>

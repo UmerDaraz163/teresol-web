@@ -7,6 +7,7 @@ import EditBlogForm from '@/components/EditBlogForm';
 type Blog = {
   id: number;
   title: string;
+  slug: string;
   short_desc: string | null;
   content: string | null;
   image_url: string | null;
