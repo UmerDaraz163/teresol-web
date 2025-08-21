@@ -25,8 +25,8 @@ export type FeatureDetail = {
       {
           title: "Single Board Computers (SBCs)",
           details: [
-          "Offers a wide range of configurations including PowerPC & ARM architectures",
-          "Supports various form factors like Qseven, SMARC, SO-DIMM, and HPC",
+          "Offer a wide range of configurations including PowerPC & ARM architectures",
+          "Support various form factors like Qseven, SMARC, SO-DIMM, and HPC",
           "PowerPC features: VME 64/64x interface, Ethernet/Serials/OS, and low power consumption",
           "ARM features: Single/Quad/Octa Core processors in a small form factor with very low power consumption",
           "Developed by working closely with Tier-1 silicon companies like Oracle, Qualcomm, Nvidia, and NXP"
