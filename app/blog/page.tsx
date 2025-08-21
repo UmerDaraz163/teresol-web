@@ -1,21 +1,15 @@
+// app/blog/page.tsx
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
-import pool from '@/lib/db'; // Your MySQL connection
 import Image from 'next/image';
+import pool from '@/lib/db'; // Your MySQL connection
 
-// Define the type for the props, including searchParams for filtering
-type BlogPageProps = {
-  searchParams: {
-    category?: string;
-  };
-};
-
-// Define the type for a blog post preview
+// Types
 type BlogPost = {
   slug: string;
   title: string;
-  short_desc: string; // Using short_desc for the excerpt
+  short_desc: string;
   author: string | null;
   created_at: string;
   read_time: string | null;
@@ -23,32 +17,30 @@ type BlogPost = {
   image_url: string | null;
 };
 
-// Define the type for a category
 type Category = {
   category: string;
 };
 
-// Fetches all necessary data for the blog page
+// Fetch blog page data
 async function getBlogPageData(selectedCategory?: string) {
   try {
-    // Fetch the most recent post as the featured post
+    // Featured post
     const [featuredRows]: any[] = await pool.query(
-      `SELECT slug, title, short_desc, author, created_at, read_time, category, image_url 
-       FROM blogs 
-       ORDER BY created_at DESC 
+      `SELECT slug, title, short_desc, author, created_at, read_time, category, image_url
+       FROM blogs
+       ORDER BY created_at DESC
        LIMIT 1`
     );
     const featuredPost: BlogPost | null = featuredRows.length > 0 ? featuredRows[0] : null;
 
-    // Base query for all other blog posts
+    // Other posts
     let postsQuery = `
-      SELECT slug, title, short_desc, author, created_at, read_time, category, image_url 
-      FROM blogs 
+      SELECT slug, title, short_desc, author, created_at, read_time, category, image_url
+      FROM blogs
       WHERE slug != ?
     `;
     const queryParams: (string | undefined)[] = [featuredPost?.slug];
 
-    // Add category filtering if a category is selected
     if (selectedCategory && selectedCategory !== 'All') {
       postsQuery += ' AND category = ?';
       queryParams.push(selectedCategory);
@@ -58,30 +50,32 @@ async function getBlogPageData(selectedCategory?: string) {
     const [blogPostRows]: any[] = await pool.query(postsQuery, queryParams);
     const blogPosts: BlogPost[] = blogPostRows;
 
-    // Fetch all unique categories
+    // Categories
     const [categoryRows]: any[] = await pool.query(
-      `SELECT DISTINCT category 
-       FROM blogs 
-       WHERE category IS NOT NULL AND category != '' 
-       ORDER BY category ASC`
+      `SELECT DISTINCT category FROM blogs WHERE category IS NOT NULL AND category != '' ORDER BY category ASC`
     );
     const categories: Category[] = [{ category: 'All' }, ...categoryRows];
 
     return { featuredPost, blogPosts, categories };
   } catch (error) {
-    console.error("Database Error:", error);
+    console.error('Database Error:', error);
     return { featuredPost: null, blogPosts: [], categories: [] };
   }
 }
 
-export default async function Blog({ searchParams }: BlogPageProps) {
-  const { category: selectedCategory } = searchParams;
+// Blog page
+export default async function Blog({
+  searchParams,
+}: {
+  searchParams: { category?: string };
+}) {
+  const selectedCategory = await searchParams?.category ?? 'All';
   const { featuredPost, blogPosts, categories } = await getBlogPageData(selectedCategory);
 
   return (
     <div className="bg-gray-50 min-h-screen">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800">
         <div className="container mx-auto px-4 text-center">
@@ -96,44 +90,45 @@ export default async function Blog({ searchParams }: BlogPageProps) {
       {featuredPost && (
         <section className="py-20">
           <div className="container mx-auto px-4">
-            <div className="mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Featured Article</h2>
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 group">
-                <div className="grid grid-cols-1 lg:grid-cols-2">
-                  <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    {featuredPost.category && (
-                       <div className="inline-block self-start px-4 py-2 bg-blue-100 text-blue-600 font-semibold rounded-full mb-4">
-                         {featuredPost.category}
-                       </div>
-                    )}
-                    <h3 className="text-3xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-blue-600 transition-colors">
-                      {featuredPost.title}
-                    </h3>
-                    <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                      {featuredPost.short_desc}
-                    </p>
-                    <div className="flex items-center justify-between text-gray-600 mb-6">
-                      <span>By <strong>{featuredPost.author || 'Teresol Team'}</strong></span>
-                      <span>{featuredPost.read_time}</span>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Featured Article</h2>
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 group">
+              <div className="grid grid-cols-1 lg:grid-cols-2">
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  {featuredPost.category && (
+                    <div className="inline-block self-start px-4 py-2 bg-blue-100 text-blue-600 font-semibold rounded-full mb-4">
+                      {featuredPost.category}
                     </div>
-                    <Link href={`/blog/${featuredPost.slug}`} className="self-start bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all">
-                      Read Full Article
-                    </Link>
+                  )}
+                  <h3 className="text-3xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-blue-600 transition-colors">
+                    {featuredPost.title}
+                  </h3>
+                  <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                    {featuredPost.short_desc}
+                  </p>
+                  <div className="flex items-center justify-between text-gray-600 mb-6">
+                    <span>By <strong>{featuredPost.author || 'Teresol Team'}</strong></span>
+                    <span>{featuredPost.read_time}</span>
                   </div>
-                  <div className="h-64 lg:h-auto overflow-hidden relative bg-gray-200">
-                    {featuredPost.image_url ? (
-                      <Image
-                        src={featuredPost.image_url}
-                        alt={featuredPost.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-gray-500">Featured Image</span>
-                      </div>
-                    )}
-                  </div>
+                  <Link
+                    href={`/blog/${featuredPost.slug}`}
+                    className="self-start bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all"
+                  >
+                    Read Full Article
+                  </Link>
+                </div>
+                <div className="h-64 lg:h-auto overflow-hidden relative bg-gray-200">
+                  {featuredPost.image_url ? (
+                    <Image
+                      src={featuredPost.image_url}
+                      alt={featuredPost.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-gray-500">Featured Image</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -141,18 +136,16 @@ export default async function Blog({ searchParams }: BlogPageProps) {
         </section>
       )}
 
-      {/* Category Filter */}
+      {/* Categories */}
       <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((cat, index) => (
+            {categories.map((cat, idx) => (
               <Link
-                key={index}
+                key={idx}
                 href={cat.category === 'All' ? '/blog' : `/blog?category=${encodeURIComponent(cat.category)}`}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  (!selectedCategory && cat.category === 'All') || selectedCategory === cat.category
-                    ? 'bg-blue-600 text-white shadow-lg' 
-                    : 'bg-white text-gray-700 hover:bg-blue-100'
+                  selectedCategory === cat.category ? 'bg-blue-600 text-white shadow-lg' : 'bg-white text-gray-700 hover:bg-blue-100'
                 }`}
               >
                 {cat.category}
@@ -162,7 +155,7 @@ export default async function Blog({ searchParams }: BlogPageProps) {
         </div>
       </section>
 
-      {/* Blog Posts Grid */}
+      {/* Blog Posts */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -172,9 +165,13 @@ export default async function Blog({ searchParams }: BlogPageProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:d-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post, index) => (
-              <Link href={`/blog/${post.slug}`} key={index} className="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group">
+              <Link
+                href={`/blog/${post.slug}`}
+                key={index}
+                className="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group"
+              >
                 <div className="relative h-48 w-full overflow-hidden bg-gray-200">
                   {post.image_url ? (
                     <Image
@@ -211,7 +208,7 @@ export default async function Blog({ searchParams }: BlogPageProps) {
           </div>
         </div>
       </section>
-      
+
       <Footer />
     </div>
   );

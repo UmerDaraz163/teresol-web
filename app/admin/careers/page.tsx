@@ -1,9 +1,13 @@
 import Link from "next/link";
 import pool from "@/lib/db";
 import { Career } from "@/types/career";
+import { format } from 'date-fns';
+import CareerActions from "@/components/CareerActions"; // Import the new component
 
 async function getCareers(): Promise<Career[]> {
-  const [rows] = await pool.query("SELECT * FROM jobs ORDER BY created_at DESC");
+  const [rows] = await pool.query(
+    "SELECT id, title, location, job_type, closing_date, is_active FROM jobs ORDER BY created_at DESC"
+  );
   return rows as Career[];
 }
 
@@ -12,54 +16,62 @@ export default async function CareersPage() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Careers Dashboard</h1>
-      <Link
-        href="/admin/careers/new"
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        + Add New Job
-      </Link>
-      <table className="mt-6 w-full border border-gray-300">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="p-2 border">Title</th>
-            <th className="p-2 border">Company</th>
-            <th className="p-2 border">Active</th>
-            <th className="p-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {careers.map((career) => (
-            <tr key={career.id}>
-              <td className="p-2 border">{career.title}</td>
-              <td className="p-2 border">{career.company}</td>
-              <td className="p-2 border">
-                {career.is_active ? "✅ Active" : "❌ Inactive"}
-              </td>
-              <td className="p-2 border space-x-2">
-                <Link
-                  href={`/admin/careers/edit/${career.id}`}
-                  className="bg-yellow-500 text-white px-3 py-1 rounded"
-                >
-                  Edit
-                </Link>
-                <form
-                  action={`/admin/careers/delete/${career.id}`}
-                  method="post"
-                  className="inline"
-                >
-                  <button
-                    type="submit"
-                    className="bg-red-600 text-white px-3 py-1 rounded"
-                  >
-                    Delete
-                  </button>
-                </form>
-              </td>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Careers Dashboard</h1>
+        <Link
+          href="/admin/careers/new"
+          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+        >
+          + Add New Job
+        </Link>
+      </div>
+      <div className="overflow-x-auto bg-white rounded-lg shadow">
+        <table className="w-full text-left">
+          <thead className="bg-gray-100 border-b">
+            <tr>
+              <th className="p-4 font-semibold">Title</th>
+              <th className="p-4 font-semibold">Location</th>
+              <th className="p-4 font-semibold">Job Type</th>
+              <th className="p-4 font-semibold">Closing Date</th>
+              <th className="p-4 font-semibold">Status</th>
+              <th className="p-4 font-semibold">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {careers.map((career) => (
+              <tr key={career.id} className="border-b hover:bg-gray-50">
+                <td className="p-4">
+                  <div className="font-medium text-gray-800">{career.title}</div>
+                </td>
+                <td className="p-4 text-gray-600">{career.location}</td>
+                <td className="p-4">
+                  <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                    {career.job_type}
+                  </span>
+                </td>
+                <td className="p-4 text-gray-600">
+                  {career.closing_date ? format(new Date(career.closing_date), 'dd MMM yyyy') : 'N/A'}
+                </td>
+                <td className="p-4">
+                  {career.is_active ? (
+                    <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                      Active
+                    </span>
+                  ) : (
+                    <span className="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">
+                      Inactive
+                    </span>
+                  )}
+                </td>
+                <td className="p-4">
+                  {/* Use the new client component for actions */}
+                  <CareerActions careerId={career.id} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FileText, Briefcase } from "lucide-react";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // Adjust this import path if needed
+import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 // Convert the component to an async function to use await

@@ -1,13 +1,10 @@
-// app/api/auth/[...nextauth]/route.ts
-
-import NextAuth, { AuthOptions } from 'next-auth';
+import { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { authOptions as centralAuthOptions } from '@/lib/auth'; // ✅ Import from the new central file
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcrypt';
 
-// Export the authOptions object so it can be used in other files
-export const localAuthOptions: AuthOptions = {
+// ✅ Define and EXPORT your authOptions from here
+export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -19,7 +16,8 @@ export const localAuthOptions: AuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
-
+        // Pro-tip: It's more efficient to use a shared DB connection
+        // from '@/lib/db' than to create a new pool on every login.
         const pool = mysql.createPool(process.env.DATABASE_URL!);
         
         try {
@@ -31,7 +29,6 @@ export const localAuthOptions: AuthOptions = {
           const user = rows[0];
 
           if (user && await bcrypt.compare(credentials.password, user.password_hash)) {
-            // Return user object without the password hash
             return {
               id: user.id,
               email: user.email,
@@ -39,7 +36,6 @@ export const localAuthOptions: AuthOptions = {
               role: user.role,
             };
           } else {
-            // If credentials are not valid, return null
             return null;
           }
         } catch (error) {
@@ -55,28 +51,22 @@ export const localAuthOptions: AuthOptions = {
     strategy: 'jwt' as const,
   },
   pages: {
-    signIn: '/login', // Redirect users to a custom login page
+    signIn: '/login',
   },
   callbacks: {
-    // This callback includes the user's role in the session token
     async jwt({ token, user }: any) {
       if (user) {
-        token.id = user.id; // Add user id to the token
+        token.id = user.id;
         token.role = user.role;
       }
       return token;
     },
-    // This callback makes the role available in the session object
     async session({ session, token }: any) {
       if (session.user) {
-        session.user.id = token.id; // Add user id to the session
+        session.user.id = token.id;
         session.user.role = token.role;
       }
       return session;
     },
   },
 };
-
-const handler = NextAuth(localAuthOptions);
-
-export { handler as GET, handler as POST };
