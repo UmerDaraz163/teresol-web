@@ -4,6 +4,7 @@ import Footer from '../../components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
 import pool from '@/lib/db'; // Your MySQL connection
+import { JSX } from 'react';
 
 // Types
 type BlogPost = {
@@ -20,6 +21,13 @@ type BlogPost = {
 type Category = {
   category: string;
 };
+
+// --- FIX 1: Define a clear type for the page props ---
+// 'searchParams' is a Promise that resolves to the search parameters object.
+type BlogPageProps = {
+  searchParams: Promise<{ category?: string }>;
+};
+
 
 // Fetch blog page data
 async function getBlogPageData(selectedCategory?: string) {
@@ -64,12 +72,14 @@ async function getBlogPageData(selectedCategory?: string) {
 }
 
 // Blog page
+// --- FIX 2: Apply the props type and add an explicit return type ---
 export default async function Blog({
   searchParams,
-}: {
-  searchParams: { category?: string };
-}) {
-  const selectedCategory = await searchParams?.category ?? 'All';
+}: BlogPageProps): Promise<JSX.Element> {
+  // --- FIX 3: Await the 'searchParams' object first, then get the property ---
+  const { category } = await searchParams;
+  const selectedCategory = category ?? 'All';
+
   const { featuredPost, blogPosts, categories } = await getBlogPageData(selectedCategory);
 
   return (
@@ -213,3 +223,4 @@ export default async function Blog({
     </div>
   );
 }
+

@@ -2,12 +2,12 @@
 
 import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { authOptions as centralAuthOptions } from '@/lib/auth'; // ✅ Import from the new central file
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcrypt';
 
-// Export the authOptions object so it can be used in other files
-export const localAuthOptions: AuthOptions = {
+// --- FIX: Remove the 'export' keyword from here ---
+// This object should be a local constant, not an export from a route file.
+const localAuthOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -58,18 +58,16 @@ export const localAuthOptions: AuthOptions = {
     signIn: '/login', // Redirect users to a custom login page
   },
   callbacks: {
-    // This callback includes the user's role in the session token
     async jwt({ token, user }: any) {
       if (user) {
-        token.id = user.id; // Add user id to the token
+        token.id = user.id;
         token.role = user.role;
       }
       return token;
     },
-    // This callback makes the role available in the session object
     async session({ session, token }: any) {
       if (session.user) {
-        session.user.id = token.id; // Add user id to the session
+        session.user.id = token.id;
         session.user.role = token.role;
       }
       return session;
@@ -77,6 +75,7 @@ export const localAuthOptions: AuthOptions = {
   },
 };
 
+// This part is correct
 const handler = NextAuth(localAuthOptions);
 
 export { handler as GET, handler as POST };

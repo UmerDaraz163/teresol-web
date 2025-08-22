@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 import pool from '@/lib/db';
 import EditBlogForm from '@/components/EditBlogForm';
+import { JSX } from 'react';
 
 // Define Blog type
 type Blog = {
@@ -17,35 +18,41 @@ type Blog = {
   is_featured: boolean | null;
 };
 
+// --- FIX 1: Tell TypeScript that 'params' is a Promise ---
+// This makes the TypeScript error go away.
 type EditBlogPageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export default async function EditBlogPage({ params }: EditBlogPageProps) {
-  // Await params before using
+export default async function EditBlogPage({
+  params,
+}: EditBlogPageProps): Promise<JSX.Element> {
+
+  // --- FIX 2: Await the 'params' Promise to get the object ---
+  // This makes the Next.js runtime error go away.
   const { slug } = await params;
 
   let blog: Blog | null = null;
 
   try {
     const [rows]: any = await pool.query(
-      `SELECT id, title, short_desc, content, image_url, author, read_time, category, is_featured 
+      `SELECT id, title, short_desc, content, image_url, author, read_time, category, is_featured
        FROM blogs WHERE slug = ? LIMIT 1`,
       [slug]
     );
 
     if (!rows || rows.length === 0) {
-      return notFound(); // Show 404 if blog not found
+      notFound();
     }
 
     blog = rows[0];
   } catch (error) {
     console.error('Failed to fetch blog:', error);
-    return notFound();
+    notFound();
   }
 
   if (!blog) {
-    return notFound();
+    notFound();
   }
 
   return <EditBlogForm blog={blog} />;

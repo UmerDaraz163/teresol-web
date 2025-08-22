@@ -5,7 +5,6 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { offices, contactMethods, faqs } from '@/app/data/contactUsData'; // Adjust path if needed
 
-
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -18,7 +17,6 @@ export default function Contact() {
 
   const [status, setStatus] = useState<'success' | 'error' | 'submitting' | null>(null);
 
-  // State to manage which FAQ is open
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -63,6 +61,14 @@ export default function Contact() {
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
+  
+  // ✅ Function to handle smooth scrolling to the contact form
+  const handleScheduleClick = () => {
+    document.getElementById('contact-form')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -96,16 +102,39 @@ export default function Contact() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {contactMethods.map((method, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
+              <div key={index} className="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow flex flex-col">
                 <div className="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-6 mx-auto">
                   <i className={`${method.icon} text-2xl text-blue-600`}></i>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{method.title}</h3>
-                <p className="text-gray-600 mb-4">{method.description}</p>
+                <p className="text-gray-600 mb-4 flex-grow">{method.description}</p>
                 <div className="text-blue-600 font-medium mb-6">{method.detail}</div>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors whitespace-nowrap cursor-pointer">
-                  {method.action}
-                </button>
+                
+                {/* ✅ Conditional rendering for actions */}
+                {method.title === 'Call Us' && (
+                  <a
+                    href={`tel:${method.detail}`}
+                    className="mt-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors whitespace-nowrap"
+                  >
+                    {method.action}
+                  </a>
+                )}
+                {method.title === 'Email Us' && (
+                  <a
+                    href={`mailto:${method.detail}`}
+                    className="mt-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors whitespace-nowrap"
+                  >
+                    {method.action}
+                  </a>
+                )}
+                {method.title === 'Schedule Meeting' && (
+                  <button
+                    onClick={handleScheduleClick}
+                    className="mt-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors whitespace-nowrap cursor-pointer"
+                  >
+                    {method.action}
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -360,3 +389,4 @@ export default function Contact() {
     </div>
   );
 }
+  

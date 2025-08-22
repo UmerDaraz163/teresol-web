@@ -6,11 +6,13 @@ import Link from 'next/link';
 import pool from '@/lib/db'; // Your MySQL connection
 import Header from '@/components/Header'; // Assuming you have a Header component
 import Footer from '@/components/Footer'; // Assuming you have a Footer component
+import { JSX } from 'react';
 
+// --- FIX 1: Update the type to reflect that 'params' is a Promise ---
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 // Define a type for the main blog post data
@@ -81,8 +83,10 @@ async function getBlogData(slug: string) {
   }
 }
 
-export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = params;
+// --- FIX 3: Add the explicit return type for the async component ---
+export default async function BlogPostPage({ params }: PageProps): Promise<JSX.Element> {
+  // --- FIX 2: Await the 'params' Promise to get the slug ---
+  const { slug } = await params;
   const { blog, recentPosts, categories } = await getBlogData(slug);
 
   // If the blog post is not found, render the 404 page

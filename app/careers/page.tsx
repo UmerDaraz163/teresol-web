@@ -17,7 +17,7 @@ export default async function CareersPage() {
   try {
     // Fetch active jobs from the MySQL database
     const [rows] = await pool.query<any[]>(
-      "SELECT id, title, location, short_desc, slug FROM jobs WHERE is_active = TRUE ORDER BY created_at DESC"
+      "SELECT id, title, location, short_desc FROM jobs WHERE is_active = TRUE ORDER BY created_at DESC"
     );
     jobs = rows as Job[];
   } catch (error) {
@@ -49,7 +49,7 @@ export default async function CareersPage() {
                 </p>
               </div>
               <div className="mt-4 sm:mt-0 sm:ml-6 flex-shrink-0">
-                <Link href={`/careers/${job.slug}`} className="inline-block bg-blue-600 text-white font-semibold px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300">
+                <Link href={`/careers/${job.id}`} className="inline-block bg-blue-600 text-white font-semibold px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300">
                   View & Apply
                 </Link>
               </div>
