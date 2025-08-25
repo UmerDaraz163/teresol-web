@@ -31,18 +31,18 @@ export const heroSlides = [
   }
 ];
   export const clients = [
-    { name: "Advanced Navigation and Positioning Corporation", logo: "/clients/anpc.png" },
     { name: "Pakistan Air Force", logo: "/clients/paf-logo.png" },
     { name: "Heavy Industries Taxila", logo: "/clients/HIT-01.png" },
+    { name: "Advanced Navigation and Positioning Corporation", logo: "/clients/anpc.png" },
+    { name: "Honda", logo: "/clients/honda.png" },
+    { name: "Fauji Fertilizer Bin Qasim Ltd", logo: "/clients/ffbl.png" },
+    { name: "Oil & Gas Development Company", logo: "/clients/OGDCL.png" },
+    { name: "Go", logo: "/clients/go.png" },
+    { name: "Albayrak", logo: "/clients/Albayrak.png" },
+    { name: "Sybrid", logo: "/clients/sybrid.png" },
     { name: "Bank Al Habib", logo: "/clients/bank-al-habib.png" },
     { name: "The First MicroFinanceBank", logo: "/clients/tfmfb.png" },
     { name: "National Bank of Pakistan", logo: "/clients/nbp-logo.png" },
-    { name: "Honda", logo: "/clients/honda.png" },
-    { name: "Oil & Gas Development Company", logo: "/clients/OGDCL.png" },
-    { name: "Go", logo: "/clients/go.png" },
-    { name: "Sybrid", logo: "/clients/sybrid.png" },
-    { name: "Albayrak", logo: "/clients/Albayrak.png" },
-    { name: "Fauji Fertilizer Bin Qasim Ltd", logo: "/clients/ffbl.png" },
   ];
   export const featuredServices = [
     {

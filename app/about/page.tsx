@@ -18,19 +18,19 @@ export default function About() {
       image: "/leadership/COO.png",
     },
       {
-      name: "Ahmad Muqeem Sheri",
+      name: "Dr. Ahmad Muqeem Sheri",
       role: "CDO",
       image: "/leadership/CDO.jpeg",
     },
     {
       name: "Mansoor Ahmad Khan",
       role: "CMO",
-      image: "/leadership/CMO.png",
+      image: "/leadership/CMO2.png",
     },
     {
       name: "Farooq Umer Khan",
       role: "CTO",
-      image: "/place-holder.jpg",
+      image: "/leadership/CTO.png",
     },
     {
       name: "Dr. Bilal Rauf",
@@ -40,7 +40,7 @@ export default function About() {
     {
       name: "Dr. Aamir Masood ",
       role: "CPO",
-      image: "/place-holder.jpg",
+      image: "/leadership/CPO.png",
     },
     {
       name: "New Member",
