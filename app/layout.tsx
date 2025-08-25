@@ -7,6 +7,9 @@ import type { ReactNode } from 'react';
 import SmoothScroll from '@/components/SmoothScroll';
 import AuthProvider from '@/components/AuthProvider'; // <-- Import the provider
 
+export const dynamic = "force-dynamic"; // 🚀 force dynamic rendering
+export const revalidate = 0; // 🚀 disable caching globally
+
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',

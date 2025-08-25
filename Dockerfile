@@ -13,7 +13,7 @@ RUN npm install
 COPY . .
 
 # Build Next.js app
-RUN NEXT_DISABLE_ESLINT=1 npm run build
+RUN npm run build
 
 # Set environment
 ENV NODE_ENV=production

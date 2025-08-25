@@ -1,3 +1,6 @@
+// app/admin/careers/page.tsx
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import pool from "@/lib/db";
 import { Career } from "@/types/career";
@@ -5,11 +8,18 @@ import { format } from 'date-fns';
 import CareerActions from "@/components/CareerActions"; // Import the new component
 
 async function getCareers(): Promise<Career[]> {
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    console.log("⏭️ Skipping DB fetch during build...");
+    return [];
+  }
+
   const [rows] = await pool.query(
     "SELECT id, title, location, job_type, closing_date, is_active FROM jobs ORDER BY created_at DESC"
   );
   return rows as Career[];
 }
+
+
 
 export default async function CareersPage() {
   const careers = await getCareers();

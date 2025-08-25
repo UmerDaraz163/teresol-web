@@ -43,17 +43,17 @@ export default function About() {
       image: "/leadership/CPO.png",
     },
     {
-      name: "New Member",
+      name: "Babar Amin",
       role: "Adv Intl Project",
       image: "/place-holder.jpg",
     },
     {
-      name: "Asim Adnan",
+      name: "Air Cdre Asim Adnan (R)",
       role: "Adv Avcs",
       image: "/leadership/Adv Avcs.jpeg",
     },
     {
-      name: "New Member",
+      name: "Col. Abdul Rauf",
       role: "Adv Grd Def Proj",
       image: "/place-holder.jpg",
     },

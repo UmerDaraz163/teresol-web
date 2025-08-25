@@ -12,8 +12,8 @@ const menuItems = [
   { name: 'Products', href: '/products' },
   { name: 'Services', href: '/services' },
   // { name: 'Resources', href: '/' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Careers', href: '/' },
+  // { name: 'Blog', href: '/blog' },
+  // { name: 'Careers', href: '/' },
   { name: 'Contact', href: '/contact' },
 ];
 
