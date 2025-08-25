@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:latest
+    container_name: next_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: teresol
+      MYSQL_USER: teresol_admin
+      MYSQL_PASSWORD: teresol123
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./teresol.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - appnet
+
+  web:
+    build: .
+    container_name: next_app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 3307
+      DATABASE_USER: teresol_admin
+      DATABASE_PASSWORD: teresol123
+      DATABASE_NAME: teresol
+    depends_on:
+      - db
+    networks:
+      - appnet
+
+  
+networks:
+  appnet:
