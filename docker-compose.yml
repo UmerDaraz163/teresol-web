@@ -21,7 +21,7 @@ services:
     build: .
     container_name: next_app
     ports:
-      - "3000:3000"
+      - "443:3000"
     environment:
       DATABASE_HOST: db
       DATABASE_PORT: 3307
