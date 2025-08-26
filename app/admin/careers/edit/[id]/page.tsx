@@ -1,8 +1,9 @@
-import { notFound } from 'next/navigation';
-import pool from '@/lib/db';
-import EditJobForm from '@/components/EditJobForm';
-import { Career } from '@/types/career';
-import { JSX } from 'react';
+import { notFound } from "next/navigation";
+import pool from "@/lib/db";
+import EditJobForm from "@/components/EditJobForm";
+import { Career } from "@/types/career";
+import { JSX } from "react";
+import AdminHeader from "@/components/AdminHeader";
 
 export const revalidate = 0;
 
@@ -25,7 +26,7 @@ export default async function EditCareerPage({
   }
 
   const [rows] = await pool.query(
-    'SELECT * FROM jobs WHERE id = ? LIMIT 1',
+    "SELECT * FROM jobs WHERE id = ? LIMIT 1",
     [numericId] // Use the converted numeric ID here
   );
 
@@ -36,8 +37,11 @@ export default async function EditCareerPage({
   const career: Career = rows[0] as Career;
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <EditJobForm job={career} />
+    <div className="space-y-4">
+      <AdminHeader showBackButton showSignOutButton />
+      <div className="max-w-3xl mx-auto p-6">
+        <EditJobForm job={career} />
+      </div>
     </div>
   );
 }
