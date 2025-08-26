@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import pool from '@/lib/db'; // Your MySQL connection
 import { JSX } from 'react';
-import { Metadata, ResolvingMetadata } from 'next'; // ✅ Import Metadata types
+import { Metadata, ResolvingMetadata } from 'next';
 
 // Types
 type BlogPost = {
@@ -24,17 +24,17 @@ type Category = {
 };
 
 type BlogPageProps = {
-  searchParams: { category?: string };
+  searchParams: Promise<{ category?: string }>;
 };
 
-// ✅ This function generates metadata that changes based on the selected category
+// ✅ Metadata generator (await searchParams)
 export async function generateMetadata(
   { searchParams }: BlogPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const category = searchParams.category;
+  const params = await searchParams;
+  const category = params.category;
 
-  // If a category is selected, create specific metadata for it
   if (category && category !== 'All') {
     return {
       title: `Technology Blog - ${category}`,
@@ -46,15 +46,19 @@ export async function generateMetadata(
     };
   }
 
-  // Default metadata for the main blog page
   return {
     title: 'Teresol Technology Blog',
-    description: 'Insights, tutorials, and industry updates from our team of technology experts at Teresol.',
-    // ✅ Keywords added here
-    keywords: ['Technology Blog', 'Teresol', 'Software Insights', 'Hardware Tutorials', 'Tech Updates'],
+    description:
+      'Insights, tutorials, and industry updates from our team of technology experts at Teresol.',
+    keywords: [
+      'Technology Blog',
+      'Teresol',
+      'Software Insights',
+      'Hardware Tutorials',
+      'Tech Updates',
+    ],
   };
 }
-
 
 // Fetch blog page data
 async function getBlogPageData(selectedCategory?: string) {
@@ -66,7 +70,8 @@ async function getBlogPageData(selectedCategory?: string) {
        ORDER BY created_at DESC
        LIMIT 1`
     );
-    const featuredPost: BlogPost | null = featuredRows.length > 0 ? featuredRows[0] : null;
+    const featuredPost: BlogPost | null =
+      featuredRows.length > 0 ? featuredRows[0] : null;
 
     // Other posts
     let postsQuery = `
@@ -87,7 +92,10 @@ async function getBlogPageData(selectedCategory?: string) {
 
     // Categories
     const [categoryRows]: any[] = await pool.query(
-      `SELECT DISTINCT category FROM blogs WHERE category IS NOT NULL AND category != '' ORDER BY category ASC`
+      `SELECT DISTINCT category 
+       FROM blogs 
+       WHERE category IS NOT NULL AND category != '' 
+       ORDER BY category ASC`
     );
     const categories: Category[] = [{ category: 'All' }, ...categoryRows];
 
@@ -98,12 +106,17 @@ async function getBlogPageData(selectedCategory?: string) {
   }
 }
 
-// Blog page component
+// ✅ Blog page component (await searchParams)
 export default async function Blog({
   searchParams,
-}: { searchParams: { category?: string } }): Promise<JSX.Element> {
-  const selectedCategory = searchParams.category ?? 'All';
-  const { featuredPost, blogPosts, categories } = await getBlogPageData(selectedCategory);
+}: {
+  searchParams: Promise<{ category?: string }>;
+}): Promise<JSX.Element> {
+  const params = await searchParams;
+  const selectedCategory = params.category ?? 'All';
+
+  const { featuredPost, blogPosts, categories } =
+    await getBlogPageData(selectedCategory);
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -112,9 +125,12 @@ export default async function Blog({
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">Technology Blog</h1>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            Technology Blog
+          </h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            Insights, tutorials, and industry updates from our team of technology experts
+            Insights, tutorials, and industry updates from our team of
+            technology experts
           </p>
         </div>
       </section>
@@ -123,7 +139,9 @@ export default async function Blog({
       {featuredPost && (
         <section className="py-20">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Featured Article</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">
+              Featured Article
+            </h2>
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 group">
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 <div className="p-8 lg:p-12 flex flex-col justify-center">
@@ -139,7 +157,9 @@ export default async function Blog({
                     {featuredPost.short_desc}
                   </p>
                   <div className="flex items-center justify-between text-gray-600 mb-6">
-                    <span>By <strong>{featuredPost.author || 'Teresol Team'}</strong></span>
+                    <span>
+                      By <strong>{featuredPost.author || 'Teresol Team'}</strong>
+                    </span>
                     <span>{featuredPost.read_time}</span>
                   </div>
                   <Link
@@ -176,9 +196,15 @@ export default async function Blog({
             {categories.map((cat, idx) => (
               <Link
                 key={idx}
-                href={cat.category === 'All' ? '/blog' : `/blog?category=${encodeURIComponent(cat.category)}`}
+                href={
+                  cat.category === 'All'
+                    ? '/blog'
+                    : `/blog?category=${encodeURIComponent(cat.category)}`
+                }
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  selectedCategory === cat.category ? 'bg-blue-600 text-white shadow-lg' : 'bg-white text-gray-700 hover:bg-blue-100'
+                  selectedCategory === cat.category
+                    ? 'bg-blue-600 text-white shadow-lg'
+                    : 'bg-white text-gray-700 hover:bg-blue-100'
                 }`}
               >
                 {cat.category}
@@ -192,7 +218,9 @@ export default async function Blog({
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Latest Articles</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Latest Articles
+            </h2>
             <p className="text-xl text-gray-600">
               Stay informed with the latest trends and insights in technology
             </p>

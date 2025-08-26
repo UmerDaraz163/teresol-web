@@ -10,8 +10,8 @@ const menuItems = [
   { name: 'About Us', href: '/about' },
   { name: 'Products', href: '/products' },
   { name: 'Services', href: '/services' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Careers', href: '/careers' },
+  // { name: 'Blog', href: '/blog' },
+  // { name: 'Careers', href: '/careers' },
   { name: 'Contact', href: '/contact' },
 ];
 
