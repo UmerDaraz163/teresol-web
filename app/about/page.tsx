@@ -38,14 +38,14 @@ export default function About() {
       image: "/place-holder.jpg",
     },
     {
-      name: "Dr. Aamir Masood ",
+      name: "Aamir Masood",
       role: "CPO",
       image: "/leadership/CPO.png",
     },
     {
       name: "Babar Amin",
       role: "Adv Intl Project",
-      image: "/place-holder.jpg",
+      image: "/leadership/Adv-Intl-Project.png",
     },
     {
       name: "Air Cdre Asim Adnan (R)",
@@ -53,9 +53,9 @@ export default function About() {
       image: "/leadership/Adv Avcs.jpeg",
     },
     {
-      name: "Col. Abdul Rauf",
+      name: "Col R Abdul Rauf SI(M)",
       role: "Adv Grd Def Proj",
-      image: "/place-holder.jpg",
+      image: "/leadership/Adv-GrdDef-Proj.png",
     },
   ];
 
