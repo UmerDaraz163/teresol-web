@@ -19,7 +19,7 @@ export type FeatureDetail = {
   {
       icon: "ri-cpu-line",
       title: "Embedded Hardware Design Services",
-      description: "Our embedded design includes complex multi-layers (18-24) high-speed signal processing PCBs, Single Board Computers (SBC) for time-scheduled applications, their board support packages/APIs for external integration, and complete customized end-to-end product (qualified for tough temperature environment) with multiple designed cards.",
+      description: "Our embedded design includes complex multi-layers (18-24) high-speed signal processing PCBs, Single Board Computers (SBC) for time-scheduled applications, their board support packages/APIs for integration, and complete customized end-to-end product (qualified for tough temperature environment) with multiple designed cards.",
       slug: "embedded-hardware-design-services",
       features: [
       {
@@ -27,7 +27,7 @@ export type FeatureDetail = {
           details: [
           "Offer a wide range of configurations including PowerPC & ARM architectures",
           "Support various form factors like Qseven, SMARC, SO-DIMM, and HPC",
-          "PowerPC features: VME 64/64x interface, Ethernet/Serials/OS, and low power consumption",
+          // "PowerPC features: VME 64/64x interface, Ethernet/Serials/OS, and low power consumption",
           "ARM features: Single/Quad/Octa Core processors in a small form factor with very low power consumption",
           "Developed by working closely with Tier-1 silicon companies like Oracle, Qualcomm, Nvidia, and NXP"
         ]
