@@ -3,22 +3,22 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import pool from '@/lib/db'; // Your MySQL connection
-import Header from '@/components/Header'; // Assuming you have a Header component
-import Footer from '@/components/Footer'; // Assuming you have a Footer component
+import pool from '@/lib/db';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { JSX } from 'react';
+import { Metadata, ResolvingMetadata } from 'next';
 
-// --- FIX 1: Update the type to reflect that 'params' is a Promise ---
+// Define the shape of the props passed to the page and metadata function
 type PageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: { slug: string };
 };
 
-// Define a type for the main blog post data
+// Define the type for a single blog post, including a short description
 type Blog = {
   id: number;
   title: string;
+  short_desc: string; // Used for meta descriptions
   content: string;
   image_url: string | null;
   author: string | null;
@@ -27,69 +27,96 @@ type Blog = {
   category: string | null;
 };
 
-// Define a type for recent posts
+// Define types for sidebar content
 type RecentPost = {
   title: string;
   slug: string;
 };
 
-// Define a type for categories
 type Category = {
   category: string;
 };
 
-// This function fetches all necessary data in parallel
+/**
+ * Generates dynamic metadata for each blog post page based on its slug.
+ * This function fetches data for a specific post and returns SEO-friendly metadata.
+ */
+export async function generateMetadata(
+  { params }: PageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { slug } = params;
+
+  // Fetch only the data needed for SEO to keep this function fast
+  const [rows]: any[] = await pool.query(
+    `SELECT title, short_desc, image_url, category FROM blogs WHERE slug = ? LIMIT 1`,
+    [slug]
+  );
+
+  const blog = rows.length > 0 ? rows[0] : null;
+
+  // If no blog is found, return a default "Not Found" title
+  if (!blog) {
+    return {
+      title: 'Blog Post Not Found',
+      description: 'The blog post you are looking for could not be found.',
+    };
+  }
+
+  // Construct the dynamic metadata object
+  return {
+    title: blog.title,
+    description: blog.short_desc,
+    keywords: [blog.category, 'Teresol Blog', blog.title],
+  };
+}
+
+/**
+ * Fetches all necessary data to render the blog post page content.
+ */
 async function getBlogData(slug: string) {
   try {
-    // Fetch the main blog post
+    // Fetch the main blog post content
     const [blogRows]: any[] = await pool.query(
-      `SELECT id, title, content, image_url, author, created_at, read_time, category 
+      `SELECT id, title, short_desc, content, image_url, author, created_at, read_time, category 
        FROM blogs 
        WHERE slug = ?`,
       [slug]
     );
-
     const blog: Blog | null = blogRows.length > 0 ? blogRows[0] : null;
 
     if (!blog) {
       return { blog: null, recentPosts: [], categories: [] };
     }
 
-    // Fetch recent posts (excluding the current one)
+    // Fetch recent posts for the sidebar
     const [recentPostRows]: any[] = await pool.query(
-      `SELECT title, slug 
-       FROM blogs 
-       WHERE slug != ? 
-       ORDER BY created_at DESC 
-       LIMIT 5`,
+      `SELECT title, slug FROM blogs WHERE slug != ? ORDER BY created_at DESC LIMIT 5`,
       [slug]
     );
     const recentPosts: RecentPost[] = recentPostRows;
 
-    // Fetch all unique categories
+    // Fetch categories for the sidebar
     const [categoryRows]: any[] = await pool.query(
-      `SELECT DISTINCT category 
-       FROM blogs 
-       WHERE category IS NOT NULL AND category != '' 
-       ORDER BY category ASC`
+      `SELECT DISTINCT category FROM blogs WHERE category IS NOT NULL AND category != '' ORDER BY category ASC`
     );
     const categories: Category[] = categoryRows;
 
     return { blog, recentPosts, categories };
   } catch (error) {
     console.error("Database Error:", error);
-    // In case of a database error, we return nulls to be handled by the component
     return { blog: null, recentPosts: [], categories: [] };
   }
 }
 
-// --- FIX 3: Add the explicit return type for the async component ---
-export default async function BlogPostPage({ params }: PageProps): Promise<JSX.Element> {
-  // --- FIX 2: Await the 'params' Promise to get the slug ---
-  const { slug } = await params;
+/**
+ * The main component for rendering a single blog post page.
+ */
+export default async function BlogPostPage({ params }: { params: { slug: string } }): Promise<JSX.Element> {
+  const { slug } = params;
   const { blog, recentPosts, categories } = await getBlogData(slug);
 
-  // If the blog post is not found, render the 404 page
+  // If the blog post doesn't exist, trigger a 404 Not Found page
   if (!blog) {
     notFound();
   }

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import pool from '@/lib/db'; // Your MySQL connection
 import { JSX } from 'react';
+import { Metadata, ResolvingMetadata } from 'next'; // ✅ Import Metadata types
 
 // Types
 type BlogPost = {
@@ -22,11 +23,37 @@ type Category = {
   category: string;
 };
 
-// --- FIX 1: Define a clear type for the page props ---
-// 'searchParams' is a Promise that resolves to the search parameters object.
 type BlogPageProps = {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: { category?: string };
 };
+
+// ✅ This function generates metadata that changes based on the selected category
+export async function generateMetadata(
+  { searchParams }: BlogPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const category = searchParams.category;
+
+  // If a category is selected, create specific metadata for it
+  if (category && category !== 'All') {
+    return {
+      title: `Technology Blog - ${category}`,
+      description: `Browse all articles and insights from Teresol in the ${category} category. Stay updated with the latest trends.`,
+      keywords: [category, 'Teresol', 'Tech Blog', 'Software Development', 'Hardware Solutions'],
+      alternates: {
+        canonical: `https://www.teresol.com/blog?category=${encodeURIComponent(category)}`,
+      },
+    };
+  }
+
+  // Default metadata for the main blog page
+  return {
+    title: 'Teresol Technology Blog',
+    description: 'Insights, tutorials, and industry updates from our team of technology experts at Teresol.',
+    // ✅ Keywords added here
+    keywords: ['Technology Blog', 'Teresol', 'Software Insights', 'Hardware Tutorials', 'Tech Updates'],
+  };
+}
 
 
 // Fetch blog page data
@@ -71,15 +98,11 @@ async function getBlogPageData(selectedCategory?: string) {
   }
 }
 
-// Blog page
-// --- FIX 2: Apply the props type and add an explicit return type ---
+// Blog page component
 export default async function Blog({
   searchParams,
-}: BlogPageProps): Promise<JSX.Element> {
-  // --- FIX 3: Await the 'searchParams' object first, then get the property ---
-  const { category } = await searchParams;
-  const selectedCategory = category ?? 'All';
-
+}: { searchParams: { category?: string } }): Promise<JSX.Element> {
+  const selectedCategory = searchParams.category ?? 'All';
   const { featuredPost, blogPosts, categories } = await getBlogPageData(selectedCategory);
 
   return (
@@ -223,4 +246,3 @@ export default async function Blog({
     </div>
   );
 }
-
