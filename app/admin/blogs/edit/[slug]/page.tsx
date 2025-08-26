@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation';
 import pool from '@/lib/db';
 import EditBlogForm from '@/components/EditBlogForm';
+import AdminHeader from '../../../../../components/AdminHeader';
 import { JSX } from 'react';
 
 // Define Blog type
@@ -19,7 +20,6 @@ type Blog = {
 };
 
 // --- FIX 1: Tell TypeScript that 'params' is a Promise ---
-// This makes the TypeScript error go away.
 type EditBlogPageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -27,9 +27,6 @@ type EditBlogPageProps = {
 export default async function EditBlogPage({
   params,
 }: EditBlogPageProps): Promise<JSX.Element> {
-
-  // --- FIX 2: Await the 'params' Promise to get the object ---
-  // This makes the Next.js runtime error go away.
   const { slug } = await params;
 
   let blog: Blog | null = null;
@@ -55,5 +52,12 @@ export default async function EditBlogPage({
     notFound();
   }
 
-  return <EditBlogForm blog={blog} />;
+  return (
+    <div className="space-y-4">
+      {/* Add AdminHeader above the form */}
+      <AdminHeader showBackButton showSignOutButton />
+
+      <EditBlogForm blog={blog} />
+    </div>
+  );
 }

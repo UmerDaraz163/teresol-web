@@ -8,6 +8,7 @@ import pool from '@/lib/db';
 import SignOutButton from '@/components/SignOutButton';
 import { PlusCircle, FileText, LayoutDashboard } from "lucide-react";
 import BlogActions from '@/components/BlogActions';
+import AdminHeader from '@/components/AdminHeader';
 
 type Blog = {
   id: number;
@@ -34,6 +35,8 @@ export default async function AdminBlogsPage() {
   }
 
   return (
+    <div>
+      <AdminHeader showBackButton showSignOutButton/>
     <div className="container mx-auto px-6 py-10">
       {/* Header */}
       <div className="flex justify-between items-center mb-10">
@@ -51,7 +54,7 @@ export default async function AdminBlogsPage() {
             <PlusCircle className="w-5 h-5" />
             Add Blog
           </Link>
-          <SignOutButton />
+          {/* <SignOutButton /> */}
         </div>
       </div>
 
@@ -79,6 +82,7 @@ export default async function AdminBlogsPage() {
           <p className="text-center text-gray-500">No blog posts found.</p>
         )}
       </div>
+    </div>
     </div>
   );
 }

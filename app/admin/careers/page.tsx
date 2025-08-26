@@ -5,6 +5,7 @@ import Link from "next/link";
 import pool from "@/lib/db";
 import { Career } from "@/types/career";
 import { format } from 'date-fns';
+import AdminHeader from "@/components/AdminHeader";
 import CareerActions from "@/components/CareerActions"; // Import the new component
 
 async function getCareers(): Promise<Career[]> {
@@ -25,6 +26,9 @@ export default async function CareersPage() {
   const careers = await getCareers();
 
   return (
+    <div>
+            <AdminHeader showBackButton showSignOutButton/>
+      
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Careers Dashboard</h1>
@@ -82,6 +86,7 @@ export default async function CareersPage() {
           </tbody>
         </table>
       </div>
+    </div>
     </div>
   );
 }
