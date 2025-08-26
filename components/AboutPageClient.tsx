@@ -55,7 +55,7 @@ export default function AboutPageClient() {
       image: "/leadership/Adv Avcs.jpeg",
     },
     {
-      name: "Col R Abdul Rauf SI(M)",
+      name: "Col Abdul Rauf SI(M) (R)",
       role: "Adv Grd Def Proj",
       image: "/leadership/Adv-GrdDef-Proj.png",
     },
