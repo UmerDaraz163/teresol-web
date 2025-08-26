@@ -29,17 +29,20 @@ export default function ProductsPageClient() {
             {
               title: "NXP QorIQ T1042-based Rugged 6U VME",
               image: "/products/sbc/sbc1.png",
-              shortDescription: "Compact SBC with dual-core processor.",
+              shortDescription:
+                "NXP QorIQ T1042 PowerPC SBCs with quad-core 1.4GHz CPUs, DPAA, rich interfaces, low power, and MIL-grade ruggedization for avionics and marine LRUs.",
             },
             {
               title: "NXP PowerPC MPC8270-based Rugged 6U VME",
               image: "/products/sbc/sbc2.png",
-              shortDescription: "Compact SBC with dual-core processor.",
+              shortDescription:
+                "PowerQUICC II (MPC8270) PowerPC SBCs with low power, Xilinx 6-series FPGA, multi-interface support, MIL-grade ruggedization, ideal for comms processing.",
             },
             {
               title: "NXP QorIQ T1042-based Rugged 3U VME",
               image: "/products/sbc/sbc3.png",
-              shortDescription: "Compact SBC with dual-core processor.",
+              shortDescription:
+                "3U PowerPC SBCs with 4×1.4GHz E5500 cores, cache, SRAM, eMMC, low power, MIL-grade ruggedization, for avionics and marine LRUs.",
             },
           ],
         },
@@ -49,12 +52,14 @@ export default function ProductsPageClient() {
             {
               title: "Tegra K1- NVIDIA",
               image: "/products/sbc/sbc4.png",
-              shortDescription: "Compact SBC with dual-core processor.",
+              shortDescription:
+                "NVIDIA-based XMC GPU modules with processor, memory, I/O, temp sensor, low power, and MIL-STD compliance.",
             },
             {
               title: "NVIDIA Xavier Single Board Computer",
               image: "/products/sbc/sbc5.png",
-              shortDescription: "Compact SBC with dual-core processor.",
+              shortDescription:
+                "XMC/PMC GPU modules with processor, memory, video codec, I/O, GPS, sensors, low power, and MIL-STD compliance.",
             },
           ],
         },
@@ -64,7 +69,8 @@ export default function ProductsPageClient() {
             {
               title: "X210 ARM",
               image: "/products/sbc/sbc6.png",
-              shortDescription: "Compact SBC with dual-core processor.",
+              shortDescription:
+                "ARM-based SBCs in varied form factors, from single to octa-core, ideal for handhelds like smartphones and tablets.",
             },
           ],
         },
@@ -82,22 +88,26 @@ export default function ProductsPageClient() {
             {
               title: "Multifunction Audio Video Interface module",
               image: "/products/video-cards/card1.png",
-              shortDescription: "High-performance video processing card.",
+              shortDescription:
+                "6U VME ARM modules with processor, memory, video/audio I/O, temp sensor, and optional accessories.",
             },
             {
               title: "Tegra K1- NVIDIA based",
               image: "/products/video-cards/card2.png",
-              shortDescription: "Versatile video and graphics card.",
+              shortDescription:
+                "NVIDIA-based XMC GPU cards with processor, memory, I/O, temp sensors, low power, and MIL-STD compliance.",
             },
             {
               title: "NVIDIA Xavier Single Board Computer",
               image: "/products/video-cards/card3.png",
-              shortDescription: "AI-optimized graphic processing SBC.",
+              shortDescription:
+                "XMC/PMC GPU modules with processor, memory, video codec, I/O, GPS, sensors, low power, and MIL-STD compliance.",
             },
             {
               title: "Head Up Graphic Module card",
               image: "/products/video-cards/card4.png",
-              shortDescription: "Optimized for military-grade HUD systems.",
+              shortDescription:
+                "6U VME modules with AD processor, memory, video codec, multi-interfaces, voltage monitoring, MIL-STD compliance, and optional accessories.",
             },
           ],
         },
@@ -107,7 +117,8 @@ export default function ProductsPageClient() {
             {
               title: "Video Compression Card",
               image: "/products/video-cards/card5.png",
-              shortDescription: "Efficient hardware-level video compression.",
+              shortDescription:
+                "Compact rugged video capture device with VGA/composite input, H.264/MPEG-4 compression, real-time HD output, stackable DVR support, and RoHS compliance.",
             },
           ],
         },
@@ -125,17 +136,20 @@ export default function ProductsPageClient() {
             {
               title: "Quad Channel MIL-STD-1553B 6U VME",
               image: "/products/interface-cards/card1.png",
-              shortDescription: "High-performance video processing card.",
+              shortDescription:
+                "The 6U MBI bridges the CPU and 1553B bus via VME as BC or RT.",
             },
             {
               title: "Dual Channel MIL-STD-1553B PMC",
               image: "/products/interface-cards/card2.png",
-              shortDescription: "Versatile video and graphics card.",
+              shortDescription:
+                "Dual-channel 1553 cards with redundant channels, each supporting BC, MT, and dual RTs.",
             },
             {
               title: "Three Channel MIL-STD-1553B 3U VME",
               image: "/products/interface-cards/card3.png",
-              shortDescription: "AI-optimized graphic processing SBC.",
+              shortDescription:
+                "The 3U MBI bridges the CPU and 1553B bus via VME as BC or RT.",
             },
           ],
         },
@@ -145,12 +159,14 @@ export default function ProductsPageClient() {
             {
               title: "Multifunction I/O Module in 6U form factor-VME",
               image: "/products/interface-cards/card4.png",
-              shortDescription: "Efficient hardware-level video compression.",
+              shortDescription:
+                "Multifunction I/O module with 10 analog inputs, Ethernet, CAN, I²C, serial, 64 DI, 24 DO, and ROHS/CE/UL/60950 compliance.",
             },
             {
               title: "System Interface Module in 3U form factor-VME",
               image: "/products/interface-cards/card5.png",
-              shortDescription: "Efficient hardware-level video compression.",
+              shortDescription:
+                "System Interface Module delivers discrete signals, digitizes analog/synchro inputs, and generates GMHDG, AOA, and NAU signals for the CPU.",
             },
           ],
         },
@@ -160,85 +176,86 @@ export default function ProductsPageClient() {
             {
               title: "Synchro Discrete I/O Board in 6U form factor-VME",
               image: "/products/interface-cards/card6.png",
-              shortDescription: "Efficient hardware-level video compression.",
+              shortDescription:
+                "High-performance processors with FPU, onboard Xilinx 6-series FPGA, BIT, 16 analog inputs (12-bit ADC), 2 synchro channels, and 16 high-power DOs.",
             },
           ],
         },
       ],
     },
-    {
-      groupTitle: "Mission Ready Systems",
-      category: "Hardware Product",
-      description:
-        "TeReSol has extensive experience in providing rugged Mission Ready systems. We provide form-fit and Functional LRUs like Display Computer, Control Computers, Digital Video and Mission Data Recorders for various segments of Aerospace and Defence Industry",
-      types: [
-        {
-          type: "Mission & Data Recorders",
-          models: [
-            {
-              title: "Multipurpose Digital Video Recorder",
-              image: "/products/mission-systems/system1.png",
-              shortDescription: "High-performance video processing card.",
-            },
-            {
-              title: "Dual Channel MIL-STD-1553B PMC",
-              image: "/products/mission-systems/system2.png",
-              shortDescription: "Versatile video and graphics card.",
-            },
-            {
-              title: "Three Channel MIL-STD-1553B 3U VME",
-              image: "/products/mission-systems/system3.png",
-              shortDescription: "AI-optimized graphic processing SBC.",
-            },
-            {
-              title: "Three Channel MIL-STD-1553B 3U VME",
-              image: "/products/mission-systems/system4.png",
-              shortDescription: "AI-optimized graphic processing SBC.",
-            },
-          ],
-        },
-        {
-          type: "Avionics Computers",
-          models: [
-            {
-              title: "Three Channel MIL-STD-1553B 3U VME",
-              image: "/products/mission-systems/system5.png",
-              shortDescription: "AI-optimized graphic processing SBC.",
-            },
-            {
-              title: "Three Channel MIL-STD-1553B 3U VME",
-              image: "/products/mission-systems/system6.png",
-              shortDescription: "AI-optimized graphic processing SBC.",
-            },
-          ],
-        },
-        {
-          type: "Multifunction Displays",
-          models: [
-            {
-              title: "Smart Display Unit-I",
-              image: "/products/mission-systems/system7.png",
-              shortDescription: "Efficient hardware-level video compression.",
-            },
-            {
-              title: "Smart Display Unit-II",
-              image: "/products/mission-systems/system8.png",
-              shortDescription: "Efficient hardware-level video compression.",
-            },
-          ],
-        },
-        {
-          type: "Power Supplies",
-          models: [
-            {
-              title: "Rack Mounted AC/DC Power Supply",
-              image: "/products/mission-systems/system9.png",
-              shortDescription: "Efficient hardware-level video compression.",
-            },
-          ],
-        },
-      ],
-    },
+    // {
+    //   groupTitle: "Mission Ready Systems",
+    //   category: "Hardware Product",
+    //   description:
+    //     "TeReSol has extensive experience in providing rugged Mission Ready systems. We provide form-fit and Functional LRUs like Display Computer, Control Computers, Digital Video and Mission Data Recorders for various segments of Aerospace and Defence Industry",
+    //   types: [
+    //     {
+    //       type: "Mission & Data Recorders",
+    //       models: [
+    //         {
+    //           title: "Multipurpose Digital Video Recorder",
+    //           image: "/products/mission-systems/system1.png",
+    //           shortDescription: "High-performance video processing card.",
+    //         },
+    //         {
+    //           title: "Dual Channel MIL-STD-1553B PMC",
+    //           image: "/products/mission-systems/system2.png",
+    //           shortDescription: "Versatile video and graphics card.",
+    //         },
+    //         {
+    //           title: "Three Channel MIL-STD-1553B 3U VME",
+    //           image: "/products/mission-systems/system3.png",
+    //           shortDescription: "AI-optimized graphic processing SBC.",
+    //         },
+    //         {
+    //           title: "Three Channel MIL-STD-1553B 3U VME",
+    //           image: "/products/mission-systems/system4.png",
+    //           shortDescription: "AI-optimized graphic processing SBC.",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       type: "Avionics Computers",
+    //       models: [
+    //         {
+    //           title: "Three Channel MIL-STD-1553B 3U VME",
+    //           image: "/products/mission-systems/system5.png",
+    //           shortDescription: "AI-optimized graphic processing SBC.",
+    //         },
+    //         {
+    //           title: "Three Channel MIL-STD-1553B 3U VME",
+    //           image: "/products/mission-systems/system6.png",
+    //           shortDescription: "AI-optimized graphic processing SBC.",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       type: "Multifunction Displays",
+    //       models: [
+    //         {
+    //           title: "Smart Display Unit-I",
+    //           image: "/products/mission-systems/system7.png",
+    //           shortDescription: "Efficient hardware-level video compression.",
+    //         },
+    //         {
+    //           title: "Smart Display Unit-II",
+    //           image: "/products/mission-systems/system8.png",
+    //           shortDescription: "Efficient hardware-level video compression.",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       type: "Power Supplies",
+    //       models: [
+    //         {
+    //           title: "Rack Mounted AC/DC Power Supply",
+    //           image: "/products/mission-systems/system9.png",
+    //           shortDescription: "Efficient hardware-level video compression.",
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     {
       groupTitle: "Automotive Systems",
       category: "Hardware Product",
@@ -251,12 +268,14 @@ export default function ProductsPageClient() {
             {
               title: "Vehicle Infotainment System",
               image: "/products/auto-systems/system1.png",
-              shortDescription: "High-performance video processing card.",
+              shortDescription:
+                "Android-based infotainment system with DVD, cameras, GSM/GPS, biometrics, OBD-II, TPMS, parking sensors—customizable and deployed in top car series.",
             },
             {
               title: "Vehicle Tracking Solutions",
               image: "/products/auto-systems/system2.png",
-              shortDescription: "Versatile video and graphics card.",
+              shortDescription:
+                "TeReSol’s TERETRACK offers GPS/GSM fleet tracking with satellite comms, sensor integration, onboard storage, and web-based management.",
             },
           ],
         },
@@ -339,7 +358,8 @@ export default function ProductsPageClient() {
             {
               title: "I-MPLOYEE",
               image: "/products/hr-systems/imployee.png",
-              shortDescription: "High-performance video processing card.",
+              shortDescription:
+                "Advanced access control system with high-speed processor, multi-factor authentication, dual storage, and 8-hour backup.",
             },
           ],
         },
