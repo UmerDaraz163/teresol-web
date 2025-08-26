@@ -1,33 +1,35 @@
 // lib/db.ts
+import mysql from "mysql2/promise";
 
-import mysql from 'mysql2/promise';
-
-// This prevents TypeScript errors if 'global.mysqlPool' is used
 declare global {
   var mysqlPool: mysql.Pool | undefined;
 }
 
-/**
- * Singleton pattern for the MySQL connection pool.
- * This ensures only one pool is created and reused across the application,
- * which is crucial for performance and stability in a serverless environment.
- */
 if (!global.mysqlPool) {
   try {
-    global.mysqlPool = mysql.createPool(process.env.DATABASE_URL!);
-    console.log("MySQL connection pool created successfully.");
+    const dbUrl = new URL(process.env.DATABASE_URL!);
+
+    // 👇 Switch hostname when running locally
+    const host =
+      dbUrl.hostname === "db" ? "localhost" : dbUrl.hostname;
+
+    global.mysqlPool = mysql.createPool({
+      host,
+      port: Number(dbUrl.port),
+      user: dbUrl.username,
+      password: dbUrl.password,
+      database: dbUrl.pathname.replace("/", ""),
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+    });
+
+    console.log(`✅ MySQL pool connected to ${host}:${dbUrl.port}`);
   } catch (error) {
-    console.error("Failed to create MySQL connection pool:", error);
-    // Throw an error to prevent the application from starting in a broken state.
-    throw new Error('Failed to initialize database connection pool.');
+    console.error("❌ Failed to create MySQL connection pool:", error);
+    throw new Error("Failed to initialize database connection pool.");
   }
 }
 
-const pool = global.mysqlPool;
-
-// This final check ensures we never export an undefined pool and satisfies TypeScript.
-if (!pool) {
-  throw new Error('Database connection pool is not available.');
-}
-
+const pool = global.mysqlPool!;
 export default pool;
