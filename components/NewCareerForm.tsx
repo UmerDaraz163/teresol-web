@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function JobForm() {
+export default function NewCareerForm() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     title: "",
@@ -35,7 +35,6 @@ export default function JobForm() {
     setIsSubmitting(true);
     setMessage("Creating job...");
 
-    // ✅ FIX: Prepare a payload and convert empty date string to null for the database.
     const payload = {
       ...formData,
       closing_date: formData.closing_date || null,
@@ -45,7 +44,7 @@ export default function JobForm() {
       const res = await fetch("/api/careers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload), // Send the corrected payload
+        body: JSON.stringify(payload),
       });
 
       if (res.ok) {
@@ -84,12 +83,12 @@ export default function JobForm() {
             type="text"
             name="title"
             value={formData.title}
-            onChange={handleChange} // Added the onChange handler
+            onChange={handleChange}
             required
             className="w-full border rounded px-3 py-2"
           />
         </div>
-
+        
         {/* Location */}
         <div>
           <label className="block font-medium">Location</label>
