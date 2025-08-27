@@ -1,13 +1,14 @@
 // app/blog/[slug]/page.tsx
 
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import pool from '@/lib/db';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { JSX } from 'react';
-import { Metadata, ResolvingMetadata } from 'next';
-import BlogPostImage from '@/components/BlogPostImage'; // ✅ Import the new client component
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import pool from "@/lib/db";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { JSX } from "react";
+import { Metadata, ResolvingMetadata } from "next";
+import BlogPostImage from "@/components/BlogPostImage"; // ✅ Import the new client component
 
 // Define the shape of the props passed to the page and metadata function
 type PageProps = {
@@ -54,15 +55,15 @@ export async function generateMetadata(
 
   if (!blog) {
     return {
-      title: 'Blog Post Not Found',
-      description: 'The blog post you are looking for could not be found.',
+      title: "Blog Post Not Found",
+      description: "The blog post you are looking for could not be found.",
     };
   }
 
   return {
     title: blog.title,
     description: blog.short_desc,
-    keywords: [blog.category, 'Teresol Blog', blog.title],
+    keywords: [blog.category, "Teresol Blog", blog.title],
   };
 }
 
@@ -96,7 +97,7 @@ async function getBlogData(slug: string) {
 
     return { blog, recentPosts, categories };
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error("Database Error:", error);
     return { blog: null, recentPosts: [], categories: [] };
   }
 }
@@ -132,9 +133,9 @@ export default async function BlogPostPage({
           </div>
         )}
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-center px-4">
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg max-w-3xl">
+          {/* <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg max-w-3xl">
             {blog.title}
-          </h1>
+          </h1> */}
         </div>
       </div>
 
@@ -142,6 +143,9 @@ export default async function BlogPostPage({
       <div className="container mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Article */}
         <article className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-xl shadow-md">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6">
+            {blog.title}
+          </h1>
           <div className="flex items-center text-sm text-gray-500 mb-6 flex-wrap gap-x-4 gap-y-2">
             {blog.category && (
               <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
@@ -149,20 +153,23 @@ export default async function BlogPostPage({
               </span>
             )}
             <span>
-              By <strong>{blog.author || 'Teresol Team'}</strong>
+              By <strong>{blog.author || "Teresol Team"}</strong>
             </span>
             <span>&middot;</span>
             <span>
-              {new Date(blog.created_at).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
+              {new Date(blog.created_at).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
               })}
             </span>
             {blog.read_time && (
               <>
                 <span>&middot;</span>
-                <span>{blog.read_time}</span>
+                <span className="flex items-center gap-1">
+                  <i className="ri-book-read-line"></i>
+                  {blog.read_time} Mins
+                </span>
               </>
             )}
           </div>
@@ -170,21 +177,19 @@ export default async function BlogPostPage({
           {/* Blog Content */}
           <div
             className="prose prose-lg prose-blue max-w-none"
-            dangerouslySetInnerHTML={{ __html: blog.content || '' }}
+            dangerouslySetInnerHTML={{ __html: blog.content || "" }}
           />
 
           {/* Author Box */}
           <div className="mt-12 border-t pt-8 flex items-center gap-4">
             <div className="h-16 w-16 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center">
               <span className="text-2xl font-bold text-gray-600">
-                {blog.author
-                  ? blog.author.charAt(0).toUpperCase()
-                  : 'T'}
+                {blog.author ? blog.author.charAt(0).toUpperCase() : "T"}
               </span>
             </div>
             <div>
               <p className="font-bold text-lg text-gray-800">
-                {blog.author || 'Teresol Team'}
+                {blog.author || "Teresol Team"}
               </p>
               <p className="text-sm text-gray-500">Writer & Contributor</p>
             </div>
