@@ -1,16 +1,17 @@
 // app/blog/[slug]/page.tsx
+
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import pool from '@/lib/db';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { JSX } from 'react';
 import { Metadata, ResolvingMetadata } from 'next';
+import BlogPostImage from '@/components/BlogPostImage'; // ✅ Import the new client component
 
 // Define the shape of the props passed to the page and metadata function
 type PageProps = {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
 // Define the type for a single blog post
@@ -42,7 +43,7 @@ export async function generateMetadata(
   { params }: PageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
 
   const [rows]: any[] = await pool.query(
     `SELECT title, short_desc, image_url, category FROM blogs WHERE slug = ? LIMIT 1`,
@@ -106,9 +107,9 @@ async function getBlogData(slug: string) {
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }): Promise<JSX.Element> {
-  const { slug } = await params;
+  const { slug } = params;
 
   const { blog, recentPosts, categories } = await getBlogData(slug);
 
@@ -123,17 +124,8 @@ export default async function BlogPostPage({
       {/* Hero Section */}
       <div className="relative h-[350px] md:h-[450px] w-full">
         {blog.image_url ? (
-          <Image
-            src={blog.image_url}
-            alt={blog.title}
-            fill
-            className="object-cover"
-            priority
-            onError={(e) => {
-              e.currentTarget.src =
-                'https://placehold.co/1920x450/eee/ccc?text=Image+Not+Found';
-            }}
-          />
+          // ✅ Use the new client component for the image
+          <BlogPostImage src={blog.image_url} alt={blog.title} />
         ) : (
           <div className="absolute inset-0 bg-gray-300 flex items-center justify-center">
             <span className="text-gray-500">No Image Available</span>

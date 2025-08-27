@@ -1,19 +1,20 @@
 'use client';
 
 import { useRef, useState } from 'react';
-// 1. Import the correct action for CREATING a post
 import { createBlogAction } from '@/app/admin/blogs/actions';
+import ImageUploadForm from '@/components/ImageUploadForm'; // ✅ 1. Import the upload form
 
 export default function BlogForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // State for title and slug generation
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
 
-  // Function to generate a slug from the title
+  // ✅ 2. Add state to hold the uploaded image URL
+  const [imageUrl, setImageUrl] = useState<string>('');
+
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = event.target.value;
     setTitle(newTitle);
@@ -21,11 +22,16 @@ export default function BlogForm() {
     const newSlug = newTitle
       .toLowerCase()
       .trim()
-      .replace(/[^a-z0-9\s-]/g, '') // Remove non-alphanumeric characters
-      .replace(/\s+/g, '-')          // Replace spaces with hyphens
-      .replace(/-+/g, '-');           // Ensure single hyphens
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
 
     setSlug(newSlug);
+  };
+
+  // ✅ 3. Create a callback function to receive the URL from the upload component
+  const handleUploadComplete = (url: string) => {
+    setImageUrl(url);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,23 +41,17 @@ export default function BlogForm() {
 
     const formData = new FormData(event.currentTarget);
 
-    // 2. Call the create action. It doesn't need an ID.
-    const blogId = 1; // Replace with the actual blog ID or fetch it dynamically
+    // The hidden input for image_url will automatically be included in formData
     const result = await createBlogAction(formData);
 
-    if (result?.success) {
-      formRef.current?.reset();
-      setTitle('');
-      setSlug('');
+    // If the server action returns a value, it means an error occurred.
+    if (result?.error) {
+      setError(result.error);
     }
 
-    // On success, the action handles redirection, so no client-side changes are needed.
-    // If you stay on the page, you might want to reset the form:
-    // else {
-    //   formRef.current?.reset();
-    //   setTitle('');
-    //   setSlug('');
-    // }
+    // On success, the page redirects, so no form reset is needed here.
+    // We only stop the submitting state if there was an error.
+    setIsSubmitting(false);
   };
 
   return (
@@ -84,7 +84,6 @@ export default function BlogForm() {
         />
       </div>
 
-      {/* All other form fields remain the same... */}
       {/* Short Description (Excerpt) Field */}
       <div>
         <label htmlFor="short_desc" className="block text-sm font-medium text-gray-700">Short Description (Excerpt)</label>
@@ -97,10 +96,18 @@ export default function BlogForm() {
         <textarea id="content" name="content" className="w-full p-2 mt-1 border border-gray-300 rounded-md" rows={12} required />
       </div>
 
-      {/* Image URL Field */}
+      {/* ✅ 4. Replace the old input with the ImageUploadForm component */}
       <div>
-        <label htmlFor="image_url" className="block text-sm font-medium text-gray-700">Image URL</label>
-        <input id="image_url" name="image_url" type="url" placeholder="https://example.com/image.png" className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
+        <label className="block text-sm font-medium text-gray-700">Feature Image</label>
+        <ImageUploadForm uploadType="blogs" onUploadComplete={handleUploadComplete} />
+        {/* Use a hidden input to pass the imageUrl to the FormData */}
+        <input type="hidden" name="image_url" value={imageUrl} />
+        {imageUrl && (
+          <div className="mt-4">
+            <p className="text-sm text-gray-600">Image uploaded:</p>
+            <img src={imageUrl} alt="Uploaded preview" className="mt-2 rounded-lg w-full max-w-xs object-cover" />
+          </div>
+        )}
       </div>
 
       {/* Author and Read Time */}

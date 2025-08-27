@@ -1,9 +1,14 @@
+// app/admin/blogs/actions.ts
+
 'use server';
 
 import pool from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+/**
+ * Server Action to CREATE a new blog post.
+ */
 export async function createBlogAction(formData: FormData) {
   try {
     const title = formData.get('title') as string;
@@ -14,7 +19,11 @@ export async function createBlogAction(formData: FormData) {
     const author = formData.get('author') as string | null;
     const read_time = formData.get('read_time') as string | null;
     const category = formData.get('category') as string | null;
+    // Convert checkbox value to 1 for true, 0 for false
     const is_featured = formData.get('is_featured') ? 1 : 0;
+
+    console.log('Creating blog with data:', { title, slug, short_desc, content, image_url, author, read_time, category, is_featured });
+    
 
     await pool.query(
       `INSERT INTO blogs 
@@ -24,14 +33,20 @@ export async function createBlogAction(formData: FormData) {
     );
 
     revalidatePath('/admin/blogs');
-    return { success: true };
+    // On success, redirect to the blogs list
+    // The redirect should happen outside the try block to ensure it only runs on success
   } catch (error: any) {
     console.error('Failed to create blog:', error);
     return { error: 'Failed to create blog. Please try again.' };
   }
+  
+  // Redirect after the try-catch block
+  redirect('/admin/blogs');
 }
 
-// Action to UPDATE an existing blog post
+/**
+ * Server Action to UPDATE an existing blog post.
+ */
 export async function updateBlogAction(blogId: number, formData: FormData) {
   const data = {
     title: formData.get('title') as string,
@@ -45,8 +60,7 @@ export async function updateBlogAction(blogId: number, formData: FormData) {
     is_featured: formData.get('is_featured') === 'on' ? 1 : 0,
   };
 
-  // **FIX: Add validation to ensure the slug is not empty.**
-  // This prevents it from being saved as NULL in the database.
+  // Add validation to ensure the slug is not empty.
   if (!data.slug || data.slug.trim() === '') {
     return { error: 'Slug is required and cannot be empty.' };
   }
@@ -60,7 +74,8 @@ export async function updateBlogAction(blogId: number, formData: FormData) {
     `;
     const values = [
       data.title, data.slug, data.short_desc, data.content, 
-      data.image_url, data.author, data.read_time, data.category, 
+      data.image_url || null, // Ensure empty string becomes NULL
+      data.author, data.read_time, data.category, 
       data.is_featured, blogId
     ];
     await pool.query(query, values);
@@ -74,13 +89,15 @@ export async function updateBlogAction(blogId: number, formData: FormData) {
     return { error: 'Database error: Failed to update post.' };
   }
 
-  // **FIX: Revalidate the entire blog layout to handle slug changes.**
-  // This ensures both the old page and the new page are updated in the cache.
+  // Revalidate paths to reflect changes immediately.
   revalidatePath('/admin/blogs');
-  revalidatePath('/blog', 'layout'); 
+  revalidatePath('/blog', 'layout'); // Revalidate layout to handle slug changes
   redirect('/admin/blogs');
 }
 
+/**
+ * Server Action to DELETE a blog post.
+ */
 export async function deleteBlogAction(blogId: number) {
   try {
     await pool.query('DELETE FROM blogs WHERE id = ?', [blogId]);
@@ -89,6 +106,7 @@ export async function deleteBlogAction(blogId: number) {
     return { error: 'Database error: Failed to delete post.' };
   }
 
-  // Revalidate the blogs list page to reflect the deletion
+  // Revalidate the blogs list page to reflect the deletion.
   revalidatePath('/admin/blogs');
+  revalidatePath('/blog');
 }
