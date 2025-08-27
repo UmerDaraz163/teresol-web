@@ -19,7 +19,6 @@ type Blog = {
   is_featured: boolean | null;
 };
 
-// --- FIX 1: Tell TypeScript that 'params' is a Promise ---
 type EditBlogPageProps = {
   params: Promise<{ slug: string }>;
 };

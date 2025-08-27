@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { updateBlogAction } from '@/app/admin/blogs/actions';
+import TiptapEditor from './TiptapEditor'; // 1. Import the Tiptap editor
+import ImageUploadForm from './ImageUploadForm'; // 2. Import the Image Upload form
 
-// Define the type for the blog prop, including the slug
+// Define the type for the blog prop
 type Blog = {
   id: number;
   title: string;
@@ -21,29 +23,36 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Set up state for controlled title and slug fields
+  // 3. Set up state for all controlled fields, including the new editor content
   const [title, setTitle] = useState(blog.title);
   const [slug, setSlug] = useState(blog.slug);
+  const [content, setContent] = useState(blog.content || '');
+  const [imageUrl, setImageUrl] = useState(blog.image_url || '');
 
-  // Effect to reset state if a different blog is loaded into the form
+  // Effect to reset state if a different blog is loaded
   useEffect(() => {
     setTitle(blog.title);
     setSlug(blog.slug);
+    setContent(blog.content || '');
+    setImageUrl(blog.image_url || '');
   }, [blog]);
 
-  // Function to handle title changes and auto-generate the slug
+  // Function to auto-generate the slug from the title
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = event.target.value;
     setTitle(newTitle);
-
     const newSlug = newTitle
       .toLowerCase()
       .trim()
-      .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
-      .replace(/\s+/g, '-')          // Replace spaces with hyphens
-      .replace(/-+/g, '-');           // Replace multiple hyphens with one
-    
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
     setSlug(newSlug);
+  };
+
+  // Callback for the image uploader
+  const handleUploadComplete = (url: string) => {
+    setImageUrl(url);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -52,15 +61,13 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
     setError(null);
 
     const formData = new FormData(event.currentTarget);
-
-    // Call update action with id + form data
     const result = await updateBlogAction(blog.id, formData);
 
     if (result?.error) {
       setError(result.error);
       setIsSubmitting(false);
     }
-    // On success, the action will handle redirection.
+    // On success, the server action handles redirection.
   };
 
   return (
@@ -68,7 +75,7 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
       onSubmit={handleSubmit}
       className="space-y-6 max-w-3xl mx-auto p-4 sm:p-6 bg-white rounded-lg shadow-md"
     >
-      {/* Title Field - Now a controlled component */}
+      {/* Title Field */}
       <div>
         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
         <input
@@ -82,7 +89,7 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
         />
       </div>
 
-      {/* Slug Field - Now a controlled component */}
+      {/* Slug Field */}
       <div>
         <label htmlFor="slug" className="block text-sm font-medium text-gray-700">Slug</label>
         <input
@@ -90,14 +97,11 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
           name="slug"
           type="text"
           value={slug}
-          onChange={(e) => setSlug(e.target.value)} // Allow manual override
+          onChange={(e) => setSlug(e.target.value)}
           className="w-full p-2 mt-1 border border-gray-300 rounded-md bg-gray-50"
           required
         />
-         <p className="mt-1 text-xs text-gray-500">The URL-friendly version of the title. Be careful changing this on a live post.</p>
       </div>
-
-      {/* --- Other fields remain the same --- */}
 
       {/* Short Description Field */}
       <div>
@@ -111,32 +115,27 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
         />
       </div>
 
-      {/* Content Field */}
+      {/* 4. Replace the content textarea with the TiptapEditor */}
       <div>
-        <label htmlFor="content" className="block text-sm font-medium text-gray-700">Content</label>
-        <textarea
-          id="content"
-          name="content"
-          defaultValue={blog.content || ''}
-          className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-          rows={12}
-          required
-        />
+        <label className="block text-sm font-medium text-gray-700">Content</label>
+        <TiptapEditor content={content} onChange={setContent} />
+        <input type="hidden" name="content" value={content} />
       </div>
 
-      {/* Image URL Field */}
+      {/* 5. Replace the image URL input with the ImageUploadForm */}
       <div>
-        <label htmlFor="image_url" className="block text-sm font-medium text-gray-700">Image URL</label>
-        <input
-          id="image_url"
-          name="image_url"
-          type="url"
-          defaultValue={blog.image_url || ''}
-          className="w-full p-2 mt-1 border border-gray-300 rounded-md"
-        />
+        <label className="block text-sm font-medium text-gray-700">Feature Image</label>
+        <ImageUploadForm uploadType="blogs" onUploadComplete={handleUploadComplete} />
+        <input type="hidden" name="image_url" value={imageUrl} />
+        {imageUrl && (
+          <div className="mt-4">
+            <p className="text-sm text-gray-600">Current Image:</p>
+            <img src={imageUrl} alt="Current preview" className="mt-2 rounded-lg w-full max-w-xs object-cover"/>
+          </div>
+        )}
       </div>
 
-      {/* Author and Read Time */}
+      {/* Other fields */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="author" className="block text-sm font-medium text-gray-700">Author</label>
@@ -160,7 +159,6 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
         </div>
       </div>
 
-      {/* Category Field */}
       <div>
         <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
         <input
@@ -172,7 +170,6 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
         />
       </div>
 
-      {/* Is Featured Checkbox */}
       <div className="flex items-center">
         <input
           id="is_featured"
@@ -188,7 +185,6 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
-      {/* Submit Button */}
       <div>
         <button
           type="submit"

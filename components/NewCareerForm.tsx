@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import TiptapEditor from "./TiptapEditor"; // 1. Import the Tiptap editor
 
 export default function NewCareerForm() {
   const router = useRouter();
@@ -9,7 +10,7 @@ export default function NewCareerForm() {
     title: "",
     location: "",
     short_desc: "",
-    full_description: "",
+    full_description: "", // This will be controlled by Tiptap
     department: "",
     job_type: "Full-time",
     experience_level: "Mid-level",
@@ -28,6 +29,14 @@ export default function NewCareerForm() {
       ...formData,
       [name]: isCheckbox ? checked : value,
     });
+  };
+
+  // 2. Add a handler to update the form state with the editor's content
+  const handleContentChange = (richText: string) => {
+    setFormData(prevData => ({
+      ...prevData,
+      full_description: richText,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -113,15 +122,12 @@ export default function NewCareerForm() {
           />
         </div>
 
-        {/* Full Description */}
+        {/* 3. Replace the Full Description textarea with the TiptapEditor */}
         <div>
           <label className="block font-medium">Full Description</label>
-          <textarea
-            name="full_description"
-            value={formData.full_description}
-            onChange={handleChange}
-            className="w-full border rounded px-3 py-2"
-            rows={5}
+          <TiptapEditor
+            content={formData.full_description}
+            onChange={handleContentChange}
           />
         </div>
 
