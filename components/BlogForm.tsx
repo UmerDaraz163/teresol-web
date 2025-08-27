@@ -2,7 +2,8 @@
 
 import { useRef, useState } from 'react';
 import { createBlogAction } from '@/app/admin/blogs/actions';
-import ImageUploadForm from '@/components/ImageUploadForm'; // ✅ 1. Import the upload form
+import ImageUploadForm from '@/components/ImageUploadForm';
+import TiptapEditor from './TiptapEditor'; // ✅ 1. Import the Tiptap editor
 
 export default function BlogForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -11,9 +12,10 @@ export default function BlogForm() {
 
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
-
-  // ✅ 2. Add state to hold the uploaded image URL
   const [imageUrl, setImageUrl] = useState<string>('');
+  
+  // ✅ 2. Add state to manage the editor's content
+  const [content, setContent] = useState<string>('');
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = event.target.value;
@@ -29,7 +31,6 @@ export default function BlogForm() {
     setSlug(newSlug);
   };
 
-  // ✅ 3. Create a callback function to receive the URL from the upload component
   const handleUploadComplete = (url: string) => {
     setImageUrl(url);
   };
@@ -40,17 +41,21 @@ export default function BlogForm() {
     setError(null);
 
     const formData = new FormData(event.currentTarget);
-
-    // The hidden input for image_url will automatically be included in formData
+    
+    // The server action will now get the HTML content from the hidden input
     const result = await createBlogAction(formData);
 
-    // If the server action returns a value, it means an error occurred.
     if (result?.error) {
       setError(result.error);
+    } else {
+      // On success, the action redirects, but we can reset state here just in case
+      formRef.current?.reset();
+      setTitle('');
+      setSlug('');
+      setImageUrl('');
+      setContent('');
     }
 
-    // On success, the page redirects, so no form reset is needed here.
-    // We only stop the submitting state if there was an error.
     setIsSubmitting(false);
   };
 
@@ -90,17 +95,18 @@ export default function BlogForm() {
         <textarea id="short_desc" name="short_desc" className="w-full p-2 mt-1 border border-gray-300 rounded-md" rows={3} />
       </div>
 
-      {/* Content Field */}
+      {/* ✅ 3. Replace the textarea with the TiptapEditor component */}
       <div>
-        <label htmlFor="content" className="block text-sm font-medium text-gray-700">Content</label>
-        <textarea id="content" name="content" className="w-full p-2 mt-1 border border-gray-300 rounded-md" rows={12} required />
+        <label className="block text-sm font-medium text-gray-700">Content</label>
+        <TiptapEditor content={content} onChange={setContent} />
+        {/* Use a hidden input to pass the HTML content to the FormData */}
+        <input type="hidden" name="content" value={content} />
       </div>
 
-      {/* ✅ 4. Replace the old input with the ImageUploadForm component */}
+      {/* Feature Image Upload */}
       <div>
         <label className="block text-sm font-medium text-gray-700">Feature Image</label>
         <ImageUploadForm uploadType="blogs" onUploadComplete={handleUploadComplete} />
-        {/* Use a hidden input to pass the imageUrl to the FormData */}
         <input type="hidden" name="image_url" value={imageUrl} />
         {imageUrl && (
           <div className="mt-4">
