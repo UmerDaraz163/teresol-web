@@ -5,7 +5,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { redirect } from 'next/navigation';
 import pool from '@/lib/db';
-import SignOutButton from '@/components/SignOutButton';
 import { PlusCircle, FileText, LayoutDashboard } from "lucide-react";
 import BlogActions from '@/components/BlogActions';
 import AdminHeader from '@/components/AdminHeader';
@@ -19,7 +18,6 @@ type Blog = {
 export default async function AdminBlogsPage() {
   const session = await getServerSession(authOptions);
 
-  // @ts-ignore
   if (!session || session.user?.role !== 'admin') {
     redirect('/admin/login');
   }

@@ -8,12 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { JSX } from "react";
 import { Metadata, ResolvingMetadata } from "next";
-import BlogPostImage from "@/components/BlogPostImage"; // ✅ Import the new client component
-
-// Define the shape of the props passed to the page and metadata function
-type PageProps = {
-  params: { slug: string };
-};
+import BlogPostImage from "@/components/BlogPostImage";
 
 // Define the type for a single blog post
 type Blog = {
@@ -41,10 +36,10 @@ type Category = {
  * Generates dynamic metadata for each blog post page based on its slug.
  */
 export async function generateMetadata(
-  { params }: PageProps,
+  { params }: { params: Promise<{ slug: string }> },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params; // ✅ Await params here
 
   const [rows]: any[] = await pool.query(
     `SELECT title, short_desc, image_url, category FROM blogs WHERE slug = ? LIMIT 1`,
@@ -108,9 +103,9 @@ async function getBlogData(slug: string) {
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<JSX.Element> {
-  const { slug } = params;
+  const { slug } = await params; // ✅ Await params here
 
   const { blog, recentPosts, categories } = await getBlogData(slug);
 
@@ -125,18 +120,13 @@ export default async function BlogPostPage({
       {/* Hero Section */}
       <div className="relative h-[350px] md:h-[450px] w-full">
         {blog.image_url ? (
-          // ✅ Use the new client component for the image
           <BlogPostImage src={blog.image_url} alt={blog.title} />
         ) : (
           <div className="absolute inset-0 bg-gray-300 flex items-center justify-center">
             <span className="text-gray-500">No Image Available</span>
           </div>
         )}
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-center px-4">
-          {/* <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow-lg max-w-3xl">
-            {blog.title}
-          </h1> */}
-        </div>
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-center px-4"></div>
       </div>
 
       {/* Main Content */}
