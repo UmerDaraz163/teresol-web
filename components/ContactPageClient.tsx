@@ -5,7 +5,7 @@
 import { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import { offices, contactMethods, faqs } from '@/app/data/contactUsData'; // Adjust path if needed
+import { offices, contactMethods } from '@/app/data/contactUsData'; // Adjust path if needed
 
 export default function ContactPageClient() {
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ export default function ContactPageClient() {
 
   const [status, setStatus] = useState<'success' | 'error' | 'submitting' | null>(null);
 
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  // const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -60,9 +60,9 @@ export default function ContactPageClient() {
     }
   };
 
-  const toggleFaq = (index: number) => {
-    setOpenFaqIndex(openFaqIndex === index ? null : index);
-  };
+  // const toggleFaq = (index: number) => {
+  //   setOpenFaqIndex(openFaqIndex === index ? null : index);
+  // };
   
   const handleScheduleClick = () => {
     document.getElementById('contact-form')?.scrollIntoView({
@@ -266,7 +266,7 @@ export default function ContactPageClient() {
                     {status === 'submitting' ? 'Sending...' : 'Send Message'}
                   </button>
                   {status === 'success' && (
-                    <p className="mt-4 text-center text-green-600">Message sent successfully! We'll be in touch soon.</p>
+                    <p className="mt-4 text-center text-green-600">Message sent successfully! We&apos;ll be in touch soon.</p>
                   )}
                   {status === 'error' && (
                     <p className="mt-4 text-center text-red-600">Something went wrong. Please try again.</p>
@@ -349,7 +349,7 @@ export default function ContactPageClient() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20">
+      {/* <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
@@ -383,7 +383,7 @@ export default function ContactPageClient() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <Footer />
     </div>

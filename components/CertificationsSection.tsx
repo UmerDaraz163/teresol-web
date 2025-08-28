@@ -22,11 +22,24 @@ export default function CertificationsSection() {
   const prevMembershipSlide = useRef(0);
   const membershipsInitialized = useRef(false);
 
-  const ITEMS_PER_PAGE = 4;
-  const certPages = Math.ceil(certifications.length / ITEMS_PER_PAGE);
-  const membershipPages = Math.ceil(memberships.length / ITEMS_PER_PAGE);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
 
-  // No changes in this section
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      // On mobile (under 640px), show 2 items per slide.
+      // On screens 640px and wider, show 4 items per slide.
+      setItemsPerPage(window.innerWidth < 640 ? 2 : 4);
+    };
+
+    updateItemsPerPage();
+    window.addEventListener('resize', updateItemsPerPage);
+    return () => window.removeEventListener('resize', updateItemsPerPage);
+  }, []);
+
+  const certPages = Math.ceil(certifications.length / itemsPerPage);
+  const membershipPages = Math.ceil(memberships.length / itemsPerPage);
+
+  // No changes to GSAP and interval useEffects...
   useEffect(() => {
     if (certPages > 1) {
       const certInterval = setInterval(() => {
@@ -104,19 +117,19 @@ export default function CertificationsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="certifications" className="sm:py-20 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
+    <section ref={sectionRef} id="certifications" className="py-16 sm:py-20 bg-gradient-to-b from-white to-blue-50 overflow-hidden">
       <div className="container mx-auto px-4">
         
         {/* Certifications Section */}
         <div className="mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Certifications and Compliance</h2>
-          <p className="text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Recognized for meeting international standards of quality and excellence.</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Certifications and Compliance</h2>
+          <p className="text-base sm:text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Recognized for meeting international standards of quality and excellence.</p>
           
-          {certifications.length < ITEMS_PER_PAGE ? (
-            <div className="flex justify-center items-stretch flex-wrap gap-6 md:gap-8 pt-4"> {/* ✨ items-stretch */}
+          {certifications.length <= itemsPerPage && certifications.length <= 4 ? (
+            <div className="flex justify-center items-stretch flex-wrap gap-6 md:gap-8 pt-4">
               {certifications.map((cert) => (
-                <div key={cert.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
-                  <Tilt className="h-full w-full" tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
+                <div key={cert.title} className="w-full max-w-[260px] sm:w-auto flex">
+                  <Tilt className="h-full w-full" tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
                     <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                       <div className="mb-4 flex justify-center items-center h-20">
                         <img src={cert.image} alt={cert.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
@@ -132,23 +145,22 @@ export default function CertificationsSection() {
             </div>
           ) : (
             <>
-              {/* ▼▼▼ CHANGE IS HERE ▼▼▼ */}
-              <div ref={certSliderRef} className="relative min-h-[36rem] md:min-h-[22rem] [perspective:1200px]">
+              <div ref={certSliderRef} className="relative min-h-[34rem] sm:min-h-[22rem] [perspective:1200px]">
                 {Array.from({ length: certPages }).map((_, pageIndex) => {
-                  const slideItems = certifications.slice(pageIndex * ITEMS_PER_PAGE, (pageIndex + 1) * ITEMS_PER_PAGE);
-                  const isFullSlide = slideItems.length === ITEMS_PER_PAGE;
+                  const slideItems = certifications.slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage);
                   
                   return (
                     <div key={pageIndex} className="cert-slide [transform-style:preserve-3d]">
-                      <div className="w-full h-full flex justify-center items-stretch"> {/* ✨ items-stretch */}
+                      <div className="w-full h-full flex justify-center items-stretch">
+                        {/* ▼▼▼ CHANGE IS HERE ▼▼▼ */}
                         <div className={
-                          isFullSlide
-                            ? "inline-grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
-                            : "flex justify-center items-stretch flex-wrap gap-6 md:gap-8" // ✨ items-stretch
+                          slideItems.length > 1
+                            ? "inline-grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+                            : "flex justify-center" // Center if only one item
                         }>
                           {slideItems.map((cert) => (
-                            <div key={cert.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
-                                <Tilt className="h-full w-full" tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
+                            <div key={cert.title} className="w-full max-w-[260px] sm:w-auto flex">
+                                <Tilt className="h-full w-full" tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
                                   <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                                     <div className="mb-4 flex justify-center items-center h-20">
                                       <img src={cert.image} alt={cert.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
@@ -180,14 +192,14 @@ export default function CertificationsSection() {
 
         {/* Memberships Section */}
         <div>
-          <h2 className="text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Memberships</h2>
-          <p className="text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Partnering with global organizations to drive innovation and growth.</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Memberships</h2>
+          <p className="text-base sm:text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Partnering with global organizations to drive innovation and growth.</p>
           
-          {memberships.length < ITEMS_PER_PAGE ? (
-            <div className="flex justify-center items-stretch flex-wrap gap-6 md:gap-8 pt-4"> {/* ✨ items-stretch */}
+          {memberships.length <= itemsPerPage && memberships.length <= 4 ? (
+            <div className="flex justify-center items-stretch flex-wrap gap-6 md:gap-8 pt-4">
               {memberships.map((membership) => (
-                <div key={membership.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
-                  <Tilt className="h-full w-full" tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
+                <div key={membership.title} className="w-full max-w-[260px] sm:w-auto flex">
+                  <Tilt className="h-full w-full" tiltMaxAngleX={18} tiltMaxAngleY={18} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
                     <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                       <div className="mb-4 flex justify-center items-center h-20">
                         <img src={membership.image} alt={membership.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>
@@ -203,23 +215,22 @@ export default function CertificationsSection() {
             </div>
           ) : (
             <>
-              {/* ▼▼▼ CHANGE IS HERE ▼▼▼ */}
-              <div ref={membershipSliderRef} className="relative min-h-[36rem] md:min-h-[22rem] [perspective:1200px]">
+              <div ref={membershipSliderRef} className="relative min-h-[34rem] sm:min-h-[22rem] [perspective:1200px]">
                 {Array.from({ length: membershipPages }).map((_, pageIndex) => {
-                  const slideItems = memberships.slice(pageIndex * ITEMS_PER_PAGE, (pageIndex + 1) * ITEMS_PER_PAGE);
-                  const isFullSlide = slideItems.length === ITEMS_PER_PAGE;
+                  const slideItems = memberships.slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage);
 
                   return (
                     <div key={pageIndex} className="membership-slide [transform-style:preserve-3d]">
-                      <div className="w-full h-full flex justify-center items-stretch"> {/* ✨ items-stretch */}
+                      <div className="w-full h-full flex justify-center items-stretch">
+                        {/* ▼▼▼ CHANGE IS HERE ▼▼▼ */}
                         <div className={
-                          isFullSlide
-                            ? "inline-grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
-                            : "flex justify-center items-stretch flex-wrap gap-6 md:gap-8" // ✨ items-stretch
+                          slideItems.length > 1
+                            ? "inline-grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+                            : "flex justify-center" // Center if only one item
                         }>
                           {slideItems.map((membership) => (
-                            <div key={membership.title} className="w-full max-w-[260px] sm:w-auto flex"> {/* ✨ flex */}
-                                <Tilt className="h-full w-full" tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff"> {/* ✨ h-full w-full */}
+                            <div key={membership.title} className="w-full max-w-[260px] sm:w-auto flex">
+                                <Tilt className="h-full w-full" tiltMaxAngleX={8} tiltMaxAngleY={8} perspective={1000} glareEnable={true} glareMaxOpacity={0.05} glareColor="#ffffff">
                                   <div className="bg-white p-6 rounded-2xl shadow-lg text-center h-full group cert-card flex flex-col">
                                     <div className="mb-4 flex justify-center items-center h-20">
                                       <img src={membership.image} alt={membership.title} className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"/>

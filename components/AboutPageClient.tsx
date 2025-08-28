@@ -2,6 +2,7 @@
 
 'use client';
 
+import Image from 'next/image'; // ✨ Import the Image component
 import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
@@ -121,7 +122,7 @@ export default function AboutPageClient() {
               Our Leadership Team
             </h2>
             <p className="text-xl text-gray-600">
-              Meet the experienced professionals leading Teresol's innovation
+              Meet the experienced professionals leading Teresol&apos;s innovation
             </p>
           </div>
 
@@ -131,10 +132,13 @@ export default function AboutPageClient() {
                 key={index}
                 className="bg-white rounded-xl shadow-lg overflow-hidden"
               >
-                <img
+                {/* ✨ Replaced <img> with next/image <Image> component */}
+                <Image
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-64 object-cover object-top"
+                  width={500}
+                  height={500}
+                  className="w-full aspect-square object-cover object-top"
                   onError={(e) => { e.currentTarget.src = 'https://placehold.co/600x400/eee/ccc?text=Image'; }}
                 />
                 <div className="p-6 text-center">
@@ -196,7 +200,7 @@ export default function AboutPageClient() {
               href="/contact"
               className="bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap cursor-pointer inline-block"
             >
-              Let's Connect{" "}
+              Let&apos;s Connect{" "}
             </Link>
           </div>
         </div>
