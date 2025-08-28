@@ -6,13 +6,14 @@ import { useState, useEffect } from 'react';
 import JobApplicationModal from '@/components/JobApplicationModal'; // Import the modal
 import AdminHeader from '@/components/AdminHeader';
 
-// ✅ 1. Update the Job type to include the full description
+// ✅ 1. Update the Job type to include closing_date
 type Job = {
   id: number;
   title: string;
   location: string | null;
   short_desc: string | null;
-  full_description: string | null; // Add this field
+  full_description: string | null;
+  closing_date: string | null; // Add this field
   slug: string | null;
 };
 
@@ -25,18 +26,46 @@ export default function CareersPage() {
   // State to manage the application modal
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
-  // ✅ 2. Add state to track which job descriptions are expanded
+  // State to track which job descriptions are expanded
   const [expandedJobId, setExpandedJobId] = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchJobs() {
       try {
-        const res = await fetch('/api/careers'); // This API must return the full_description
+        // Ensure your API at /api/careers returns the closing_date
+        const res = await fetch('/api/careers'); 
         if (!res.ok) {
           throw new Error('Failed to fetch jobs.');
         }
         const data = await res.json();
-        setJobs(data);
+        
+        // Get today's date string in YYYY-MM-DD format for PKT
+        const todayPKTString = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'Asia/Karachi',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        }).format(new Date());
+
+        const activeJobs = data.filter((job: Job) => {
+          // If there's no closing date, always show the job
+          if (!job.closing_date) {
+            return true;
+          }
+          
+          // ✅ FIX: Convert the closing date from UTC to PKT before comparing
+          const closingDate = new Date(job.closing_date);
+          const closingDatePKTString = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Asia/Karachi',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          }).format(closingDate);
+
+          return closingDatePKTString >= todayPKTString;
+        });
+
+        setJobs(activeJobs);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -46,7 +75,7 @@ export default function CareersPage() {
     fetchJobs();
   }, []);
 
-  // ✅ 3. Function to toggle the expanded state of a job
+  // Function to toggle the expanded state of a job
   const toggleJobDescription = (jobId: number) => {
     setExpandedJobId(prevId => (prevId === jobId ? null : jobId));
   };
@@ -76,7 +105,7 @@ export default function CareersPage() {
             Join Our Team
           </h1>
           <p className="mt-4 text-lg text-gray-600">
-            We're looking for passionate people to help us build the future. Check out our open positions below.
+            We are looking for passionate people to help us build the future. Check out our open positions below.
           </p>
         </div>
 
@@ -90,12 +119,21 @@ export default function CareersPage() {
                     <div>
                       <h2 className="text-xl font-bold text-gray-800">{job.title}</h2>
                       <p className="text-md text-gray-500 mt-1">{job.location}</p>
+                      {job.closing_date && (
+                        <p className="text-sm text-gray-500 mt-1">
+                          <strong>Closes on:</strong> {new Date(job.closing_date).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            timeZone: 'UTC', // Display date correctly without timezone shift
+                          })}
+                        </p>
+                      )}
                       <p className="mt-3 text-gray-600 leading-relaxed">
                         {job.short_desc}
                       </p>
                     </div>
                     <div className="mt-4 sm:mt-0 sm:ml-6 flex-shrink-0 flex items-center gap-4">
-                      {/* ✅ 4. Button to expand/collapse the description */}
                       <button 
                         onClick={() => toggleJobDescription(job.id)}
                         className="font-semibold text-blue-600 hover:text-blue-800 transition-colors"
@@ -111,7 +149,6 @@ export default function CareersPage() {
                     </div>
                   </div>
 
-                  {/* ✅ 5. Conditionally rendered full description with smooth transition */}
                   <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[1000px] mt-6 pt-6 border-t' : 'max-h-0'}`}>
                     <div 
                       className="prose prose-sm sm:prose-base max-w-none" 
