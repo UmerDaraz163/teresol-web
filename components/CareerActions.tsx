@@ -8,13 +8,16 @@ export default function CareerActions({ careerId }: { careerId: number }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
-  const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+  const [message, setMessage] = useState<{
+    text: string;
+    type: "success" | "error";
+  } | null>(null);
 
   const handleDelete = async () => {
     // On the first click, ask for confirmation
     if (!isConfirmingDelete) {
       setIsConfirmingDelete(true);
-      setMessage({ text: 'Are you sure?', type: 'error' });
+      setMessage({ text: "Are you sure?", type: "error" });
       return;
     }
 
@@ -28,21 +31,26 @@ export default function CareerActions({ careerId }: { careerId: number }) {
         });
 
         if (res.ok) {
-          setMessage({ text: 'Deleted!', type: 'success' });
+          setMessage({ text: "Deleted!", type: "success" });
           // Refresh the page to show the updated list after a short delay
           setTimeout(() => router.refresh(), 1000);
         } else {
           const errorData = await res.json();
-          setMessage({ text: `Error: ${errorData.error}`, type: 'error' });
+          setMessage({ text: `Error: ${errorData.error}`, type: "error" });
         }
       } catch (error) {
         console.error("Delete failed:", error);
-        setMessage({ text: 'An unexpected error occurred.', type: 'error' });
+        setMessage({ text: "An unexpected error occurred.", type: "error" });
       } finally {
         // Reset confirmation state after action
         setIsConfirmingDelete(false);
       }
     });
+  };
+
+  const handleCancel = () => {
+    setIsConfirmingDelete(false);
+    setMessage(null);
   };
 
   return (
@@ -53,23 +61,42 @@ export default function CareerActions({ careerId }: { careerId: number }) {
       >
         Edit
       </Link>
-      
+
       {/* Conditionally render the delete button text */}
-      <button
-        onClick={handleDelete}
-        disabled={isPending}
-        className={`px-3 py-1 rounded-md text-sm text-white transition-colors ${
-          isConfirmingDelete 
-            ? 'bg-red-700 hover:bg-red-800' 
-            : 'bg-red-600 hover:bg-red-700'
-        } disabled:bg-gray-400`}
-      >
-        {isConfirmingDelete ? 'Confirm Delete' : 'Delete'}
-      </button>
+      {isConfirmingDelete ? (
+        <>
+          <button
+            onClick={handleDelete}
+            disabled={isPending}
+            className="px-3 py-1 rounded-md text-sm text-white bg-red-700 hover:bg-red-800 disabled:bg-gray-400"
+          >
+            Confirm Delete
+          </button>
+          <button
+            onClick={handleCancel}
+            disabled={isPending}
+            className="px-3 py-1 rounded-md text-sm text-gray-700 bg-gray-200 hover:bg-gray-300 disabled:bg-gray-400"
+          >
+            Cancel
+          </button>
+        </>
+      ) : (
+        <button
+          onClick={handleDelete}
+          disabled={isPending}
+          className="px-3 py-1 rounded-md text-sm text-white bg-red-600 hover:bg-red-700 disabled:bg-gray-400"
+        >
+          Delete
+        </button>
+      )}
 
       {/* Display on-page messages */}
       {message && (
-        <span className={`text-xs font-medium ${message.type === 'error' ? 'text-red-600' : 'text-green-600'}`}>
+        <span
+          className={`text-xs font-medium ${
+            message.type === "error" ? "text-red-600" : "text-green-600"
+          }`}
+        >
           {message.text}
         </span>
       )}
