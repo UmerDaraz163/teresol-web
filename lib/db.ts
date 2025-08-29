@@ -9,12 +9,15 @@ if (!global.mysqlPool) {
   try {
     const dbUrl = new URL(process.env.DATABASE_URL!);
 
+    console.log("🌐 Connecting to database at:", dbUrl);
+    
+    
     // 👇 Switch hostname when running locally
-    const host =
-      dbUrl.hostname === "db" ? "localhost" : dbUrl.hostname;
+    // const host =
+    //   dbUrl.hostname === "db" ? "localhost" : dbUrl.hostname;
 
     global.mysqlPool = mysql.createPool({
-      host,
+      host: dbUrl.hostname, // no override
       port: Number(dbUrl.port),
       user: dbUrl.username,
       password: dbUrl.password,
@@ -24,7 +27,7 @@ if (!global.mysqlPool) {
       queueLimit: 0,
     });
 
-    console.log(`✅ MySQL pool connected to ${host}:${dbUrl.port}`);
+    console.log(`✅ MySQL pool connected to ${dbUrl.hostname}:${dbUrl.port}`);
   } catch (error) {
     console.error("❌ Failed to create MySQL connection pool:", error);
     throw new Error("Failed to initialize database connection pool.");

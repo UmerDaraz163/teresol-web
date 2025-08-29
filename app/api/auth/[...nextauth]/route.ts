@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 import pool from "@/lib/db"; // ✅ use the shared pool
 
 const localAuthOptions: AuthOptions = {
+  
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -19,6 +20,8 @@ const localAuthOptions: AuthOptions = {
         }
 
         try {
+          console.log("🔍 Authorizing", pool);
+          
           const [rows]: any[] = await pool.query(
             "SELECT * FROM users WHERE email = ?",
             [credentials.email]
