@@ -9,7 +9,7 @@ if (!global.mysqlPool) {
   try {
     const dbUrl = new URL(process.env.DATABASE_URL!);
 
-    console.log("🌐 Connecting to database at:", dbUrl);
+    // console.log("🌐 Connecting to database at:", dbUrl);
     
     
     // 👇 Switch hostname when running locally

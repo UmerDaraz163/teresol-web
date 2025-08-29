@@ -90,10 +90,12 @@ export default function Footer() {
                 <div className="w-5 h-5 flex items-center justify-center mt-1">
                   <i className="ri-map-pin-line text-blue-400"></i>
                 </div>
+                <a href="https://maps.app.goo.gl/ePqb6Wpy4dbfVMoF8" target="_blank">
                 <span className="text-gray-300">
                   15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA,
                   Phase-II Islamabad , Pakistan
                 </span>
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-5 h-5 flex items-center justify-center">

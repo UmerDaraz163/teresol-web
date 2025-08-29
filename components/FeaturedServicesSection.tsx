@@ -6,6 +6,7 @@ import Tilt from 'react-parallax-tilt';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { featuredServices } from '@/app/data/homepageData';
+import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 

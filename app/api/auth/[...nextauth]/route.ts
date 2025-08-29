@@ -20,7 +20,7 @@ const localAuthOptions: AuthOptions = {
         }
 
         try {
-          console.log("🔍 Authorizing", pool);
+          // console.log("🔍 Authorizing", pool);
           
           const [rows]: any[] = await pool.query(
             "SELECT * FROM users WHERE email = ?",

@@ -7,6 +7,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Tilt from 'react-parallax-tilt';
 import Link from 'next/link';
+import Image from 'next/image';
 import { services, type Service, type FeatureDetail } from '@/app/data/servicesPageData'; // Adjust path if needed
 
 export default function ServicesPageClient() {
@@ -117,7 +118,7 @@ export default function ServicesPageClient() {
                             className={`bg-white p-2 rounded-xl flex items-center justify-center shadow-md transition-all duration-300 ${!isExpanded && 'hover:shadow-xl hover:-translate-y-1.5 aspect-square'
                               }`}
                           >
-                            <img
+                            <Image
                               src={iconUrl}
                               alt={`Technology icon ${i + 1}`}
                               className={`transition-all duration-500 object-contain ${isExpanded
@@ -190,7 +191,7 @@ export default function ServicesPageClient() {
 
           {/* CTA Section */}
           <div className="text-center mt-16">
-            <p className="text-lg text-slate-300 mb-6">Ready to secure your project's future?</p>
+            <p className="text-lg text-slate-300 mb-6">Ready to secure your projects future?</p>
             <Link
               href="/contact"
               className="inline-block bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105"

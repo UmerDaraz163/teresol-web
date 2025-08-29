@@ -4,7 +4,6 @@
 
 import { useState, type ChangeEvent } from 'react';
 
-// The component props remain the same
 type Props = {
   uploadType: 'blogs' | 'jobs';
   onUploadComplete: (url: string) => void;
@@ -14,12 +13,19 @@ export default function ImageUploadForm({ uploadType, onUploadComplete }: Props)
   const [message, setMessage] = useState<string>('');
   const [isUploading, setIsUploading] = useState(false);
 
-  // ✅ This function now runs automatically when a file is selected
   async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     setMessage('');
     const file = event.target.files?.[0];
 
     if (!file) {
+      return;
+    }
+
+    // ✅ Validate file size (max 1MB)
+    const maxSize = 1 * 1024 * 1024; // 1MB
+    if (file.size > maxSize) {
+      setMessage('Error: File size should not exceed 1MB.');
+      event.target.value = ''; // reset input so user can select again
       return;
     }
 
@@ -40,7 +46,7 @@ export default function ImageUploadForm({ uploadType, onUploadComplete }: Props)
 
       if (response.ok) {
         setMessage(`Upload successful!`);
-        onUploadComplete(data.imageUrl); // Send the URL back to the parent form
+        onUploadComplete(data.imageUrl);
       } else {
         throw new Error(data.error || 'Upload failed');
       }
@@ -52,15 +58,14 @@ export default function ImageUploadForm({ uploadType, onUploadComplete }: Props)
   }
 
   return (
-    // ✅ The <form> and <button> have been removed
     <div className="p-4 border rounded-lg bg-gray-50">
       <input
         name="file"
         type="file"
         accept="image/png, image/jpeg, image/webp"
         required
-        onChange={handleFileChange} // ✅ The upload is triggered on change
-        disabled={isUploading} // Disable input while uploading
+        onChange={handleFileChange}
+        disabled={isUploading}
         className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 disabled:opacity-50"
       />
       {message && <p className="mt-4 text-sm font-medium">{message}</p>}
