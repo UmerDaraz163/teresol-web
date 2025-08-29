@@ -123,8 +123,8 @@ export default function BlogForm() {
           <input id="author" name="author" type="text" className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
         </div>
         <div>
-          <label htmlFor="read_time" className="block text-sm font-medium text-gray-700">Read Time</label>
-          <input id="read_time" name="read_time" type="text" placeholder="e.g., 5 min read" className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
+          <label htmlFor="read_time" className="block text-sm font-medium text-gray-700">Read Time(Mins)</label>
+          <input id="read_time" name="read_time" type="number" placeholder="5" className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
         </div>
       </div>
 

@@ -11,26 +11,28 @@ type Props = {
 
 export default function ImageUploadForm({ uploadType, onUploadComplete }: Props) {
   const [message, setMessage] = useState<string>('');
+  const [messageType, setMessageType] = useState<'success' | 'error' | 'info' | ''>(''); // Track type
   const [isUploading, setIsUploading] = useState(false);
 
   async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     setMessage('');
+    setMessageType('');
     const file = event.target.files?.[0];
 
     if (!file) {
       return;
     }
 
-    // ✅ Validate file size (max 1MB)
-    const maxSize = 1 * 1024 * 1024; // 1MB
-    if (file.size > maxSize) {
-      setMessage('Error: File size should not exceed 1MB.');
-      event.target.value = ''; // reset input so user can select again
+    // ✅ File size validation (1MB = 1,048,576 bytes)
+    if (file.size > 1 * 1024 * 1024) {
+      setMessage('Error: File size must be less than 1 MB');
+      setMessageType('error');
       return;
     }
 
     setIsUploading(true);
     setMessage('Uploading...');
+    setMessageType('info');
 
     const formData = new FormData();
     formData.append('file', file);
@@ -46,12 +48,14 @@ export default function ImageUploadForm({ uploadType, onUploadComplete }: Props)
 
       if (response.ok) {
         setMessage(`Upload successful!`);
+        setMessageType('success');
         onUploadComplete(data.imageUrl);
       } else {
         throw new Error(data.error || 'Upload failed');
       }
     } catch (error: any) {
       setMessage(`Error: ${error.message}`);
+      setMessageType('error');
     } finally {
       setIsUploading(false);
     }
@@ -66,9 +70,25 @@ export default function ImageUploadForm({ uploadType, onUploadComplete }: Props)
         required
         onChange={handleFileChange}
         disabled={isUploading}
-        className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 disabled:opacity-50"
+        className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+                   file:rounded-full file:border-0 file:font-semibold 
+                   file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 
+                   disabled:opacity-50"
       />
-      {message && <p className="mt-4 text-sm font-medium">{message}</p>}
+
+      {message && (
+        <p
+          className={`mt-4 text-sm font-medium ${
+            messageType === 'error'
+              ? 'text-red-600'
+              : messageType === 'success'
+              ? 'text-green-600'
+              : 'text-gray-600'
+          }`}
+        >
+          {message}
+        </p>
+      )}
     </div>
   );
 }

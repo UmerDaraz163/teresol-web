@@ -148,11 +148,11 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
           />
         </div>
         <div>
-          <label htmlFor="read_time" className="block text-sm font-medium text-gray-700">Read Time</label>
+          <label htmlFor="read_time" className="block text-sm font-medium text-gray-700">Read Time(Mins)</label>
           <input
             id="read_time"
             name="read_time"
-            type="text"
+            type="number"
             defaultValue={blog.read_time || ''}
             className="w-full p-2 mt-1 border border-gray-300 rounded-md"
           />
