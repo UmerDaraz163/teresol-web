@@ -2,8 +2,9 @@ version: "3.9"
 
 services:
   db:
-    image: mysql:latest
+    image: mysql:8.0
     container_name: next_db
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: teresol
@@ -12,7 +13,7 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - ./db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
       - ./teresol.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - appnet
@@ -20,16 +21,22 @@ services:
   web:
     build: .
     container_name: next_app
+    restart: always
     ports:
       - "443:3000"
-    
     environment:
+      NODE_ENV: production
       DATABASE_URL: "mysql://teresol_admin:teresol123@db:3306/teresol"
     depends_on:
       - db
+    volumes:
+      - ./public/uploads:/app/public/uploads   # ✅ mount the whole public/uploads folder
     networks:
       - appnet
 
-  
+volumes:
+  db_data:
+
 networks:
   appnet:
+    driver: bridge

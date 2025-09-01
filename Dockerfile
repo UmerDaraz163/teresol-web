@@ -15,6 +15,9 @@ RUN npm install
 # Copy all project files
 COPY . .
 
+# ✅ Create uploads folder inside public (so Next.js serves it automatically)
+RUN mkdir -p /app/public/uploads
+
 # Build Next.js app
 RUN npm run build
 
