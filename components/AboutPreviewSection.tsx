@@ -73,7 +73,7 @@ export default function AboutPreviewSection() {
             </Link> */}
           </div>
           {/* Image Content */}
-          <div className="relative about-image w-full aspect-[2/1] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
+          <div className="relative about-image w-full aspect-[2/1] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105">
             <Image
               src="/about-us1.webp"
               alt="Teresol Team"

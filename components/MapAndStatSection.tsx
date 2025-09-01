@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image'; // ✅ Import the Next.js Image component
 import { markers, stats } from '@/app/data/homepageData';
 import MapMarker from '@/components/MapMarker';
 import StatCard from '@/components/StatCard';
@@ -39,11 +40,15 @@ export default function MapAndStatSection() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
           {/* Map Column */}
           <div className="lg:col-span-3">
-            <div className="relative w-full h-96 lg:h-[32rem] rounded-3xl overflow-hidden shadow-2xl">
-              <img
+            {/* ✅ FIX: Removed fixed height and added aspect-ratio to match the image */}
+            <div className="relative w-full aspect-[2/1] rounded-3xl overflow-hidden shadow-2xl">
+              {/* ✅ FIX: Replaced <img> with the optimized Next.js <Image> component */}
+              <Image
                 src="/World-Map1.1.png"
                 alt="World Map"
-                className="w-full h-full object-contain transition-transform duration-700 ease-in-out hover:scale-105"
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
               />
               {markers.map(marker => (
                 <MapMarker key={marker.name} marker={marker} />
@@ -64,3 +69,4 @@ export default function MapAndStatSection() {
     </section>
   );
 }
+

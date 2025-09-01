@@ -1,5 +1,5 @@
 // hash-password.js
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
 const password = 'Teresol@321';
 const saltRounds = 10; // Standard salt rounds

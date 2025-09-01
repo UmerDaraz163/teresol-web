@@ -18,7 +18,7 @@ export default function AboutPageClient() {
     {
       name: "Dr. Naveed Iqbal",
       role: "COO",
-      image: "/leadership/COO.png",
+      image: "/leadership/COO.webp",
     },
       {
       name: "Dr. Ahmad Muqeem Sheri",
@@ -33,7 +33,7 @@ export default function AboutPageClient() {
     {
       name: "Farooq Umer Khan",
       role: "CTO",
-      image: "/leadership/CTO.png",
+      image: "/leadership/CTO.webp",
     },
     {
       name: "Dr. Bilal Rauf",

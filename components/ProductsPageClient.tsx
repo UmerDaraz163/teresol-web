@@ -7,7 +7,7 @@ import { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function ProductsPageClient() {
   const [expandedGroups, setExpandedGroups] = useState<{
@@ -482,7 +482,7 @@ export default function ProductsPageClient() {
                                         key={modelIndex}
                                         className="flex items-start space-x-4 bg-gray-50 p-4 rounded-lg shadow-sm"
                                       >
-                                        <Image
+                                        <img
                                           src={model.image}
                                           alt={model.title}
                                           className="w-24 h-24 object-cover rounded-md hover:scale-105 transition-transform duration-300 will-change-transform"
@@ -580,11 +580,9 @@ export default function ProductsPageClient() {
               </div>
             </div>
             <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-              <Image
+              <img
                 src="/products/about-us2.webp"
                 alt="Product Benefits"
-                fill
-                priority
                 className="object-cover object-top"
               />
             </div>

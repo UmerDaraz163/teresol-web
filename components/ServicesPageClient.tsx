@@ -118,7 +118,7 @@ export default function ServicesPageClient() {
                             className={`bg-white p-2 rounded-xl flex items-center justify-center shadow-md transition-all duration-300 ${!isExpanded && 'hover:shadow-xl hover:-translate-y-1.5 aspect-square'
                               }`}
                           >
-                            <Image
+                            <img
                               src={iconUrl}
                               alt={`Technology icon ${i + 1}`}
                               className={`transition-all duration-500 object-contain ${isExpanded
