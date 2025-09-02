@@ -33,7 +33,7 @@ export default function AboutPageClient() {
     {
       name: "Farooq Umer Khan",
       role: "CTO",
-      image: "/leadership/CTO.webp",
+      image: "/leadership/CTOo.webp",
     },
     {
       name: "Dr. Bilal Rauf",

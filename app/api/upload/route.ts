@@ -1,5 +1,3 @@
-// app/api/upload/route.ts
-
 import { NextResponse } from 'next/server';
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -14,39 +12,41 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'No file uploaded.' }, { status: 400 });
     }
 
-    // Validate the uploadType to ensure it's either 'blogs' or 'jobs'
     if (!uploadType || !['blogs', 'jobs'].includes(uploadType)) {
       return NextResponse.json({ error: 'Invalid upload type specified.' }, { status: 400 });
     }
 
-    // Construct the save path based on the uploadType
-    const savePath = path.join(process.cwd(), 'public', 'uploads', uploadType);
-
-    // Ensure the save directory exists
+    // ✅ **Change 1: Save to a writable directory outside /public**
+    // We'll create a folder named 'writable_uploads' at the project root.
+    const savePath = path.join(process.cwd(), 'writable_uploads', uploadType);
     await fs.mkdir(savePath, { recursive: true });
 
-    // Read the file into a buffer
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    // ✅ Create a new filename with the format: type-timestamp-originalName
     const timestamp = Date.now();
     const originalFilename = file.name.replaceAll(' ', '_');
     const newFilename = `${uploadType}-${timestamp}-${originalFilename}`;
     const filePath = path.join(savePath, newFilename);
 
-    // Write the file to the filesystem
     await fs.writeFile(filePath, buffer);
 
-    // Construct the public URL for the saved image
-    const imageUrl = `/uploads/${uploadType}/${newFilename}`;
+    // ✅ **Change 2: Return a URL pointing to our new serving API**
+    // This URL will be handled by the GET route we create in Step 2.
+    // It passes the subfolder (uploadType) and the filename.
+    const imageUrl = `/api/images/${uploadType}/${newFilename}`;
 
     return NextResponse.json({
+      success: true,
       message: 'Image uploaded successfully.',
-      imageUrl: imageUrl,
+      imageUrl, // This is now an API URL, not a direct file path
     });
 
   } catch (error: any) {
     console.error('Error uploading image:', error);
     return NextResponse.json({ error: 'Failed to upload image.', details: error.message }, { status: 500 });
   }
+}
+
+export async function GET() {
+  return NextResponse.json({ message: 'Upload API is working. Use POST to upload files.' });
 }
