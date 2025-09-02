@@ -18,7 +18,7 @@ export type FeatureDetail = {
   export const services: Service[] = [
   {
       icon: "ri-cpu-line",
-      title: "Embedded Hardware Design Services",
+      title: "Embedded Hardware Design & Development Services",
       description: "Our embedded design includes complex multi-layers (18-24) high-speed signal processing PCBs, Single Board Computers (SBC) for time-scheduled applications, their board support packages/APIs for integration, and complete customized end-to-end product (qualified for tough temperature environment) with multiple designed cards.",
       slug: "embedded-hardware-design-services",
       features: [

@@ -47,7 +47,7 @@ export const heroSlides = [
   export const featuredServices = [
     {
       icon: "ri-cpu-line",
-      title: "Embedded Hardware Design Services",
+      title: "Embedded Hardware Design & Development Services",
       description: "Our embedded design includes complex multi layers (18-24) high speed signal processing PCBs, Single Board Computers (SBC) for time sched-uled applications, their board support packages/APIs for external integration and complete customized end to end product (qualified for tough temperature environment) with multiple designed cards.",
       slug: "embedded-hardware-design-services",
       features:[],
