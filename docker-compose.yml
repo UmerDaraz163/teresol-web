@@ -23,7 +23,7 @@ services:
     container_name: next_app
     restart: always
     ports:
-      - "443:3000"
+      - "80:3000"
     environment:
       NODE_ENV: production
       DATABASE_URL: "mysql://teresol_admin:teresol123@db:3306/teresol"
