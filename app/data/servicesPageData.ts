@@ -86,13 +86,13 @@ export type FeatureDetail = {
   {
     "icon": "/icons/esw.png",
     "title": "Enterprise Software Solutions",
-    "description": "Well-reputed Research and Innovation (R&I) company with a proven track record in developing customized, cost efficient and scalable enterprise software solutions. We offer a comprehensive suite of services. We are a team of over 400 professionals includ- ing 20 PhDs from esteemed global institutes. We are ISO 9001, 20000, 27001 certified, guaranteeing industry-leading quality.",
+    "description": "Well-reputed Research and Innovation (R&I) company with a proven track record in developing customized, cost efficient and scalable enterprise software solutions. We offer a comprehensive suite of services. We are a team of over 400 professionals including 20 PhDs from esteemed global institutes. We are ISO 9001, 20000, 27001 certified, guaranteeing industry-leading quality.",
     "slug": "enterprise-software-solutions",
     "features": [
       {
         "title": "Cloud-Native Banking & Fintech Solutions",
         "details": [
-          "Modernizes large-scale legacy systems (e.g., a core banking solution with ~20 million+ lines of code for 1000+ branches and 1255+ ATMs) into advanced N-tier cloud-native, open-source architectures.",
+          "Modernizes large-scale legacy systems (e.g., a core banking solution with 20 million+ lines of code for 1000+ branches and 1255+ ATMs) into advanced N-tier cloud-native, open-source architectures.",
           "Employs a unique requirement gathering process and detailed code analysis using Data Flow Diagrams (DFDs) and Class Diagrams with a human-in-the-loop mechanism.",
           "Enables seamless omni-channel and branchless banking through innovative digital tools, such as a secure Digital Account Opening app and a large-scale Biometric Verification System deployed on over 1800 devices for government pensioners.",
           "Achieves significant outcomes, including making systems future-ready for Digital and Open Banking, and reducing annual license costs by over 50%.",
