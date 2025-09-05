@@ -38,7 +38,7 @@ export default function AboutPageClient() {
     {
       name: "Dr. Bilal Rauf",
       role: "CIO",
-      image: "/place-holder.jpg",
+      image: "/leadership/CIO1.webp",
     },
     {
       name: "Aamir Masood",

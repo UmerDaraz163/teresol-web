@@ -92,8 +92,8 @@ export default function Footer() {
                 </div>
                 <a href="https://maps.app.goo.gl/ePqb6Wpy4dbfVMoF8" target="_blank">
                 <span className="text-gray-300">
-                  15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA,
-                  Phase-II Islamabad , Pakistan
+                  15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA
+                  Phase-II, Islamabad, Pakistan
                 </span>
                 </a>
               </div>

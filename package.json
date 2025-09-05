@@ -1,6 +1,6 @@
 {
-  "name": "next-app",
-  "version": "0.1.0",
+  "name": "TERESOL",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev --turbopack -H 0.0.0.0 -p 3000",

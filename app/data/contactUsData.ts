@@ -3,16 +3,16 @@
   export const offices = [
     {
       city: "Islamabad",
-      address: "15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA, Phase-II Islamabad , Pakistan",
-      phone: "+518430644",
+      address: "15- Sheikh Zayed Bin Sultan Road (GT Road) , Sector-H, DHA Phase-II, Islamabad, Pakistan",
+      phone: "+92518430644",
       email: "info@teresol.com",
       mapLink: "https://maps.app.goo.gl/ePqb6Wpy4dbfVMoF8",
       isMain: true
     },
     {
       city: "Karachi",
-      address: "Centerpoint Tower, Shaheed-e-Millat Expressway, KPT Interchange, Qayyumabad, Karachi",
-      phone: "+518430644",
+      address: "Centerpoint Tower, Shaheed-e-Millat Expressway, KPT Interchange, Qayyumabad, Karachi, Pakistan",
+      phone: "+92518430644",
       email: "info@teresol.com",
       mapLink: "https://maps.app.goo.gl/iLnpc76qWW9xouYn9",
       isMain: false
