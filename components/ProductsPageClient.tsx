@@ -1,3 +1,5 @@
+// components/ProductsPageClient.tsx
+
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -5,7 +7,7 @@ import { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function ProductsPageClient() {
   const [expandedGroups, setExpandedGroups] = useState<{
@@ -182,6 +184,79 @@ export default function ProductsPageClient() {
         },
       ],
     },
+    // {
+    //   groupTitle: "Mission Ready Systems",
+    //   category: "Hardware Product",
+    //   description:
+    //     "TeReSol has extensive experience in providing rugged Mission Ready systems. We provide form-fit and Functional LRUs like Display Computer, Control Computers, Digital Video and Mission Data Recorders for various segments of Aerospace and Defence Industry",
+    //   types: [
+    //     {
+    //       type: "Mission & Data Recorders",
+    //       models: [
+    //         {
+    //           title: "Multipurpose Digital Video Recorder",
+    //           image: "/products/mission-systems/system1.png",
+    //           shortDescription: "High-performance video processing card.",
+    //         },
+    //         {
+    //           title: "Dual Channel MIL-STD-1553B PMC",
+    //           image: "/products/mission-systems/system2.png",
+    //           shortDescription: "Versatile video and graphics card.",
+    //         },
+    //         {
+    //           title: "Three Channel MIL-STD-1553B 3U VME",
+    //           image: "/products/mission-systems/system3.png",
+    //           shortDescription: "AI-optimized graphic processing SBC.",
+    //         },
+    //         {
+    //           title: "Three Channel MIL-STD-1553B 3U VME",
+    //           image: "/products/mission-systems/system4.png",
+    //           shortDescription: "AI-optimized graphic processing SBC.",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       type: "Avionics Computers",
+    //       models: [
+    //         {
+    //           title: "Three Channel MIL-STD-1553B 3U VME",
+    //           image: "/products/mission-systems/system5.png",
+    //           shortDescription: "AI-optimized graphic processing SBC.",
+    //         },
+    //         {
+    //           title: "Three Channel MIL-STD-1553B 3U VME",
+    //           image: "/products/mission-systems/system6.png",
+    //           shortDescription: "AI-optimized graphic processing SBC.",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       type: "Multifunction Displays",
+    //       models: [
+    //         {
+    //           title: "Smart Display Unit-I",
+    //           image: "/products/mission-systems/system7.png",
+    //           shortDescription: "Efficient hardware-level video compression.",
+    //         },
+    //         {
+    //           title: "Smart Display Unit-II",
+    //           image: "/products/mission-systems/system8.png",
+    //           shortDescription: "Efficient hardware-level video compression.",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       type: "Power Supplies",
+    //       models: [
+    //         {
+    //           title: "Rack Mounted AC/DC Power Supply",
+    //           image: "/products/mission-systems/system9.png",
+    //           shortDescription: "Efficient hardware-level video compression.",
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     {
       groupTitle: "Automotive Systems",
       category: "Hardware Product",
@@ -405,16 +480,13 @@ export default function ProductsPageClient() {
                                     {type.models.map((model, modelIndex) => (
                                       <div
                                         key={modelIndex}
-                                        className="group flex items-start space-x-4 bg-gray-50 p-4 rounded-lg shadow-sm"
+                                        className="flex items-start space-x-4 bg-gray-50 p-4 rounded-lg shadow-sm"
                                       >
-                                        <div className="relative w-24 h-24 flex-shrink-0 rounded-md overflow-hidden">
-                                          <Image
-                                            src={model.image}
-                                            alt={model.title}
-                                            fill
-                                            className="object-cover group-hover:scale-105 transition-transform duration-300 will-change-transform"
-                                          />
-                                        </div>
+                                        <img
+                                          src={model.image}
+                                          alt={model.title}
+                                          className="w-24 h-24 object-cover rounded-md hover:scale-105 transition-transform duration-300 will-change-transform"
+                                        />
                                         <div>
                                           <h4 className="text-lg font-semibold text-gray-900">
                                             {model.title}
@@ -507,12 +579,11 @@ export default function ProductsPageClient() {
                 </div>
               </div>
             </div>
-            <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
-              <Image
+            <div className="relative w-full rounded-xl overflow-hidden shadow-lg">
+              <img
                 src="/products/about-us2.webp"
                 alt="Product Benefits"
-                fill
-                className="object-cover"
+                className="object-cover object-top"
               />
             </div>
           </div>
@@ -536,6 +607,12 @@ export default function ProductsPageClient() {
             >
               Request Demo
             </Link>
+            {/* <Link
+              href="/contact"
+              className="bg-[#25237b] hover:bg-[#8b0303] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap cursor-pointer inline-block"
+            >
+              Get Quote
+            </Link> */}
           </div>
         </div>
       </section>
@@ -544,4 +621,3 @@ export default function ProductsPageClient() {
     </div>
   );
 }
-

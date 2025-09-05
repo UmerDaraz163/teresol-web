@@ -4,7 +4,7 @@ import { image } from "framer-motion/client";
 
 export const heroSlides = [
   {
-    video: "/HW1.1.mp4",
+    video: "/HW1.1.webm",
     duration: 18000,
     textCues: [
       { startTime: 0, endTime: 2.16, title: "Innovatively Creative", subtitle: "Engineering forward-thinking ideas into reality." },
@@ -15,7 +15,7 @@ export const heroSlides = [
     ]
   },
   {
-    video: "/SW1.3.mp4",
+    video: "/SW1.3.webm",
     duration: 10000,
     textCues: [
       { startTime: 0, endTime: 4, title: "Enterprise Software Solutions", subtitle: "Scalable and robust applications to empower your business." },
