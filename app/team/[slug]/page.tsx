@@ -73,7 +73,7 @@ const team = [
     slug: "dr-bilal-rauf",
     name: "Dr. Bilal Rauf",
     role: "CIO",
-    image: "/place-holder.jpg",
+    image: "/leadership/CIO1.webp",
     intro: `Dr. Bilal manages information systems and IT strategy, aligning
     technology resources with business objectives.`,
     reportees: [
@@ -137,11 +137,17 @@ const team = [
 ];
 
 export async function generateStaticParams() {
-  return team.map((member) => ({ slug: member.slug }));
+  return team.map((member) => ({ slug:  member.slug }));
 }
 
-export default function TeamMemberProfile({ params }: { params: { slug: string } }) {
-  const member = team.find((m) => m.slug === params.slug);
+export default async function TeamMemberProfile({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  const member = team.find((m) => m.slug === slug);
 
   if (!member) return notFound();
 

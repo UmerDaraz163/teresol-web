@@ -44,7 +44,7 @@ const team = [
     slug: "dr-bilal-rauf",
     name: "Dr. Bilal Rauf",
     role: "CIO",
-    image: "/place-holder.jpg",
+    image: "/leadership/CIO1.webp",
   },
   {
     slug: "aamir-masood",
