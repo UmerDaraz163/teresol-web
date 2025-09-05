@@ -1,66 +1,77 @@
 // components/AboutPageClient.tsx
 
-'use client';
+"use client";
 
-import Image from 'next/image'; // ✨ Import the Image component
+import Image from "next/image"; // ✨ Import the Image component
 import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
 import AboutPreviewSection from "@/components/AboutPreviewSection";
 
 export default function AboutPageClient() {
-  const team = [
-    {
-      name: "Dr. Muhammad Faisal Khan",
-      role: "CEO",
-      image: "/leadership/CEO.png",
-    },
-    {
-      name: "Dr. Naveed Iqbal",
-      role: "COO",
-      image: "/leadership/COO.webp",
-    },
-      {
-      name: "Dr. Ahmad Muqeem Sheri",
-      role: "CDO",
-      image: "/leadership/CDO.jpeg",
-    },
-    {
-      name: "Mansoor Ahmad Khan",
-      role: "CMO",
-      image: "/leadership/CMO2.png",
-    },
-    {
-      name: "Farooq Umer Khan",
-      role: "CTO",
-      image: "/leadership/CTOo.webp",
-    },
-    {
-      name: "Dr. Bilal Rauf",
-      role: "CIO",
-      image: "/leadership/CIO1.webp",
-    },
-    {
-      name: "Aamir Masood",
-      role: "CPO",
-      image: "/leadership/CPO.png",
-    },
-    {
-      name: "Babar Amin",
-      role: "Adv Intl Project",
-      image: "/leadership/Adv-Intl-Project.png",
-    },
-    {
-      name: "Air Cdre Asim Adnan (R)",
-      role: "Adv Avcs",
-      image: "/leadership/Adv Avcs.jpeg",
-    },
-    {
-      name: "Col Abdul Rauf SI(M) (R)",
-      role: "Adv Grd Def Proj",
-      image: "/leadership/Adv-GrdDef-Proj.png",
-    },
-  ];
+const team = [
+  {
+    slug: "dr-muhammad-faisal-khan",
+    name: "Dr. Muhammad Faisal Khan",
+    role: "CEO",
+    image: "/leadership/CEO.png",
+  },
+  {
+    slug: "dr-naveed-iqbal",
+    name: "Dr. Naveed Iqbal",
+    role: "COO",
+    image: "/leadership/COO.webp",
+  },
+  {
+    slug: "dr-ahmad-muqeem-sheri",
+    name: "Dr. Ahmad Muqeem Sheri",
+    role: "CDO",
+    image: "/leadership/CDO.jpeg",
+  },
+  {
+    slug: "mansoor-ahmad-khan",
+    name: "Mansoor Ahmad Khan",
+    role: "CMO",
+    image: "/leadership/CMO2.png",
+  },
+  {
+    slug: "farooq-umer-khan",
+    name: "Farooq Umer Khan",
+    role: "CTO",
+    image: "/leadership/CTOo.webp",
+  },
+  {
+    slug: "dr-bilal-rauf",
+    name: "Dr. Bilal Rauf",
+    role: "CIO",
+    image: "/place-holder.jpg",
+  },
+  {
+    slug: "aamir-masood",
+    name: "Aamir Masood",
+    role: "CPO",
+    image: "/leadership/CPO.png",
+  },
+  {
+    slug: "babar-amin",
+    name: "Babar Amin",
+    role: "Adv Intl Project",
+    image: "/leadership/Adv-Intl-Project.png",
+  },
+  {
+    slug: "air-cdre-asim-adnan-r",
+    name: "Air Cdre Asim Adnan (R)",
+    role: "Adv Avcs",
+    image: "/leadership/Adv Avcs.jpeg",
+  },
+  {
+    slug: "col-abdul-rauf-sim-r",
+    name: "Col Abdul Rauf SI(M) (R)",
+    role: "Adv Grd Def Proj",
+    image: "/leadership/Adv-GrdDef-Proj.png",
+  },
+];
+
 
   const values = [
     {
@@ -113,7 +124,7 @@ export default function AboutPageClient() {
       </section>
 
       <AboutPreviewSection />
-      
+
       {/* Team Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -122,7 +133,8 @@ export default function AboutPageClient() {
               Our Leadership Team
             </h2>
             <p className="text-xl text-gray-600">
-              Meet the experienced professionals leading Teresol&apos;s innovation
+              Meet the experienced professionals leading Teresol&apos;s
+              innovation
             </p>
           </div>
 
@@ -133,14 +145,16 @@ export default function AboutPageClient() {
                 className="bg-white rounded-xl shadow-lg overflow-hidden"
               >
                 {/* ✨ Replaced <img> with next/image <Image> component */}
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  width={500}
-                  height={500}
-                  className="w-full aspect-square object-cover object-top"
-                  onError={(e) => { e.currentTarget.src = 'https://placehold.co/600x400/eee/ccc?text=Image'; }}
-                />
+                <Link href={`/team/${member.slug}`}>
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    width={500}
+                    height={500}
+                    className="w-full aspect-square object-cover object-top"
+                  />
+                </Link>
+
                 <div className="p-6 text-center">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     {member.name}
