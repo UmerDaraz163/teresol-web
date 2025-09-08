@@ -145,7 +145,7 @@ const team = [
                 className="bg-white rounded-xl shadow-lg overflow-hidden"
               >
                 {/* ✨ Replaced <img> with next/image <Image> component */}
-                {/* <Link> */}
+                {/* <Link href={`/team/${member.slug}`}> */}
                   <Image
                     src={member.image}
                     alt={member.name}
