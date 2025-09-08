@@ -145,7 +145,7 @@ const team = [
                 className="bg-white rounded-xl shadow-lg overflow-hidden"
               >
                 {/* ✨ Replaced <img> with next/image <Image> component */}
-                <Link href={`/team/${member.slug}`}>
+                {/* <Link> */}
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -153,7 +153,7 @@ const team = [
                     height={500}
                     className="w-full aspect-square object-cover object-top"
                   />
-                </Link>
+                {/* </Link> */}
 
                 <div className="p-6 text-center">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
