@@ -1,26 +1,44 @@
-// app/api/contact/route.ts
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
+  // 1. Load SMTP credentials from environment variables
+  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD } = process.env;
+  const recipientEmail = process.env.CONTACT_FORM_RECIPIENT;
+
+  // 2. Basic validation to ensure credentials are set
+  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASSWORD || !recipientEmail) {
+    console.error('SMTP credentials or recipient email are not configured in environment variables.');
+    return NextResponse.json({ message: 'Server configuration error' }, { status: 500 });
+  }
+
   try {
+    // 3. Parse form data from the request
     const formData = await request.json();
     const { name, email, phone, company, service, message } = formData;
 
-    // More descriptive subject line for better filtering
-    const subject = `New Teresol Inquiry: ${service || 'General Question'} from ${name}`;
-    
-    // Get current date and time in Pakistan Standard Time
-    const submissionDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' });
+    // 4. Create a Nodemailer "transporter"
+    const transporter = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: Number(SMTP_PORT),
+      secure: Number(SMTP_PORT) === 465, // Use SSL for port 465
+      auth: {
+        user: SMTP_USER,
+        pass: SMTP_PASSWORD,
+      },
+    });
 
-    const { data, error } = await resend.emails.send({
-      // For production, use a verified domain like 'notifications@teresol.com'
-      from: 'Teresol Website <onboarding@resend.dev>',
-      to: 'umardraz555@gmail.com',
+    // 5. Define email content
+    const subject = `New Teresol Inquiry: ${service || 'General Question'} from ${name}`;
+    const submissionDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' });
+    
+    // 6. Send the email using the transporter
+    await transporter.sendMail({
+      from: `"${name}" <${SMTP_USER}>`, // The "from" field will show the sender's name but use your email to send
+      to: recipientEmail,
+      replyTo: email, // When you reply, it goes to the user's actual email
       subject: subject,
-      replyTo: email,
+      // ✅ Your HTML email template is now included here
       html: `
         <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f7f6;">
           <div style="width: 100%; max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #e2e8f0;">
@@ -69,15 +87,10 @@ export async function POST(request: Request) {
       `,
     });
 
-    if (error) {
-      console.error({ error });
-      return NextResponse.json({ message: 'Error sending email', error }, { status: 500 });
-    }
-
-    return NextResponse.json({ message: 'Email sent successfully!', data }, { status: 200 });
+    return NextResponse.json({ message: 'Email sent successfully!' }, { status: 200 });
 
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: 'Internal Server Error', error }, { status: 500 });
+    return NextResponse.json({ message: 'Error sending email', error }, { status: 500 });
   }
 }
