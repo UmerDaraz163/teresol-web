@@ -10,7 +10,7 @@ const team = [
     image: "/leadership/CEO.png",
     intro: `Dr. Faisal leads Teresol with a vision for innovation and growth, 
     guiding the company's strategy and long-term goals with deep expertise in technology leadership.`,
-    reportees: [
+    teamMembers: [
       { name: "Huzaifa", image: "/place-holder.jpg" },
       { name: "Umer", image: "/place-holder.jpg" },
       { name: "Ali Khan", image: "/place-holder.jpg" },
@@ -24,7 +24,7 @@ const team = [
     intro: `Dr. Naveed oversees operational excellence at Teresol, ensuring
     smooth delivery of projects and client satisfaction. He has deep expertise
     in large-scale system implementation.`,
-    reportees: [
+    teamMembers: [
       { name: "Sara Ahmed", image: "/place-holder.jpg" },
       { name: "Usman Tariq", image: "/place-holder.jpg" },
       { name: "Maryam Noor", image: "/place-holder.jpg" },
@@ -37,7 +37,7 @@ const team = [
     image: "/leadership/CDO.jpeg",
     intro: `Dr. Ahmad drives digital innovation at Teresol, focusing on 
     data-driven strategies and modern transformation practices.`,
-    reportees: [
+    teamMembers: [
       { name: "Imran Ali", image: "/place-holder.jpg" },
       { name: "Kiran Fatima", image: "/place-holder.jpg" },
       { name: "Zeeshan Malik", image: "/place-holder.jpg" },
@@ -50,7 +50,7 @@ const team = [
     image: "/leadership/CMO2.png",
     intro: `Mansoor leads the marketing initiatives at Teresol, building
     brand value and customer engagement through innovative campaigns.`,
-    reportees: [
+    teamMembers: [
       { name: "Hira Shah", image: "/place-holder.jpg" },
       { name: "Bilal Asif", image: "/place-holder.jpg" },
       { name: "Ayesha Khan", image: "/place-holder.jpg" },
@@ -64,11 +64,11 @@ const team = [
     intro: `Air Commodore (Retd.) Farooq Umer Khan is a distinguished technology leader with a remarkable career in the Pakistan Air Force and extensive expertise in PCB design, embedded systems, and advanced hardware engineering. Currently serving as Chief Technology Officer (CTO), he leverages decades of technical and leadership experience to drive innovation, oversee complex projects, and deliver cutting-edge solutions.
 
 With a strong background in design engineering and system development, he combines strategic vision with deep technical insight, enabling organizations to achieve both technological advancement and operational excellence. His rare blend of military discipline, engineering proficiency, and executive leadership makes him highly effective in guiding teams, shaping technology roadmaps, and ensuring mission-critical outcomes.`,
-    reportees: [
-      { name: "Dr. Shahzad Arshad", image: "/leadership/staff/Dr. Shahzad Arshad.jpeg" },
-      { name: "Adeel Tariq", image: "/place-holder.jpg" },
-      { name: "Raheel Bari", image: "/leadership/staff/Raheel Bari.webp" },
-      { name: "Daniyal Islam", image: "/place-holder.jpg" },
+  teamMembers: [
+      { name: "Dr. Shahzad Arshad", image: "/leadership/staff/Dr. Shahzad Arshad.jpeg", role:"PD RF Team" },
+      { name: "Adeel Tariq", image: "/leadership/staff/Adeel Tariq.jpeg", role:"PD Tech Support" },
+      { name: "Raheel Bari", image: "/leadership/staff/Raheel Bari.webp" ,role:"PD Embedded Team" },
+      { name: "Daniyal Islam", image: "/place-holder.jpg", role:"PD Embedded Team" },
     ],
   },
   {
@@ -78,7 +78,7 @@ With a strong background in design engineering and system development, he combin
     image: "/leadership/CIO1.webp",
     intro: `Dr. Bilal manages information systems and IT strategy, aligning
     technology resources with business objectives.`,
-    reportees: [
+    teamMembers: [
       { name: "Hassan Raza", image: "/place-holder.jpg" },
       { name: "Maha Qureshi", image: "/place-holder.jpg" },
       { name: "Adnan Farid", image: "/place-holder.jpg" },
@@ -91,7 +91,7 @@ With a strong background in design engineering and system development, he combin
     image: "/leadership/CPO.png",
     intro: `Aamir drives product strategy and development, ensuring Teresol
     delivers impactful and market-ready solutions.`,
-    reportees: [
+    teamMembers: [
       { name: "Nida Khan", image: "/place-holder.jpg" },
       { name: "Rashid Ali", image: "/place-holder.jpg" },
       { name: "Zainab Mirza", image: "/place-holder.jpg" },
@@ -104,7 +104,7 @@ With a strong background in design engineering and system development, he combin
     image: "/leadership/Adv-Intl-Project.png",
     intro: `Babar advises on international projects, bringing a wealth of
     global experience to Teresol's ventures.`,
-    reportees: [
+    teamMembers: [
       { name: "Ali Raza", image: "/place-holder.jpg" },
       { name: "Sadia Noor", image: "/place-holder.jpg" },
       { name: "Ahmed Jan", image: "/place-holder.jpg" },
@@ -117,7 +117,7 @@ With a strong background in design engineering and system development, he combin
     image: "/leadership/Adv Avcs.jpeg",
     intro: `Asim brings aerospace and defense expertise, advising Teresol on
     advanced systems and strategic initiatives.`,
-    reportees: [
+    teamMembers: [
       { name: "Waqas Hanif", image: "/place-holder.jpg" },
       { name: "Saira Malik", image: "/place-holder.jpg" },
       { name: "Jawad Yousaf", image: "/place-holder.jpg" },
@@ -130,7 +130,7 @@ With a strong background in design engineering and system development, he combin
     image: "/leadership/Adv-GrdDef-Proj.png",
     intro: `Col Abdul Rauf advises Teresol on ground defense projects, providing
     critical military and defense expertise.`,
-    reportees: [
+    teamMembers: [
       { name: "Moiz Khan", image: "/place-holder.jpg" },
       { name: "Fatima Aslam", image: "/place-holder.jpg" },
       { name: "Kashif Mehmood", image: "/place-holder.jpg" },
