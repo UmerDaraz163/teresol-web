@@ -61,14 +61,17 @@ const team = [
     name: "Farooq Umer Khan",
     role: "CTO",
     image: "/leadership/CTOo.webp",
-    intro: `Air Commodore (Retd.) Farooq Umer Khan is a distinguished technology leader with a remarkable career in the Pakistan Air Force and extensive expertise in PCB design, embedded systems, and advanced hardware engineering. Currently serving as Chief Technology Officer (CTO), he leverages decades of technical and leadership experience to drive innovation, oversee complex projects, and deliver cutting-edge solutions.
+    intro: `Mr Muhammad Farooq Umer Khan is an Aeronautical (Avionics) Engineer with more than 30 years of professional experience across varied domains of Research and Development and Project Management.<br /><br />
+Mr. Muhammad Farooq Umer Khan is a highly accomplished technology innovator. He specializes in hardware and software architecture design, embedded systems, signal analysis and system integration. He has rich experience of applied research, and has successfully produced numerous electronic systems which are currently in use in various types of aircraft and ground systems. His expertise and dedication have played a key role in establishing TeReSol as a leader in open-architecture computing and electronic systems for aerospace, defense, and industrial applications.<br /><br />
+Prior to his present assignment, he served in Pakistan Air Force in engineering branch where he supervised projects of different scope and magnitude at organizational, national and international levels, while being at senior management positions.<br /><br />
+Mr Khan has also remained actively involved in enhancing Academia-Industry linkages. He has worked as Director ORIC (Office of Research, Innovation & Commercialization) at NuTech University, Islamabad. Based on extensive hand-on experience of carrying out R&D, he made sizeable efforts in creating an enabling environment for product-based research through creation of a meaningful interface between the researchers and industry. He assisted in providing strategic and operational support to the research activities of university, focusing on turning knowledge into innovation through generation of products and refinement of production processes.<br /><br />
+Mr Khan is a published author having multiple internationally recognized and conference papers to his credit.`,
 
-With a strong background in design engineering and system development, he combines strategic vision with deep technical insight, enabling organizations to achieve both technological advancement and operational excellence. His rare blend of military discipline, engineering proficiency, and executive leadership makes him highly effective in guiding teams, shaping technology roadmaps, and ensuring mission-critical outcomes.`,
-  teamMembers: [
-      { name: "Dr. Shahzad Arshad", image: "/leadership/staff/Dr. Shahzad Arshad.jpeg", role:"PD RF Team" },
-      { name: "Adeel Tariq", image: "/leadership/staff/Adeel Tariq.jpeg", role:"PD Tech Support" },
-      { name: "Raheel Bari", image: "/leadership/staff/Raheel Bari.webp" ,role:"PD Embedded Team" },
-      { name: "Daniyal Islam", image: "/place-holder.jpg", role:"PD Embedded Team" },
+    teamMembers: [
+      { name: "Dr. Shahzad Arshad", image: "/leadership/staff/Dr. Shahzad Arshad.jpeg", role: "PD RF Team" },
+      { name: "Adeel Tariq", image: "/leadership/staff/Adeel Tariq.jpeg", role: "PD Tech Support" },
+      { name: "Raheel Bari", image: "/leadership/staff/Raheel Bari.webp", role: "PD Embedded Team" },
+      { name: "Daniyal Islam", image: "/place-holder.jpg", role: "PD Embedded Team" },
     ],
   },
   {
