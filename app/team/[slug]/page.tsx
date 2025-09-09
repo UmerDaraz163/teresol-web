@@ -61,12 +61,14 @@ const team = [
     name: "Farooq Umer Khan",
     role: "CTO",
     image: "/leadership/CTOo.webp",
-    intro: `Farooq spearheads technology development at Teresol, ensuring
-    cutting-edge solutions and system architectures.`,
+    intro: `Air Commodore (Retd.) Farooq Umer Khan is a distinguished technology leader with a remarkable career in the Pakistan Air Force and extensive expertise in PCB design, embedded systems, and advanced hardware engineering. Currently serving as Chief Technology Officer (CTO), he leverages decades of technical and leadership experience to drive innovation, oversee complex projects, and deliver cutting-edge solutions.
+
+With a strong background in design engineering and system development, he combines strategic vision with deep technical insight, enabling organizations to achieve both technological advancement and operational excellence. His rare blend of military discipline, engineering proficiency, and executive leadership makes him highly effective in guiding teams, shaping technology roadmaps, and ensuring mission-critical outcomes.`,
     reportees: [
-      { name: "Tariq Javed", image: "/place-holder.jpg" },
-      { name: "Saima Bano", image: "/place-holder.jpg" },
-      { name: "Omer Khalid", image: "/place-holder.jpg" },
+      { name: "Dr. Shahzad Arshad", image: "/leadership/staff/Dr. Shahzad Arshad.jpeg" },
+      { name: "Adeel Tariq", image: "/place-holder.jpg" },
+      { name: "Raheel Bari", image: "/leadership/staff/Raheel Bari.webp" },
+      { name: "Daniyal Islam", image: "/place-holder.jpg" },
     ],
   },
   {
@@ -137,7 +139,7 @@ const team = [
 ];
 
 export async function generateStaticParams() {
-  return team.map((member) => ({ slug:  member.slug }));
+  return team.map((member) => ({ slug: member.slug }));
 }
 
 export default async function TeamMemberProfile({
