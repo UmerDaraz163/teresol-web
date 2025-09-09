@@ -19,7 +19,7 @@ type TeamMember = {
   teamMembers: teamMember[];
 };
 
-// ✅ Mapping abbreviations to full forms
+// Mapping abbreviations to full forms
 const roleMap: Record<string, string> = {
   CEO: "Chief Executive Officer",
   COO: "Chief Operating Officer",
@@ -34,71 +34,70 @@ const roleMap: Record<string, string> = {
 };
 
 export default function TeamMemberPage({ member }: { member: TeamMember }) {
-  // ✅ Check if full form exists, otherwise fallback to abbreviation
+  // Check if full form exists, otherwise fallback to abbreviation
   const fullRole = roleMap[member.role] || member.role;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen ">
       <Header />
 
-      {/* Top Section */}
-      <section className="mt-20">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      {/* ✅ FIX: Added a hero section with a dark background */}
+      {/* This provides contrast for the transparent header on page load. */}
+      <section className="bg-gray-800 pt-24 pb-16 text-white">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center">
             <Image
               src={member.image}
               alt={member.name}
               width={400}
               height={400}
-              className="object-cover shadow-lg"
+              className="object-cover shadow-lg rounded-[24px] border-4 border-gray-600"
             />
           </div>
 
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center md:text-left">
+            <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
               {member.name}
             </h1>
-            <p className="text-xl text-blue-600 font-medium">{fullRole}</p>
+            <p className="text-xl text-blue-300 font-medium">{fullRole}</p>
           </div>
         </div>
       </section>
 
       {/* Intro Section */}
-      <section className="py-8 px-36">
-        <div className="container mx-auto">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+      <section className="py-16">
+        <div className="container mx-auto px-4 md:px-0 max-w-4xl">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
               Professional Summary
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed text-justify">
               {member.intro}
             </p>
-          </div>
         </div>
       </section>
 
-      {/* Reportees Section */}
+      {/* Team Members Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Team Members
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
             {member.teamMembers.map((teamMem, i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl shadow-lg overflow-hidden"
+                className="bg-white rounded-xl shadow-lg overflow-hidden text-center group"
               >
-                <Image
-                  src={teamMem.image}
-                  alt={teamMem.name}
-                  width={500}
-                  height={500}
-                  className="w-full aspect-square object-cover object-top"
-                />
-
-                <div className="p-6 text-center">
+                <div className="relative w-full aspect-square">
+                  <Image
+                    src={teamMem.image}
+                    alt={teamMem.name}
+                    fill
+                    className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     {teamMem.name}
                   </h3>
