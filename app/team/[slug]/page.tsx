@@ -8,8 +8,10 @@ const team = [
     name: "Dr. Muhammad Faisal Khan",
     role: "CEO",
     image: "/leadership/CEO.png",
-    intro: `Dr. Faisal leads Teresol with a vision for innovation and growth, 
-    guiding the company's strategy and long-term goals with deep expertise in technology leadership.`,
+    intro: `Dr. Muhammad Faisal Khan is a highly accomplished and experienced technology innovator. He is a seasoned entrepreneur, who sequentially co-founded TeReSol and KRTECH Private Limited, Pakistan; both research-based organizations. Dr. Khan has been leading the companies as Chief Executive Officer since 2017. Prior to founding TeReSol, Dr. Khan also served as an Assistant Professor at the National University of Sciences and Technology (NUST) from February 2009 to April 2014. <br /><br />
+Currently Dr. Khan is heading workforce of more than 400 Engineers and 20 PhDs. He specializes in hardware and software architecture designing, embedded systems, signal analysis, system integration (mechanical and electrical) and image processing. Dr. Khan's expertise and commitment have been instrumental in positioning TeReSol as a leader in open architecture computing and electronic systems for aerospace, defense, and industrial applications. His team has successfully produced six top of the line products for defense as well as private sector under his dynamic lead. Under his leadership, TeReSol has been recognized as a fast-growing R&D company, notably being featured in the Japan International Cooperation Agency's (JICA) report highlighting Pakistan as 'the next ICT powerhouse'. <br /><br />
+Dr. Khan is also the member of National Committee on Research & Development, R&D Division, Higher Education Commission, Government of Pakistan and has been awarded RCCI ICT Company of the Year 2015 as well as P@SHA Award for health and wellbeing sector 2016 in Pakistan.
+Dr. Muhammad Faisal Khan is a published author with over twelve internationally recognized journal and conference papers to his credit.`,
     teamMembers: [
       { name: "Huzaifa", image: "/place-holder.jpg" },
       { name: "Umer", image: "/place-holder.jpg" },
@@ -21,9 +23,11 @@ const team = [
     name: "Dr. Naveed Iqbal",
     role: "COO",
     image: "/leadership/COO.webp",
-    intro: `Dr. Naveed oversees operational excellence at Teresol, ensuring
-    smooth delivery of projects and client satisfaction. He has deep expertise
-    in large-scale system implementation.`,
+    intro: `Dr Naveed is a serial entrepreneur, with an acumen of designing innovatively creative products. He has served as VP engineering for a decade and was responsible for transformation of user idea into a high-level product design and its translation into product features; selection of available technology; supervise and guide teams while making “product development plan” and designing & testing of core algorithms; etc. Presently, he is managing operations of 400+ engineers team in multiple cities and countries as COO.<br /><br />
+Dr Naveed has served as teaching & research faculty in Military College of Signals (A constituent College of NUST) 2007 till 2020. During these years, he taught various subjects related to Advance Signal & Image Processing, supervised MS & PhD students in this domain. Moreover, he served as Head of Computer Software Engineering department for two years and supervised academic management of more than 300 students. During this time, he established a national research center in field of Image Processing Center with funding of Ministry of Sciences and Technology Pakistan, won and completed multiple national & international academic research fundings including from DaaD (Germany) for many years, represented Pakistan in various academic events under Higher Education Commission of Pakistan banner etc.<br /><br />
+In 2010, Dr Naveed was selected by US Department of Commerce (through their Commercial Law Development Program - CLDP program) as top ten emerging academic entrepreneurs from Pakistan for Professional Entrepreneurship training at USA and have worked with many US AIDS program and been referred as a success story many times.<br /><br />
+As part of Corporate Social Responsibility, Dr Naveed is on industrial advisory board panel in multiple universities including Capital University (CUST), Air University, etc.  part of steering committee of National Robotics Center, Pakistan and member of Government Regulatory Committee in Pakistan Software Houses Association (PASHA) on volunteer basis.
+Dr. Naveed Iqbal is a published author with over twelve internationally recognized journal and conference papers to his credit.`,
     teamMembers: [
       { name: "Sara Ahmed", image: "/place-holder.jpg" },
       { name: "Usman Tariq", image: "/place-holder.jpg" },
@@ -68,10 +72,10 @@ Mr Khan has also remained actively involved in enhancing Academia-Industry linka
 Mr Khan is a published author having multiple internationally recognized and conference papers to his credit.`,
 
     teamMembers: [
-      { name: "Dr. Shahzad Arshad", image: "/leadership/staff/Dr. Shahzad Arshad.jpeg", role: "PD RF Team" },
+      { name: "Dr. Shahzad Arshad", image: "/leadership/staff/Dr. Shahzad Arshad.jpeg", role: "PD Radio Frequency" },
       { name: "Adeel Tariq", image: "/leadership/staff/Adeel Tariq.jpeg", role: "PD Tech Support" },
-      { name: "Raheel Bari", image: "/leadership/staff/Raheel Bari.webp", role: "PD Embedded Team" },
-      { name: "Daniyal Islam", image: "/place-holder.jpg", role: "PD Embedded Team" },
+      { name: "Raheel Bari", image: "/leadership/staff/Raheel Bari.webp", role: "PD Embedded" },
+      { name: "Daniyal Islam", image: "/place-holder.jpg", role: "PD Embedded" },
     ],
   },
   {

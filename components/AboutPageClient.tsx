@@ -1,8 +1,6 @@
-// components/AboutPageClient.tsx
-
 "use client";
 
-import Image from "next/image"; // ✨ Import the Image component
+import Image from "next/image";
 import Header from "./Header";
 import Footer from "./Footer";
 import Link from "next/link";
@@ -13,43 +11,43 @@ export default function AboutPageClient() {
     {
       slug: "dr-muhammad-faisal-khan",
       name: "Dr. Muhammad Faisal Khan",
-      role: "CEO",
+      role: "Chief Executive Officer",
       image: "/leadership/CEO.png",
     },
     {
       slug: "dr-naveed-iqbal",
       name: "Dr. Naveed Iqbal",
-      role: "COO",
+      role: "Chief Operating Officer",
       image: "/leadership/COO.webp",
     },
     {
       slug: "dr-ahmad-muqeem-sheri",
       name: "Dr. Ahmad Muqeem Sheri",
-      role: "CDO",
+      role: "Chief Design Officer",
       image: "/leadership/CDO.jpeg",
     },
     {
       slug: "mansoor-ahmad-khan",
       name: "Mansoor Ahmad Khan",
-      role: "CMO",
+      role: "Chief Marketing Officer",
       image: "/leadership/CMO2.png",
     },
     {
       slug: "farooq-umer-khan",
       name: "Farooq Umer Khan",
-      role: "CTO",
+      role: "Chief Technical Officer",
       image: "/leadership/CTOo.webp",
     },
     {
       slug: "dr-bilal-rauf",
       name: "Dr. Bilal Rauf",
-      role: "CIO",
+      role: "Chief Information Officer",
       image: "/leadership/CIO1.webp",
     },
     {
       slug: "aamir-masood",
       name: "Aamir Masood",
-      role: "CPO",
+      role: "Chief Project Officer",
       image: "/leadership/CPO.png",
     },
     {
@@ -123,55 +121,66 @@ export default function AboutPageClient() {
       </section>
 
       <AboutPreviewSection />
-{/* Team Section */}
-<section className="py-20 bg-gray-50">
-  <div className="container mx-auto px-4">
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-gray-900 mb-4">
-        Our Leadership Team
-      </h2>
-      <p className="text-xl text-gray-600">
-        Meet the experienced professionals leading Teresol&apos;s innovation
-      </p>
-    </div>
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-      {team.map((member, index) => {
-        const isCTO = member.role === "CTO"; // ✅ Only CTO clickable
-
-        const imageElement = (
-          <Image
-            src={member.image}
-            alt={member.name}
-            width={500}
-            height={500}
-            className="w-full aspect-square object-cover object-top"
-          />
-        );
-
-        return (
-          <div
-            key={index}
-            className="bg-white rounded-xl shadow-lg overflow-hidden"
-          >
-            {isCTO ? (
-              <Link href={`/team/${member.slug}`}>{imageElement}</Link>
-            ) : (
-              imageElement
-            )}
-
-            <div className="p-6 text-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {member.name}
-              </h3>
-              <p className="text-blue-600 font-medium">{member.role}</p>
-            </div>
+      {/* Team Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Our Leadership Team
+            </h2>
+            <p className="text-xl text-gray-600">
+              Meet the experienced professionals leading Teresol&apos;s innovation
+            </p>
           </div>
-        );
-      })}
-    </div>
-  </div>
-</section>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {team.map((member, index) => {
+              const isClickable =
+                member.role === "Chief Technical Officer" ||
+                member.role === "Chief Executive Officer" ||
+                member.role === "Chief Operating Officer";
+
+              // ✅ Define the card's inner content as a constant
+              const cardContent = (
+                <>
+                  <div className="relative w-full aspect-square">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-6 text-center">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600">
+                      {member.name}
+                    </h3>
+                    <p className="text-blue-600 font-medium">{member.role}</p>
+                  </div>
+                </>
+              );
+              
+              // ✅ Conditionally render the card inside a Link or a div
+              return isClickable ? (
+                <Link
+                  key={index}
+                  href={`/team/${member.slug}`}
+                  className="block bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                >
+                  {cardContent}
+                </Link>
+              ) : (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-lg overflow-hidden"
+                >
+                  {cardContent}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
 
       {/* Values Section */}
