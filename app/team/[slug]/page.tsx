@@ -71,10 +71,34 @@ Mr Khan has also remained actively involved in enhancing Academia-Industry linka
 Mr Khan is a published author having multiple internationally recognized and conference papers to his credit.`,
 
     teamMembers: [
-      { name: "Dr. Shahzad Arshad", image: "/leadership/staff/Dr. Shahzad Arshad.jpeg", role: "PD Radio Frequency" },
-      { name: "Adeel Tariq", image: "/leadership/staff/Adeel Tariq.jpeg", role: "PD Tech Support" },
-      { name: "Raheel Bari", image: "/leadership/staff/Raheel Bari.webp", role: "PD Embedded" },
-      { name: "Daniyal Islam", image: "/place-holder.jpg", role: "PD Embedded" },
+      {
+        name: "Dr. Shahzad Arshad",
+        image: "/leadership/staff/Dr. Shahzad Arshad.jpeg",
+        role: "PD Radio Frequency",
+        intro:
+          "With pver 30 years of experience, Specialized in radio frequency systems, ensuring reliable communication and signal integrity across projects. Focused on designing, testing, and optimizing RF solutions for advanced defense technologies.",
+      },
+      {
+        name: "Adeel Tariq",
+        image: "/leadership/staff/Adeel Tariq.jpeg",
+        role: "PD Tech Support",
+        intro:
+          "With over 25 years of experince in relative field, Dedicated to providing end-to-end technical assistance, ensuring smooth operation of systems and tools. Skilled in troubleshooting, resolving issues, and supporting teams to maintain peak efficiency.",
+      },
+      {
+        name: "Raheel Bari",
+        image: "/leadership/staff/Raheel Bari.webp",
+        role: "PD Embedded",
+        intro:
+          "Focused on developing and optimizing embedded systems that power critical applications. Skilled in firmware design, hardware-software integration, and delivering reliable real-time solutions.",
+      },
+      {
+        name: "Daniyal Islam",
+        image: "/place-holder.jpg",
+        role: "PD Embedded",
+        intro:
+          "Focused on developing and optimizing embedded systems that power critical applications. Skilled in firmware design, hardware-software integration, and delivering reliable real-time solutions.",
+      },
     ],
   },
   {
