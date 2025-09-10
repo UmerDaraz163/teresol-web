@@ -13,9 +13,8 @@ Currently Dr. Khan is heading workforce of more than 400 Engineers and 20 PhDs. 
 Dr. Khan is also the member of National Committee on Research & Development, R&D Division, Higher Education Commission, Government of Pakistan and has been awarded RCCI ICT Company of the Year 2015 as well as P@SHA Award for health and wellbeing sector 2016 in Pakistan.
 Dr. Muhammad Faisal Khan is a published author with over twelve internationally recognized journal and conference papers to his credit.`,
     teamMembers: [
-      { name: "Huzaifa", image: "/place-holder.jpg" },
-      { name: "Umer", image: "/place-holder.jpg" },
-      { name: "Ali Khan", image: "/place-holder.jpg" },
+      { name: "Farooq Umer Khan", image: "/leadership/CTOo.webp", role: "CTO" },
+      { name: "Dr. Bilal Rauf", image: "/leadership/CIO1.webp", role: "CIO" },
     ],
   },
   {
