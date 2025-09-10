@@ -80,6 +80,7 @@ export default function AboutPreviewSection() {
               fill
               priority
               className="object-cover object-top"
+              unoptimized
             />
           </div>
         </div>
