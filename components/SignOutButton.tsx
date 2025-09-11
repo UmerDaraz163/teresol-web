@@ -1,12 +1,11 @@
-// components/SignOutButton.tsx
 'use client';
 
 import { signOut } from 'next-auth/react';
 
 export default function SignOutButton() {
   const handleSignOut = async () => {
-    // The signOut function from NextAuth handles session clearing and redirection.
-    await signOut({ callbackUrl: '/admin/login' });
+    const callbackUrl = `${window.location.origin}/admin/login`;
+    await signOut({ callbackUrl });
   };
 
   return (
