@@ -35,7 +35,7 @@ export default function AboutPageClient() {
     {
       slug: "farooq-umer-khan",
       name: "Farooq Umer Khan",
-      role: "Chief Technical Officer",
+      role: "Chief Technology Officer",
       image: "/leadership/CTOo.webp",
     },
     {
@@ -53,19 +53,19 @@ export default function AboutPageClient() {
     {
       slug: "babar-amin",
       name: "Babar Amin",
-      role: "Adv Intl Project",
+      role: "Advisor International Projects",
       image: "/leadership/Adv-Intl-Project.png",
     },
     {
       slug: "air-cdre-asim-adnan-r",
       name: "Air Cdre Asim Adnan (R)",
-      role: "Adv Avcs",
+      role: "Advisor Aviation Projects",
       image: "/leadership/Adv Avcs.jpeg",
     },
     {
       slug: "col-abdul-rauf-sim-r",
       name: "Col Abdul Rauf SI(M) (R)",
-      role: "Adv Grd Def Proj",
+      role: "Advisor Defense Projects",
       image: "/leadership/Adv-GrdDef-Proj.png",
     },
   ];
@@ -136,10 +136,10 @@ export default function AboutPageClient() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {team.map((member, index) => {
               const isClickable =
-                member.role === "Chief Technical Officer" 
-                // ||
-                // member.role === "Chief Executive Officer" ||
-                // member.role === "Chief Operating Officer";
+                member.role === "Chief Technology Officer" 
+                ||
+                member.role === "Chief Executive Officer" ||
+                member.role === "Chief Operating Officer";
 
               // ✅ Define the card's inner content as a constant
               const cardContent = (

@@ -26,7 +26,7 @@ export default function Footer() {
                 <i className="ri-facebook-fill text-white"></i>
               </div>
               <div className="w-8 h-8 flex items-center justify-center bg-blue-600 rounded cursor-pointer hover:bg-blue-700 transition-colors">
-                <i className="ri-twitter-fill text-white"></i>
+                <i className="ri-instagram-fill text-white"></i>
               </div>
               <div className="w-8 h-8 flex items-center justify-center bg-blue-600 rounded cursor-pointer hover:bg-blue-700 transition-colors">
                 <i className="ri-linkedin-fill text-white"></i>
@@ -119,7 +119,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © Copyright Teresol. All Rights Reserved.
+            © 2025 Teresol . All Rights Reserved.
           </p>
         </div>
       </div>

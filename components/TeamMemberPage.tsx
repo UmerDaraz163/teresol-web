@@ -24,14 +24,14 @@ type TeamMember = {
 const roleMap: Record<string, string> = {
   CEO: "Chief Executive Officer",
   COO: "Chief Operating Officer",
-  CTO: "Chief Technical Officer",
+  CTO: "Chief Technology Officer",
   CIO: "Chief Information Officer",
   CDO: "Chief Digital Officer",
   CMO: "Chief Marketing Officer",
   CPO: "Chief Product Officer",
-  "Adv Intl Project": "Advisor International Projects",
-  "Adv Avcs": "Advisor Avionics & Special Projects",
-  "Adv Grd Def Proj": "Advisor Ground Defense Projects",
+  "Advisor International Projects": "Advisor International Projects",
+  "Adv Aviation Projects": "Advisor Avionics & Special Projects",
+  "Advisor Defense Projects": "Advisor Ground Defense Projects",
 };
 
 export default function TeamMemberPage({ member }: { member: TeamMember }) {
@@ -75,49 +75,52 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
       </section>
 
       {/* Team Members Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
-            Team Members
-          </h2>
+      {fullRole !== "Chief Executive Officer" &&
+        fullRole !== "Chief Operating Officer" && (
+          <section className="py-16 bg-gray-50">
+            <div className="container mx-auto px-4 max-w-6xl">
+              <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
+                Team Members
+              </h2>
 
-          {/* Make every card one full row */}
-          <div className="grid grid-cols-1 gap-8">
-            {member.teamMembers.map((teamMem, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row group hover:shadow-2xl transition-all duration-300"
-              >
-                {/* Image */}
-                <div className="relative w-full sm:w-1/4 md:w-1/5">
-                  <Image
-                    src={teamMem.image}
-                    alt={teamMem.name}
-                    width={200} // control width
-                    height={250} // control height
-                    className="object-contain transition-transform duration-300 group-hover:scale-105 bg-gray-100"
-                  />
-                </div>
+              {/* Make every card one full row */}
+              <div className="grid grid-cols-1 gap-8">
+                {member.teamMembers.map((teamMem, i) => (
+                  <div
+                    key={i}
+                    className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row group hover:shadow-2xl transition-all duration-300"
+                  >
+                    {/* Image */}
+                    <div className="relative w-full sm:w-1/4 md:w-1/5">
+                      <Image
+                        src={teamMem.image}
+                        alt={teamMem.name}
+                        width={200}
+                        height={250}
+                        className="object-contain transition-transform duration-300 group-hover:scale-105 bg-gray-100"
+                      />
+                    </div>
 
-                {/* Text content */}
-                <div className="p-6 flex flex-col justify-start sm:w-2/3">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-1">
-                    {teamMem.name}
-                  </h3>
-                  <p className="text-blue-600 font-medium mb-3">
-                    {teamMem.role ?? "Team Member"}
-                  </p>
-                  {teamMem.intro && (
-                    <p className="text-gray-600 text-sm leading-relaxed mt-2 text-justify">
-                      {teamMem.intro}
-                    </p>
-                  )}
-                </div>
+                    {/* Text content */}
+                    <div className="p-6 flex flex-col justify-start sm:w-2/3">
+                      <h3 className="text-xl font-semibold text-gray-900 mb-1">
+                        {teamMem.name}
+                      </h3>
+                      <p className="text-blue-600 font-medium mb-3">
+                        {teamMem.role ?? "Team Member"}
+                      </p>
+                      {teamMem.intro && (
+                        <p className="text-gray-600 text-sm leading-relaxed mt-2 text-justify">
+                          {teamMem.intro}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
+          </section>
+        )}
 
       <Footer />
     </div>
