@@ -136,9 +136,10 @@ export default function AboutPageClient() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {team.map((member, index) => {
               const isClickable =
-                member.role === "Chief Technical Officer" ||
-                member.role === "Chief Executive Officer" ||
-                member.role === "Chief Operating Officer";
+                member.role === "Chief Technical Officer" 
+                // ||
+                // member.role === "Chief Executive Officer" ||
+                // member.role === "Chief Operating Officer";
 
               // ✅ Define the card's inner content as a constant
               const cardContent = (
