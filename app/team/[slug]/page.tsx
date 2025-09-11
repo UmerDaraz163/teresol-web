@@ -64,7 +64,7 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
     name: "Farooq Umer Khan",
     role: "CTO",
     image: "/leadership/CTOo.webp",
-    intro: `Mr. Muhammad Farooq Umer Khan is an Aeronautical (Avionics) Engineer with 30 years of professional experience spanning Research & Development and Project Management. Currently serving as Chief Technology Officer (CTO), he leverages decades of technical and leadership experience to drive innovation, oversee complex projects, and deliver cutting-edge solutions.
+    intro: `Mr. Farooq Umer Khan is an Aeronautical (Avionics) Engineer with 30 years of professional experience spanning Research & Development and Project Management. Currently serving as Chief Technology Officer (CTO), he leverages decades of technical and leadership experience to drive innovation, oversee complex projects, and deliver cutting-edge solutions.
 
 <br></br> A highly accomplished technology innovator, he specializes in hardware and software architecture design, embedded systems, signal analysis, and system integration. With a strong background in design engineering and system development, he combines strategic vision with deep technical insight, enabling organizations to achieve both technological advancement and operational excellence.
 
@@ -92,7 +92,7 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
         image: "/leadership/staff/Raheel Bari.webp",
         role: "Project Director Embedded Systems",
         intro:
-          "Focused on developing and optimizing embedded systems that power critical applications. Skilled in firmware design, hardware-software integration, and delivering reliable real-time solutions.",
+          "Mr. Raheel Bari is working as Project Director – Embedded Systems at TeReSol with overall 20+ years of experience in embedded hardware, firmware, and system architecture. He drives complex product development from concept to certification, delivering high-reliability, standards-compliant electronics systems for aerospace and defense applications.",
       },
       {
         name: "Daniyal Islam",
