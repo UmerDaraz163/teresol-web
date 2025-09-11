@@ -13,8 +13,8 @@ Currently Dr. Khan is heading workforce of more than 400 Engineers and 20 PhDs. 
 Dr. Khan is also the member of National Committee on Research & Development, R&D Division, Higher Education Commission, Government of Pakistan and has been awarded RCCI ICT Company of the Year 2015 as well as P@SHA Award for health and wellbeing sector 2016 in Pakistan.
 Dr. Muhammad Faisal Khan is a published author with over twelve internationally recognized journal and conference papers to his credit.`,
     teamMembers: [
-      { name: "Farooq Umer Khan", image: "/leadership/CTOo.webp", role: "CTO" },
-      { name: "Dr. Bilal Rauf", image: "/leadership/CIO1.webp", role: "CIO" },
+      // { name: "Farooq Umer Khan", image: "/leadership/CTOo.webp", role: "CTO" },
+      // { name: "Dr. Bilal Rauf", image: "/leadership/CIO1.webp", role: "CIO" },
     ],
   },
   {
@@ -28,9 +28,9 @@ In 2010, Dr Naveed was selected by US Department of Commerce (through their Comm
 As part of Corporate Social Responsibility, Dr Naveed is on industrial advisory board panel in multiple universities including Capital University (CUST), Air University, etc.  part of steering committee of National Robotics Center, Pakistan and member of Government Regulatory Committee in Pakistan Software Houses Association (PASHA) on volunteer basis.
 Dr. Naveed Iqbal is a published author with over twelve internationally recognized journal and conference papers to his credit.`,
     teamMembers: [
-      { name: "Sara Ahmed", image: "/place-holder.jpg" },
-      { name: "Usman Tariq", image: "/place-holder.jpg" },
-      { name: "Maryam Noor", image: "/place-holder.jpg" },
+      // { name: "Sara Ahmed", image: "/place-holder.jpg" },
+      // { name: "Usman Tariq", image: "/place-holder.jpg" },
+      // { name: "Maryam Noor", image: "/place-holder.jpg" },
     ],
   },
   {
@@ -64,38 +64,40 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
     name: "Farooq Umer Khan",
     role: "CTO",
     image: "/leadership/CTOo.webp",
-    intro: `Mr Muhammad Farooq Umer Khan is an Aeronautical (Avionics) Engineer with more than 30 years of professional experience across varied domains of Research and Development and Project Management.<br /><br />
-Mr. Muhammad Farooq Umer Khan is a highly accomplished technology innovator. He specializes in hardware and software architecture design, embedded systems, signal analysis and system integration. He has rich experience of applied research, and has successfully produced numerous electronic systems which are currently in use in various types of aircraft and ground systems. His expertise and dedication have played a key role in establishing TeReSol as a leader in open-architecture computing and electronic systems for aerospace, defense, and industrial applications.<br /><br />
-Prior to his present assignment, he served in Pakistan Air Force in engineering branch where he supervised projects of different scope and magnitude at organizational, national and international levels, while being at senior management positions.<br /><br />
-Mr Khan has also remained actively involved in enhancing Academia-Industry linkages. He has worked as Director ORIC (Office of Research, Innovation & Commercialization) at NuTech University, Islamabad. Based on extensive hand-on experience of carrying out R&D, he made sizeable efforts in creating an enabling environment for product-based research through creation of a meaningful interface between the researchers and industry. He assisted in providing strategic and operational support to the research activities of university, focusing on turning knowledge into innovation through generation of products and refinement of production processes.<br /><br />
-Mr Khan is a published author having multiple internationally recognized and conference papers to his credit.`,
+    intro: `Mr. Muhammad Farooq Umer Khan is an Aeronautical (Avionics) Engineer with 30 years of professional experience spanning Research & Development and Project Management. Currently serving as Chief Technology Officer (CTO), he leverages decades of technical and leadership experience to drive innovation, oversee complex projects, and deliver cutting-edge solutions.
+
+<br></br> A highly accomplished technology innovator, he specializes in hardware and software architecture design, embedded systems, signal analysis, and system integration. With a strong background in design engineering and system development, he combines strategic vision with deep technical insight, enabling organizations to achieve both technological advancement and operational excellence.
+
+<br></br> He has extensive applied research experience and has successfully developed numerous electronic systems currently deployed in various types of aircraft and ground platforms. His expertise and dedication played a key role in establishing TeReSol as a leader in open-architecture computing and electronic systems for aerospace, defense, and industrial applications.
+
+<br></br> Earlier in his career, he served in the Pakistan Air Force as part of the engineering branch, where he managed projects of diverse scope and complexity at organizational, national, and international levels while holding senior management positions. Mr. Khan is also a published author with multiple internationally recognized conference papers to his credit`,
 
     teamMembers: [
       {
         name: "Dr. Shahzad Arshad",
         image: "/leadership/staff/Dr. Shahzad Arshad.jpeg",
-        role: "PD Radio Frequency",
+        role: "Project Director Radio Frequency",
         intro:
-          "With pver 30 years of experience, Specialized in radio frequency systems, ensuring reliable communication and signal integrity across projects. Focused on designing, testing, and optimizing RF solutions for advanced defense technologies.",
+          "With over 30 years of experience, Specialized in radio frequency systems, ensuring reliable communication and signal integrity across projects. Focused on designing, testing, and optimizing RF solutions for advanced defense technologies.",
       },
       {
         name: "Adeel Tariq",
         image: "/leadership/staff/Adeel Tariq.jpeg",
-        role: "PD Tech Support",
+        role: "Project Director Technical Support",
         intro:
           "With over 25 years of experince in relative field, Dedicated to providing end-to-end technical assistance, ensuring smooth operation of systems and tools. Skilled in troubleshooting, resolving issues, and supporting teams to maintain peak efficiency.",
       },
       {
         name: "Raheel Bari",
         image: "/leadership/staff/Raheel Bari.webp",
-        role: "PD Embedded",
+        role: "Project Director Embedded Systems",
         intro:
           "Focused on developing and optimizing embedded systems that power critical applications. Skilled in firmware design, hardware-software integration, and delivering reliable real-time solutions.",
       },
       {
         name: "Daniyal Islam",
         image: "/place-holder.jpg",
-        role: "PD Embedded",
+        role: "Project Director Embedded Systems",
         intro:
           "Focused on developing and optimizing embedded systems that power critical applications. Skilled in firmware design, hardware-software integration, and delivering reliable real-time solutions.",
       },
