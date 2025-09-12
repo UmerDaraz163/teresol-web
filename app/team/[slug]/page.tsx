@@ -78,7 +78,7 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
         image: "/leadership/staff/DrShahzadArshad.jpeg",
         role: "Project Director Radio Frequency",
         intro:
-          "With over 30 years of experience, Specialized in radio frequency systems, ensuring reliable communication and signal integrity across projects. Focused on designing, testing, and optimizing RF solutions for advanced defense technologies.",
+          "RF & Microwave Systems at TeReSol, leveraging over 20 years of experience in RF systems design to spearhead the end-to-end development of radar and wireless comm systems. He brings extensive experience in leading technical teams for technology development projects, adeptly guiding cross-functional teams to achieve project milestones and drive innovation.",
       },
       {
         name: "Adeel Tariq",
@@ -92,14 +92,14 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
         image: "/leadership/staff/RaheelBari.webp",
         role: "Project Director Embedded Systems",
         intro:
-          "Mr. Raheel Bari is working as Project Director – Embedded Systems at TeReSol with overall 20+ years of experience in embedded hardware, firmware, and system architecture. He drives complex product development from concept to certification, delivering high-reliability, standards-compliant electronics systems for aerospace and defense applications.",
+          "Embedded Systems at TeReSol with overall 20+ years of experience in embedded hardware, firmware, and system architecture. He drives complex product development from concept to certification, delivering high-reliability, standards-compliant electronics systems.",
       },
       {
         name: "Danyal Sajid",
         image: "/leadership/staff/DanyalSajid.webp",
         role: "Project Director Embedded Systems",
         intro:
-          "Focused on developing and optimizing embedded systems that power critical applications. Skilled in firmware design, hardware-software integration, and delivering reliable real-time solutions.",
+          "Embedded Systems at TeReSol with over 30 years of experience leading communications and embedded system development projects. He brings unmatched expertise in DSP/FPGA hardware–software design, RF spectrum monitoring, and avionics system integration. Renowned for driving innovation and mission-critical solutions, he excels in managing complex R&D initiatives from concept to deployment.",
       },
     ],
   },
