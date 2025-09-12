@@ -68,6 +68,12 @@ export default function AboutPageClient() {
       role: "Advisor Defense Projects",
       image: "/leadership/Adv-GrdDef-Proj.png",
     },
+    {
+      slug: "muhammad-jamal-shah",
+      name: "Muhammad Jamal Shah",
+      role: "Director Operations",
+      image: "/leadership/DirOps.webp",
+    },
   ];
 
   const values = [
@@ -132,16 +138,13 @@ export default function AboutPageClient() {
               Meet the experienced professionals leading Teresol&apos;s innovation
             </p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+          <div className="flex flex-wrap justify-center -mx-4">
             {team.map((member, index) => {
               const isClickable =
-                member.role === "Chief Technology Officer" 
-                ||
+                member.role === "Chief Technology Officer" ||
                 member.role === "Chief Executive Officer" ||
                 member.role === "Chief Operating Officer";
 
-              // ✅ Define the card's inner content as a constant
               const cardContent = (
                 <>
                   <div className="relative w-full aspect-square">
@@ -152,30 +155,30 @@ export default function AboutPageClient() {
                       className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <div className="p-6 text-center">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600">
+                  <div className="p-6 text-center flex flex-col flex-grow">
+                    <h3 className="flex-grow text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600">
                       {member.name}
                     </h3>
                     <p className="text-blue-600 font-medium">{member.role}</p>
                   </div>
                 </>
               );
-              
-              // ✅ Conditionally render the card inside a Link or a div
+              const itemClasses = "w-full sm:w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-8";
+
               return isClickable ? (
-                <Link
-                  key={index}
-                  href={`/team/${member.slug}`}
-                  className="block bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-                >
-                  {cardContent}
-                </Link>
+                <div key={index} className={itemClasses}>
+                  <Link
+                    href={`/team/${member.slug}`}
+                    className="block bg-white rounded-xl shadow-lg overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 h-full flex flex-col"
+                  >
+                    {cardContent}
+                  </Link>
+                </div>
               ) : (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden"
-                >
-                  {cardContent}
+                <div key={index} className={itemClasses}>
+                  <div className="bg-white rounded-xl shadow-lg overflow-hidden h-full flex flex-col">
+                    {cardContent}
+                  </div>
                 </div>
               );
             })}
@@ -236,8 +239,8 @@ export default function AboutPageClient() {
           </div>
         </div>
       </section>
-
       <Footer />
     </div>
   );
 }
+

@@ -110,7 +110,7 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
                         {teamMem.role ?? "Team Member"}
                       </p>
                       {teamMem.intro && (
-                        <p className="text-gray-600 text-sm leading-relaxed mt-2 text-justify">
+                        <p className="text-black-600 text-medium leading-relaxed mt-2 text-justify">
                           {teamMem.intro}
                         </p>
                       )}

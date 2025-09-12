@@ -22,15 +22,19 @@ export default function Footer() {
               modern businesses.
             </p>
             <div className="flex space-x-4">
+            {/* <Link href={'https://www.facebook.com/TeresolPvtLtd/'} target="_blank" rel="noopener noreferrer">
               <div className="w-8 h-8 flex items-center justify-center bg-blue-600 rounded cursor-pointer hover:bg-blue-700 transition-colors">
                 <i className="ri-facebook-fill text-white"></i>
               </div>
+              </Link>
               <div className="w-8 h-8 flex items-center justify-center bg-blue-600 rounded cursor-pointer hover:bg-blue-700 transition-colors">
                 <i className="ri-instagram-fill text-white"></i>
-              </div>
+              </div> */}
+              <Link href={'https://www.linkedin.com/company/teresolpvtltd'} target="_blank" rel="noopener noreferrer">
               <div className="w-8 h-8 flex items-center justify-center bg-blue-600 rounded cursor-pointer hover:bg-blue-700 transition-colors">
                 <i className="ri-linkedin-fill text-white"></i>
               </div>
+              </Link>
             </div>
           </div>
 

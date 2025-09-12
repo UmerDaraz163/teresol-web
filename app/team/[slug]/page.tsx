@@ -75,28 +75,28 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
     teamMembers: [
       {
         name: "Dr. Shahzad Arshad",
-        image: "/leadership/staff/Dr. Shahzad Arshad.jpeg",
+        image: "/leadership/staff/DrShahzadArshad.jpeg",
         role: "Project Director Radio Frequency",
         intro:
           "With over 30 years of experience, Specialized in radio frequency systems, ensuring reliable communication and signal integrity across projects. Focused on designing, testing, and optimizing RF solutions for advanced defense technologies.",
       },
       {
         name: "Adeel Tariq",
-        image: "/leadership/staff/Adeel Tariq.jpeg",
+        image: "/leadership/staff/AdeelTariq.webp",
         role: "Project Director Technical Support",
         intro:
-          "With over 25 years of experince in relative field, Dedicated to providing end-to-end technical assistance, ensuring smooth operation of systems and tools. Skilled in troubleshooting, resolving issues, and supporting teams to maintain peak efficiency.",
+          "With 27+ years of distinguished experience, he has successfully managed radar, avionics and system integration programs at national and international levels. As Project Director (Technical Support), he leads end-to-end program delivery; spanning hardware, production, logistics and networks, while driving innovation, efficiency and customer satisfaction. A seasoned professional who is passionate about transforming complex challenges into enduring successes.",
       },
       {
         name: "Raheel Bari",
-        image: "/leadership/staff/Raheel Bari.webp",
+        image: "/leadership/staff/RaheelBari.webp",
         role: "Project Director Embedded Systems",
         intro:
           "Mr. Raheel Bari is working as Project Director – Embedded Systems at TeReSol with overall 20+ years of experience in embedded hardware, firmware, and system architecture. He drives complex product development from concept to certification, delivering high-reliability, standards-compliant electronics systems for aerospace and defense applications.",
       },
       {
-        name: "Daniyal Islam",
-        image: "/place-holder.jpg",
+        name: "Danyal Sajid",
+        image: "/leadership/staff/DanyalSajid.webp",
         role: "Project Director Embedded Systems",
         intro:
           "Focused on developing and optimizing embedded systems that power critical applications. Skilled in firmware design, hardware-software integration, and delivering reliable real-time solutions.",
