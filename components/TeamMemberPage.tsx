@@ -20,18 +20,18 @@ type TeamMember = {
   teamMembers: teamMember[];
 };
 
-// Mapping abbreviations to full forms
+// ✅ FIX: Corrected and completed the role map for accuracy
 const roleMap: Record<string, string> = {
   CEO: "Chief Executive Officer",
   COO: "Chief Operating Officer",
-  CTO: "Chief Technology Officer",
+  CTO: "Chief Technical Officer",
   CIO: "Chief Information Officer",
   CDO: "Chief Digital Officer",
   CMO: "Chief Marketing Officer",
   CPO: "Chief Product Officer",
-  "Advisor International Projects": "Advisor International Projects",
-  "Adv Aviation Projects": "Advisor Avionics & Special Projects",
-  "Advisor Defense Projects": "Advisor Ground Defense Projects",
+  "Adv Intl Project": "Advisor International Projects",
+  "Adv Avcs": "Advisor Avionics & Special Projects",
+  "Adv Grd Def Proj": "Advisor Ground Defense Projects",
 };
 
 export default function TeamMemberPage({ member }: { member: TeamMember }) {
@@ -64,10 +64,10 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
       <section className="py-16">
         <div className="container mx-auto px-4 md:px-0 max-w-4xl">
           <div
-            className="space-y-6 text-lg text-gray-700 leading-relaxed text-justify"
+            className="prose lg:prose-xl max-w-none text-gray-700 leading-relaxed text-justify"
             dangerouslySetInnerHTML={{
               __html: Array.isArray(member.intro)
-                ? member.intro.join("<br /><br />") // join arrays with paragraph breaks
+                ? member.intro.join("<br /><br />")
                 : member.intro,
             }}
           />
@@ -75,54 +75,51 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
       </section>
 
       {/* Team Members Section */}
-      {fullRole !== "Chief Executive Officer" &&
-        fullRole !== "Chief Operating Officer" && (
-          <section className="py-16 bg-gray-50">
-            <div className="container mx-auto px-4 max-w-6xl">
-              <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
-                Team Members
-              </h2>
-
-              {/* Make every card one full row */}
-              <div className="grid grid-cols-1 gap-8">
-                {member.teamMembers.map((teamMem, i) => (
-                  <div
-                    key={i}
-                    className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row group hover:shadow-2xl transition-all duration-300"
-                  >
-                    {/* Image */}
-                    <div className="relative w-full sm:w-1/4 md:w-1/5">
-                      <Image
-                        src={teamMem.image}
-                        alt={teamMem.name}
-                        width={200}
-                        height={250}
-                        className="object-contain transition-transform duration-300 group-hover:scale-105 bg-gray-100"
-                      />
-                    </div>
-
-                    {/* Text content */}
-                    <div className="p-6 flex flex-col justify-start sm:w-2/3">
-                      <h3 className="text-xl font-semibold text-gray-900 mb-1">
-                        {teamMem.name}
-                      </h3>
-                      <p className="text-blue-600 font-medium mb-3">
-                        {teamMem.role ?? "Team Member"}
-                      </p>
-                      {teamMem.intro && (
-                        <p className="text-black-600 text-medium leading-relaxed mt-2 text-justify">
-                          {teamMem.intro}
-                        </p>
-                      )}
-                    </div>
+      {member.teamMembers && member.teamMembers.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
+              Team Members
+            </h2>
+            <div className="grid grid-cols-1 gap-8 max-w-6xl mx-auto">
+              {member.teamMembers.map((teamMem, i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row items-center group hover:shadow-2xl transition-all duration-300"
+                >
+                  {/* ✅ FIX: Image container with a fixed width that doesn't shrink */}
+                  <div className="relative w-full h-full sm:w-48 flex-shrink-0 aspect-square">
+                    <Image
+                      src={teamMem.image}
+                      alt={teamMem.name}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
                   </div>
-                ))}
-              </div>
+
+                  {/* ✅ FIX: Text container now grows to fill the remaining space */}
+                  <div className="p-6 flex-1 flex flex-col justify-start">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-1">
+                      {teamMem.name}
+                    </h3>
+                    <p className="text-blue-600 font-medium mb-3">
+                      {teamMem.role ?? "Team Member"}
+                    </p>
+                    {teamMem.intro && (
+                      <p className="text-gray-600 text-medium mt-2 text-justify">
+                        {teamMem.intro}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
       <Footer />
     </div>
   );
 }
+
