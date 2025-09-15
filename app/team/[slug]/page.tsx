@@ -51,13 +51,12 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
     name: "Mansoor Ahmad Khan",
     role: "CMO",
     image: "/leadership/CMO2.png",
-    intro: `Mansoor leads the marketing initiatives at Teresol, building
-    brand value and customer engagement through innovative campaigns.`,
-    teamMembers: [
-      { name: "Hira Shah", image: "/place-holder.jpg" },
-      { name: "Bilal Asif", image: "/place-holder.jpg" },
-      { name: "Ayesha Khan", image: "/place-holder.jpg" },
-    ],
+    intro: `Mansoor Ahmed Khan – Chief Marketing Officer, Teresol (Pvt.) Ltd.
+Mansoor Khan is a seasoned business leader with over 35+ years of experience, recognized for driving organizational growth, developing high-performing teams, and building long-term stakeholder relationships. For more than thirty-five(35) years, he has been at the forefront of Pakistan’s offshore software development industry. He founded Rel-Soft (Pvt.) Ltd., later acquired by VentureChest, a Venture Capital Fund and restructured as Makabu (Pvt.) Ltd. in 2000. Since then, as CEO of Makabu, he has overseen strategy, marketing, client relations, project delivery, financial management, and team development, transforming the company into a progressive organization with a strong international footprint.
+<br></br> In 2016, Mansoor Khan took on the role of Chief Marketing Officer at Teresol (Pvt.) Ltd., where he leads the company’s marketing, sales, and business development initiatives. His mandate is to drive sustainable business growth by developing new client relationships, expanding into targeted industries, and strengthening Teresol’s product and service ecosystem. Mansoor Khan is also responsible for building strategic alliances, enhancing Teresol’s international portfolio, and ensuring the company remains aligned with its vision of innovation and excellence.
+<br></br> Beyond his corporate responsibilities, Mansoor Khan is deeply engaged in community and professional initiatives. He serves as a Trustee of JAQ Education Trust, an organization committed to educational development, and as a Board Member of OPEN Islamabad, a global network fostering entrepreneurship and professional growth.
+With a proven record of leadership and a passion for fostering innovation, Mansoor Khan  brings both vision and execution to his role. His extensive experience and strategic direction continue to play a central role in positioning Teresol as a forward-looking and client-focused organization.`,
+    teamMembers: [],
   },
   {
     slug: "farooq-umer-khan",
@@ -93,7 +92,7 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
         role: "Project Director Embedded Systems",
         intro:
           "Mr. Raheel Bari is working as Project Director-Embedded Systems at TeReSol with overall 20+ years of experience in embedded hardware, firmware, and system architecture. He drives complex product development from concept to certification, delivering high-reliability, standards-compliant electronics system",
-      }, 
+      },
       {
         name: "Danyal Sajid",
         image: "/leadership/staff/DanyalSajid.webp",
@@ -121,26 +120,24 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
     name: "Aamir Masood",
     role: "CPO",
     image: "/leadership/CPO.png",
-    intro: `Aamir drives product strategy and development, ensuring Teresol
-    delivers impactful and market-ready solutions.`,
-    teamMembers: [
-      { name: "Nida Khan", image: "/place-holder.jpg" },
-      { name: "Rashid Ali", image: "/place-holder.jpg" },
-      { name: "Zainab Mirza", image: "/place-holder.jpg" },
-    ],
+    intro: `Aamir Masood Khan is a Leadership professional with 25+ years of diverse experience in Acedemia, R&D, and the corporate sector. He has worked with globally renowned MNCs like Siemens, Nokia, and Ericsson in multiple positions – transitioning from pure technical roles to senior leadership positions. 
+<br></br> Aamir started his professional career as the Gold Medalist of the first batch of NUST, and later on completed his two Masters degrees with distinction – first from ISU, USA and second from CASE, PAK.
+<br></br> In his early career, he worked as a faculty member at NUST for six years, where his contributions in teaching and research were recognized at multiple forums. 
+<br></br> Aamir has played a key role in telecommunication industry’s growth of Pakistan during his experience at Siemens, Nokia Siemens Networks, Ericsson, Nexus Telecom, and Mobilink (now Jazz). He has held regional and global assignments that have helped him work with diverse teams to achieve significant milestones.  He has successfully completed multiple technical, management, and leadership certifications/trainings from Pakistan, UAE, Germany, Thailand, and Finland.   
+<br></br> Aamir has contributed significantly to high-impact national projects as the COO of National Testing Service (NTS), and later on as the CEO of TEPS (a technology partner of PMC for digitization of various tests within Pakistan, and at international level).`,
+    teamMembers: [],
   },
   {
     slug: "babar-amin",
     name: "Babar Amin",
     role: "Adv Intl Project",
     image: "/leadership/Adv-Intl-Project.png",
-    intro: `Babar advises on international projects, bringing a wealth of
-    global experience to Teresol's ventures.`,
-    teamMembers: [
-      { name: "Ali Raza", image: "/place-holder.jpg" },
-      { name: "Sadia Noor", image: "/place-holder.jpg" },
-      { name: "Ahmed Jan", image: "/place-holder.jpg" },
-    ],
+    intro: `Ambassador Babar Amin is currently serving as Advisor for Foreign Business Development with TeReSol®, Pakistan. He previously had a distinguished 33-year career in the Foreign Service of Pakistan, retiring at the rank of Special Foreign Secretary (BS-22). His notable diplomatic assignments included serving as High Commissioner of Pakistan to Australia, Ambassador to Norway, Deputy High Commissioner to India, and Consul General in Guangzhou, China. At the Ministry of Foreign Affairs in Islamabad, he held senior positions including Additional Foreign Secretary and National Coordinator for the SCO, as well as Director General for China, CARs & ECO, and Policy Planning & Public Diplomacy. Before joining the Foreign Service, he served as a Provincial Service Officer with the Government of Punjab in administrative roles.
+
+<br></br> Throughout his diplomatic career, Ambassador Amin was deeply engaged in advancing economic, trade, investment, educational, scientific, and technological cooperation with partner countries. He worked across G2G, G2B, and B2B platforms, as well as hybrid engagement models. He led numerous government and private sector negotiations in the fields of economic policy, trade, investment, and taxation, and facilitated partnerships between Pakistani and foreign enterprises in sectors such as IT and software, manufacturing, services, and agriculture.
+
+<br></br> Beyond his professional career, Ambassador Amin continues to contribute actively to intellectual and policy discourse. He regularly participates in international and domestic conferences, seminars, and roundtables, and writes op-eds for leading newspapers and journals. He is a member of the Academic Committee of the Foreign Service Academy of Pakistan, where he also serves as guest faculty, in addition to teaching at Quaid-i-Azam University, Islamabad.`,
+    teamMembers: [],
   },
   {
     slug: "air-cdre-asim-adnan-r",
