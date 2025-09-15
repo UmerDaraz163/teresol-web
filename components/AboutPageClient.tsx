@@ -135,7 +135,8 @@ export default function AboutPageClient() {
               Our Leadership Team
             </h2>
             <p className="text-xl text-gray-600">
-              Meet the experienced professionals leading Teresol&apos;s innovation
+              Meet the experienced professionals leading Teresol&apos;s
+              innovation
             </p>
           </div>
           <div className="flex flex-wrap justify-center -mx-4">
@@ -143,7 +144,10 @@ export default function AboutPageClient() {
               const isClickable =
                 member.role === "Chief Technology Officer" ||
                 member.role === "Chief Executive Officer" ||
-                member.role === "Chief Operating Officer";
+                member.role === "Chief Operating Officer" ||
+                member.role === "Chief Project Officer" ||
+                member.role === "Advisor International Projects" ||
+                member.role === "Chief Marketing Officer";
 
               const cardContent = (
                 <>
@@ -185,7 +189,6 @@ export default function AboutPageClient() {
           </div>
         </div>
       </section>
-
 
       {/* Values Section */}
       <section className="py-20 bg-white">
@@ -243,4 +246,3 @@ export default function AboutPageClient() {
     </div>
   );
 }
-
