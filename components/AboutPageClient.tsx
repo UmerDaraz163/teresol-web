@@ -36,7 +36,7 @@ export default function AboutPageClient() {
       slug: "farooq-umer-khan",
       name: "Farooq Umer Khan",
       role: "Chief Technology Officer",
-      image: "/leadership/CTOo.webp",
+      image: "/leadership/CTO2.jpg",
     },
     {
       slug: "dr-bilal-rauf",
