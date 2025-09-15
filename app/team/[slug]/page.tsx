@@ -93,7 +93,7 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
         role: "Project Director Embedded Systems",
         intro:
           "Mr. Raheel Bari is working as Project Director-Embedded Systems at TeReSol with overall 20+ years of experience in embedded hardware, firmware, and system architecture. He drives complex product development from concept to certification, delivering high-reliability, standards-compliant electronics system",
-      },
+      }, 
       {
         name: "Danyal Sajid",
         image: "/leadership/staff/DanyalSajid.webp",
