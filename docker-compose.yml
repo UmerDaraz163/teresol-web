@@ -30,7 +30,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./public/uploads:/app/public/uploads   # ✅ mount the whole public/uploads folder
+      - ./public/uploads:/app/writable_uploads   # ✅ mount the whole public/uploads folder
     networks:
       - appnet
 
