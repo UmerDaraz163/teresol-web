@@ -85,10 +85,11 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
               {member.teamMembers.map((teamMem, i) => (
                 <div
                   key={i}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row items-center group hover:shadow-2xl transition-all duration-300"
+                  className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row group hover:shadow-2xl transition-all duration-300"
                 >
                   {/* ✅ FIX: Image container with a fixed width that doesn't shrink */}
-                  <div className="relative w-full h-full sm:w-48 flex-shrink-0 aspect-square">
+                  <div className="relative w-full sm:w-48 aspect-square flex-shrink-0">
+                    {" "}
                     <Image
                       src={teamMem.image}
                       alt={teamMem.name}
@@ -97,8 +98,8 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
                     />
                   </div>
 
-                  {/* ✅ FIX: Text container now grows to fill the remaining space */}
-                  <div className="p-6 flex-1 flex flex-col justify-start">
+                  {/* Text container */}
+                  <div className="p-6 flex-1">
                     <h3 className="text-xl font-semibold text-gray-900 mb-1">
                       {teamMem.name}
                     </h3>
@@ -106,7 +107,7 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
                       {teamMem.role ?? "Team Member"}
                     </p>
                     {teamMem.intro && (
-                      <p className="text-gray-600 text-medium mt-2 text-justify">
+                      <p className="text-gray-600 text-base leading-relaxed text-justify">
                         {teamMem.intro}
                       </p>
                     )}
@@ -122,4 +123,3 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
     </div>
   );
 }
-

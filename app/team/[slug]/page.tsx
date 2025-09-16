@@ -144,13 +144,14 @@ With a proven record of leadership and a passion for fostering innovation, Manso
     name: "Air Cdre Asim Adnan (R)",
     role: "Adv Avcs",
     image: "/leadership/Adv Avcs.jpeg",
-    intro: `Asim brings aerospace and defense expertise, advising Teresol on
-    advanced systems and strategic initiatives.`,
-    teamMembers: [
-      { name: "Waqas Hanif", image: "/place-holder.jpg" },
-      { name: "Saira Malik", image: "/place-holder.jpg" },
-      { name: "Jawad Yousaf", image: "/place-holder.jpg" },
-    ],
+    intro: `Air Cdre Asim Adnan (R) is an accomplished Avionics Engineer with over 40 years of distinguished service in the Pakistan Air Force (PAF). Since October 2016, he has been serving as Advisor Aviation & Special Projects at TeReSol Pvt. Ltd., where he contributes his extensive expertise in aerospace and defense systems.
+<br></br> Over the course of his career, he has held several senior positions, including Deputy Director General at AERO, Pakistan, where he led a multidisciplinary team of over 100 engineers and 150 technicians in developing advanced aerospace and avionics systems in compliance with AS-9100 Aerospace Standards. As Assistant Chief of Air Staff at PAF Headquarters, Islamabad, he provided strategic support on the life cycle maintenance of aviation systems. Earlier, as Technical Attaché at the Pakistan Embassy in Berlin, he established strong linkages with leading European aerospace and defense OEMs, managing procurement, contract negotiations, life cycle support, and follow-up activities.
+<br></br> He also served as Director of Electronic Warfare Systems, overseeing nationwide management of PAF’s EW capabilities. With more than four decades of professional experience, he has specialized in the induction, commissioning, and life cycle management of aerospace and avionics systems from U.S., European, and Chinese OEMs, contributing significantly to the modernization of the PAF.
+<br></br> Licensed by the CAA Pakistan as an Aircraft Maintenance Engineer (Boeing 737-200), he has hands-on expertise in line and C-check maintenance of Boeing 737 and Falcon DA-20 aircraft, along with EW-related modifications of C-130 systems. His experience further includes depot-level maintenance of radar, C4I, environmental control, and power generation systems.
+<br></br> His international exposure includes coordinating with German regulatory authorities on export controls and negotiating contracts with global manufacturers such as EADS, Saab-Ericsson, Aselsan, Mectron, and CETC for major PAF and PAC Kamra projects.
+<br></br> He has also completed several advanced professional courses, including the Senior Engineering Management Course at PAF College of Aeronautical Engineering, the Air War Course at PAF Air War College, Karachi, and technical certifications in avionics, radar, EW, and aircraft maintenance from international institutions in Germany, USA, Sri Lanka, and Malaysia.
+<br></br> For his outstanding professional achievements, he has been awarded the Sitara-i-Imtiaz (Military) by the President of Pakistan, along with multiple commendations and certificates of merit from the Chief of the Air Staff, PAF, including recognition for excellence on Special Mission DA-20 Aircraft, successful modification of the Marconi Condor Radar System, and best performance in project work during BE (Avionics).`,
+    teamMembers: [],
   },
   {
     slug: "col-abdul-rauf-sim-r",
