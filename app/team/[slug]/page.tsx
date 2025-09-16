@@ -98,7 +98,7 @@ With a proven record of leadership and a passion for fostering innovation, Manso
         image: "/leadership/staff/DanyalSajid.webp",
         role: "Project Director Embedded Systems",
         intro:
-          "Mr. Danyal Sajid is working as Project Director-Embedded Systems at TeReSol with over 30 years of experience leading communications and embedded system development projects. He brings unmatched expertise in DSP/FPGA hardware–software design, RF spectrum monitoring, and avionics system integration. Renowned for driving innovation and mission-critical solutions, he excels in managing complex R&D initiatives from concept to deployment.",
+          "Mr. Danyal Sajid is working as Project Director-Embedded Systems at TeReSol with over 25 years of experience leading communications and embedded system development projects. He brings unmatched expertise in DSP/FPGA hardware–software design, RF spectrum monitoring, and avionics system integration. Renowned for driving innovation and mission-critical solutions, he excels in managing complex R&D initiatives from concept to deployment.",
       },
     ],
   },
