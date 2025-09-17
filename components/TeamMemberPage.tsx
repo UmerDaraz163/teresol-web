@@ -87,7 +87,7 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
                   key={i}
                   className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col sm:flex-row group hover:shadow-2xl transition-all duration-300"
                 >
-                  {/* ✅ FIX: Image container with a fixed width that doesn't shrink */}
+                  {/* Image container */}
                   <div className="relative w-full sm:w-48 aspect-square flex-shrink-0">
                     {" "}
                     <Image
