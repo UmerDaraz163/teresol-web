@@ -30,7 +30,7 @@ const roleMap: Record<string, string> = {
   CMO: "Chief Marketing Officer",
   CPO: "Chief Project Officer",
   "Adv Intl Project": "Advisor International Projects",
-  "Adv Avcs": "Advisor Avionics & Special Projects",
+  "Adv Avcs": "Advisor Aviation Projects",
   "Adv Grd Def Proj": "Advisor Ground Defense Projects",
 };
 
