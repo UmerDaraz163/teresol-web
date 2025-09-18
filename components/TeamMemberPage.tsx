@@ -43,14 +43,16 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
 
       <section className="bg-gray-800 pt-24 pb-16 text-white">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="flex justify-center">
-            <Image
-              src={member.image}
-              alt={member.name}
-              width={400}
-              height={400}
-              className="object-cover shadow-lg rounded-[24px] border-4 border-gray-600"
-            />
+          <div className="flex justify-center items-center mx-auto">
+            <div className="h-[400px] w-[350px]">
+              <Image
+                src={member.image}
+                alt={member.name}
+                width={400}
+                height={400}
+                className="h-full w-full object-cover object-center md:object-top shadow-lg rounded-[24px] border-4 border-gray-600"
+              />
+            </div>
           </div>
           <div className="text-center md:text-left">
             <h1 className="text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -59,6 +61,7 @@ export default function TeamMemberPage({ member }: { member: TeamMember }) {
             <p className="text-xl text-blue-300 font-medium">{fullRole}</p>
           </div>
         </div>
+
       </section>
 
       <section className="py-16">
