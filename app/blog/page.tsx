@@ -63,33 +63,46 @@ export async function generateMetadata(
 // Fetch blog page data
 async function getBlogPageData(selectedCategory?: string) {
   try {
-    // Featured post
+    // Featured post (pick where is_featured = 1, fallback to latest)
     const [featuredRows]: any[] = await pool.query(
       `SELECT slug, title, short_desc, author, created_at, read_time, category, image_url
        FROM blogs
+       WHERE is_featured = 1
        ORDER BY created_at DESC
        LIMIT 1`
     );
     const featuredPost: BlogPost | null =
       featuredRows.length > 0 ? featuredRows[0] : null;
 
-    // Other posts
+    // Other posts (exclude featured if exists)
     let postsQuery = `
       SELECT slug, title, short_desc, author, created_at, read_time, category, image_url
       FROM blogs
-      WHERE slug != ?
+      WHERE 1=1
     `;
-    const queryParams: (string | undefined)[] = [featuredPost?.slug];
+    const queryParams: (string | undefined)[] = [];
+
+    if (featuredPost?.slug) {
+      postsQuery += ' AND slug != ?';
+      queryParams.push(featuredPost.slug);
+    }
 
     if (selectedCategory && selectedCategory !== 'All') {
       postsQuery += ' AND category = ?';
       queryParams.push(selectedCategory);
     }
+    console.log('====================================');
+    console.log(postsQuery, queryParams);
+    console.log("selectedCategory", selectedCategory);
+    console.log('====================================');
+
     postsQuery += ' ORDER BY created_at DESC';
 
     const [blogPostRows]: any[] = await pool.query(postsQuery, queryParams);
     const blogPosts: BlogPost[] = blogPostRows;
-
+    console.log('====================================');
+    console.log("blogPosts", blogPosts);
+    console.log('====================================');
     // Categories
     const [categoryRows]: any[] = await pool.query(
       `SELECT DISTINCT category 
@@ -105,6 +118,51 @@ async function getBlogPageData(selectedCategory?: string) {
     return { featuredPost: null, blogPosts: [], categories: [] };
   }
 }
+
+// async function getBlogPageData(selectedCategory?: string) {
+//   try {
+//     // Featured post
+//     const [featuredRows]: any[] = await pool.query(
+//       `SELECT slug, title, short_desc, author, created_at, read_time, category, image_url
+//        FROM blogs
+//        ORDER BY created_at DESC
+//        LIMIT 1`
+//     );
+//     const featuredPost: BlogPost | null =
+//       featuredRows.length > 0 ? featuredRows[0] : null;
+
+//     // Other posts
+//     let postsQuery = `
+//       SELECT slug, title, short_desc, author, created_at, read_time, category, image_url
+//       FROM blogs
+//       WHERE slug != ?
+//     `;
+//     const queryParams: (string | undefined)[] = [featuredPost?.slug];
+
+//     if (selectedCategory && selectedCategory !== 'All') {
+//       postsQuery += ' AND category = ?';
+//       queryParams.push(selectedCategory);
+//     }
+//     postsQuery += ' ORDER BY created_at DESC';
+
+//     const [blogPostRows]: any[] = await pool.query(postsQuery, queryParams);
+//     const blogPosts: BlogPost[] = blogPostRows;
+
+//     // Categories
+//     const [categoryRows]: any[] = await pool.query(
+//       `SELECT DISTINCT category 
+//        FROM blogs 
+//        WHERE category IS NOT NULL AND category != '' 
+//        ORDER BY category ASC`
+//     );
+//     const categories: Category[] = [{ category: 'All' }, ...categoryRows];
+
+//     return { featuredPost, blogPosts, categories };
+//   } catch (error) {
+//     console.error('Database Error:', error);
+//     return { featuredPost: null, blogPosts: [], categories: [] };
+//   }
+// }
 
 // ✅ Blog page component (await searchParams)
 export default async function Blog({

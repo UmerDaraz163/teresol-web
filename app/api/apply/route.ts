@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import  pool  from '@/lib/db';
 
 export async function POST(request: Request) {
   // 1. Load SMTP credentials and the new recipient email from environment variables
@@ -20,10 +21,18 @@ export async function POST(request: Request) {
     const phone = formData.get('phone') as string;
     const jobTitle = formData.get('jobTitle') as string;
     const cvFile = formData.get('cv') as File | null;
+    const jobId = formData.get('jobId') as string;
 
-    if (!name || !email || !jobTitle || !cvFile) {
+    if (!name || !email || !jobTitle || !jobId || !cvFile) {
+      
       return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
     }
+
+    await pool.query(
+      `INSERT INTO job_applications (job_id, name, email, phone, cv_filename, created_at)
+       VALUES (?, ?, ?, ?, ?, NOW())`,
+      [jobId, name, email, phone || null, cvFile.name] 
+    );
 
     // 4. Create a buffer from the uploaded file
     const buffer = Buffer.from(await cvFile.arrayBuffer());

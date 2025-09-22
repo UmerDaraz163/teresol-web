@@ -152,11 +152,10 @@ export default function CertificationsSection() {
                   return (
                     <div key={pageIndex} className="cert-slide [transform-style:preserve-3d]">
                       <div className="w-full h-full flex justify-center items-stretch">
-                        {/* ▼▼▼ CHANGE IS HERE ▼▼▼ */}
                         <div className={
-                          slideItems.length > 1
+                          slideItems.length > 3
                             ? "inline-grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
-                            : "flex justify-center" // Center if only one item
+                            : "flex justify-center" // Center if <4 item
                         }>
                           {slideItems.map((cert) => (
                             <div key={cert.title} className="w-full max-w-[260px] sm:w-auto flex">

@@ -174,6 +174,11 @@ export const heroSlides = [
       image: "/iso2000-01.png"
     },
     {
+      title: "ISO 27001:2022",
+      description: "International standard for Design, Development, Production and After Sales Support for Integrated ICT Based Products, Solutions and Services with the Statement of Applicability",
+      image: "/Cetificate27001-2022.webp"
+    },
+    {
       title: "MIL-STD-704 COMPLIANT",
       description: "    U.S. military standard that defines the characteristics of electrical power provided to equipment on military aircraft.",
       image: "/mil-std-704.png"
