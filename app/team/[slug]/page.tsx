@@ -62,7 +62,7 @@ With a proven record of leadership and a passion for fostering innovation, Manso
     slug: "farooq-umer-khan",
     name: "Farooq Umer Khan",
     role: "CTO",
-    image: "/leadership/CTO2.webp",
+    image: "/leadership/CTO2o.webp",
     intro: `Mr. Farooq Umer Khan is an Aeronautical (Avionics) Engineer with 30 years of professional experience spanning Research & Development and Project Management. Currently serving as Chief Technology Officer (CTO), he leverages decades of technical and leadership experience to drive innovation, oversee complex projects, and deliver cutting-edge solutions.
 
 <br></br> A highly accomplished technology innovator, he specializes in hardware and software architecture design, embedded systems, signal analysis, and system integration. With a strong background in design engineering and system development, he combines strategic vision with deep technical insight, enabling organizations to achieve both technological advancement and operational excellence.
