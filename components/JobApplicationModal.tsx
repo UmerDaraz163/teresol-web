@@ -1,5 +1,3 @@
-// components/JobApplicationModal.tsx
-
 'use client';
 
 import { useState, type FormEvent, type ChangeEvent } from 'react';
@@ -12,18 +10,22 @@ type Job = {
 type Props = {
   job: Job;
   onClose: () => void;
+  isInternship: boolean; // 👈 Now correctly defined in Props
 };
 
-export default function JobApplicationModal({ job, onClose }: Props) {
+// 🛑 1. Destructure isInternship from Props
+export default function JobApplicationModal({ job, onClose, isInternship }: Props) {
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Using 5 MB as the limit
+  const MAX_FILE_SIZE_MB = 5; 
   const [fileError, setFileError] = useState<string | null>(null);
 
   function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        setFileError('File size must be less than 5 MB.');
+      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        setFileError(`File size must be less than ${MAX_FILE_SIZE_MB} MB.`);
         e.target.value = ''; // reset the file input
       } else {
         setFileError(null);
@@ -37,15 +39,22 @@ export default function JobApplicationModal({ job, onClose }: Props) {
     const formData = new FormData(event.currentTarget);
 
     const cvFile = formData.get('cv') as File | null;
-    if (!cvFile || cvFile.size > 5 * 1024 * 1024) {
-      setFileError('Please upload a CV under 5   MB.');
+    if (!cvFile || cvFile.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+      setFileError(`Please upload a CV under ${MAX_FILE_SIZE_MB} MB.`);
       return;
     }
 
     setIsSubmitting(true);
     setMessage('Submitting application...');
 
+    // 🛑 2. Add isInternship and job_id to the form data
     formData.append('jobTitle', job.title);
+    
+    // If it's the general internship, send a special job ID (like 0) or null for the backend
+    // and explicitly send the internship flag.
+    formData.append('jobId', isInternship ? '0' : job.id.toString());
+    formData.append('isInternship', isInternship ? '1' : '0'); 
+
 
     try {
       const response = await fetch('/api/apply', {
@@ -67,6 +76,12 @@ export default function JobApplicationModal({ job, onClose }: Props) {
       setIsSubmitting(false);
     }
   }
+  
+  // UI helper for the title
+  const modalTitle = isInternship 
+    ? "General Internship Application" 
+    : `Apply for: ${job.title}`;
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -78,14 +93,16 @@ export default function JobApplicationModal({ job, onClose }: Props) {
           &times;
         </button>
 
-        <h2 className="text-2xl font-bold mb-2">Apply for: {job.title}</h2>
+        <h2 className="text-2xl font-bold mb-2">{modalTitle}</h2>
         <p className="text-gray-600 mb-6">
-          Please fill out the form below to submit your application.
+          {isInternship 
+            ? "We are accepting applications for our general internship program."
+            : "Please fill out the form below to submit your application."}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="hidden" name="jobId" value={job.id} />
-
+          {/* Note: Removed the unused hidden input since jobId is added to formData in JS */}
+          
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
             <input
@@ -141,7 +158,7 @@ export default function JobApplicationModal({ job, onClose }: Props) {
                 hover:file:bg-blue-100"
             />
             <p className="text-xs text-gray-500 mt-1">
-              Accepted formats: PDF, DOC, DOCX. Max size: 2 MB
+              Accepted formats: PDF, DOC, DOCX. Max size: {MAX_FILE_SIZE_MB} MB
             </p>
             {fileError && <p className="text-red-500 text-sm mt-1">{fileError}</p>}
           </div>
