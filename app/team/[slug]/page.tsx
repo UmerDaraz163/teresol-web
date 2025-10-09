@@ -107,13 +107,10 @@ With a proven record of leadership and a passion for fostering innovation, Manso
     name: "Dr. Bilal Rauf",
     role: "CIO",
     image: "/leadership/CIO1.webp",
-    intro: `Dr. Bilal manages information systems and IT strategy, aligning
-    technology resources with business objectives.`,
-    teamMembers: [
-      { name: "Hassan Raza", image: "/place-holder.jpg" },
-      { name: "Maha Qureshi", image: "/place-holder.jpg" },
-      { name: "Adnan Farid", image: "/place-holder.jpg" },
-    ],
+    intro: `Dr. Bilal Rauf holds a Ph.D. in Information Security from the National University of Sciences and Technology (NUST), Pakistan. He has been serving as the Chief Information Officer (Software) at TeReSol Pvt. Ltd. since June 2021. Prior to joining TeReSol, he worked as an Assistant Professor at NUST.
+<br></br>As Project Director at TeReSol, Dr. Rauf oversees project planning and execution, manages front-end development teams, ensures seamless integration of front-end applications, and monitors overall project progress and deliverables. His responsibilities also include dividing tasks into manageable components, overseeing deployment activities, addressing quality assurance (QA) issues, facilitating coordination between front-end and back-end teams, and maintaining project documentation throughout various stages.
+<br></br>Dr. Rauf possesses strong technical expertise in JavaScript, Java, CSS, Python, C/C++, SQL, Nmap, and Vue.js. He is currently leading work on IFRS 9 compliance and Core Banking System projects.`,
+    teamMembers: [],
   },
   {
     slug: "aamir-masood",
