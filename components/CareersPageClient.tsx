@@ -1,3 +1,4 @@
+// components/CareersPageClient.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -5,7 +6,7 @@ import JobApplicationModal from '@/components/JobApplicationModal';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-// Define a type for the job data
+// Define a type for the job data (remains the same)
 type Job = {
   id: number;
   title: string;
@@ -14,12 +15,14 @@ type Job = {
   full_description: string | null;
   closing_date: string | null;
   slug: string | null;
+  is_internship: boolean; 
 };
 
-// Data for the Benefits & Perks section
+// Data for the Benefits & Perks section (remains the same)
 const benefits = [
     { title: "Medical Coverage (Self & Dependents)", icon: "ri-first-aid-kit-line" },
     { title: "Life Insurance", icon: "ri-heart-pulse-line" },
+    // ... (rest of benefits)
     { title: "Paid Leaves", icon: "ri-calendar-event-line" },
     { title: "Subsidized Food", icon: "ri-restaurant-2-line" },
     { title: "Annual Increments", icon: "ri-arrow-up-circle-line" },
@@ -35,6 +38,17 @@ const benefits = [
     { title: "Professional Development Support", icon: "ri-graduation-cap-line" },
 ];
 
+// Base definition for the Internship Application
+const BASE_INTERNSHIP_JOB = {
+    id: 0, 
+    location: "Any Location (Remote/On-Site)",
+    short_desc: "Submit your application for this internship stream. We are always looking for bright new talent.",
+    full_description: "<p>If you are a student looking for practical experience, please apply here. Your application will be reviewed for potential placements in this department.</p>",
+    closing_date: null,
+    slug: 'general-internship',
+    is_internship: true, 
+};
+
 
 export default function CareersPageClient() {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -42,8 +56,13 @@ export default function CareersPageClient() {
   const [error, setError] = useState<string | null>(null);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [expandedJobId, setExpandedJobId] = useState<number | null>(null);
+  
+  // 🛑 NEW STATE: To control the visibility of the stream selection buttons
+  const [showInternshipStreams, setShowInternshipStreams] = useState(false);
+
 
   useEffect(() => {
+    // ... (Job fetching logic remains the same)
     async function fetchJobs() {
       try {
         const res = await fetch('/api/careers');
@@ -60,19 +79,24 @@ export default function CareersPageClient() {
         }).format(new Date());
 
         const activeJobs = data.filter((job: Job) => {
-          if (!job.closing_date) {
-            return true;
-          }
-          
-          const closingDate = new Date(job.closing_date);
-          const closingDatePKTString = new Intl.DateTimeFormat('en-CA', {
-            timeZone: 'Asia/Karachi',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-          }).format(closingDate);
+            
+            // Filter out roles explicitly marked as an internship if you want them separated
+            if (job.is_internship) return false; 
+            
+            // Existing closing date check
+            if (!job.closing_date) {
+                return true;
+            }
+            
+            const closingDate = new Date(job.closing_date);
+            const closingDatePKTString = new Intl.DateTimeFormat('en-CA', {
+                timeZone: 'Asia/Karachi',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+            }).format(closingDate);
 
-          return closingDatePKTString >= todayPKTString;
+            return closingDatePKTString >= todayPKTString;
         });
 
         setJobs(activeJobs);
@@ -88,6 +112,19 @@ export default function CareersPageClient() {
   const toggleJobDescription = (jobId: number) => {
     setExpandedJobId(prevId => (prevId === jobId ? null : jobId));
   };
+  
+  // 🛑 New handler to create the specific internship job object and open the modal
+  const openInternshipModal = (stream: 'Software' | 'Hardware') => {
+      const internshipJob: Job = {
+          ...BASE_INTERNSHIP_JOB,
+          title: `${stream} Internship Application`,
+          full_description: BASE_INTERNSHIP_JOB.full_description.replace('various departments', stream),
+      };
+      setSelectedJob(internshipJob);
+      // Optional: Hide stream buttons after selection
+      setShowInternshipStreams(false); 
+  }
+
 
   if (isLoading) {
     return <p className="text-center py-12">Loading job openings...</p>;
@@ -99,15 +136,17 @@ export default function CareersPageClient() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      {/* The modal component (JobApplicationModal) now correctly receives isInternship */}
       {selectedJob && (
         <JobApplicationModal 
           job={selectedJob} 
+          isInternship={selectedJob.is_internship} 
           onClose={() => setSelectedJob(null)} 
         />
       )}
       <Header/>
 
-      {/* Hero Section */}
+      {/* Hero Section (remains the same) */}
       <section
         className="relative py-32 bg-cover bg-center"
         style={{ backgroundImage: `url('/careers/career-banner.jpg')` }}
@@ -123,8 +162,9 @@ export default function CareersPageClient() {
         </div>
       </section>
 
-      {/* Benefits & Perks Section */}
+      {/* Benefits & Perks Section (remains the same) */}
       <section className="py-20 bg-white">
+        {/* ... (Benefits content) ... */}
         <div className="container mx-auto px-4">
             <div className="text-center mb-16">
                 <h2 className="text-4xl font-bold text-gray-900 mb-4">
@@ -148,8 +188,53 @@ export default function CareersPageClient() {
       </section>
 
       <main className={`max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${selectedJob ? 'blur-sm pointer-events-none' : ''}`}>
-        <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">Open Positions</h2>
+        <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Current Opportunities</h2>
+        
+        {/* 🛑 UPDATED: Internship Application Card with Stream Selection */}
+        <div className="bg-yellow-50 border-2 border-yellow-300 shadow-xl rounded-xl p-8 mb-8 flex flex-col justify-between transition-all duration-300">
+            <div className="flex items-center space-x-4 mb-4">
+                <i className="ri-graduation-cap-line text-4xl text-yellow-700"></i>
+                <div>
+                    <h3 className="text-2xl font-bold text-yellow-800">
+                        Internship Program
+                    </h3>
+                    <p className="text-lg text-yellow-700 mt-1 max-w-xl">
+                        Select your preferred stream to begin your application.
+                    </p>
+                </div>
+            </div>
+
+            <div className="pt-4 border-t border-yellow-200">
+                {/* Check if streams are visible, otherwise show the main selection button */}
+                {!showInternshipStreams ? (
+                    <button 
+                        onClick={() => setShowInternshipStreams(true)}
+                        className="w-full bg-yellow-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-yellow-700 transition-colors duration-300 shadow-md"
+                    >
+                        Start Internship Application
+                    </button>
+                ) : (
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <button 
+                            onClick={() => openInternshipModal('Software')}
+                            className="flex-1 bg-yellow-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-yellow-800 transition-colors duration-300 shadow-md"
+                        >
+                            Software Internship
+                        </button>
+                        <button 
+                            onClick={() => openInternshipModal('Hardware')}
+                            className="flex-1 bg-yellow-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-yellow-800 transition-colors duration-300 shadow-md"
+                        >
+                            Hardware Internship
+                        </button>
+                    </div>
+                )}
+            </div>
+        </div>
+
+        {/* Job Listings (remains the same) */}
         <div className="space-y-4">
+          <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Full-Time Openings</h3>
           {jobs.length > 0 ? (
             jobs.map((job) => {
               const isExpanded = expandedJobId === job.id;
@@ -169,7 +254,6 @@ export default function CareersPageClient() {
                           })}
                         </p>
                       )}
-                      {/* ✅ Short description is now removed from the main view */}
                     </div>
                     <div className="mt-4 sm:mt-0 sm:ml-6 flex-shrink-0 flex items-center gap-4">
                       <button 
@@ -190,7 +274,6 @@ export default function CareersPageClient() {
                   <div className={`grid transition-[grid-template-rows] duration-500 ease-in-out ${isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
                     <div className="overflow-hidden">
                       <div className="mt-6 pt-6 border-t">
-                        {/* ✅ Short description is now here, in the expandable section */}
                         <p className="mb-4 text-gray-600 leading-relaxed">
                           {job.short_desc}
                         </p>
@@ -207,8 +290,8 @@ export default function CareersPageClient() {
             })
           ) : (
             <div className="text-center py-10 bg-gray-50 rounded-lg">
-              <h3 className="text-xl font-semibold text-gray-700">No Open Positions</h3>
-              <p className="mt-2 text-gray-500">We are not currently hiring, but please check back soon!</p>
+              <h3 className="text-xl font-semibold text-gray-700">No Full-Time Openings</h3>
+              <p className="mt-2 text-gray-500">We are not currently hiring for full-time roles, but please check back soon!</p>
             </div>
           )}
         </div>
@@ -217,4 +300,3 @@ export default function CareersPageClient() {
     </div>
   );
 }
-
