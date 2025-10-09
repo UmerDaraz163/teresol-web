@@ -148,7 +148,7 @@ export default function AboutPageClient() {
                 member.role === "Chief Project Officer" ||
                 member.role === "Advisor International Projects" ||
                 member.role === "Chief Marketing Officer" ||
-                member.role === "Advisor Aviation Projects" ||
+                member.role === "Advisor Aviation Projects";
                 member.role === "Chief Information Officer";
 
               const cardContent = (
