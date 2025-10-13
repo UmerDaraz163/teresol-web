@@ -6,6 +6,17 @@ import JobApplicationModal from '@/components/JobApplicationModal';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+// Define the available internship streams
+const INTERNSHIP_STREAMS = [
+    'Software Department', 
+    'Hardware Department',
+    'MIS', 
+    'Production',
+    'Operations',
+    'Accounts',
+    'Human Resource (HR)',
+];
+
 // Define a type for the job data (remains the same)
 type Job = {
   id: number;
@@ -22,7 +33,6 @@ type Job = {
 const benefits = [
     { title: "Medical Coverage (Self & Dependents)", icon: "ri-first-aid-kit-line" },
     { title: "Life Insurance", icon: "ri-heart-pulse-line" },
-    // ... (rest of benefits)
     { title: "Paid Leaves", icon: "ri-calendar-event-line" },
     { title: "Subsidized Food", icon: "ri-restaurant-2-line" },
     { title: "Annual Increments", icon: "ri-arrow-up-circle-line" },
@@ -113,8 +123,8 @@ export default function CareersPageClient() {
     setExpandedJobId(prevId => (prevId === jobId ? null : jobId));
   };
   
-  // 🛑 New handler to create the specific internship job object and open the modal
-  const openInternshipModal = (stream: 'Software' | 'Hardware') => {
+  // 🛑 New handler creates the job object based on the selected stream
+  const openInternshipModal = (stream: string) => {
       const internshipJob: Job = {
           ...BASE_INTERNSHIP_JOB,
           title: `${stream} Internship Application`,
@@ -214,18 +224,25 @@ export default function CareersPageClient() {
                         Start Internship Application
                     </button>
                 ) : (
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    // 🛑 Layout change: Use a flex column container for the grid and the cancel button
+                    <div className="flex flex-col gap-3">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            {INTERNSHIP_STREAMS.map(stream => (
+                                <button 
+                                    key={stream}
+                                    onClick={() => openInternshipModal(stream)}
+                                    className="bg-yellow-700 text-white text-sm font-semibold p-3 rounded-lg hover:bg-yellow-800 transition-colors duration-300 shadow-md h-full"
+                                >
+                                    {stream}
+                                </button>
+                            ))}
+                        </div>
+                        {/* 🛑 Cancel button moved to its own full-width line below the grid */}
                         <button 
-                            onClick={() => openInternshipModal('Software')}
-                            className="flex-1 bg-yellow-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-yellow-800 transition-colors duration-300 shadow-md"
+                            onClick={() => setShowInternshipStreams(false)}
+                            className="w-full bg-gray-300 text-gray-700 text-sm font-semibold p-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 shadow-md"
                         >
-                            Software Internship
-                        </button>
-                        <button 
-                            onClick={() => openInternshipModal('Hardware')}
-                            className="flex-1 bg-yellow-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-yellow-800 transition-colors duration-300 shadow-md"
-                        >
-                            Hardware Internship
+                            Cancel Selection
                         </button>
                     </div>
                 )}
