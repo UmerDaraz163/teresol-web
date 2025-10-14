@@ -37,7 +37,7 @@ export default function ClientsSection() {
         return () => ctx.revert();
     }, []);
     return (
-        <section ref={sectionRef} id="clients" className="py-20 bg-white relative overflow-hidden">
+        <section ref={sectionRef} id="clients" className="py-20 bg-white">
             <div className="container mx-auto px-4 text-center">
                 <h2 className="text-4xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#25237b] to-[#8b0303]">
                     Our Valuable Clients
