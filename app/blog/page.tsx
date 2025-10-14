@@ -34,7 +34,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const params = await searchParams;
   const category = params.category;
-
+    
   if (category && category !== 'All') {
     return {
       title: `Technology Blog - ${category}`,

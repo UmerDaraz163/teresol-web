@@ -38,13 +38,8 @@ Dr. Naveed Iqbal is a published author with over twelve internationally recogniz
     name: "Dr. Ahmad Muqeem Sheri",
     role: "CDO",
     image: "/leadership/CDO.jpeg",
-    intro: `Dr. Ahmad drives digital innovation at Teresol, focusing on 
-    data-driven strategies and modern transformation practices.`,
-    teamMembers: [
-      { name: "Imran Ali", image: "/place-holder.jpg" },
-      { name: "Kiran Fatima", image: "/place-holder.jpg" },
-      { name: "Zeeshan Malik", image: "/place-holder.jpg" },
-    ],
+    intro: `Dr. Ahmad Muqeem Sheri did his PHD in Machine Learning from Gwangju Institute of Science and Technology, South Korea. He is working as Chief Design Officer in TeReSol Pvt. Ltd. since July 2019. He served as Research Professor in GIST, South Korea. He also worked as Assistant Professor at National University of Sciences and Technology. <br></br> As project director in TeReSol Pvt Ltd., his key responsibilities include project planning, managing development teams, monitoring progress, liaising between front-end and back-end teams and documenting the project at different stages. His technical skills include C/C++, Java, JS, software engineering, DevOps strategy, software architecture. Currently, he is working on BAHL core banking system project.`,
+    teamMembers: [],
   },
   {
     slug: "mansoor-ahmad-khan",
@@ -155,13 +150,17 @@ With a proven record of leadership and a passion for fostering innovation, Manso
     name: "Col Abdul Rauf SI(M) (R)",
     role: "Adv Grd Def Proj",
     image: "/leadership/Adv-GrdDef-Proj.png",
-    intro: `Col Abdul Rauf advises Teresol on ground defense projects, providing
-    critical military and defense expertise.`,
-    teamMembers: [
-      { name: "Moiz Khan", image: "/place-holder.jpg" },
-      { name: "Fatima Aslam", image: "/place-holder.jpg" },
-      { name: "Kashif Mehmood", image: "/place-holder.jpg" },
-    ],
+    intro: `Col (Retd.) Abdul Rauf, a BSc Telecom Engineering graduate from UET Lahore, is currently serving as the Project Director at TeReSol Pvt Ltd. He specializes in communications, with over 25 years of experience in planning, operations, and maintenance of various communication systems, including optical fiber, satellite, and field communication networks. He has extensive expertise in designing, operating, and maintaining VSAT networks.<br></br>
+With approximately 30 years of service in the Pakistan Army, he has held various command and staff appointments, gaining significant experience in personnel management, communication operations, and training activities at multiple levels. In addition to his military tenure, he has spent about eight years in procurement, contract management, and defense industrial management. He firmly believes in the core values of honesty, loyalty, and hard work.`,
+    teamMembers: [],
+  },
+  {
+    slug: "muhammad-jamal-shah",
+    name: "Muhammad Jamal Shah",
+    role: "Director Operations",
+    image: "/leadership/DirOps.webp",
+    intro: `Lt. Col. (Rted) Muhammad Jamal Shah did his Master’s in Business Administration from University of Engineering and Technology (UET), Taxila, Pakistan. He is working as Director Operations in TeReSol Pvt. Ltd. since 2012. His ability to analyze diverse information and formulate recommendations quickly is a unique quality of his. His skills include ability to motivate others, strategic thinking, multi-functional team experience, tolerance of ambiguity; flexibility, interpersonal skills and ability to recognize key factors in extensive data.`,
+    teamMembers: [],
   },
 ];
 

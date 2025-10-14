@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import AdminHeader from "@/components/AdminHeader";
 import CareerActions from "@/components/CareerActions";
 import StatusDropdown from "@/components/StatusDropdown";
+import InternshipSettings from "@/components/InternshipSettings"; // 🛑 IMPORT NEW COMPONENT
 
 // Define the Application type (assuming a structure for applied jobs)
 type Application = {
@@ -178,6 +179,9 @@ export default async function CareersPage({ searchParams }: { searchParams: { ta
             </Link>
           )}
         </div>
+        
+        {/* 🛑 RENDER NEW COMPONENT HERE (Above the tabs) */}
+        <InternshipSettings />
 
         {/* 🛑 Tab Navigation Update */}
         <div className="border-b border-gray-200 mb-6">

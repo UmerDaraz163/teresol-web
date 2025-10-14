@@ -141,15 +141,7 @@ export default function AboutPageClient() {
           </div>
           <div className="flex flex-wrap justify-center -mx-4">
             {team.map((member, index) => {
-              const isClickable =
-                member.role === "Chief Technology Officer" ||
-                member.role === "Chief Executive Officer" ||
-                member.role === "Chief Operating Officer" ||
-                member.role === "Chief Project Officer" ||
-                member.role === "Advisor International Projects" ||
-                member.role === "Chief Marketing Officer" ||
-                member.role === "Advisor Aviation Projects" ||
-                member.role === "Chief Information Officer";
+              const isClickable = true;
 
               const cardContent = (
                 <>
