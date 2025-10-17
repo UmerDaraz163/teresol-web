@@ -1,3 +1,4 @@
+// app/api/settings/internships/route.ts
 import { NextResponse } from 'next/server';
 import pool from "@/lib/db";
 

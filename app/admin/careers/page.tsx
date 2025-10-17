@@ -1,4 +1,3 @@
-// app/admin/careers/page.tsx
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
@@ -7,10 +6,10 @@ import { Career } from "@/types/career";
 import { format } from 'date-fns';
 import AdminHeader from "@/components/AdminHeader";
 import CareerActions from "@/components/CareerActions";
-import StatusDropdown from "@/components/StatusDropdown";
-import InternshipSettings from "@/components/InternshipSettings"; // 🛑 IMPORT NEW COMPONENT
+import StatusDropdown from "@/components/StatusDropdown"; 
+import InternshipSettings from "@/components/InternshipSettings"; 
 
-// Define the Application type (assuming a structure for applied jobs)
+// Define the Application type
 type Application = {
   id: number;
   job_title: string;
@@ -22,30 +21,19 @@ type Application = {
 
 // Data fetching for Careers (Job Postings)
 async function getCareers(): Promise<Career[]> {
-  if (process.env.NEXT_PHASE === "phase-production-build") {
-    console.log("⏭️ Skipping DB fetch for careers during build...");
-    return [];
-  }
-
-  // Filter out any jobs specifically marked as is_internship if they exist in the jobs table
+  if (process.env.NEXT_PHASE === "phase-production-build") return [];
   const [rows] = await pool.query(
     "SELECT id, title, location, job_type, closing_date, is_active FROM jobs WHERE is_internship IS NULL OR is_internship = 0 ORDER BY created_at DESC"
   );
   return rows as Career[];
 }
 
-// 🛑 UPDATED FUNCTION: Data fetching for Internship Applications
+// Data fetching for Internship Applications
 async function getInternApplications(): Promise<Application[]> {
-  if (process.env.NEXT_PHASE === "phase-production-build") {
-    console.log("⏭️ Skipping DB fetch for intern applications during build...");
-    return [];
-  }
-  
-  // Use the internship_dept column for the job title display
+  if (process.env.NEXT_PHASE === "phase-production-build") return [];
   const [rows] = await pool.query(
     `SELECT 
         a.id, 
-        -- 🛑 FIX: Use internship_dept as the job_title for interns 
         COALESCE(a.internship_dept, 'General Internship (Stream Unknown)') AS job_title, 
         a.name, 
         a.email, 
@@ -55,18 +43,12 @@ async function getInternApplications(): Promise<Application[]> {
     WHERE a.is_internship = 1 
     ORDER BY a.created_at DESC`
   );
-  
   return rows as Application[];
 }
 
-// 🛑 UPDATED FUNCTION: Data fetching for REGULAR Job Applications (Non-Interns)
+// Data fetching for REGULAR Job Applications (Non-Interns)
 async function getRegularApplications(): Promise<Application[]> {
-  if (process.env.NEXT_PHASE === "phase-production-build") {
-    console.log("⏭️ Skipping DB fetch for regular applications during build...");
-    return [];
-  }
-  
-  // Filter out applications that are marked as internships (a.is_internship = 1)
+  if (process.env.NEXT_PHASE === "phase-production-build") return [];
   const [rows] = await pool.query(
     `SELECT 
         a.id, 
@@ -77,69 +59,85 @@ async function getRegularApplications(): Promise<Application[]> {
         COALESCE(a.status, 'New') as status 
     FROM job_applications a 
     JOIN jobs j ON a.job_id = j.id 
-    -- 🛑 FIX: Filter by the application's own is_internship flag
     WHERE a.is_internship IS NULL OR a.is_internship = 0
     ORDER BY a.created_at DESC`
   );
-  
   return rows as Application[];
 }
 
 
-// New component for the list of applied jobs (remains the same)
-function AppliedJobsList({ applications }: { applications: Application[] }) {
-    // ... (AppliedJobsList content remains the same)
+// New component for the list of applied jobs - UPDATED TO INCLUDE DOWNLOAD BUTTON
+function AppliedJobsList({ applications, type }: { applications: Application[], type: 'regular' | 'intern' }) {
+    const fileName = type === 'intern' ? 'Intern' : 'Regular Job';
+    // Link to the API route with the correct type parameter
+    const downloadUrl = `/api/careers/download-applications?type=${type}`;
+    
     return (
-        <div className="overflow-x-auto bg-white rounded-lg shadow">
-        <table className="w-full text-left">
-            <thead className="bg-gray-100 border-b">
-            <tr>
-                <th className="p-4 font-semibold">Job Title</th>
-                <th className="p-4 font-semibold">Applicant Name</th>
-                <th className="p-4 font-semibold">Applicant Email</th>
-                <th className="p-4 font-semibold">Applied Date</th>
-                <th className="p-4 font-semibold">Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            {applications.length === 0 ? (
+        <div>
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-semibold">{fileName} Applications List</h2>
+                
+                {/* DOWNLOAD BUTTON */}
+                <a
+                    href={downloadUrl}
+                    className="bg-green-600 text-white px-4 py-2 text-sm rounded-md hover:bg-green-700 transition flex items-center space-x-2"
+                >
+                    <i className="fas fa-file-excel mr-2"></i>
+                    Download {fileName} CSV
+                </a>
+                
+            </div>
+            
+            <div className="overflow-x-auto bg-white rounded-lg shadow">
+            <table className="w-full text-left">
+                <thead className="bg-gray-100 border-b">
                 <tr>
-                <td colSpan={5} className="p-4 text-center text-gray-500">
-                    No applications found.
-                </td>
+                    <th className="p-4 font-semibold">Job Title</th>
+                    <th className="p-4 font-semibold">Applicant Name</th>
+                    <th className="p-4 font-semibold">Applicant Email</th>
+                    <th className="p-4 font-semibold">Applied Date</th>
+                    <th className="p-4 font-semibold">Status</th>
                 </tr>
-            ) : (
-                applications.map((app) => (
-                <tr key={app.id} className="border-b hover:bg-gray-50">
-                    <td className="p-4 font-medium text-gray-800">{app.job_title}</td>
-                    <td className="p-4 text-gray-600">{app.name}</td>
-                    <td className="p-4 text-blue-600 hover:underline">
-                        <a href={`mailto:${app.email}`}>{app.email}</a>
+                </thead>
+                <tbody>
+                {applications.length === 0 ? (
+                    <tr>
+                    <td colSpan={5} className="p-4 text-center text-gray-500">
+                        No applications found.
                     </td>
-                    <td className="p-4 text-gray-600">
-                    {format(new Date(app.applied_date), 'dd MMM yyyy, hh:mm a')}
-                    </td>
-                    <td className="p-4">
-                    <StatusDropdown 
-                        applicationId={app.id} 
-                        initialStatus={app.status} 
-                    />
-                    </td>
-                </tr>
-                ))
-            )}
-            </tbody>
-        </table>
+                    </tr>
+                ) : (
+                    applications.map((app) => (
+                    <tr key={app.id} className="border-b hover:bg-gray-50">
+                        <td className="p-4 font-medium text-gray-800">{app.job_title}</td>
+                        <td className="p-4 text-gray-600">{app.name}</td>
+                        <td className="p-4 text-blue-600 hover:underline">
+                            <a href={`mailto:${app.email}`}>{app.email}</a>
+                        </td>
+                        <td className="p-4 text-gray-600">
+                        {format(new Date(app.applied_date), 'dd MMM yyyy, hh:mm a')}
+                        </td>
+                        <td className="p-4">
+                        <StatusDropdown 
+                            applicationId={app.id} 
+                            initialStatus={app.status} 
+                        />
+                        </td>
+                    </tr>
+                    ))
+                )}
+                </tbody>
+            </table>
+            </div>
         </div>
     );
 }
 
 // Your main Server Component now takes searchParams to determine the tab
 export default async function CareersPage({ searchParams }: { searchParams: { tab?: string } }) {
-  // FIX: Await the resolution of the searchParams object
   const { tab } = await searchParams; 
   
-  // 🛑 Update to handle three states: 'careers', 'applications' (regular), 'interns'
+  // Update to handle three states: 'careers', 'applications' (regular), 'interns'
   let activeTab: 'careers' | 'applications' | 'interns';
   if (tab === 'interns') {
       activeTab = 'interns';
@@ -152,9 +150,9 @@ export default async function CareersPage({ searchParams }: { searchParams: { ta
   // Fetch data based on the active tab
   const allCareers = activeTab === 'careers' ? await getCareers() : [];
   const allRegularApplications = activeTab === 'applications' ? await getRegularApplications() : [];
-  const allInternApplications = activeTab === 'interns' ? await getInternApplications() : []; // 🛑 New data fetch
+  const allInternApplications = activeTab === 'interns' ? await getInternApplications() : []; 
 
-  // Get today's date string for career status check (rest remains the same)
+  // Get today's date string for career status check
   const today = new Date();
   const todayPKTString = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Asia/Karachi',
@@ -180,10 +178,9 @@ export default async function CareersPage({ searchParams }: { searchParams: { ta
           )}
         </div>
         
-        {/* 🛑 RENDER NEW COMPONENT HERE (Above the tabs) */}
         <InternshipSettings />
 
-        {/* 🛑 Tab Navigation Update */}
+        {/* Tab Navigation */}
         <div className="border-b border-gray-200 mb-6">
           <nav className="-mb-px flex space-x-8">
             <Link
@@ -224,7 +221,6 @@ export default async function CareersPage({ searchParams }: { searchParams: { ta
 
         {/* Tab Content */}
         {activeTab === 'careers' && (
-           // ... (Job Postings content remains the same)
            <div className="overflow-x-auto bg-white rounded-lg shadow">
             <table className="w-full text-left">
               <thead className="bg-gray-100 border-b">
@@ -239,7 +235,6 @@ export default async function CareersPage({ searchParams }: { searchParams: { ta
               </thead>
               <tbody>
                 {allCareers.map((career) => {
-                  // ... (Status logic remains the same)
                   let statusElement;
                   const isClosed = career.closing_date && new Intl.DateTimeFormat('en-CA', {
                     timeZone: 'Asia/Karachi',
@@ -296,14 +291,14 @@ export default async function CareersPage({ searchParams }: { searchParams: { ta
           </div>
         )}
 
-        {/* 🛑 Display Regular Applications */}
+        {/* Display Regular Applications */}
         {activeTab === 'applications' && (
-          <AppliedJobsList applications={allRegularApplications} />
+          <AppliedJobsList applications={allRegularApplications} type="regular" />
         )}
         
-        {/* 🛑 Display Intern Applications */}
+        {/* Display Intern Applications */}
         {activeTab === 'interns' && (
-          <AppliedJobsList applications={allInternApplications} />
+          <AppliedJobsList applications={allInternApplications} type="intern" />
         )}
 
       </div>
