@@ -123,7 +123,7 @@ export default function CertificationsSection() {
         {/* Certifications Section */}
         <div className="mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 text-center cert-heading">Certifications and Compliance</h2>
-          <p className="text-base sm:text-lg text-gray-600 mb-6 text-center max-w-xl mx-auto">Recognized for meeting international standards of quality and excellence.</p>
+          <p className="text-base sm:text-lg text-gray-600 mb-6 text-center max-w-full mx-auto whitespace-nowrap">Recognized for meeting international standards of quality and excellence.</p>
           
           {certifications.length <= itemsPerPage && certifications.length <= 4 ? (
             <div className="flex justify-center items-stretch flex-wrap gap-6 md:gap-8 pt-4">

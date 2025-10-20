@@ -7,7 +7,6 @@ import Header from './Header';
 import Footer from './Footer';
 import Tilt from 'react-parallax-tilt';
 import Link from 'next/link';
-import Image from 'next/image';
 import { services, type Service, type FeatureDetail } from '@/app/data/servicesPageData'; // Adjust path if needed
 
 export default function ServicesPageClient() {
@@ -58,7 +57,7 @@ export default function ServicesPageClient() {
                   {/* Text Content Column */}
                   <div className={`flex flex-col ${index % 2 !== 0 ? 'lg:order-last' : ''}`}>
                     <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-5 bg-gradient-to-r from-[#25237b] to-[#8b0303] bg-clip-text text-transparent">{service.title}</h3>
-                    <p className="text-gray-600 text-base md:text-lg leading-relaxed">{service.description}</p>
+                    <p className="text-gray-600 text-base md:text-lg leading-relaxed text-justify">{service.description}</p>
 
                     {/* Expandable Features Section */}
                     <div className={`transition-all duration-700 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[1000px] mt-6' : 'max-h-0'}`}>

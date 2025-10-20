@@ -1,4 +1,3 @@
-import { image } from "framer-motion/client";
 
  // Data arrays
 
@@ -7,19 +6,19 @@ export const heroSlides = [
     video: "/HW1.1.webm",
     duration: 18000,
     textCues: [
-      { startTime: 0, endTime: 2.16, title: "Innovatively Creative", subtitle: "Engineering forward-thinking ideas into reality." },
-      { startTime: 2.16, endTime: 7.14, title: "Embedded Design Services", subtitle: "Expert solutions for your custom hardware challenges." },
-      { startTime: 7.15, endTime: 9.55, title: "Wide Range of Single Board Computers", subtitle: "Powerful and versatile platforms for any project." },
-      { startTime: 9.56, endTime: 13.92, title: "AI Embedded Systems", subtitle: "Bringing intelligent processing and machine learning to the edge." },
-      { startTime: 13.93, endTime: 18.92, title: "Next-Gen RF Solutions", subtitle: "Advanced wireless technology for seamless connectivity." },
+      { startTime: 0, endTime: 2.16, title: "Innovatively Creative", subtitle: "Engineering forward-thinking ideas into reality" },
+      { startTime: 2.16, endTime: 7.14, title: "Embedded Design Services", subtitle: "Expert solutions for your custom hardware challenges" },
+      { startTime: 7.15, endTime: 9.55, title: "Wide Range of Single Board Computers", subtitle: "Powerful and versatile platforms for any project" },
+      { startTime: 9.56, endTime: 13.92, title: "AI Embedded Systems", subtitle: "Bringing intelligent processing and machine learning to the edge" },
+      { startTime: 13.93, endTime: 18.92, title: "Next-Gen RF Solutions", subtitle: "Advanced wireless technology for seamless connectivity" },
     ]
   },
   {
     video: "/SW1.3.webm",
     duration: 10000,
     textCues: [
-      { startTime: 0, endTime: 4, title: "Enterprise Software Solutions", subtitle: "Scalable and robust applications to empower your business." },
-      { startTime: 4.01, endTime: 6.9, title: "Modernization of Legacy Systems", subtitle: "Transforming financial services for the digital age." },
+      { startTime: 0, endTime: 4, title: "Enterprise Software Solutions", subtitle: "Scalable and robust applications to empower your business" },
+      { startTime: 4.01, endTime: 6.9, title: "Modernization of Legacy Systems", subtitle: "Transforming financial services for the digital age" },
       { startTime: 7, endTime: 10, title: "Serving Your World", subtitle: "Delivering technology that makes a global impact." },
     ]
   },
@@ -62,7 +61,7 @@ export const heroSlides = [
     {
       icon: "/icons/esw.png",
       title: "Enterprise Software Solutions",
-      description: "Well-reputed Research and Innovation (R&I) company with a proven track record in developing customized, cost efficient and scalable enterprise software solutions. We offer a comprehensive suite of services. We are a team of over 400 professionals includ- ing 20 PhDs from esteemed global institutes. We are ISO 9001, 20000, 27001 certified, guaranteeing industry-leading quality.",
+      description: "We are a well-reputed Research and Innovation (R&I) company specializing in developing customized, cost-efficient, and scalable enterprise software solutions. Our proven development approach leverages modern, flexible technology stacks, including robust open-source software (OSS), to deliver superior performance and avoid vendor lock-in, guaranteeing optimal longterm cost of ownership. We offer a comprehensive suite of services, backed by a team of over 400 professionals, including 20 PhDs from esteemed global institutes, and maintain industry-leading quality assurance with our ISO 9001, 20000, and 27001 certifications.",
       slug: "enterprise-software-solutions",
       features:[],
       techIcons: [

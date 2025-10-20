@@ -19,7 +19,7 @@ export type FeatureDetail = {
   {
       icon: "ri-cpu-line",
       title: "Embedded Hardware Design & Development Services",
-      description: "Our embedded design includes complex multi-layers (18-24) high-speed signal processing PCBs, Single Board Computers (SBC) for time-scheduled applications, their board support packages/APIs for integration, and complete customized end-to-end product (qualified for tough temperature environment) with multiple designed cards.",
+      description: "Our embedded design includes complex multilayers (18-24) high-speed signal processing PCBs, Single Board Computers (SBC) for time-scheduled applications, their board support packages/APIs for integration, and complete customized end-to-end product (qualified for tough temperature environment) with multiple designed cards.",
       slug: "embedded-hardware-design-services",
       features: [
       {
@@ -86,7 +86,7 @@ export type FeatureDetail = {
   {
     "icon": "/icons/esw.png",
     "title": "Enterprise Software Solutions",
-    "description": "Well-reputed Research and Innovation (R&I) company with a proven track record in developing customized, cost efficient and scalable enterprise software solutions. We offer a comprehensive suite of services. We are a team of over 400 professionals including 20 PhDs from esteemed global institutes. We are ISO 9001, 20000, 27001 certified, guaranteeing industry-leading quality.",
+    "description": "We are a well-reputed Research and Innovation (R&I) company specializing in developing customized, cost-efficient, and scalable enterprise software solutions. Our proven development approach leverages modern, flexible technology stacks, including robust open-source software (OSS), to deliver superior performance and avoid vendor lock-in, guaranteeing optimal longterm cost of ownership. We offer a comprehensive suite of services, backed by a team of over 400 professionals, including 20 PhDs from esteemed global institutes, and maintain industry-leading quality assurance with our ISO 9001, 20000, and 27001 certifications.",
     "slug": "enterprise-software-solutions",
     "features": [
       {
@@ -121,7 +121,7 @@ export type FeatureDetail = {
         "details": [
           "Creates robust and efficient embedded solutions for critical applications.",
           "Follows industry best practices for coding standards, version control, and traceability.",
-          "Expertise in designing complex, multi-layer (18-24) high-speed signal processing PCBs.",
+          "Expertise in designing complex, multilayer (18-24) high-speed signal processing PCBs.",
           "Delivers end-to-end products qualified for harsh environments."
         ]
       }

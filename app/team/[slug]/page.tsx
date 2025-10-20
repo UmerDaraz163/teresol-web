@@ -105,7 +105,50 @@ With a proven record of leadership and a passion for fostering innovation, Manso
     intro: `Dr. Bilal Rauf holds a Ph.D. in Information Security from the National University of Sciences and Technology (NUST), Pakistan. He has been serving as the Chief Information Officer (Software) at TeReSol Pvt. Ltd. since June 2021. Prior to joining TeReSol, he worked as an Assistant Professor at NUST.
 <br></br>As Project Director at TeReSol, Dr. Rauf oversees project planning and execution, manages front-end development teams, ensures seamless integration of front-end applications, and monitors overall project progress and deliverables. His responsibilities also include dividing tasks into manageable components, overseeing deployment activities, addressing quality assurance (QA) issues, facilitating coordination between front-end and back-end teams, and maintaining project documentation throughout various stages.
 <br></br>Dr. Rauf possesses strong technical expertise in JavaScript, Java, CSS, Python, C/C++, SQL, Nmap, and Vue.js. He is currently leading work on IFRS 9 compliance and Core Banking System projects.`,
-    teamMembers: [],
+    teamMembers: [
+        {
+          "name": "Brig Asif Saeed ur Rahman",
+          "image": "/leadership/staff/Asif-Saeed.jpeg",
+          "role": "Project Director Software",
+          "intro": "Brig Asif Saeed ur Rahman has more than 30 years of experience managing large-scale, mission-critical IT systems for the Pakistan Army and the private sector. His career includes leadership roles like Director Software Development, Director System Division, and Director Software Projects at Teresol (Pvt) Ltd. He has led major national-level digital transformation initiatives, such as smart ID solutions, Army-wide automation systems, and data center operations. His core expertise is in software project management, system integration, and software security standards."
+        },
+        {
+          "name": "Muhammad Javed",
+          "image": "/leadership/staff/Javed.jpeg",
+          "role": "Project Director – Software Development",
+          "intro": "Muhammad Javed is a Project Director – Software Development with over two decades of experience in designing, architecting, and delivering enterprise-grade solutions, mainly for the banking and financial services sectors. He has expertise in leading cross-functional teams, deploying mission-critical applications that meet performance and compliance standards, and modernizing legacy systems. He is adept at aligning technology strategies with business objectives, mentoring high-performing teams, and executing complex digital transformation initiatives with innovation and precision."
+        },
+        {
+          "name": "Athar Mohsin",
+          "image": "/leadership/staff/Athar.jpeg",
+          "role": "Project Director (Software)",
+          "intro": "Athar Mohsin is an Electrical Engineer with a Master’s in Software Engineering, bringing over 40 years of experience in engineering, academia, and project management. He is a Pakistan Army veteran with 20 years of service and spent 17 years as a faculty member in Software Engineering at NUST. He is currently serving as Project Director (Software) at TeReSol Pvt Ltd, where he leads fintech development projects."
+        },
+        {
+          "name": "Aamir Zaheer",
+          "image": "/leadership/staff/Amir-Zaheer.jpeg",
+          "role": "Project Director Software",
+          "intro": "This seasoned IT Leader has 25+ years of experience as a Project Director/CIO in Pakistan & Saudi Arabia]. They are skilled in managing large IT projects and leading large IT teams]. They have proven expertise in leading business transformation and application development for applications including Cloud Native Core Banking System, ERP, BI, E-commerce, and business application development for Client-Server, Web, Cloud & Mobile Applications]. Business sectors served include Banking, Trade, Retail, Manufacturing, Fashion Garment, and IT Consultancies]. **Note**: The name '(Aamir Zaheer)' was noted in the document near the previous entry], but the following text describes an unnamed individual."
+        },
+        {
+          "name": "Dr. Qaiser Chaudry",
+          "image": "/leadership/staff/Qaiser.jpeg",
+          "role": "Project Director (Software)",
+          "intro": "Dr. Qaiser Chaudry did his PhD in Electrical and Computer Engineering from Georgia Institute of Technology, USA. He is working as Project Director (Software) in TeReSol Pvt. Ltd. since June 2025. He served as Professor in National University of Sciences & Technology (NUST). As project director in TeReSol Pvt Ltd., his key responsibilities include overseeing project’s planning, execution, completion and overall success. His technical skills include Project Management, Problem Solving, AI, Machine Learning, Computer graphics and visualization, Programming languages, software design and development. Currently, he is working on Business Process Re-engineering and core banking systems."
+        },
+        {
+          "name": "Dr Tahir Zaidi",
+          "image": "/leadership/staff/Tahir-Zaidi.jpeg",
+          "role": "Project Director Software",
+          "intro": "Dr Tahir Zaidi has a PhD in Electrical and Computer Engineering from Georgia Institute of Technology, USA. He has more than 35+ years of technology and project management. He has served as Maintenance Incharge Executive Aircrafts of Pakistan Army; Professor, Director Special Projects and Director MIS at EME College, NUST, Islamabad; Head of Department Aviation Engineering & Technology programs and Director Centre of Interdisciplinary Research at The Superior University, Lahore; and Thematic Expert Production and Quality at National Compliance Center, Ministry of Commerce, Islamabad."
+        },
+        {
+          "name": "Mr. Faiz",
+          "image": "/leadership/staff/faiz.png",
+          "role": "Project Director Software",
+          "intro": "Mr. Faiz is seasoned professional known in IT industry for his dedicated technology & business work for last 25 years. He successfully introduced Technology products and Services models in Pakistan.  He managed Oracle Database projects with major Banks including State Bank for Core Banking (Symbols and Temenos) implementation.  He played vital role for Symbols Core banking software selection by Faysal Bank and United Bank.  He also managed IFRS16 reporting projects for Banks.  Aside from Financial sector, he worked with Telco, Govt. Utilities, Airlines Textile, & Pharma industries.  He has the domain knowledge, experience, exposure of application software, its implementation in the enterprises, achieving operational efficiency and its true adoption for the benefit of organization."
+        },
+    ],
   },
   {
     slug: "aamir-masood",
