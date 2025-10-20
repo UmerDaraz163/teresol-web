@@ -480,21 +480,19 @@ export default function ProductsPageClient() {
                                     {type.models.map((model, modelIndex) => (
                                       <div
                                         key={modelIndex}
-                                        className="flex items-start space-x-4 bg-gray-50 p-4 rounded-lg shadow-sm"
+                                        className="flex flex-col items-center justify-center bg-gray-50 p-6 rounded-lg shadow-sm text-center"
                                       >
                                         <img
                                           src={model.image}
                                           alt={model.title}
-                                          className="w-24 h-24 object-cover rounded-md hover:scale-105 transition-transform duration-300 will-change-transform"
+                                          className="w-40 h-40 object-contain rounded-md mb-4 hover:scale-105 transition-transform duration-300 will-change-transform"
                                         />
-                                        <div>
-                                          <h4 className="text-lg font-semibold text-gray-900">
-                                            {model.title}
-                                          </h4>
-                                          <p className="text-gray-600 text-sm mt-2">
-                                            {model.shortDescription}
-                                          </p>
-                                        </div>
+                                        <h4 className="text-lg font-semibold text-gray-900">
+                                          {model.title}
+                                        </h4>
+                                        <p className="text-gray-600 text-sm mt-2">
+                                          {model.shortDescription}
+                                        </p>
                                       </div>
                                     ))}
                                   </motion.div>
