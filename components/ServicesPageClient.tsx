@@ -32,7 +32,7 @@ export default function ServicesPageClient() {
         <div className="relative z-10 container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">Our Core Services</h1>
           <p className="text-xl text-gray-200 max-w-3xl mx-auto">
-            Pioneering end-to-end technology solutions to drive innovation and accelerate your business success.
+            Pioneering end-to-end technology solutions to drive innovation and accelerate your business success
           </p>
         </div>
       </section>
@@ -146,7 +146,7 @@ export default function ServicesPageClient() {
               24/7 Support
             </h2>
             <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
-              From initial deployment to long-term maintenance, we are your dedicated technology partner, ensuring operational excellence and peace of mind.
+              From initial deployment to long-term maintenance, we are your dedicated technology partner, ensuring operational excellence and peace of mind
             </p>
           </div>
 

@@ -18,7 +18,7 @@ export default function JobApplicationModal({ job, onClose, isInternship }: Prop
   const [message, setMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   // Using 5 MB as the limit
-  const MAX_FILE_SIZE_MB = 5; 
+  const MAX_FILE_SIZE_MB = 5;
   const [fileError, setFileError] = useState<string | null>(null);
 
   function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
@@ -49,11 +49,11 @@ export default function JobApplicationModal({ job, onClose, isInternship }: Prop
 
     // 🛑 2. Add isInternship and job_id to the form data
     formData.append('jobTitle', job.title);
-    
+
     // If it's the general internship, send a special job ID (like 0) or null for the backend
     // and explicitly send the internship flag.
     formData.append('jobId', isInternship ? '0' : job.id.toString());
-    formData.append('isInternship', isInternship ? '1' : '0'); 
+    formData.append('isInternship', isInternship ? '1' : '0');
 
 
     try {
@@ -76,13 +76,14 @@ export default function JobApplicationModal({ job, onClose, isInternship }: Prop
       setIsSubmitting(false);
     }
   }
-  
+
   // UI helper for the title
-  const modalTitle = isInternship 
-    ? "General Internship Application" 
+  const modalTitle = isInternship
+    ? "General Internship Application"
     : `Apply for: ${job.title}`;
 
 
+  
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 relative">
@@ -95,21 +96,26 @@ export default function JobApplicationModal({ job, onClose, isInternship }: Prop
 
         <h2 className="text-2xl font-bold mb-2">{modalTitle}</h2>
         <p className="text-gray-600 mb-6">
-          {isInternship 
+          {isInternship
             ? "We are accepting applications for our general internship program."
             : "Please fill out the form below to submit your application."}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Note: Removed the unused hidden input since jobId is added to formData in JS */}
-          
+
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
             <input
               type="text"
               name="name"
               id="name"
+              pattern="[A-Za-z\s]+"
               required
+              onInput={(e) => {
+                const target = e.target as HTMLInputElement;
+                target.value = target.value.replace(/[^A-Za-z\s]/g, '');
+              }}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>

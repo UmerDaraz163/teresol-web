@@ -485,12 +485,12 @@ export default function ProductsPageClient() {
                                         <img
                                           src={model.image}
                                           alt={model.title}
-                                          className="w-40 h-40 object-contain rounded-md mb-4 hover:scale-105 transition-transform duration-300 will-change-transform"
+                                          className="w-50 h-50 object-contain rounded-md mb-4 hover:scale-105 transition-transform duration-300 will-change-transform"
                                         />
                                         <h4 className="text-lg font-semibold text-gray-900">
                                           {model.title}
                                         </h4>
-                                        <p className="text-gray-600 text-sm mt-2">
+                                        <p className="text-gray-600 text-sm mt-2 text-justify">
                                           {model.shortDescription}
                                         </p>
                                       </div>
