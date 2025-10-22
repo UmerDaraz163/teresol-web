@@ -110,43 +110,49 @@ With a proven record of leadership and a passion for fostering innovation, Manso
           "name": "Brig Asif Saeed ur Rahman",
           "image": "/leadership/staff/Asif-Saeed.jpeg",
           "role": "Project Director Software",
-          "intro": "Brig Asif Saeed ur Rahman has more than 30 years of experience managing large-scale, mission-critical IT systems for the Pakistan Army and the private sector. His career includes leadership roles like Director Software Development, Director System Division, and Director Software Projects at Teresol (Pvt) Ltd. He has led major national-level digital transformation initiatives, such as smart ID solutions, Army-wide automation systems, and data center operations. His core expertise is in software project management, system integration, and software security standards."
+          "intro": "Brig Asif Saeed ur Rahman brings with him more than 30 years of experience in managing large-scale, mission-critical IT systems for the Pakistan Army and private sector. His career spans leadership roles including Director Software Development, Director System Division, and Director Software Projects at Teresol (Pvt) Ltd. He has led key national-level digital transformation initiatives, including Army-wide automation systems, smart ID solutions, and data center operations. His core expertise lies in software project management, system integration, and software security standards."
         },
         {
           "name": "Muhammad Javed",
           "image": "/leadership/staff/Javed.jpeg",
-          "role": "Project Director – Software Development",
-          "intro": "Muhammad Javed is a Project Director – Software Development with over two decades of experience in designing, architecting, and delivering enterprise-grade solutions, mainly for the banking and financial services sectors. He has expertise in leading cross-functional teams, deploying mission-critical applications that meet performance and compliance standards, and modernizing legacy systems. He is adept at aligning technology strategies with business objectives, mentoring high-performing teams, and executing complex digital transformation initiatives with innovation and precision."
+          "role": "Project Director Software",
+          "intro": "Muhammad Javed is a Project Director – Software Development with over two decades of experience in designing, architecting, and delivering enterprise-grade solutions, primarily for the banking and financial services sectors. He has proven expertise in leading cross-functional teams, modernizing legacy systems, and deploying mission-critical applications that meet compliance and performance standards. Adept at aligning technology strategies with business objectives, he excels in mentoring high-performing teams and executing complex digital transformation initiatives with precision and innovation."
         },
         {
           "name": "Athar Mohsin",
-          "image": "/leadership/staff/Athar.jpeg",
-          "role": "Project Director (Software)",
-          "intro": "Athar Mohsin is an Electrical Engineer with a Master’s in Software Engineering, bringing over 40 years of experience in engineering, academia, and project management. He is a Pakistan Army veteran with 20 years of service and spent 17 years as a faculty member in Software Engineering at NUST. He is currently serving as Project Director (Software) at TeReSol Pvt Ltd, where he leads fintech development projects."
+          "image": "/leadership/staff/Athar.webp",
+          "role": "Project Director Software",
+          "intro": "Athar Mohsin — Electrical Engineer with a Master’s in Software Engineering, bringing over 40 years of experience in engineering, academia, and project management. A Pakistan Army veteran with 20 years of service and 17 years at NUST as a faculty member in Software Engineering. Currently serving as Project Director (Software) at TeReSol Pvt Ltd, leading fintech development projects."
         },
         {
           "name": "Aamir Zaheer",
           "image": "/leadership/staff/Amir-Zaheer.jpeg",
           "role": "Project Director Software",
-          "intro": "This seasoned IT Leader has 25+ years of experience as a Project Director/CIO in Pakistan & Saudi Arabia]. They are skilled in managing large IT projects and leading large IT teams]. They have proven expertise in leading business transformation and application development for applications including Cloud Native Core Banking System, ERP, BI, E-commerce, and business application development for Client-Server, Web, Cloud & Mobile Applications]. Business sectors served include Banking, Trade, Retail, Manufacturing, Fashion Garment, and IT Consultancies]. **Note**: The name '(Aamir Zaheer)' was noted in the document near the previous entry], but the following text describes an unnamed individual."
+          "intro": "Skilled in managing large IT projects and leading large IT teams. Seasoned IT Leader with 25+ years of experience as Project Director/ CIO in Pakistan & Saudi Arabia. Proven expertise in leading business transformation & application development in Cloud Native Core Banking System, ERP, BI, E-commerce and business application development for Client-Server, Web, Cloud & Mobile Applications. Business sectors served are Banking, Trade, Retail, Manufacturing, Fashion Garment & IT Consultancies."
         },
         {
           "name": "Dr. Qaiser Chaudry",
           "image": "/leadership/staff/Qaiser.jpeg",
-          "role": "Project Director (Software)",
-          "intro": "Dr. Qaiser Chaudry did his PhD in Electrical and Computer Engineering from Georgia Institute of Technology, USA. He is working as Project Director (Software) in TeReSol Pvt. Ltd. since June 2025. He served as Professor in National University of Sciences & Technology (NUST). As project director in TeReSol Pvt Ltd., his key responsibilities include overseeing project’s planning, execution, completion and overall success. His technical skills include Project Management, Problem Solving, AI, Machine Learning, Computer graphics and visualization, Programming languages, software design and development. Currently, he is working on Business Process Re-engineering and core banking systems."
+          "role": "Project Director Software",
+          "intro": "Dr. Qaiser Chaudhry earned his PhD in Electrical and Computer Engineering from the Georgia Institute of Technology, USA. He has been serving as the Project Director (Software) at Teresol (Pvt.) Ltd. since June 2025. He previously served as a Professor at the National University of Sciences and Technology (NUST). As Project Director at Teresol (Pvt.) Ltd., his key responsibilities include overseeing project planning, execution, completion, and overall success. His technical expertise includes project management, problem-solving, artificial intelligence (AI), machine learning, computer graphics and visualization, programming languages, and software design and development. He is currently working on business process re-engineering and core banking systems."
         },
         {
           "name": "Dr Tahir Zaidi",
           "image": "/leadership/staff/Tahir-Zaidi.jpeg",
           "role": "Project Director Software",
-          "intro": "Dr Tahir Zaidi has a PhD in Electrical and Computer Engineering from Georgia Institute of Technology, USA. He has more than 35+ years of technology and project management. He has served as Maintenance Incharge Executive Aircrafts of Pakistan Army; Professor, Director Special Projects and Director MIS at EME College, NUST, Islamabad; Head of Department Aviation Engineering & Technology programs and Director Centre of Interdisciplinary Research at The Superior University, Lahore; and Thematic Expert Production and Quality at National Compliance Center, Ministry of Commerce, Islamabad."
+          "intro": "Dr. Tahir Zaidi holds a PhD in Electrical and Computer Engineering from the Georgia Institute of Technology, USA. He has over 35 years of experience in technology and project management. He has served as Maintenance In-Charge (Executive Aircraft) for the Pakistan Army; Professor, Director Special Projects, and Director MIS at the College of Electrical and Mechanical Engineering (EME), NUST, Islamabad; Head of the Department of Aviation Engineering and Technology Programs and Director, Centre for Interdisciplinary Research at The Superior University, Lahore; and Thematic Expert (Production and Quality) at the National Compliance Center, Ministry of Commerce, Islamabad."
         },
         {
           "name": "Mr. Faiz",
           "image": "/leadership/staff/faiz.png",
           "role": "Project Director Software",
-          "intro": "Mr. Faiz is seasoned professional known in IT industry for his dedicated technology & business work for last 25 years. He successfully introduced Technology products and Services models in Pakistan.  He managed Oracle Database projects with major Banks including State Bank for Core Banking (Symbols and Temenos) implementation.  He played vital role for Symbols Core banking software selection by Faysal Bank and United Bank.  He also managed IFRS16 reporting projects for Banks.  Aside from Financial sector, he worked with Telco, Govt. Utilities, Airlines Textile, & Pharma industries.  He has the domain knowledge, experience, exposure of application software, its implementation in the enterprises, achieving operational efficiency and its true adoption for the benefit of organization."
+          "intro": "Mr. Faiz is a seasoned IT professional with over 25 years of experience in technology and business innovation. He has led Oracle Database and Core Banking (Symbols and Temenos) projects for major banks, including the State Bank, Faysal Bank, and United Bank, and has managed IFRS 16 reporting implementations. Beyond the financial sector, he has worked with telecom, government, utilities, airline, textile, and pharmaceutical industries. His expertise spans enterprise software implementation, operational efficiency, and digital transformation."
+        },
+         {
+          "name": "Zain ul Abdin",
+          "image": "/leadership/staff/zain-ul-abidin.webp",
+          "role": "Project Director Software",
+          "intro": "Zain ul Abdin has over 30 years of experience in the fields of telecommunications, information technology (IT), and industrial automation. He has a proven track record of delivering complex projects on time and within budget, leveraging strong leadership and strategic planning skills. He is adept at fostering collaboration and communication across cross-functional teams, driving innovation, and achieving organizational goals. He is proficient in agile methodologies and is committed to continuous improvement and excellence."
         },
     ],
   },
