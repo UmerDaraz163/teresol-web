@@ -12,37 +12,47 @@ export default function AboutPageClient() {
       slug: "dr-muhammad-faisal-khan",
       name: "Dr. Muhammad Faisal Khan",
       role: "Chief Executive Officer",
-      image: "/leadership/CEO.png",
+      // image: "/leadership/CEO.png",
+      image: "/leadership/1.webp",
+
     },
     {
       slug: "dr-naveed-iqbal",
       name: "Dr. Naveed Iqbal",
       role: "Chief Operating Officer",
-      image: "/leadership/COO.webp",
+      // image: "/leadership/COO.webp",
+      image: "/leadership/3.webp",
+
     },
     {
       slug: "dr-ahmad-muqeem-sheri",
       name: "Dr. Ahmad Muqeem Sheri",
       role: "Chief Design Officer",
-      image: "/leadership/CDO.jpeg",
+      // image: "/leadership/CDO.jpeg",
+      image: "/leadership/4.webp",
+
     },
     {
       slug: "mansoor-ahmad-khan",
       name: "Mansoor Ahmad Khan",
       role: "Chief Marketing Officer",
-      image: "/leadership/CMO2.png",
+      // image: "/leadership/CMO2.png",
+      image: "/leadership/CMO-01.webp",
+
     },
     {
       slug: "farooq-umer-khan",
       name: "Farooq Umer Khan",
       role: "Chief Technology Officer",
-      image: "/leadership/CTO2o.webp",
+      // image: "/leadership/CTO2o.webp",
+      image: "/leadership/5.webp",
+
     },
     {
       slug: "dr-bilal-rauf",
       name: "Dr. Bilal Rauf",
       role: "Chief Information Officer",
-      image: "/leadership/CIO1.webp",
+      image: "/leadership/sir-bilal.webp",
     },
     {
       slug: "aamir-masood",
@@ -66,7 +76,7 @@ export default function AboutPageClient() {
       slug: "col-abdul-rauf-sim-r",
       name: "Col Abdul Rauf SI(M) (R)",
       role: "Advisor Defense Projects",
-      image: "/leadership/Adv-GrdDef-Proj.png",
+      image: "/leadership/col-rauf.webp",
     },
     {
       slug: "muhammad-jamal-shah",
