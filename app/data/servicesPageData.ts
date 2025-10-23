@@ -96,7 +96,7 @@ export type FeatureDetail = {
           "Employs a unique requirement gathering process and detailed code analysis using Data Flow Diagrams (DFDs) and Class Diagrams with a human-in-the-loop mechanism.",
           "Enables seamless omni-channel and branchless banking through innovative digital tools, such as a secure Digital Account Opening app and a large-scale Biometric Verification System deployed on over 1800 devices for government pensioners.",
           "Achieves significant outcomes, including making systems future-ready for Digital and Open Banking, and reducing annual license costs by over 50%.",
-          "Utilizes modern, scalable tech stacks including Microservices, Kubernetes, Open Stack, Kafka, and enterprise APIs (e.g., Temenos) within a secure mesh network."
+          "Utilizes modern, scalable tech stacks including Microservices, Kubernetes and enterprise APIs within a secure mesh network."
         ]
       },
       // {

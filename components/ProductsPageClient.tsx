@@ -307,13 +307,13 @@ export default function ProductsPageClient() {
               title: "Remote IT Team Establishment",
               image: "/products/software/remote.jpeg",
               shortDescription:
-                "We provide skilled teams with 24/7 support, flexible scaling, and lower costs than in-house staffing.",
+                "TeReSol offers skilled teams that come with 24/7 support, flexible scaling, and lower costs compared to in-house staffing.",
             },
             {
               title: "Consultancy Services",
               image: "/products/software/consultancy.jpg",
               shortDescription:
-                "We optimize IT teams through restructuring, PMO setup, recruitment, process guidelines, and training.",
+                "TeReSol optimizes IT teams by providing comprehensive services, including restructuring, PMO setup, recruitment, process guidelines, and training.",
             },
           ],
         },

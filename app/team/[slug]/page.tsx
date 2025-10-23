@@ -143,7 +143,7 @@ With a proven record of leadership and a passion for fostering innovation, Manso
           "intro": "Dr. Tahir Zaidi holds a PhD in Electrical and Computer Engineering from the Georgia Institute of Technology, USA. He has over 35 years of experience in technology and project management. He has served as Maintenance In-Charge (Executive Aircraft) for the Pakistan Army; Professor, Director Special Projects, and Director MIS at the College of Electrical and Mechanical Engineering (EME), NUST, Islamabad; Head of the Department of Aviation Engineering and Technology Programs and Director, Centre for Interdisciplinary Research at The Superior University, Lahore; and Thematic Expert (Production and Quality) at the National Compliance Center, Ministry of Commerce, Islamabad."
         },
         {
-          "name": "Mr. Faiz",
+          "name": "Mr. Nasir Faiz",
           "image": "/leadership/staff/faiz.png",
           "role": "Project Director Software",
           "intro": "Mr. Faiz is a seasoned IT professional with over 25 years of experience in technology and business innovation. He has led Oracle Database and Core Banking (Symbols and Temenos) projects for major banks, including the State Bank, Faysal Bank, and United Bank, and has managed IFRS 16 reporting implementations. Beyond the financial sector, he has worked with telecom, government, utilities, airline, textile, and pharmaceutical industries. His expertise spans enterprise software implementation, operational efficiency, and digital transformation."
