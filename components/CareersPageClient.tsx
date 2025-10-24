@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import JobApplicationModal from '@/components/JobApplicationModal';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useRouter } from 'next/navigation'; // 👈 Import useRouter
 
 // Define the available internship streams
 const INTERNSHIP_STREAMS = [
@@ -29,7 +30,7 @@ type Job = {
     is_internship: boolean;
 };
 
-// Data for the Benefits & Perks section (remains the same)
+// ... (Benefits data remains the same) ...
 const benefits = [
     { title: "Medical Coverage (Self & Dependents)", icon: "ri-first-aid-kit-line" },
     { title: "Life Insurance", icon: "ri-heart-pulse-line" },
@@ -48,6 +49,7 @@ const benefits = [
     { title: "Professional Development Support", icon: "ri-graduation-cap-line" },
 ];
 
+
 // Base definition for the Internship Application
 const BASE_INTERNSHIP_JOB = {
     id: 0,
@@ -61,10 +63,11 @@ const BASE_INTERNSHIP_JOB = {
 
 
 export default function CareersPageClient() {
+    const router = useRouter(); // 👈 Initialize the router
     const [jobs, setJobs] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+    const [selectedJob, setSelectedJob] = useState<Job | null>(null); // Only used for Internships now
     const [expandedJobId, setExpandedJobId] = useState<number | null>(null);
 
     // State to hold the internship enablement status
@@ -139,7 +142,7 @@ export default function CareersPageClient() {
         setExpandedJobId(prevId => (prevId === jobId ? null : jobId));
     };
 
-    // New handler creates the job object based on the selected stream
+    // New handler creates the job object based on the selected stream (for Modal)
     const openInternshipModal = (stream: string) => {
         const internshipJob: Job = {
             ...BASE_INTERNSHIP_JOB,
@@ -158,6 +161,12 @@ export default function CareersPageClient() {
         }
     }
 
+    // NEW HANDLER: Redirects to the new application page
+    const handleApplyNow = (job: Job) => {
+        // Use Next.js router to navigate to the new dedicated application page
+        router.push(`/careers/apply/${job.id}?title=${encodeURIComponent(job.title)}`);
+    }
+
 
     if (isLoading) {
         return <p className="text-center py-12">Loading job openings...</p>;
@@ -174,7 +183,7 @@ export default function CareersPageClient() {
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            {/* The modal component (JobApplicationModal) now correctly receives isInternship */}
+            {/* The modal component (JobApplicationModal) now ONLY for internships */}
             {selectedJob && (
                 <JobApplicationModal
                     job={selectedJob}
@@ -238,12 +247,12 @@ export default function CareersPageClient() {
                 </div>
             </section>
 
-            <main className={`max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 transition-all duration-300 ${selectedJob ? 'blur-sm pointer-events-none' : ''}`}>
+            <main className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Current Opportunities</h2>
 
                 {/* 🛑 INTERNSHIP SECTION: Always Show */}
                 <>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Internship Opportunities</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Internship Opportunities (Simple Modal Form)</h3>
                     <div className="bg-yellow-50 border-2 border-yellow-300 shadow-xl rounded-xl p-8 mb-8 flex flex-col justify-between transition-all duration-300">
                         <div className="flex items-center space-x-4 mb-4">
                             <i className="ri-graduation-cap-line text-4xl text-yellow-700"></i>
@@ -254,7 +263,7 @@ export default function CareersPageClient() {
                                 <p className="text-lg text-yellow-700 mt-1 max-w-xl">
                                     {/* Update description based on status */}
                                     {isInternshipsActive
-                                        ? 'Select your preferred stream to begin your application.'
+                                        ? 'Select your preferred stream to begin your quick application.'
                                         : 'We are not accepting new internship applications at this time. Please check back later.'}
                                 </p>
                             </div>
@@ -309,7 +318,7 @@ export default function CareersPageClient() {
 
                 {/* 🛑 FULL-TIME SECTION: Always show */}
                 <>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Full-Time Openings</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Full-Time Openings (Dedicated Page Form)</h3>
                     <div className="space-y-4">
                         {jobs.length > 0 ? (
                             jobs.map((job) => {
@@ -339,7 +348,7 @@ export default function CareersPageClient() {
                                                     {isExpanded ? 'Hide Details' : 'View Details'}
                                                 </button>
                                                 <button
-                                                    onClick={() => setSelectedJob(job)}
+                                                    onClick={() => handleApplyNow(job)} // 👈 NEW HANDLER: Redirects to new page
                                                     className="inline-block bg-blue-600 text-white font-semibold px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300"
                                                 >
                                                     Apply Now
