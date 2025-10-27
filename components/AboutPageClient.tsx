@@ -29,7 +29,7 @@ export default function AboutPageClient() {
       name: "Dr. Ahmad Muqeem Sheri",
       role: "Chief Design Officer",
       // image: "/leadership/CDO.jpeg",
-      image: "/leadership/4.webp",
+      image: "/leadership/CDO.webp",
 
     },
     {
@@ -56,9 +56,9 @@ export default function AboutPageClient() {
     },
     {
       slug: "aamir-masood",
-      name: "Aamir Masood",
+      name: "Aamir Masood Khan",
       role: "Chief Project Officer",
-      image: "/leadership/CPO.png",
+      image: "/leadership/CPO.webp",
     },
     {
       slug: "babar-amin",
