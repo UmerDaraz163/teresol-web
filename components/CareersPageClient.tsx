@@ -252,7 +252,7 @@ export default function CareersPageClient() {
 
                 {/* 🛑 INTERNSHIP SECTION: Always Show */}
                 <>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Internship Opportunities (Simple Modal Form)</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Internship Opportunities</h3>
                     <div className="bg-yellow-50 border-2 border-yellow-300 shadow-xl rounded-xl p-8 mb-8 flex flex-col justify-between transition-all duration-300">
                         <div className="flex items-center space-x-4 mb-4">
                             <i className="ri-graduation-cap-line text-4xl text-yellow-700"></i>
@@ -318,7 +318,7 @@ export default function CareersPageClient() {
 
                 {/* 🛑 FULL-TIME SECTION: Always show */}
                 <>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Full-Time Openings (Dedicated Page Form)</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Full-Time Openings</h3>
                     <div className="space-y-4">
                         {jobs.length > 0 ? (
                             jobs.map((job) => {
