@@ -178,7 +178,9 @@ With a proven record of leadership and a passion for fostering innovation, Manso
 <br></br> Aamir started his professional career as the Gold Medalist of the first batch of NUST, and later on completed his two Masters degrees with distinction – first from ISU, USA and second from CASE, PAK.
 <br></br> In his early career, he worked as a faculty member at NUST for six years, where his contributions in teaching and research were recognized at multiple forums. 
 <br></br> Aamir has played a key role in telecommunication industry’s growth of Pakistan during his experience at Siemens, Nokia Siemens Networks, Ericsson, Nexus Telecom, and Mobilink (now Jazz). He has held regional and global assignments that have helped him work with diverse teams to achieve significant milestones.  He has successfully completed multiple technical, management, and leadership certifications/trainings from Pakistan, UAE, Germany, Thailand, and Finland.   
-<br></br> Aamir has contributed significantly to high-impact national projects as the COO of National Testing Service (NTS), and later on as the CEO of TEPS (a technology partner of PMC for digitization of various tests within Pakistan, and at international level).`,
+<br></br> Aamir has contributed significantly to high-impact national projects as the COO of National Testing Service (NTS), and later on as the CEO of TEPS (a technology partner of PMC for digitization of various tests within Pakistan, and at international level). 
+<br></br> Aamir has envisioned and implemented a high-impact PMO function at TeResol over the past 5 years. Working with a team of 400+ professionals, he has led successful delivery of multiple projects to public and private sector customers. He also played a key role in establishing the PMO department for TeReSol’s customer organization, and helped build the structure, processes, and the entire system for ensuring optimized delivery of a large number of projects. 
+ <br></br> Being part of the leadership team, Aamir is continuously engaged in strategic planning, business development, and system improvement initiatives at TeReSol `,
     teamMembers: [],
   },
   {
