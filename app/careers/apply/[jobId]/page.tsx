@@ -2,6 +2,7 @@
 import Header from "@/components/Header"; // Assuming Header is in components/Header
 import Footer from "@/components/Footer"; // Assuming Footer is in components/Footer
 import JobApplicationPage from "@/components/JobApplicationPage"; // The client component you created
+import AdminHeader from "@/components/AdminHeader";
 
 /**
  * Defines the props received by the dynamic Next.js Page component.
@@ -59,7 +60,7 @@ export default async function ApplicationPage({
   // ✅ Render the page normally
   return (
     <div className="bg-gray-50 min-h-screen">
-      <Header />
+      <AdminHeader showBackButton/>
       <main className="py-12">
         {/* 3. Render the client component, passing the validated props.
             The complex form logic resides entirely within JobApplicationPage.

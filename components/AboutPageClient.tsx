@@ -13,7 +13,7 @@ export default function AboutPageClient() {
       name: "Dr. Muhammad Faisal Khan",
       role: "Chief Executive Officer",
       // image: "/leadership/CEO.png",
-      image: "/leadership/1.webp",
+      image: "/leadership/CEO.webp",
 
     },
     {
@@ -21,7 +21,7 @@ export default function AboutPageClient() {
       name: "Dr. Naveed Iqbal",
       role: "Chief Operating Officer",
       // image: "/leadership/COO.webp",
-      image: "/leadership/3.webp",
+      image: "/leadership/COO1.webp",
 
     },
     {
