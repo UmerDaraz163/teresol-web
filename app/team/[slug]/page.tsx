@@ -68,25 +68,18 @@ With a proven record of leadership and a passion for fostering innovation, Manso
 
     teamMembers: [
       {
-        name: "Adeel Tariq",
-        image: "/leadership/staff/AdeelTariq.webp",
-        role: "Project Director Technical Support",
-        intro:
-          "With 27+ years of distinguished experience, he has successfully managed radar, avionics and system integration programs at national and international levels. As Project Director (Technical Support), he leads end-to-end program delivery; spanning hardware, production, logistics and networks, while driving innovation, efficiency and customer satisfaction. A seasoned professional who is passionate about transforming complex challenges into enduring successes.",
-      },
-      {
-        name: "Danyal Sajid",
-        image: "/leadership/staff/DanyalSajid.webp",
-        role: "Project Director Embedded Systems",
-        intro:
-          "Mr. Danyal Sajid is working as Project Director-Embedded Systems at TeReSol with over 25 years of experience leading communications and embedded system development projects. He brings unmatched expertise in DSP/FPGA hardware–software design, RF spectrum monitoring, and avionics system integration. Renowned for driving innovation and mission-critical solutions, he excels in managing complex R&D initiatives from concept to deployment.",
-      },
-      {
         name: "Dr. Shahzad Arshad",
         image: "/leadership/staff/DrShahzadArshad.jpeg",
         role: "Project Director Radio Frequency",
         intro:
           "Dr. Shahzad Arshad serves as Project Director-RF & Microwave Systems at TeReSol, leveraging over 20 years of experience in RF systems design to spearhead the end-to-end development of radar and wireless comm systems. He brings extensive experience in leading technical teams for technology development projects, adeptly guiding cross-functional teams to achieve project milestones and drive innovation.",
+      },
+      {
+        name: "Adeel Tariq",
+        image: "/leadership/staff/AdeelTariq.webp",
+        role: "Project Director Technical Support",
+        intro:
+          "With 27+ years of distinguished experience, he has successfully managed radar, avionics and system integration programs at national and international levels. As Project Director (Technical Support), he leads end-to-end program delivery; spanning hardware, production, logistics and networks, while driving innovation, efficiency and customer satisfaction. A seasoned professional who is passionate about transforming complex challenges into enduring successes.",
       },
       {
         name: "Raheel Bari",
@@ -95,7 +88,13 @@ With a proven record of leadership and a passion for fostering innovation, Manso
         intro:
           "Mr. Raheel Bari is working as Project Director-Embedded Systems at TeReSol with overall 20+ years of experience in embedded hardware, firmware, and system architecture. He drives complex product development from concept to certification, delivering high-reliability, standards-compliant electronics system",
       },
-
+      {
+        name: "Danyal Sajid",
+        image: "/leadership/staff/DanyalSajid.webp",
+        role: "Project Director Embedded Systems",
+        intro:
+          "Mr. Danyal Sajid is working as Project Director-Embedded Systems at TeReSol with over 25 years of experience leading communications and embedded system development projects. He brings unmatched expertise in DSP/FPGA hardware–software design, RF spectrum monitoring, and avionics system integration. Renowned for driving innovation and mission-critical solutions, he excels in managing complex R&D initiatives from concept to deployment.",
+      },
     ],
   },
   {
@@ -108,64 +107,74 @@ With a proven record of leadership and a passion for fostering innovation, Manso
 <br></br>Dr. Rauf possesses strong technical expertise in JavaScript, Java, CSS, Python, C/C++, SQL, Nmap, and Vue.js. He is currently leading work on IFRS 9 compliance and Core Banking System projects.`,
     teamMembers: [
       {
-        "name": "Aamir Zaheer",
-        "image": "/leadership/staff/Amir-Zaheer.jpeg",
-        "role": "Project Director Software",
-        "intro": "Skilled in managing large-scale IT projects and leading high-performing teams, Aamir Zaheer is a seasoned technology leader with over 25 years of experience in delivering impactful digital solutions. He possesses proven expertise in driving business transformation and overseeing end-to-end application development across cloud-native core banking systems, ERP, BI, e-commerce, and enterprise business applications for client-server, web, cloud, and mobile platforms. Throughout his career, he has contributed to diverse industries including banking, trade, retail, manufacturing, fashion garments, and IT consulting, consistently aligning technology initiatives with strategic business goals."
+        name: "Brig (R) Asif Saeed ur Rahman",
+        image: "/leadership/staff/Asif-Saeed.jpeg",
+        role: "Project Director Software",
+        intro:
+          "Brig (R) Asif Saeed ur Rahman brings with him more than 30 years of experience in leading and managing large-scale, mission-critical IT systems for the public and private sectors. His career spans leadership roles including Director of Software Development, Director of Systems Division, and Director of Software Projects at Teresol (Pvt.) Ltd. He has led key national-level digital transformation initiatives, including enterprise-wide automation systems, smart ID solutions, and data center operations. His core expertise lies in software project management, systems integration, and software security standards.",
       },
       {
-        "name": "Athar Mohsin",
-        "image": "/leadership/staff/Athar.webp",
-        "role": "Project Director Software",
-        "intro": "Athar Mohsin is an accomplished Electrical Engineer with a Master’s degree in Software Engineering and over 40 years of diverse experience spanning engineering, academia, and project management. With two decades of service in the public sector and 17 years as a faculty member at NUST, he has contributed significantly to the advancement of software engineering education and practice. Currently serving as the Project Director (Software) at TeReSol (Pvt.) Ltd., he leads innovative fintech development projects, driving excellence through technical expertise, leadership, and strategic vision."
+        name: "Aamir Zaheer",
+        image: "/leadership/staff/Amir-Zaheer.jpeg",
+        role: "Project Director Software",
+        intro:
+          "Skilled in managing large-scale IT projects and leading high-performing teams, Aamir Zaheer is a seasoned technology leader with over 25 years of experience in delivering impactful digital solutions. He possesses proven expertise in driving business transformation and overseeing end-to-end application development across cloud-native core banking systems, ERP, BI, e-commerce, and enterprise business applications for client-server, web, cloud, and mobile platforms. Throughout his career, he has contributed to diverse industries including banking, trade, retail, manufacturing, fashion garments, and IT consulting, consistently aligning technology initiatives with strategic business goals.",
       },
       {
-        "name": "Brig (R) Asif Saeed ur Rahman",
-        "image": "/leadership/staff/Asif-Saeed.jpeg",
-        "role": "Project Director Software",
-        "intro": "Brig (R) Asif Saeed ur Rahman brings with him more than 30 years of experience in leading and managing large-scale, mission-critical IT systems for the public and private sectors. His career spans leadership roles including Director of Software Development, Director of Systems Division, and Director of Software Projects at Teresol (Pvt.) Ltd. He has led key national-level digital transformation initiatives, including enterprise-wide automation systems, smart ID solutions, and data center operations. His core expertise lies in software project management, systems integration, and software security standards."
+        name: "Athar Mohsin",
+        image: "/leadership/staff/Athar.webp",
+        role: "Project Director Software",
+        intro:
+          "Athar Mohsin is an accomplished Electrical Engineer with a Master’s degree in Software Engineering and over 40 years of diverse experience spanning engineering, academia, and project management. With two decades of service in the public sector and 17 years as a faculty member at NUST, he has contributed significantly to the advancement of software engineering education and practice. Currently serving as the Project Director (Software) at TeReSol (Pvt.) Ltd., he leads innovative fintech development projects, driving excellence through technical expertise, leadership, and strategic vision.",
       },
       {
-        "name": "Dr. Tahir Zaidi",
-        "image": "/leadership/staff/Tahir-Zaidi.jpeg",
-        "role": "Project Director Software",
-        "intro": "Dr. Tahir Zaidi holds a PhD in Electrical and Computer Engineering from the Georgia Institute of Technology, USA, and has over 35 years of experience in technology and project management. He currently serves as the Project Director (Software) at TeReSol (Pvt.) Ltd. He has served as Professor, Director of Special Projects, Director of MIS at the College of Electrical and Mechanical Engineering (EME), NUST, Islamabad; Head of the Department of Aviation Engineering and Technology Programs, Director of the Centre for Interdisciplinary Research at The Superior University, Lahore; and Thematic Expert (Production and Quality) at the National Compliance Center, Ministry of Commerce, Islamabad."
+        name: "Dr. Tahir Zaidi",
+        image: "/leadership/staff/Tahir-Zaidi.jpeg",
+        role: "Project Director Software",
+        intro:
+          "Dr. Tahir Zaidi holds a PhD in Electrical and Computer Engineering from the Georgia Institute of Technology, USA, and has over 35 years of experience in technology and project management. He currently serves as the Project Director (Software) at TeReSol (Pvt.) Ltd. He has served as Professor, Director of Special Projects, Director of MIS at the College of Electrical and Mechanical Engineering (EME), NUST, Islamabad; Head of the Department of Aviation Engineering and Technology Programs, Director of the Centre for Interdisciplinary Research at The Superior University, Lahore; and Thematic Expert (Production and Quality) at the National Compliance Center, Ministry of Commerce, Islamabad.",
       },
       {
-        "name": "Dr. Qaiser Chaudry",
-        "image": "/leadership/staff/Qaiser.jpeg",
-        "role": "Project Director Software",
-        "intro": "Dr. Qaiser Chaudhry holds a PhD in Electrical and Computer Engineering from the Georgia Institute of Technology, USA, and brings extensive experience in software engineering, academia, and project leadership. He is currently serving as the Project Director (Software) at TeReSol (Pvt.) Ltd., where he leads initiatives in business process re-engineering and core banking systems. Prior to this, he served as a Professor at the National University of Sciences and Technology (NUST), contributing to research and curriculum development in advanced computing domains. His areas of expertise include project management, artificial intelligence (AI), machine learning, computer graphics & visualization, programming languages, and software design and development, with a strong focus on driving innovation and operational excellence across technology projects."
+        name: "Dr. Qaiser Chaudry",
+        image: "/leadership/staff/Qaiser.jpeg",
+        role: "Project Director Software",
+        intro:
+          "Dr. Qaiser Chaudhry holds a PhD in Electrical and Computer Engineering from the Georgia Institute of Technology, USA, and brings extensive experience in software engineering, academia, and project leadership. He is currently serving as the Project Director (Software) at TeReSol (Pvt.) Ltd., where he leads initiatives in business process re-engineering and core banking systems. Prior to this, he served as a Professor at the National University of Sciences and Technology (NUST), contributing to research and curriculum development in advanced computing domains. His areas of expertise include project management, artificial intelligence (AI), machine learning, computer graphics & visualization, programming languages, and software design and development, with a strong focus on driving innovation and operational excellence across technology projects.",
       },
       {
-        "name": "Muhammad Bashir Bilal Siddiqi",
-        "image": "/leadership/staff/Bashir-bilal.webp",
-        "role": "Project Director Software",
-        "intro": "Bashir Bilal has over 25 years of experience in the fields of enterprise software development, solution architecture, and IT infrastructure management. He currently serves as the Project Director (Software) at TeReSol (Pvt.) Ltd. With deep expertise in ASP.NET Core MVC, Microsoft SQL Server, and related web technologies, he has guided and mentored development teams to deliver scalable, secure, and high-performing applications.He is adept at aligning technology initiatives with organizational goals, driving innovation, and ensuring technical excellence across all projects."
+        name: "Muhammad Bashir Bilal Siddiqi",
+        image: "/leadership/staff/Bashir-bilal.webp",
+        role: "Project Director Software",
+        intro:
+          "Bashir Bilal has over 25 years of experience in the fields of enterprise software development, solution architecture, and IT infrastructure management. He currently serves as the Project Director (Software) at TeReSol (Pvt.) Ltd. With deep expertise in ASP.NET Core MVC, Microsoft SQL Server, and related web technologies, he has guided and mentored development teams to deliver scalable, secure, and high-performing applications.He is adept at aligning technology initiatives with organizational goals, driving innovation, and ensuring technical excellence across all projects.",
       },
       {
-        "name": "Muhammad Javed",
-        "image": "/leadership/staff/Javed.jpeg",
-        "role": "Project Director Software",
-        "intro": "Muhammad Javed is a Project Director of Software Development with over two decades of experience in designing, architecting, and delivering enterprise-grade solutions, primarily for the banking and financial services sectors. He has demonstrated expertise in leading cross-functional teams, modernizing legacy systems, and deploying critical financial applications that meet compliance and performance standards. Adept at aligning technology strategies with business objectives, he excels in mentoring high-performing teams and executing complex digital transformation initiatives with both precision and innovation."
+        name: "Muhammad Javed",
+        image: "/leadership/staff/Javed.jpeg",
+        role: "Project Director Software",
+        intro:
+          "Muhammad Javed is a Project Director of Software Development with over two decades of experience in designing, architecting, and delivering enterprise-grade solutions, primarily for the banking and financial services sectors. He has demonstrated expertise in leading cross-functional teams, modernizing legacy systems, and deploying critical financial applications that meet compliance and performance standards. Adept at aligning technology strategies with business objectives, he excels in mentoring high-performing teams and executing complex digital transformation initiatives with both precision and innovation.",
       },
       {
-        "name": "Nasir Faiz",
-        "image": "/leadership/staff/faiz.webp",
-        "role": "Project Director Software",
-        "intro": "Nasir Faiz is a seasoned IT professional with over 25 years of experience in technology, business innovation, and digital transformation. He currently serves as the Project Director (Software) at TeReSol (Pvt.) Ltd. He has led Oracle Database and core banking projects (Symbols and Temenos) for major banks, including the State Bank of Pakistan, Faysal Bank, and United Bank Limited, and has managed IFRS 16 reporting system implementations. Beyond the financial sector, he has worked with the telecom, government, utilities, airline, textile, and pharmaceutical industries. His expertise spans enterprise software implementation, process optimization, and technology-driven business transformation."
-      },
-        {
-        "name": "Qaiser Saeed",
-        "image": "/leadership/staff/qaiser-saeed.webp",
-        "role": "Project Director Software",
-        "intro": "Qaiser Saeed is an experienced Software Engineer and Technical Lead with over 20 years of experience in embedded, desktop, web-based, and distributed software system development. He has contributed to the design, development, and integration of software solutions that emphasize reliability and compliance with industry software and quality standards, such as DO-178B and AS9100, while maintaining close coordination with systems engineering and quality assurance teams. He is currently involved in the development of a financial software platform, focusing on adherence to architectural standards, code performance optimization, and system scalability."
+        name: "Nasir Faiz",
+        image: "/leadership/staff/faiz.webp",
+        role: "Project Director Software",
+        intro:
+          "Nasir Faiz is a seasoned IT professional with over 25 years of experience in technology, business innovation, and digital transformation. He currently serves as the Project Director (Software) at TeReSol (Pvt.) Ltd. He has led Oracle Database and core banking projects (Symbols and Temenos) for major banks, including the State Bank of Pakistan, Faysal Bank, and United Bank Limited, and has managed IFRS 16 reporting system implementations. Beyond the financial sector, he has worked with the telecom, government, utilities, airline, textile, and pharmaceutical industries. His expertise spans enterprise software implementation, process optimization, and technology-driven business transformation.",
       },
       {
-        "name": "Zain ul Abdin",
-        "image": "/leadership/staff/zain-ul-abidin.webp",
-        "role": "Project Director Software",
-        "intro": "Zain ul Abdin has over 30 years of experience in telecommunications, information technology (IT), and industrial automation. He currently serves as the Project Director (Software) at TeReSol (Pvt.) Ltd. He has a proven track record of delivering complex projects on time and within budget, leveraging strong leadership, strategic planning, and technical expertise. He is adept at fostering collaboration and effective communication across cross-functional teams, driving innovation, and achieving organizational goals. He is well-versed in agile methodologies and is committed to continuous improvement and operational excellence."
+        name: "Qaiser Saeed",
+        image: "/leadership/staff/qaiser-saeed.webp",
+        role: "Project Director Software",
+        intro:
+          "Qaiser Saeed is an experienced Software Engineer and Technical Lead with over 20 years of experience in embedded, desktop, web-based, and distributed software system development. He has contributed to the design, development, and integration of software solutions that emphasize reliability and compliance with industry software and quality standards, such as DO-178B and AS9100, while maintaining close coordination with systems engineering and quality assurance teams. He is currently involved in the development of a financial software platform, focusing on adherence to architectural standards, code performance optimization, and system scalability.",
+      },
+      {
+        name: "Zain ul Abdin",
+        image: "/leadership/staff/zain-ul-abidin.webp",
+        role: "Project Director Software",
+        intro:
+          "Zain ul Abdin has over 30 years of experience in telecommunications, information technology (IT), and industrial automation. He currently serves as the Project Director (Software) at TeReSol (Pvt.) Ltd. He has a proven track record of delivering complex projects on time and within budget, leveraging strong leadership, strategic planning, and technical expertise. He is adept at fostering collaboration and effective communication across cross-functional teams, driving innovation, and achieving organizational goals. He is well-versed in agile methodologies and is committed to continuous improvement and operational excellence.",
       },
     ],
   },
