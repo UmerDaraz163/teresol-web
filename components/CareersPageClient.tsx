@@ -250,71 +250,6 @@ export default function CareersPageClient() {
             <main className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Current Opportunities</h2>
 
-                {/* 🛑 INTERNSHIP SECTION: Always Show */}
-                <>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Internship Opportunities</h3>
-                    <div className="bg-yellow-50 border-2 border-yellow-300 shadow-xl rounded-xl p-8 mb-8 flex flex-col justify-between transition-all duration-300">
-                        <div className="flex items-center space-x-4 mb-4">
-                            <i className="ri-graduation-cap-line text-4xl text-yellow-700"></i>
-                            <div>
-                                <h3 className="text-2xl font-bold text-yellow-800">
-                                    Internship Program
-                                </h3>
-                                <p className="text-lg text-yellow-700 mt-1 max-w-xl">
-                                    {/* Update description based on status */}
-                                    {isInternshipsActive
-                                        ? 'Select your preferred stream to begin your quick application.'
-                                        : 'We are not accepting new internship applications at this time. Please check back later.'}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="pt-4 border-t border-yellow-200">
-                            {/* Check if streams are visible, otherwise show the main selection button */}
-                            {!showInternshipStreams ? (
-                                <button
-                                    onClick={handleStartInternshipApplication}
-                                    disabled={!isInternshipsActive} // 🛑 DISABLE BUTTON IF NOT ACTIVE
-                                    className={`w-full font-semibold px-6 py-3 rounded-lg transition-colors duration-300 shadow-md 
-                                ${!isInternshipsActive
-                                            ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                                            : 'bg-yellow-600 text-white hover:bg-yellow-700'
-                                        }
-                            `}
-                                >
-                                    {internshipButtonText}
-                                </button>
-                            ) : (
-                                <div className="flex flex-col gap-3">
-                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                        {INTERNSHIP_STREAMS.map(stream => (
-                                            <button
-                                                key={stream}
-                                                onClick={() => openInternshipModal(stream)}
-                                                // 🛑 DISABLE DEPARTMENT BUTTONS IF NOT ACTIVE
-                                                disabled={!isInternshipsActive}
-                                                className={`text-sm font-semibold p-3 rounded-lg shadow-md h-full
-                                            ${!isInternshipsActive
-                                                        ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
-                                                        : 'bg-yellow-700 text-white hover:bg-yellow-800 transition-colors duration-300'
-                                                    }
-                                        `}
-                                            >
-                                                {stream}
-                                            </button>
-                                        ))}
-                                    </div>
-                                    <button
-                                        onClick={() => setShowInternshipStreams(false)}
-                                        className="w-full bg-gray-300 text-gray-700 text-sm font-semibold p-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 shadow-md"
-                                    >
-                                        Cancel Selection
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </>
 
                 {/* 🛑 FULL-TIME SECTION: Always show */}
                 <>
@@ -381,6 +316,80 @@ export default function CareersPageClient() {
                         )}
                     </div>
                 </>
+
+                {/* 🛑 INTERNSHIP SECTION: Always Show */}
+                <>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6 mt-6 border-b pb-2">Internship Opportunities</h3>
+                    <div className="bg-yellow-50 border-2 border-yellow-300 shadow-xl rounded-xl p-8 mb-8 flex flex-col justify-between transition-all duration-300">
+                        <div className="flex items-center space-x-4 mb-4">
+                            <i className="ri-graduation-cap-line text-4xl text-yellow-700"></i>
+                            <div>
+                                <h3 className="text-2xl font-bold text-yellow-800">
+                                    Internship Program
+                                </h3>
+                                <p className="text-lg text-yellow-700 mt-1 max-w-xl">
+                                    {isInternshipsActive ? (
+                                        'Select your preferred stream to begin your quick application.'
+                                    ) : (
+                                        <>
+                                            Applications for the Summer Internship Program will commence on 15th March.
+                                            <br />
+                                            The duration of the program shall be six weeks.
+                                        </>
+                                    )}
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div className="pt-4 border-t border-yellow-200">
+                            {/* Check if streams are visible, otherwise show the main selection button */}
+                            {!showInternshipStreams ? (
+                                <button
+                                    onClick={handleStartInternshipApplication}
+                                    disabled={!isInternshipsActive} // 🛑 DISABLE BUTTON IF NOT ACTIVE
+                                    className={`w-full font-semibold px-6 py-3 rounded-lg transition-colors duration-300 shadow-md 
+                                ${!isInternshipsActive
+                                            ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                                            : 'bg-yellow-600 text-white hover:bg-yellow-700'
+                                        }
+                            `}
+                                >
+                                    {internshipButtonText}
+                                </button>
+                            ) : (
+                                <div className="flex flex-col gap-3">
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                        {INTERNSHIP_STREAMS.map(stream => (
+                                            <button
+                                                key={stream}
+                                                onClick={() => openInternshipModal(stream)}
+                                                // 🛑 DISABLE DEPARTMENT BUTTONS IF NOT ACTIVE
+                                                disabled={!isInternshipsActive}
+                                                className={`text-sm font-semibold p-3 rounded-lg shadow-md h-full
+                                            ${!isInternshipsActive
+                                                        ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+                                                        : 'bg-yellow-700 text-white hover:bg-yellow-800 transition-colors duration-300'
+                                                    }
+                                        `}
+                                            >
+                                                {stream}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <button
+                                        onClick={() => setShowInternshipStreams(false)}
+                                        className="w-full bg-gray-300 text-gray-700 text-sm font-semibold p-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 shadow-md"
+                                    >
+                                        Cancel Selection
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </>
+
+
             </main>
             <Footer />
         </div>
