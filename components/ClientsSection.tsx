@@ -45,7 +45,7 @@ export default function ClientsSection() {
                 <p className="text-lg mb-12 max-w-2xl mx-auto text-gray-600">
                     Trusted by Global Industry Leaders and Renowned Institutions Worldwide
                 </p>
-                <div className="relative group">
+                <div className="relative group overflow-x-hidden">
                     {/* MODIFIED: Increased spacing for larger cards */}
                     <div className="flex space-x-20 w-max animate-marquee group-hover:[animation-play-state:paused]">
                         {duplicatedClients.map((client, index) => (
