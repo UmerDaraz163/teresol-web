@@ -99,17 +99,6 @@ The project is configured for deployment using Docker and Kubernetes.
     ```
 ---
 
-## 💻 Development Guidelines
-
-| Area | Guideline | Tools/Reference |
-| :--- | :--- | :--- |
-| **Code Style** | Follow consistent style for readability and maintainability. | Airbnb JavaScript Style Guide |
-| **Linting** | Use static analysis to catch errors and enforce style. | ESLint |
-| **Testing** | Write unit tests for components and API routes. | Jest, React Testing Library |
-| **Version Control** | Use Git for tracking changes and collaborative development. | Git, standard branching model |
-| **Styling** | Use utility-first approach for responsive and scalable design. | Tailwind CSS |
-
----
 
 ## 🐳 Docker Configuration
 
